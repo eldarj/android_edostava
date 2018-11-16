@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    tools:context="com.eldar.fit.seminarski.fragments.PosiljkaAddPrimaocFragment"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/inputSlikaPrimaoca"
+        android:src="@drawable/ic_image"
+        android:layout_alignParentStart="true"
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
+
+    <LinearLayout
+        android:layout_below="@id/inputSlikaPrimaoca"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/tvPrimaocLeft"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/inputImePrimaoca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="16dp"
+                android:hint="Ime primaoca" />
+
+            <TextView
+                android:id="@+id/inputPrezimePrimaoca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/inputImePrimaoca"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="16dp"
+                android:hint="Prezime primaoca" />
+
+            <TextView
+                android:id="@+id/inputTelefonPrimaoca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/inputImePrimaoca"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="16dp"
+                android:hint="Telefon primaoca" />
+
+            <TextView
+                android:id="@+id/inputAdresaPrimaoca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/inputPrezimePrimaoca"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="16dp"
+                android:hint="Adresa primaoca" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/tvPrimaocRight"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/inputOpstina"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="16dp"
+                android:hint="Opstina primaoca" />
+            <TextView
+                android:id="@+id/inputDrzava"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="16dp"
+                android:hint="Država primaoca" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/btnMenuPrimaoc"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        fab:fab_addButtonColorNormal="@color/colorAccent"
+        fab:fab_addButtonColorPressed="@color/colorAccentDark"
+        android:layout_marginBottom="8dp">
+        <!-- fab:fab_labelStyle="@style/menu_labels_style" -->
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnPromijeniPrimaoca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_title="Promijeni primaoca"
+            fab:fab_colorNormal="@color/colorAccent"
+            fab:fab_colorPressed="@color/colorAccentDark"
+            fab:fab_icon="@drawable/ic_account"
+            fab:fab_size="mini"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnPosaljiDalje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_title="Dalje"
+            fab:fab_labelStyle="@color/colorPrimaryDark"
+            fab:fab_colorNormal="@color/colorAccent"
+            fab:fab_colorPressed="@color/colorAccentDark"
+            fab:fab_icon="@drawable/ic_chevron_right"
+            fab:fab_size="mini"/>
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
+</RelativeLayout>
