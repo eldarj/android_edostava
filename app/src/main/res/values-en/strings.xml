@@ -22,4 +22,5 @@
     <string name="app_email">eldar.jahijagic@fit.edu.ba</string>
     <string name="login_password">Password</string>
     <string name="login_username">Username</string>
+    <string name="login_error_password">Polje password ne smije biti prazno ili manje od 4 karaktera.</string>
 </resources>

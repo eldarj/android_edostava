@@ -2,8 +2,12 @@ package com.eldar.fit.seminarski.helper;
 
 
 import android.app.Activity;
+import android.content.Context;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import com.eldar.fit.seminarski.LoginActivity;
 
 import java.util.List;
 
@@ -15,4 +19,12 @@ public class MyUtils {
         el.setAdapter(dataAdapter);
     }
 
+    public static void dismissKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (activity.getCurrentFocus() != null) {
+            imm.hideSoftInputFromWindow(
+                    activity.getCurrentFocus().getApplicationWindowToken(),
+                    0);
+        }
+    }
 }

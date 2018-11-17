@@ -111,8 +111,8 @@ public class PosiljkaAddPrimaocFragment extends Fragment {
                         result.getPrezime()));
 
                 inputAdresaPrimaoca.setText(getString(R.string.posiljka_dodaj_primaoc_adresa,
-                        result.getOpstinaVM().getnaziv(),
-                        result.getOpstinaVM().getdrzava()));
+                        result.getBlokVM().getNaziv(),
+                        result.getBlokVM().getDrzava()));
             }
         };
 

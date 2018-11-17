@@ -1,25 +1,30 @@
 package com.eldar.fit.seminarski;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.eldar.fit.seminarski.data.KorisnikVM;
 import com.eldar.fit.seminarski.data.Storage;
 import com.eldar.fit.seminarski.helper.MySession;
+import com.eldar.fit.seminarski.helper.MyUtils;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 public class LoginActivity extends AppCompatActivity {
 
     private static String BUNDLE_KEY_USERNAME = "MyBundleKeyUsername";
     private static String BUNDLE_KEY_PASSWORD = "MyBundleKeyPassword";
 
-    private EditText inputUsername, inputPassword;
-    private Button btnLogin;
+    private TextInputEditText inputUsername, inputPassword;
+    private Button btnLogin, btnOpenRegistration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         inputUsername = findViewById(R.id.inputLoginUsername);
-
         inputPassword = findViewById(R.id.inputLoginPassword);
 
         btnLogin = findViewById(R.id.btnLogin);
@@ -38,6 +42,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        btnOpenRegistration = findViewById(R.id.btnOpenRegistration);
+        btnOpenRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                do_btnOpenRegistrationClick();
+            }
+        });
 
         if (savedInstanceState != null
             && savedInstanceState.containsKey(BUNDLE_KEY_USERNAME)) {
@@ -49,16 +60,8 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i("TEST", "onResume from Login");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i("TEST", "onDestroy from Login");
+    private void do_btnOpenRegistrationClick() {
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 
     @Override
@@ -70,12 +73,28 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void do_btnLoginClick() {
+        MyUtils.dismissKeyboard(this);
+
+        if (inputPassword == null || inputPassword.length() <= 4) {
+            inputPassword.setError(getString(R.string.login_error_password));
+        } else {
+            inputPassword.setError(null); // Clear the error
+        }
+        if (inputUsername == null || inputUsername.length() <= 4) {
+            inputUsername.setError(getString(R.string.login_error_username));
+        } else {
+            inputUsername.setError(null); // Clear the error
+        }
+
+        if (inputUsername.getError() != null || inputPassword.getError() != null) {
+            Snackbar.make(findViewById(android.R.id.content), "Molimo provjerite podatke!", Snackbar.LENGTH_LONG).show();
+            return;
+        }
 
         KorisnikVM korisnik = Storage.LoginCheck(inputUsername.getText().toString(), inputPassword.getText().toString());
 
         if (korisnik == null) {
-            View parentLayout = findViewById(android.R.id.content);
-            Snackbar.make(parentLayout, "Pogrešan username ili password.", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(findViewById(android.R.id.content), "Pogrešan username ili password.", Snackbar.LENGTH_LONG).show();
         } else {
             MySession.setKorisnik(korisnik);
             startActivity(new Intent(this, GlavniActivity.class));

@@ -135,8 +135,8 @@ public class GlavniActivity extends AppCompatActivity
                 korisnik.getPrezime()));
 
         args.putString(BUNDLE_INPUT_ADRESA_PRIMAOCA, getString(R.string.posiljka_dodaj_primaoc_adresa,
-                korisnik.getOpstinaVM().getnaziv(),
-                korisnik.getOpstinaVM().getdrzava()));
+                korisnik.getBlokVM().getNaziv(),
+                korisnik.getBlokVM().getDrzava()));
 
         PosiljkaAddPrimaocFragment fragment = PosiljkaAddPrimaocFragment.newInstance();
         fragment.setArguments(args);

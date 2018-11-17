@@ -203,8 +203,8 @@ public class KorisnikPretragaDialogFragment extends DialogFragment {
                         podaci.get(i).getIme(),
                         podaci.get(i).getPrezime()));
                 subtitle.setText(getString(R.string.stavka_korisnik_subtitle,
-                        podaci.get(i).getOpstinaVM().getnaziv(),
-                        podaci.get(i).getOpstinaVM().getdrzava()));
+                        podaci.get(i).getBlokVM().getNaziv(),
+                        podaci.get(i).getBlokVM().getDrzava()));
 
                 return view;
             }

@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.eldar.fit.seminarski.R;
+import com.eldar.fit.seminarski.data.BlokVM;
 import com.eldar.fit.seminarski.data.KorisnikVM;
 import com.eldar.fit.seminarski.data.OpstinaVM;
 import com.eldar.fit.seminarski.data.Storage;
@@ -87,8 +88,10 @@ public class KorisnikAddDialogFragment extends DialogFragment {
     private void do_btnKorisnikSnimiClick() {
         int opstinaPosition = spinnerOpstina.getSelectedItemPosition();
         OpstinaVM izabranaOpstina = Storage.getOpstinaByPosition(opstinaPosition);
+        izabranaOpstina = null;
+        BlokVM izabraniBlok = Storage.getBlokovi().get(0);
 
-        KorisnikVM noviKorisnik = new KorisnikVM("", "", inputIme.getText().toString(), inputPrezime.getText().toString(), izabranaOpstina);
+        KorisnikVM noviKorisnik = new KorisnikVM("", "", inputIme.getText().toString(), inputPrezime.getText().toString(), izabraniBlok);
         Storage.addKorisnik(noviKorisnik);
 
         callback.run(noviKorisnik);
