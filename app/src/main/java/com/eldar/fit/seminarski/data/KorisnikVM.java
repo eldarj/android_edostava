@@ -11,18 +11,18 @@ public class KorisnikVM implements Serializable{
     private String Password;
     private String Ime;
     private String Prezime;
-    private OpstinaVM OpstinaVM;
+    private BlokVM BlokVM;
 
-    public KorisnikVM(String username, String password, String ime, String prezime, OpstinaVM opstinaVM) {
+    public KorisnikVM(String username, String password, String ime, String prezime, BlokVM blokVM) {
         Username = username;
         Password = password;
         Ime = ime;
         Prezime = prezime;
-        OpstinaVM = opstinaVM;
+        BlokVM = blokVM;
     }
-    public OpstinaVM getOpstinaVM(){ return OpstinaVM; }
+    public BlokVM getBlokVM(){ return BlokVM; }
 
-    public void setOpstinaVM(OpstinaVM value){ OpstinaVM = value; }
+    public void setOpstinaVM(BlokVM value){ BlokVM = value; }
 
     public String getUsername() { return Username; }
 
