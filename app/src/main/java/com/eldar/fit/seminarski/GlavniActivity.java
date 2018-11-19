@@ -2,21 +2,29 @@ package com.eldar.fit.seminarski;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.eldar.fit.seminarski.data.KorisnikVM;
 import com.eldar.fit.seminarski.fragments.PosiljkaAddPrimaocFragment;
 import com.eldar.fit.seminarski.fragments.PosiljkaListFragment;
+import com.eldar.fit.seminarski.fragments.RestoranDetaljnoFragment;
+import com.eldar.fit.seminarski.fragments.RestoranListFragment;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
+import com.eldar.fit.seminarski.helper.MyFragmentPagerAdapter;
 import com.eldar.fit.seminarski.helper.MySession;
 
 import static com.eldar.fit.seminarski.fragments.PosiljkaAddPrimaocFragment.BUNDLE_INPUT_ADRESA_PRIMAOCA;
@@ -24,6 +32,14 @@ import static com.eldar.fit.seminarski.fragments.PosiljkaAddPrimaocFragment.BUND
 
 public class GlavniActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MyFragmentHelper.OnKorisnikPretragaClickListener {
+
+    Toolbar toolbar;
+    DrawerLayout drawer;
+    NavigationView navigationView;
+    TabLayout tabLayoutNav;
+
+    ViewPager viewPager;
+    private MyFragmentPagerAdapter myFragmentPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,32 +53,50 @@ public class GlavniActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_glavni);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        tabLayoutNav = (TabLayout) findViewById(R.id.tabLayoutNav);
+
+        setupTabNavigation();
+        setupMainNavigation();
+
+        //MyFragmentHelper.fragmentCreate(this, R.id.fragmentContainer,  RestoranListFragment.newInstance());
+    }
+
+    private void setupTabNavigation() {
+        tabLayoutNav.addTab(tabLayoutNav.newTab().setText("Restorani"));
+        tabLayoutNav.addTab(tabLayoutNav.newTab().setText("Korpa"));
+
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), tabLayoutNav.getTabCount());
+
+        viewPager.setAdapter(myFragmentPagerAdapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayoutNav));
+        tabLayoutNav.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+    }
+
+    private void setupMainNavigation() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-        MyFragmentHelper.fragmentCreate(this, R.id.fragmentContainer,  PosiljkaListFragment.newInstance());
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i("TEST", "onResume from GlavniActivity");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i("TEST", "onDestroy from GlavniActivity");
     }
 
     @Override
@@ -70,6 +104,8 @@ public class GlavniActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (viewPager.getCurrentItem() == 0 && myFragmentPagerAdapter.getItem(0) instanceof RestoranDetaljnoFragment) {
+            ((RestoranDetaljnoFragment) myFragmentPagerAdapter.getItem(0)).backPressed();
         } else {
             super.onBackPressed();
         }
@@ -103,11 +139,13 @@ public class GlavniActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
+        if (id == R.id.nav_restorani) {
+            tabLayoutNav.getTabAt(0).select();
+            //MyFragmentHelper.fragmentCreate(this, R.id.fragmentContainer, RestoranListFragment.newInstance());
         } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
+            tabLayoutNav.getTabAt(1).select();
+            //MyFragmentHelper.fragmentCreate(this, R.id.fragmentContainer, PosiljkaListFragment.newInstance());
+        } else if (id == R.id.nav_profile) {
 
         } else if (id == R.id.nav_manage) {
 

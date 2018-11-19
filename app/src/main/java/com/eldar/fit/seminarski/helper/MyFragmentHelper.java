@@ -1,10 +1,13 @@
 package com.eldar.fit.seminarski.helper;
 
-import android.app.Activity;
-import android.app.DialogFragment;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.eldar.fit.seminarski.data.KorisnikVM;
 import com.eldar.fit.seminarski.fragments.PosiljkaListFragment;
@@ -31,20 +34,32 @@ public class MyFragmentHelper {
         void run(T t);
     }
 
-    public static void fragmentCreate(Activity activity, int targetLayoutId, Fragment fragment) {
-        fm = activity.getFragmentManager();
+    public static void fragmentEmptyAndCreate(AppCompatActivity activity, int targetLayoutId, Fragment fragment) {
+
+    }
+
+    public static void fragmentCreate(AppCompatActivity activity, int targetLayoutId, Fragment fragment) {
+        fm = activity.getSupportFragmentManager();
         ft = fm.beginTransaction();
         ft.replace(targetLayoutId, fragment);
+
+        if (activity.findViewById(targetLayoutId).getTag().equals("ListaRestorana")) {
+            RelativeLayout l = (RelativeLayout) activity.findViewById(targetLayoutId);
+            l.removeAllViews();
+        }
 
         if (!(fragment instanceof PosiljkaListFragment)) {
             ft.addToBackStack(null);
         }
+
+        Log.i("Test:", "fragmentCreate()");
+
         ft.commit();
         fragNo++;
     }
 
-    public static void dodajDialog(Activity activity, String tag, DialogFragment dialogFragment) {
-        FragmentManager fm = activity.getFragmentManager();
+    public static void dodajDialog(AppCompatActivity activity, String tag, DialogFragment dialogFragment) {
+        FragmentManager fm = activity.getSupportFragmentManager();
         dialogFragment.show(fm, tag);
     }
 }

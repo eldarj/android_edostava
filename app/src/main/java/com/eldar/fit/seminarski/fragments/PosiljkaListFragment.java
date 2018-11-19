@@ -2,12 +2,13 @@ package com.eldar.fit.seminarski.fragments;
 
 
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import java.util.Locale;
 public class PosiljkaListFragment extends Fragment {
 
     private List<PosiljkaVM> podaci;
+
     private ListView listPosiljke;
     private AddFloatingActionButton btnDodajPosiljku;
     private BaseAdapter listPosiljkeAdapter;
@@ -103,7 +105,7 @@ public class PosiljkaListFragment extends Fragment {
     }
 
     private void do_btnDodajPosiljkuClick() {
-        MyFragmentHelper.fragmentCreate(getActivity(), R.id.fragmentContainer, PosiljkaAddPrimaocFragment.newInstance());
+        MyFragmentHelper.fragmentCreate((AppCompatActivity)getActivity(), R.id.fragmentContainer, PosiljkaAddPrimaocFragment.newInstance());
     }
 
     private void popuniPodatke() {
@@ -155,6 +157,5 @@ public class PosiljkaListFragment extends Fragment {
         };
 
         listPosiljke.setAdapter(listPosiljkeAdapter);
-
     }
 }

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants">
+
+    <android.support.design.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/mtrl_card_spacing"
+        android:layout_marginTop="@dimen/mtrl_card_spacing"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="@dimen/mtrl_card_spacing">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:background="@color/colorBackground"
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:tint="@color/colorTypographyPrimaryDark"
+                    android:src="@drawable/ic_placeholder_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    android:id="@+id/imageStavkaRestoranSlika"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"/>
+            </RelativeLayout>
+
+            <TextView
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:paddingLeft="16dp"
+                android:paddingTop="16dp"
+                android:id="@+id/textStavkaRestoranNaziv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Restoran naziv"
+                />
+
+            <TextView
+                style="@style/TextAppearance.MaterialComponents.Caption"
+                android:paddingLeft="16dp"
+                android:paddingBottom="16dp"
+                android:id="@+id/textStavkaRestoranLikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16 sviđanja"
+                />
+
+            <TextView
+                android:paddingLeft="16dp"
+                android:paddingBottom="16dp"
+                android:id="@+id/textStavkaRestoranOpis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Restoran opis"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:layout_height="wrap_content">
+                <android.support.design.button.MaterialButton
+                    android:id="@+id/btnStavkaRestoranPregled"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pregledaj hranu"
+                    />
+                <ImageButton
+                    style="@style/AppTheme.CardIconButton"
+                    android:id="@+id/btnStavkaRestoranLike"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_heart"
+                    />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </android.support.design.card.MaterialCardView>
+
+</RelativeLayout>

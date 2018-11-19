@@ -182,4 +182,8 @@ public class RestoranVM implements Serializable {
     public void setKorisniciLikes(List<KorisnikVM> korisniciLikes) {
         this.korisniciLikes = korisniciLikes;
     }
+
+    public int getLikesCount() {
+        return 16;
+    }
 }

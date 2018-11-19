@@ -1,8 +1,9 @@
 package com.eldar.fit.seminarski.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,7 +96,7 @@ public class PosiljkaAddPrimaocFragment extends Fragment {
 
     private void do_btnDaljeClick() {
         if (posiljkaVM != null) {
-            MyFragmentHelper.fragmentCreate(getActivity(), R.id.fragmentContainer, PosiljkaAddPaketFragment.newInstance(posiljkaVM));
+            MyFragmentHelper.fragmentCreate((AppCompatActivity)getActivity(), R.id.fragmentContainer, PosiljkaAddPaketFragment.newInstance(posiljkaVM));
         }
     }
 
@@ -117,7 +118,7 @@ public class PosiljkaAddPrimaocFragment extends Fragment {
         };
 
         KorisnikPretragaDialogFragment dlg = KorisnikPretragaDialogFragment.newInstance(callback);
-        MyFragmentHelper.dodajDialog(getActivity(), "promijeniPrimaocaDialog", dlg);
+        MyFragmentHelper.dodajDialog((AppCompatActivity)getActivity(), "promijeniPrimaocaDialog", dlg);
     }
 
 }

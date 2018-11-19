@@ -1,17 +1,48 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
+        <item name="android:windowContentOverlay">@color/colorTypographyPrimaryDark</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="textInputStyle">@style/AppTheme.TextInputLayout</item>
+        <item name="android:listViewStyle">@style/AppTheme.ListViewStyle</item>
     </style>
 
-    <style name="AppTheme.NoActionBar" parent="AppTheme">
+    <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@color/colorTransparent</item>
+    </style>
+
+    <style name="AppTheme.AppBarTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:text">Restorani</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="AppTheme.AppBarLogo">
+        <item name="android:src">@drawable/ic_restaurant_circular</item>
+        <item name="android:tint">@color/colorAccent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+    </style>
+
+    <style name="DialogsTheme" parent="AppTheme" />
+
+    <style name="AppTheme.ListViewStyle" parent="Widget.AppCompat.ListView">
+        <item name="android:background">@color/colorBackgroundLight</item>
     </style>
 
     <style name="AppTheme.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -22,10 +53,8 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
-    <style name="DialogsTheme" parent="AppTheme" />
-
-    <style name="AppTheme.AppBarOverlay" parent="AppTheme" />
-
-    <style name="AppTheme.PopupOverlay" parent="AppTheme" />
-
+    <style name="AppTheme.CardIconButton">
+        <item name="android:backgroundTint">@color/colorTransparent</item>
+        <item name="android:tint">@color/colorTypographyPrimarySemiDark</item>
+    </style>
 </resources>

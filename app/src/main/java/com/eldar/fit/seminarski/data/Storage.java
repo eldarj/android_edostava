@@ -65,7 +65,7 @@ public class Storage {
     public static List<RestoranVM> getRestorani() {
         if (restorani == null) {
             restorani = new ArrayList<>();
-            restorani.add(new RestoranVM("http://p1712.app.fit.ba/uploads/images/restoran/istock-503692580_3f22.jpg",
+            restorani.add(new RestoranVM("http://p1712.app.fit.ba/uploads/images/restoran/opentable-scenic-restaurants-marine-room-FT-BLOG0818_a13b.jpg",
                     null,
                     "Petica",
                     "Tradicija 100 godina",
@@ -77,7 +77,7 @@ public class Storage {
                     "http://p1712.app.fit.ba",
                     "petica@gmail.com",
                     "+387 62 005 152"));
-            restorani.add(new RestoranVM("http://p1712.app.fit.ba/uploads/images/restoran/istock-503692580_3f22.jpg",
+            restorani.add(new RestoranVM("http://p1712.app.fit.ba/uploads/images/restoran/ITALIAN-restaurant-img_aa51.jpg",
                     null,
                     "Sezam",
                     "Tradicija 100 godina",
@@ -89,7 +89,7 @@ public class Storage {
                     "http://p1712.app.fit.ba",
                     "sezam@gmail.com",
                     "+387 35 121 777"));
-            restorani.add(new RestoranVM("http://p1712.app.fit.ba/uploads/images/restoran/istock-503692580_3f22.jpg",
+            restorani.add(new RestoranVM("http://p1712.app.fit.ba/uploads/images/restoran/main_image_3a66.jpg",
                     null,
                     "Pizza Hut",
                     "Tradicija 100 godina",
@@ -101,24 +101,24 @@ public class Storage {
                     "http://p1712.app.fit.ba",
                     "pizza@hut.com",
                     "+387 62 915 911"));
-            restorani.add(new RestoranVM("http://p1712.app.fit.ba/uploads/images/restoran/istock-503692580_3f22.jpg",
+            restorani.add(new RestoranVM("http://p1712.app.fit.ba/uploads/images/restoran/burgerandfriescosts_0_6fd0.jpg",
                     null,
                     "Imbis",
                     "Tradicija 50 godina",
                     null,
-                    getTipoviRestorana().get(2),
+                    getTipoviRestorana().get(1),
                     getKorisnici().get(3),
                     "Alije Izetbegovića 19.",
                     getBlokovi().get(1),
                     "http://p1712.app.fit.ba",
                     "imbis@gmail.com",
                     "+387 62 151 599"));
-            restorani.add(new RestoranVM("http://p1712.app.fit.ba/uploads/images/restoran/istock-503692580_3f22.jpg",
+            restorani.add(new RestoranVM("",
                     null,
                     "Zlatnik",
                     "Vrhunski roštilj.",
                     null,
-                    getTipoviRestorana().get(2),
+                    getTipoviRestorana().get(1),
                     getKorisnici().get(4),
                     "Centar 31.",
                     getBlokovi().get(0),

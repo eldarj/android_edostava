@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- General -->
-    <color name="colorPrimary">#002538</color>
-    <color name="colorPrimaryDark">#001821</color>
-    <color name="colorPrimaryLight">#2d4b59</color>
+    <color name="colorPrimary">#fff</color>
+    <color name="colorPrimaryDark">#f3f3f3</color>
 
     <color name="colorAccent">#faab1a</color>
     <color name="colorAccentDark">#c27c00</color>
     <color name="colorAccentLight">#ffdd54</color>
 
-    <color name="colorTextPrimary">#ffffff</color>
-    <color name="colorTextPrimaryDark">#19272a</color>
-    <color name="colorTextPrimarySemiDark">#767676</color>
+    <color name="colorTypographyPrimary">#ffffff</color>
+    <color name="colorTypographyPrimaryDark">#2d4b59</color>
+    <color name="colorTypographyPrimarySemiDark">#767676</color>
 
-    <!-- Important -->
-    <color name="colorBackground">#eeeeff</color>
+    <color name="colorBackground">#eaedf7</color>
     <color name="colorBackgroundLight">#f9faff</color>
 
     <color name="colorWhite">#fafafa</color>
     <color name="colorWhitePressed">#f1f1f1</color>
+
+    <color name="colorTransparent">#00000000</color>
 </resources>
