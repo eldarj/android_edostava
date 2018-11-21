@@ -32,7 +32,6 @@ public class RestoranDetaljnoActivity extends AppCompatActivity {
 
         Bundle args = getIntent().getExtras();
         RestoranVM restoran = (RestoranVM) args.getSerializable(DETAIL_VIEW_RESTORAN);
-
         restoranNaziv = findViewById(R.id.textDetaljnoRestoranNaziv);
         restoranNaziv.setText(restoran.getNaziv());
 
@@ -55,7 +54,7 @@ public class RestoranDetaljnoActivity extends AppCompatActivity {
         //animateCard();
     }
 
-    private void animateCard() {
+    /*private void animateCard() {
         card = findViewById(R.id.cardDetaljnoContainer);
         anim = new Animation() {
             @Override
@@ -71,5 +70,5 @@ public class RestoranDetaljnoActivity extends AppCompatActivity {
         anim.setDuration(250);
         card.setAnimation(anim);
         card.invalidate();
-    }
+    }*/
 }
