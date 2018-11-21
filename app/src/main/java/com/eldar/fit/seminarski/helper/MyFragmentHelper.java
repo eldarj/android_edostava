@@ -43,11 +43,6 @@ public class MyFragmentHelper {
         ft = fm.beginTransaction();
         ft.replace(targetLayoutId, fragment);
 
-        if (activity.findViewById(targetLayoutId).getTag().equals("ListaRestorana")) {
-            RelativeLayout l = (RelativeLayout) activity.findViewById(targetLayoutId);
-            l.removeAllViews();
-        }
-
         if (!(fragment instanceof PosiljkaListFragment)) {
             ft.addToBackStack(null);
         }

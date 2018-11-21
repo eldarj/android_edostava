@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:transitionName="@string/transition_restoran_card">
+
+        <android.support.design.widget.AppBarLayout
+            app:theme="@style/AppTheme.AppBar.Transparent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/transparent_appbar_height">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                        <ImageButton
+                            android:id="@+id/btnCustomToolbarBack"
+                            android:tint="@color/colorWhite"
+                            android:src="@drawable/ic_chevron_left"
+                            android:layout_width="?attr/actionBarSize"
+                            android:layout_height="?attr/actionBarSize" />
+
+                        <TextView
+                            android:id="@+id/customToolbarTitle"
+                            style="@style/AppTheme.AppBarTitle" />
+                </LinearLayout>
+
+        </android.support.design.widget.AppBarLayout>
+        <android.support.design.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:id="@+id/cardDetaljnoContainer">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:id="@+id/detaljnoImageHolder"
+                            android:background="@color/colorBackgroundLight"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp">
+                                <ImageView
+                                    android:layout_centerVertical="true"
+                                    android:tint="@color/colorTypographyDark"
+                                    android:src="@drawable/ic_placeholder_image"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+
+                                <ImageView
+                                    android:id="@+id/imageDetaljnoRestoranSlika"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"/>
+
+                        </RelativeLayout>
+
+
+                        <TextView
+                            style="@style/TextAppearance.MaterialComponents.Headline6"
+                            android:paddingLeft="16dp"
+                            android:paddingTop="16dp"
+                            android:id="@+id/textDetaljnoRestoranNaziv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Restoran naziv"
+                            />
+
+                        <TextView
+                            style="@style/TextAppearance.MaterialComponents.Caption"
+                            android:paddingLeft="16dp"
+                            android:paddingBottom="16dp"
+                            android:id="@+id/textDetaljnoRestoranLikes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="16 sviđanja"
+                            />
+
+                        <TextView
+                            android:paddingLeft="16dp"
+                            android:paddingBottom="16dp"
+                            android:id="@+id/textDetaljnoRestoranOpis"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Restoran opis"
+                            />
+                </LinearLayout>
+
+        </android.support.design.card.MaterialCardView>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_below="@id/cardDetaljnoContainer"
+            android:fillViewport="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <TextView
+                    android:scrollbars="vertical"
+                    android:scrollbarAlwaysDrawVerticalTrack="true"
+                    android:text="@string/long_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+        </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>

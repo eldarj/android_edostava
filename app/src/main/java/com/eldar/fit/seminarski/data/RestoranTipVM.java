@@ -1,6 +1,8 @@
 package com.eldar.fit.seminarski.data;
 
-public class RestoranTipVM {
+import java.io.Serializable;
+
+public class RestoranTipVM implements Serializable {
     private static int tipRestoranaIdCounter = 0;
 
     private int id;

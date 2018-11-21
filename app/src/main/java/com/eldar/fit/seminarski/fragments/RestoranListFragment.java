@@ -1,8 +1,11 @@
 package com.eldar.fit.seminarski.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.button.MaterialButton;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,27 +20,25 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.eldar.fit.seminarski.R;
+import com.eldar.fit.seminarski.RestoranDetaljnoActivity;
+import com.eldar.fit.seminarski.data.KorisnikVM;
 import com.eldar.fit.seminarski.data.RestoranVM;
 import com.eldar.fit.seminarski.data.Storage;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
-import com.eldar.fit.seminarski.helper.MyFragmentPagerAdapter;
 
-import java.net.URL;
 import java.util.List;
+
+import static com.eldar.fit.seminarski.RestoranDetaljnoActivity.DETAIL_VIEW_RESTORAN;
 
 public class RestoranListFragment extends Fragment {
 
     private List<RestoranVM> storageRestorani;
     private ListView listRestorani;
+    public static RestoranListFragment newInstance() {
+        Bundle args = new Bundle();
 
-    private BaseAdapter listRestoraniAdapter;
-
-    private static RestoranListFragment fragment;
-    public MyFragmentPagerAdapter.FirstPageFragmentListener listener;
-
-    public static RestoranListFragment newInstance(MyFragmentPagerAdapter.FirstPageFragmentListener listener) {
-        fragment = new RestoranListFragment();
-        fragment.listener = listener;
+        RestoranListFragment fragment = new RestoranListFragment();
+        fragment.setArguments(args);
 
         return fragment;
     }
@@ -47,19 +48,32 @@ public class RestoranListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_restoran_list, container, false);
 
-        Fragment f = this;
-
         listRestorani = view.findViewById(R.id.listViewRestorani);
+
+        popuniPodatke();
+
         listRestorani.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("Test", "CARD CLICKED");
-                listener.onSwitchToNextFragment();
+                RestoranVM restoran = storageRestorani.get(position);
+                do_transitionCardView(view, restoran);
             }
         });
-        popuniPodatke();
 
         return view;
+    }
+
+    private void do_transitionCardView(View view, RestoranVM restoran) {
+        Intent intent = new Intent(getActivity(), RestoranDetaljnoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(DETAIL_VIEW_RESTORAN, restoran);
+        intent.putExtras(bundle);
+
+        ActivityOptionsCompat options = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(getActivity(), view, getString(R.string.transition_restoran_card));
+
+        startActivity(intent, options.toBundle());
     }
 
     private void popuniPodatke() {
@@ -72,13 +86,11 @@ public class RestoranListFragment extends Fragment {
             }
 
             @Override
-            public Object getItem(int position) {
-                return null;
-            }
+            public Object getItem(int position) { return storageRestorani.get(position); }
 
             @Override
             public long getItemId(int position) {
-                return 0;
+                return storageRestorani.get(position).getId();
             }
 
             @Override
@@ -94,18 +106,34 @@ public class RestoranListFragment extends Fragment {
                 TextView restoranLikesCount = view.findViewById(R.id.textStavkaRestoranLikes);
                 ImageView restoranSlikaView = view.findViewById(R.id.imageStavkaRestoranSlika);
 
+                MaterialButton btnDetaljno = view.findViewById(R.id.btnStavkaRestoranDetaljno);
+                btnDetaljno.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MyFragmentHelper.RunnableCallback<KorisnikVM> callback = new MyFragmentHelper.RunnableCallback<KorisnikVM>() {
+                            @Override
+                            public void run(KorisnikVM korisnikVM) {
+
+                            }
+                        };
+
+                        KorisnikPretragaDialogFragment dlg = KorisnikPretragaDialogFragment.newInstance(callback);
+                        MyFragmentHelper.dodajDialog((AppCompatActivity)getActivity(), "promijeniPrimaocaDialog", dlg);
+                    }
+                });
+
                 restoranNaziv.setText(storageRestorani.get(position).getNaziv());
                 restoranOpis.setText(storageRestorani.get(position).getOpis());
-                restoranNaziv.setText(storageRestorani.get(position).getNaziv());
                 restoranLikesCount.setText(storageRestorani.get(position).getLikesCount() + " sviđanja");
 
-                /*new MyAsyncImageInflater(restoranSlika)
-                    .execute("http://java.sogeti.nl/JavaBlog/wp-content/uploads/2009/04/android_icon_256.png");*/
+
 
                 Glide.with(getActivity())
                         .load(storageRestorani.get(position).getMainImageUrl())
                         .centerCrop()
                         .into(restoranSlikaView);
+
+
 
                 return view;
             }
@@ -113,4 +141,6 @@ public class RestoranListFragment extends Fragment {
 
         listRestorani.setAdapter(listRestoraniAdapter);
     }
+
+    private BaseAdapter listRestoraniAdapter;
 }

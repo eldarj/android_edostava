@@ -1,8 +1,9 @@
 package com.eldar.fit.seminarski.data;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class HranaItemVM {
+public class HranaItemVM implements Serializable {
     private static int hranaItemIdCounter = 0;
 
     private int id;

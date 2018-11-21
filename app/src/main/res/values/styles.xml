@@ -1,21 +1,31 @@
 <resources>
-
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
-        <!-- Customize your theme here. -->
-        <item name="android:windowContentOverlay">@color/colorTypographyPrimaryDark</item>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Glavni stilovi -->
+        <item name="android:windowContentOverlay">@color/colorSecondary</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+
+        <!-- Enable Transitions -->
+
+        <!-- Element stilovi -->
         <item name="textInputStyle">@style/AppTheme.TextInputLayout</item>
         <item name="android:listViewStyle">@style/AppTheme.ListViewStyle</item>
+        <item name="bottomNavigationStyle">@style/AppTheme.BottomNavigationStyle</item>
     </style>
 
+    <!-- General stilovi -->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:statusBarColor">@color/colorTransparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.AppBar.Transparent" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:backgroundTint">@color/Transparent</item>
+        <item name="android:fitsSystemWindows">true</item>
     </style>
 
     <style name="AppTheme.AppBarTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
@@ -27,7 +37,7 @@
 
     <style name="AppTheme.AppBarLogo">
         <item name="android:src">@drawable/ic_restaurant_circular</item>
-        <item name="android:tint">@color/colorAccent</item>
+        <item name="android:tint">#fff</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_marginRight">10dp</item>
@@ -36,13 +46,29 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
     </style>
 
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
     </style>
 
+    <style name="AppTheme.Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"></style>
+
     <style name="DialogsTheme" parent="AppTheme" />
 
+    <!-- Element stilovi -->
+
+    <style name="AppTheme.NoDivider">
+        <item name="android:divider">#00000000</item>
+    </style>
+
+    <style name="AppTheme.BottomNavigationStyle">
+        <item name="android:maxHeight">@dimen/bottomnav_height</item>
+        <item name="android:background">@color/colorBackgroundDark</item>
+        <item name="itemIconTint">@color/colorWhite</item>
+        <item name="itemTextColor">@color/colorWhite</item>
+    </style>
+
     <style name="AppTheme.ListViewStyle" parent="Widget.AppCompat.ListView">
-        <item name="android:background">@color/colorBackgroundLight</item>
+        <item name="android:background">@color/colorBackground</item>
     </style>
 
     <style name="AppTheme.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -54,7 +80,7 @@
     </style>
 
     <style name="AppTheme.CardIconButton">
-        <item name="android:backgroundTint">@color/colorTransparent</item>
-        <item name="android:tint">@color/colorTypographyPrimarySemiDark</item>
+        <item name="android:backgroundTint">@android:color/transparent</item>
+        <item name="android:tint">@color/colorTypographySemiDark</item>
     </style>
 </resources>

@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".RestoranDetaljnoActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".GlavniActivity"
             android:label="@string/title_activity_glavni"
             android:theme="@style/AppTheme.NoActionBar">

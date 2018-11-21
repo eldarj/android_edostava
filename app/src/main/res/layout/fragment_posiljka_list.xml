@@ -19,8 +19,8 @@
         android:id="@+id/btnNovaPosiljka"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        fab:fab_colorNormal="@color/colorAccent"
-        fab:fab_colorPressed="@color/colorAccentDark"
+        fab:fab_colorNormal="@color/colorPrimary"
+        fab:fab_colorPressed="@color/colorPrimaryDark"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="8dp"/>

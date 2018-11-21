@@ -2,15 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:descendantFocusability="blocksDescendants">
+    android:descendantFocusability="blocksDescendants"
+    android:transitionName="@string/transition_restoran_card">
 
     <android.support.design.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/mtrl_card_spacing"
-        android:layout_marginTop="@dimen/mtrl_card_spacing"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="@dimen/mtrl_card_spacing">
+        android:layout_margin="@dimen/mtrl_card_spacing">
 
         <LinearLayout
             android:orientation="vertical"
@@ -18,12 +16,12 @@
             android:layout_height="wrap_content">
 
             <RelativeLayout
-                android:background="@color/colorBackground"
+                android:background="@color/colorBackgroundLight"
                 android:layout_width="match_parent"
                 android:layout_height="150dp">
                 <ImageView
                     android:layout_centerVertical="true"
-                    android:tint="@color/colorTypographyPrimaryDark"
+                    android:tint="@color/colorTypographyDark"
                     android:src="@drawable/ic_placeholder_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -31,7 +29,7 @@
                 <ImageView
                     android:id="@+id/imageStavkaRestoranSlika"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"/>
+                    android:layout_height="match_parent"/>
             </RelativeLayout>
 
             <TextView
@@ -69,15 +67,15 @@
                 android:paddingRight="16dp"
                 android:layout_height="wrap_content">
                 <android.support.design.button.MaterialButton
-                    android:id="@+id/btnStavkaRestoranPregled"
+                    android:id="@+id/btnStavkaRestoranDetaljno"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Pregledaj hranu"
                     />
                 <ImageButton
-                    style="@style/AppTheme.CardIconButton"
                     android:id="@+id/btnStavkaRestoranLike"
+                    style="@style/AppTheme.CardIconButton"
                     android:layout_alignParentEnd="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

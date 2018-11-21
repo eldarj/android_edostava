@@ -96,8 +96,8 @@
         android:layout_width="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        fab:fab_addButtonColorNormal="@color/colorAccent"
-        fab:fab_addButtonColorPressed="@color/colorAccentDark"
+        fab:fab_addButtonColorNormal="@color/colorPrimary"
+        fab:fab_addButtonColorPressed="@color/colorPrimaryDark"
         android:layout_marginBottom="8dp">
         <!-- fab:fab_labelStyle="@style/menu_labels_style" -->
 
@@ -106,8 +106,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_title="Promijeni primaoca"
-            fab:fab_colorNormal="@color/colorAccent"
-            fab:fab_colorPressed="@color/colorAccentDark"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimaryDark"
             fab:fab_icon="@drawable/ic_account"
             fab:fab_size="mini"/>
 
@@ -117,8 +117,8 @@
             android:layout_height="wrap_content"
             fab:fab_title="Dalje"
             fab:fab_labelStyle="@color/colorPrimaryDark"
-            fab:fab_colorNormal="@color/colorAccent"
-            fab:fab_colorPressed="@color/colorAccentDark"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimaryDark"
             fab:fab_icon="@drawable/ic_chevron_right"
             fab:fab_size="mini"/>
 
