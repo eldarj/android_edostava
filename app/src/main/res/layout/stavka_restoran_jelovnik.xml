@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="10dp"
-    android:paddingBottom="16dp"
-    android:paddingHorizontal="16dp">
+    android:paddingBottom="16dp">
 
     <LinearLayout
         android:id="@+id/vgStavkaJelovnikIconHolders"
@@ -17,16 +16,17 @@
 
         <ImageButton
             android:id="@+id/btnDodajStavkuKorpu"
-            android:src="@drawable/ic_plus_circular"
-            android:tint="@color/colorSecondaryLight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <ImageView
-            android:id="@+id/imageStavkaJelovnikSlika"
-            android:src="@drawable/ic_box"
+            android:src="@drawable/ic_plus_round"
             android:tint="@color/colorSecondary"
+            android:backgroundTint="@color/Transparent"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageStavkaJelovnikSlika"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            />
     </LinearLayout>
 
     <LinearLayout
