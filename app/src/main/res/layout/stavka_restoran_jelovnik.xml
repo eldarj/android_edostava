@@ -7,17 +7,30 @@
     android:paddingBottom="16dp"
     android:paddingHorizontal="16dp">
 
-    <ImageView
-        android:id="@+id/imageStavkaHranaSlika"
-        android:src="@drawable/ic_box"
-        android:tint="@color/colorSecondary"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="3dp"
+    <LinearLayout
+        android:id="@+id/vgStavkaJelovnikIconHolders"
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="3dp">
+
+        <ImageButton
+            android:id="@+id/btnDodajStavkuKorpu"
+            android:src="@drawable/ic_plus_circular"
+            android:tint="@color/colorSecondaryLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/imageStavkaJelovnikSlika"
+            android:src="@drawable/ic_box"
+            android:tint="@color/colorSecondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <LinearLayout
-        android:layout_toRightOf="@id/imageStavkaHranaSlika"
+        android:layout_toRightOf="@id/vgStavkaJelovnikIconHolders"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="wrap_content">
@@ -28,30 +41,29 @@
             android:layout_height="wrap_content"
             android:minHeight="72dp">
             <TextView
-                android:id="@+id/textStavkaHranaSuper"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:text="Datum"/>
-            <TextView
-                android:id="@+id/textStavkaHranaTitle"
+                android:id="@+id/textStavkaJelovnikNaziv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="First Line"
                 android:textSize="16dp"
                 android:textStyle="bold" />
-
             <TextView
-                android:id="@+id/textStavkaHranaSubtitle"
+                android:id="@+id/textStavkaJelovnikOpis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Neki tekst..."/>
+            <TextView
+                android:id="@+id/textStavkaJelovnikSastojci"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="Datum"/>
         </LinearLayout>
         <TextView
-            android:id="@+id/textStavkaHranaMeta"
+            android:id="@+id/textStavkaJelovnikCijena"
             android:layout_weight="1"
             android:width="0dp"
-            android:gravity="center_vertical|right"
+            android:gravity="top|right"
             android:layout_width="24dp"
             android:layout_height="match_parent"
             android:text="Broj 15"/>

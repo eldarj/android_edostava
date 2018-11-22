@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/nav_bottom_restoran_jelovnik"
+        android:icon="@drawable/ic_jelovnik"
+        android:title="Jelovnik" />
+    <item
+        android:id="@+id/nav_bottom_restoran_vise"
+        android:icon="@drawable/ic_information"
+        android:title="O restoranu" />
+    <item
+        android:id="@+id/nav_bottom_restoran_korpa"
+        android:icon="@drawable/ic_korpa"
+        android:title="Moja korpa" />
 </menu>

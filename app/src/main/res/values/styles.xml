@@ -51,8 +51,6 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
     </style>
 
-    <style name="AppTheme.Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"></style>
-
     <style name="DialogsTheme" parent="AppTheme" />
 
     <!-- Element stilovi -->
@@ -62,8 +60,8 @@
     </style>
 
     <style name="AppTheme.BottomNavigationStyle">
-        <item name="android:maxHeight">@dimen/bottomnav_height</item>
-        <item name="android:background">@color/colorBackgroundDark</item>
+        <item name="itemBackground">@drawable/bg_bottom_navigation_pressed</item>
+        <item name="android:background">@color/colorSecondary</item>
         <item name="itemIconTint">@color/colorWhite</item>
         <item name="itemTextColor">@color/colorWhite</item>
     </style>
@@ -83,5 +81,11 @@
     <style name="AppTheme.CardIconButton">
         <item name="android:backgroundTint">@android:color/transparent</item>
         <item name="android:tint">@color/colorTypographySemiDark</item>
+    </style>
+
+    <style name="AppTheme.Fab" parent="Widget.Design.FloatingActionButton">
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:tint">@color/colorWhite</item>
     </style>
 </resources>

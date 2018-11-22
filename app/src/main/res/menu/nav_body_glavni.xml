@@ -9,7 +9,7 @@
             android:icon="@drawable/ic_restaurant"
             android:title="Restorani" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_korpa"
             android:icon="@drawable/ic_korpa"
             android:title="Moja korpa" />
         <item

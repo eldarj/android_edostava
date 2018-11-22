@@ -1,6 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    android:paddingBottom="16dp"
+    android:paddingHorizontal="16dp">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imageStavkaKorpa"
+        android:src="@drawable/ic_restaurant"
+        android:tint="@color/colorSecondary"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/stavka_korpa_details"
+        android:layout_toRightOf="@id/imageStavkaKorpa"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_weight="3"
+            android:id="@+id/stavka_korpa_details_left"
+            android:layout_toRightOf="@id/stavka_icon"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="72dp">
+            <TextView
+                android:id="@+id/stavka_korpa_super"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="Datum"/>
+            <TextView
+                android:id="@+id/stavka_korpa_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="First Line"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/stavka_korpa_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Neki tekst..."/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/stavka_korpa_cijena"
+            android:text="15 KM"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:width="0dp"
+            android:gravity="top|right"
+            android:layout_toRightOf="@id/stavka_korpa_details_left"/>
+    </LinearLayout>
+
+</RelativeLayout>
