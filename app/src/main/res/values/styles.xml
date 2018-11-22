@@ -53,7 +53,17 @@
 
     <style name="DialogsTheme" parent="AppTheme" />
 
+
     <!-- Element stilovi -->
+
+    <style name="Divider">
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
 
     <style name="AppTheme.NoDivider">
         <item name="android:divider">#00000000</item>
@@ -67,7 +77,6 @@
     </style>
 
     <style name="AppTheme.ListViewStyle" parent="Widget.AppCompat.ListView">
-        <item name="android:background">@color/colorBackground</item>
     </style>
 
     <style name="AppTheme.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
