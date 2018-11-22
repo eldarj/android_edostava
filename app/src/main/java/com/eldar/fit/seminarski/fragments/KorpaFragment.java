@@ -1,15 +1,19 @@
 package com.eldar.fit.seminarski.fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.button.MaterialButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,15 +22,16 @@ import com.bumptech.glide.Glide;
 import com.eldar.fit.seminarski.R;
 import com.eldar.fit.seminarski.data.Korpa;
 import com.eldar.fit.seminarski.data.KorpaHranaStavka;
+import com.eldar.fit.seminarski.helper.MyFragmentHelper;
 import com.eldar.fit.seminarski.helper.MySession;
 
-public class KorpaFragment extends Fragment {
+public class KorpaFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private Korpa korpa;
     private TextView textKorpaIntro, textKorpaTotal;
     private ListView listKorpaStavke;
     private Button btnKorpaNaruci;
-    private ImageButton btnKorpaOdbaci;
+    private MaterialButton btnKorpaOdbaci;
 
     public static KorpaFragment newInstance() {
         Bundle args = new Bundle();
@@ -54,21 +59,20 @@ public class KorpaFragment extends Fragment {
         korpa = MySession.getKorpa();
     }
 
-    @Override
-    public void onResume() {
-        getKorpaSession();
-        super.onResume();
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+
+
         View view = inflater.inflate(R.layout.fragment_korpa, container, false);
+
+        Log.i("Test", "onCreateView::KorpaFragment");
 
         textKorpaIntro = view.findViewById(R.id.textKorpaIntro);
         textKorpaIntro.setText(korpa.getHranaStavke().size() == 0 ?
                 "Korpa je prazna. Pregledajte restorane i jelovnike, izaberite i dodajte nešto u korpu!" :
-                "Ukupno stavki u korpi: " + korpa.getHranaStavke().size());
+                "Ukupno stavki u korpi: " + korpa.getHranaStavkeTotalCount());
 
         textKorpaTotal = view.findViewById(R.id.textKorpaTotal);
         final double ukupno = korpa.getUkupnaCijena();
@@ -76,12 +80,19 @@ public class KorpaFragment extends Fragment {
 
         listKorpaStavke = view.findViewById(R.id.listKorpaStavke);
         listKorpaStavkePopuni();
+        listKorpaStavke.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                KorpaHranaStavka stavka = korpa.getHranaStavke().get(position);
+                MyFragmentHelper.dodajDialog((AppCompatActivity) getActivity(), "korpaStavkaDlg", KorpaStavkaDialogFragment.newInstance(stavka));
+            }
+        });
 
         btnKorpaOdbaci = view.findViewById(R.id.btnKorpaOdbaci);
         btnKorpaOdbaci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Korpa.izvrsiNarudzbu();
+                korpa = Korpa.izvrsiNarudzbu();
             }
         });
 
@@ -89,7 +100,7 @@ public class KorpaFragment extends Fragment {
         btnKorpaNaruci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Korpa.odbaciNarudzbu();
+                korpa = Korpa.odbaciNarudzbu();
             }
         });
 
@@ -146,5 +157,27 @@ public class KorpaFragment extends Fragment {
         };
 
         listKorpaStavke.setAdapter(listStavkeAdapter);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        Log.i("Test", "onSharedPreferenceChanged with key: " + key);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getKorpaSession();
+
+        SharedPreferences prefs = MySession.getPrefs();
+        prefs.registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onPause() {
+        SharedPreferences prefs = MySession.getPrefs();
+        prefs.registerOnSharedPreferenceChangeListener(this);
+
+        super.onPause();
     }
 }
