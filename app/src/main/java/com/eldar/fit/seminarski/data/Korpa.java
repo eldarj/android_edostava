@@ -1,5 +1,7 @@
 package com.eldar.fit.seminarski.data;
 
+import com.eldar.fit.seminarski.helper.MySession;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,14 @@ public class Korpa implements Serializable {
         hranaStavke = new ArrayList<KorpaHranaStavka>();
     }
 
+    public static void odbaciNarudzbu() {
+        MySession.setKorpa(new Korpa());
+    }
+
+    public static void izvrsiNarudzbu() {
+        MySession.setKorpa(new Korpa());
+    }
+
     public UUID getuId() {
         return uId;
     }
@@ -31,6 +41,13 @@ public class Korpa implements Serializable {
     }
 
     public void dodajStavku(KorpaHranaStavka stavka) {
+        for (KorpaHranaStavka s :
+                hranaStavke) {
+            if (s.equals(stavka)) {
+                s.dodajNaKolicinu();
+                return;
+            }
+        }
         hranaStavke.add(stavka);
     }
 

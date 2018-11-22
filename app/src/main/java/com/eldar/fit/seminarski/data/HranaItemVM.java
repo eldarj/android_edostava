@@ -1,6 +1,7 @@
 package com.eldar.fit.seminarski.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HranaItemVM implements Serializable {
@@ -26,7 +27,7 @@ public class HranaItemVM implements Serializable {
         this.id = hranaItemIdCounter++;
         this.naziv = naziv;
         this.opis = opis;
-        this.sastojci = sastojci;
+        this.sastojci = sastojci == null ? new ArrayList<String>() : sastojci;
         this.kategorije = kategorije;
         this.restoran = restoran;
         this.cijena = cijena;
