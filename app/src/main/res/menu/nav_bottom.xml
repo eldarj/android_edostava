@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/bottommain_restorani"
         android:icon="@drawable/ic_restaurant"
         android:title="Restorani" />
     <item
+        android:id="@+id/bottommain_omiljeni_restorani"
         android:icon="@drawable/ic_heart"
         android:title="Omiljeni" />
     <item
+        android:id="@+id/bottommain_korpa"
         android:icon="@drawable/ic_korpa"
         android:title="Korpa" />
 </menu>
