@@ -64,4 +64,8 @@ public class MySession {
         editor.putString(PREF_LOGGED_USER, jsonKorisnik);
         editor.apply();
     }
+
+    public static SharedPreferences getPrefs() {
+        return MyApp.getContext().getSharedPreferences(SHARED_PREFS_STORAGE_NAME, Context.MODE_PRIVATE);
+    }
 }
