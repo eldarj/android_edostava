@@ -2,6 +2,8 @@ package com.eldar.fit.seminarski;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -26,6 +28,8 @@ public class GlavniActivity extends AppCompatActivity
     DrawerLayout drawer;
     NavigationView navigationView;
 
+    BottomNavigationView bottomnavigationMain;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -40,9 +44,36 @@ public class GlavniActivity extends AppCompatActivity
         setContentView(R.layout.activity_glavni);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+        bottomnavigationMain = findViewById(R.id.bottomnavigationMain);
+        bottomnavigationMain.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int kliknutiTabId = menuItem.getItemId();
+
+                switch(kliknutiTabId) {
+                    case R.id.bottommain_restorani:
+                        MyFragmentHelper.fragmentCreate(GlavniActivity.this,
+                                R.id.fragmentContainer,
+                                RestoranListFragment.newInstance());
+                        break;
+                    case R.id.bottommain_korpa:
+                        MyFragmentHelper.fragmentCreate(GlavniActivity.this,
+                                R.id.fragmentContainer,
+                                KorpaFragment.newInstance());
+                        break;
+                    default:
+                        return false;
+                }
+
+                menuItem.setChecked(true);
+                return true;
+            }
+        });
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         setupMainNavigation();
+
 
         MyFragmentHelper.fragmentCreate(this, R.id.fragmentContainer,  RestoranListFragment.newInstance());
     }
