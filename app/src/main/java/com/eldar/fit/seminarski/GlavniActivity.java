@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -13,9 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.eldar.fit.seminarski.data.KorisnikVM;
+import com.eldar.fit.seminarski.fragments.KorpaFragment;
 import com.eldar.fit.seminarski.fragments.RestoranListFragment;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
 import com.eldar.fit.seminarski.helper.MySession;
@@ -26,7 +25,6 @@ public class GlavniActivity extends AppCompatActivity
     Toolbar toolbar;
     DrawerLayout drawer;
     NavigationView navigationView;
-    TabLayout tabLayoutNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,11 +99,9 @@ public class GlavniActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_restorani) {
-            tabLayoutNav.getTabAt(0).select();
-            //MyFragmentHelper.fragmentCreate(this, R.id.fragmentContainer, RestoranListFragment.newInstance());
-        } else if (id == R.id.nav_gallery) {
-            tabLayoutNav.getTabAt(1).select();
-            //MyFragmentHelper.fragmentCreate(this, R.id.fragmentContainer, PosiljkaListFragment.newInstance());
+            MyFragmentHelper.fragmentCreate(this, R.id.fragmentContainer,  RestoranListFragment.newInstance());
+        } else if (id == R.id.nav_korpa) {
+            MyFragmentHelper.fragmentCreate(this, R.id.fragmentContainer, KorpaFragment.newInstance());
         } else if (id == R.id.nav_profile) {
 
         } else if (id == R.id.nav_manage) {
@@ -117,6 +113,8 @@ public class GlavniActivity extends AppCompatActivity
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
+
+        navigationView.setCheckedItem(item);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
