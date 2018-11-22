@@ -12,8 +12,17 @@ public class KorisnikVM implements Serializable{
     private String Ime;
     private String Prezime;
     private BlokVM BlokVM;
+    private String ImageUrl;
 
-    public KorisnikVM(String username, String password, String ime, String prezime, BlokVM blokVM) {
+    public KorisnikVM(String username, String password, String ime, String prezime, String imageUrl, BlokVM blokVM) {
+        Username = username;
+        Password = password;
+        Ime = ime;
+        Prezime = prezime;
+        BlokVM = blokVM;
+        ImageUrl = imageUrl;
+    }
+    public KorisnikVM(String username, String password, String ime, String prezime,BlokVM blokVM) {
         Username = username;
         Password = password;
         Ime = ime;
@@ -40,6 +49,11 @@ public class KorisnikVM implements Serializable{
 
     public void setPrezime(String value){ Prezime = value; }
 
+    public String getImageUrl() {
+        return ImageUrl;
+    }
 
-    
+    public void setImageUrl(String imageUrl) {
+        ImageUrl = imageUrl;
+    }
 }

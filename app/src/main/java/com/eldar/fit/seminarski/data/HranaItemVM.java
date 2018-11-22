@@ -20,6 +20,8 @@ public class HranaItemVM implements Serializable {
 
     private double cijena;
 
+    private String imageUrl;
+
     public HranaItemVM(String naziv, String opis, List<String> sastojci, List<HranaKategorijaVM> kategorije, RestoranVM restoran, double cijena) {
         this.id = hranaItemIdCounter++;
         this.naziv = naziv;
@@ -28,6 +30,18 @@ public class HranaItemVM implements Serializable {
         this.kategorije = kategorije;
         this.restoran = restoran;
         this.cijena = cijena;
+        this.imageUrl = imageUrl;
+    }
+
+    public HranaItemVM(String naziv, String opis, List<String> sastojci, List<HranaKategorijaVM> kategorije, RestoranVM restoran, String imageUrl, double cijena) {
+        this.id = hranaItemIdCounter++;
+        this.naziv = naziv;
+        this.opis = opis;
+        this.sastojci = sastojci;
+        this.kategorije = kategorije;
+        this.restoran = restoran;
+        this.cijena = cijena;
+        this.imageUrl = imageUrl;
     }
 
     public int getId() {
@@ -72,6 +86,14 @@ public class HranaItemVM implements Serializable {
 
     public void setRestoran(RestoranVM restoran) {
         this.restoran = restoran;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public double getCijena() {
