@@ -17,7 +17,8 @@ public class KorpaHranaStavka implements Serializable {
 
     @Override
     public boolean equals(@Nullable Object obj) {
-        return this.hranaItemVM == obj || this == obj;
+        return obj instanceof HranaItemVM && this.hranaItemVM == obj ||
+                obj instanceof KorpaHranaStavka && this == obj;
     }
 
     public HranaItemVM getHranaItemVM() {
@@ -28,9 +29,17 @@ public class KorpaHranaStavka implements Serializable {
         return kolicina;
     }
 
-    public void dodajNaKolicinu() {
+    public void dodajKolicinu() {
         ++this.kolicina;
         ukupnaCijena += hranaItemVM.getCijena();
+    }
+
+    public void umanjiKolicinu() {
+//        if (kolicina == 1) {
+//
+//        }
+//        --this.kolicina;
+//        ukupnaCijena -= hranaItemVM.getCijena();
     }
 
     public double getUkupnaCijena() {
