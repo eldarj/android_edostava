@@ -3,6 +3,7 @@ package com.eldar.fit.seminarski.data;
 import android.support.annotation.Nullable;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RestoranVM implements Serializable {
@@ -44,7 +45,6 @@ public class RestoranVM implements Serializable {
                       @Nullable List<String> imageUrls,
                       String naziv,
                       String opis,
-                      @Nullable List<HranaItemVM> hrana,
                       RestoranTipVM tipRestorana,
                       KorisnikVM vlasnik,
                       String adresa,
@@ -57,7 +57,6 @@ public class RestoranVM implements Serializable {
         this.imageUrls = imageUrls;
         this.naziv = naziv;
         this.opis = opis;
-        this.hrana = hrana;
         this.tipRestorana = tipRestorana;
         this.vlasnik = vlasnik;
         this.adresa = adresa;
@@ -104,6 +103,15 @@ public class RestoranVM implements Serializable {
     }
 
     public List<HranaItemVM> getHrana() {
+        if (hrana == null) {
+            hrana = new ArrayList<HranaItemVM>();
+            for (HranaItemVM k: Storage.getHrana()) {
+                if (k.getRestoran() == this) {
+                    hrana.add(k);
+                }
+            }
+        }
+
         return hrana;
     }
 
