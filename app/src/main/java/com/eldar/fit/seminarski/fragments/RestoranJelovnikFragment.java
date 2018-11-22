@@ -3,24 +3,31 @@ package com.eldar.fit.seminarski.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.eldar.fit.seminarski.GlavniActivity;
 import com.eldar.fit.seminarski.R;
 import com.eldar.fit.seminarski.data.HranaItemVM;
 import com.eldar.fit.seminarski.data.Korpa;
 import com.eldar.fit.seminarski.data.Storage;
+import com.eldar.fit.seminarski.helper.MyApp;
 import com.eldar.fit.seminarski.helper.MySession;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RestoranJelovnikFragment extends Fragment {
 
@@ -52,15 +59,6 @@ public class RestoranJelovnikFragment extends Fragment {
         super.onResume();
     }
 
-
-    private void getKorpaSession() {
-        if (MySession.getKorpa() == null) {
-            korpa = new Korpa();
-            MySession.setKorpa(korpa);
-        }
-        korpa = MySession.getKorpa();
-    }
-
     private void popuniPodatke() {
         podaci = Storage.getHrana();
 
@@ -86,7 +84,6 @@ public class RestoranJelovnikFragment extends Fragment {
                     LayoutInflater inflater = getLayoutInflater();
                     view = inflater != null ? inflater.inflate(R.layout.stavka_restoran_jelovnik, parent, false) : null;
                 }
-
                 TextView textStavkaJelovnikNaziv = view.findViewById(R.id.textStavkaJelovnikNaziv);
                 textStavkaJelovnikNaziv.setText(podaci.get(position).getNaziv());
 
@@ -95,32 +92,55 @@ public class RestoranJelovnikFragment extends Fragment {
 
                 TextView textStavkaJelovnikSastojci = view.findViewById(R.id.textStavkaJelovnikSastojci);
                 StringBuilder sastojci = new StringBuilder("Sastojci ");
-                for (String s : podaci.get(position).getSastojci()) {
-                    sastojci.append(s).append(", ");
+                if (podaci.get(position).getSastojci() == null) {
+                    sastojci.append(" - ");
+                } else {
+                    for (String s : podaci.get(position).getSastojci()) {
+                        sastojci.append(s).append(", ");
+                    }
                 }
+
                 textStavkaJelovnikSastojci.setText(sastojci);
 
                 TextView textStavkaJelovnikCijena = view.findViewById(R.id.textStavkaJelovnikCijena);
-                textStavkaJelovnikCijena.setText(String.format("%d KM", podaci.get(position).getCijena()));
+                textStavkaJelovnikCijena.setText(String.format("%1$,.2f KM",podaci.get(position).getCijena()));
 
-                Button btnDodajStavkuKorpu = view.findViewById(R.id.btnDodajStavkuKorpu);
+                ImageButton btnDodajStavkuKorpu = view.findViewById(R.id.btnDodajStavkuKorpu);
                 btnDodajStavkuKorpu.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        korpa.dodajStavku(podaci.get(position));
+                        v.setBackground(getResources().getDrawable(R.drawable.ic_plus_round_added));
+                        do_dodajStavku(position);
                     }
                 });
 
-                ImageView imageStavkaJelovnikSlika = view.findViewById(R.id.imageStavkaJelovnikSlika);
-                Glide.with(getActivity())
-                        .load(podaci.get(position).getImageUrl())
-                        .centerCrop()
-                        .into(imageStavkaJelovnikSlika);
+                CircleImageView imageStavkaJelovnikSlika = view.findViewById(R.id.imageStavkaJelovnikSlika);
+                if (podaci.get(position).getImageUrl() == null) {
+                    //imageStavkaJelovnikSlika.setImageDrawable(getResources().getDrawable(R.drawable.ic_round_placeholder_image));
+                } else {
+                    Glide.with(getActivity())
+                            .load(podaci.get(position).getImageUrl())
+                            .centerCrop()
+                            .into(imageStavkaJelovnikSlika);
+                }
 
                 return view;
             }
         };
 
         listViewHrana.setAdapter(listAdapter);
+    }
+
+    private void getKorpaSession() {
+        if (MySession.getKorpa() == null) {
+            korpa = new Korpa();
+            MySession.setKorpa(korpa);
+        }
+        korpa = MySession.getKorpa();
+    }
+
+    private void do_dodajStavku(int position) {
+        korpa.dodajStavku(podaci.get(position));
+        MySession.setKorpa(korpa);
     }
 }

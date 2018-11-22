@@ -4,30 +4,29 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.eldar.fit.seminarski.R;
-import com.eldar.fit.seminarski.RestoranDetaljnoActivity;
 import com.eldar.fit.seminarski.data.Korpa;
 import com.eldar.fit.seminarski.data.KorpaHranaStavka;
 import com.eldar.fit.seminarski.helper.MySession;
-
-import java.io.Serializable;
 
 public class KorpaFragment extends Fragment {
 
     private Korpa korpa;
     private TextView textKorpaIntro, textKorpaTotal;
     private ListView listKorpaStavke;
+    private Button btnKorpaNaruci;
+    private ImageButton btnKorpaOdbaci;
 
     public static KorpaFragment newInstance() {
         Bundle args = new Bundle();
@@ -68,8 +67,8 @@ public class KorpaFragment extends Fragment {
 
         textKorpaIntro = view.findViewById(R.id.textKorpaIntro);
         textKorpaIntro.setText(korpa.getHranaStavke().size() == 0 ?
-                "" + korpa.getHranaStavke().size() + " stavke u vašoj korpi" :
-                "Korpa je prazna. Pregledajte restorane i jelovnike, izaberite i dodajte nešto u korpu!");
+                "Korpa je prazna. Pregledajte restorane i jelovnike, izaberite i dodajte nešto u korpu!" :
+                "Ukupno stavki u korpi: " + korpa.getHranaStavke().size());
 
         textKorpaTotal = view.findViewById(R.id.textKorpaTotal);
         final double ukupno = korpa.getUkupnaCijena();
@@ -78,6 +77,21 @@ public class KorpaFragment extends Fragment {
         listKorpaStavke = view.findViewById(R.id.listKorpaStavke);
         listKorpaStavkePopuni();
 
+        btnKorpaOdbaci = view.findViewById(R.id.btnKorpaOdbaci);
+        btnKorpaOdbaci.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Korpa.izvrsiNarudzbu();
+            }
+        });
+
+        btnKorpaNaruci = view.findViewById(R.id.btnKorpaNaruci);
+        btnKorpaNaruci.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Korpa.odbaciNarudzbu();
+            }
+        });
 
         return view;
     }
@@ -102,24 +116,24 @@ public class KorpaFragment extends Fragment {
 
             @Override
             public View getView(int position, View view, ViewGroup parent) {
-                view = getLayoutInflater().inflate(R.layout.stavka_korpa, parent, false);
+                if (view == null) {
+                    LayoutInflater inflater = getActivity().getLayoutInflater();
+                    view = inflater != null ? inflater.inflate(R.layout.stavka_korpa, parent, false) : null;
+                }
 
                 KorpaHranaStavka stavka = korpa.getHranaStavke().get(position);
 
-                TextView stavka_korpa_super = view.findViewById(R.id.stavka_korpa_super);
-                stavka_korpa_super.setText("Iz restorana " + stavka.getHranaItemVM().getRestoran().getNaziv());
+                TextView textStavkaKorpaSuper = view.findViewById(R.id.textStavkaKorpaSuper);
+                textStavkaKorpaSuper.setText("Restoran " + stavka.getHranaItemVM().getRestoran().getNaziv());
 
-                TextView stavka_korpa_title = view.findViewById(R.id.stavka_korpa_title);
-                stavka_korpa_title.setText(stavka.getHranaItemVM().getNaziv());
+                TextView textStavkaKorpaNaziv = view.findViewById(R.id.textStavkaKorpaNaziv);
+                textStavkaKorpaNaziv.setText("x" + stavka.getKolicina() + " " + stavka.getHranaItemVM().getNaziv());
 
-                TextView stavka_korpa_subtitle = view.findViewById(R.id.stavka_korpa_subtitle);
-                stavka_korpa_subtitle.setText(
-                        "Jed.cijena " + stavka.getHranaItemVM().getCijena() +
-                                " Kolicina " + stavka.getKolicina()
-                );
+                TextView textStavkaKorpaOpis = view.findViewById(R.id.textStavkaKorpaOpis);
+                textStavkaKorpaOpis.setText("Cijena " + stavka.getHranaItemVM().getCijena());
 
-                TextView stavka_korpa_cijena = view.findViewById(R.id.stavka_korpa_cijena);
-                stavka_korpa_cijena.setText(stavka.getUkupnaCijena() == 0 ? "- KM" : stavka.getUkupnaCijena() + " KM");
+                TextView textStavkaKorpaCijena = view.findViewById(R.id.textStavkaKorpaCijena);
+                textStavkaKorpaCijena.setText(stavka.getUkupnaCijena() == 0 ? "- KM" : stavka.getUkupnaCijena() + " KM");
 
                 ImageView imageStavkaKorpa = view.findViewById(R.id.imageStavkaKorpa);
                 Glide.with(getActivity())
