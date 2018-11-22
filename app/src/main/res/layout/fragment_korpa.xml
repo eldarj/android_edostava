@@ -1,77 +1,124 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textKorpaIntro"
-        android:layout_margin="8dp"
-        android:text="4 stavke u vašoj korpi"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:gravity="bottom"
+        android:translationZ="2.5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="80dp"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-    <ListView
-        android:id="@+id/listKorpaStavke"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"></ListView>
+        <android.support.v7.widget.Toolbar
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:contentInsetLeft="0dp"
+            android:contentInsetStart="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:id="@+id/btnKorpaClose"
+                    android:tint="@color/colorWhite"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_chevron_left"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/titleKorpaNaziv"
+                    android:textColor="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Korpa"
+                    style="@style/Base.TextAppearance.AppCompat.Title" />
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
 
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
-        android:layout_margin="8dp"
         android:orientation="vertical"
+        android:fillViewport="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:tag="fragmentKorpa"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <View style="@style/Divider"/>
-
-        <RelativeLayout
-            android:layout_marginBottom="16dp"
+        <TextView
+            android:id="@+id/textKorpaIntro"
+            android:layout_margin="8dp"
+            android:text="4 stavke u vašoj korpi"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="Total"
-                android:textAllCaps="true"
-                android:textSize="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/textKorpaTotal"
-                android:textAllCaps="true"
-                android:textSize="16dp"
-                android:text="41.25 KM"
-                android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" />
 
-        </RelativeLayout>
+        <ListView
+            android:id="@+id/listKorpaStavke"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+
         <LinearLayout
-            android:orientation="horizontal"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/btnKorpaNaruci"
-                android:text="NARUČI"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
 
-            <android.support.design.button.MaterialButton
-                android:id="@+id/btnKorpaOdbaci"
-                style="@style/Widget.MaterialComponents.Button.Icon"
-                android:backgroundTint="@color/colorSecondary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Odbaci"
-                android:textAlignment="viewEnd"
-                app:iconGravity="textStart"
-                android:layout_marginLeft="8dp"
-                app:icon="@drawable/ic_trash"/>
+            <View style="@style/Divider"/>
+
+            <RelativeLayout
+                android:layout_marginBottom="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="Total"
+                    android:textAllCaps="true"
+                    android:textSize="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/textKorpaTotal"
+                    android:textAllCaps="true"
+                    android:textSize="16dp"
+                    android:text="41.25 KM"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/btnKorpaNaruci"
+                    android:text="NARUČI"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+                <android.support.design.button.MaterialButton
+                    android:id="@+id/btnKorpaOdbaci"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Odbaci"
+                    android:textAlignment="viewEnd"
+                    app:iconGravity="textStart"
+                    android:layout_marginLeft="8dp"
+                    app:icon="@drawable/ic_trash"/>
+            </LinearLayout>
+
         </LinearLayout>
-
     </LinearLayout>
-
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
