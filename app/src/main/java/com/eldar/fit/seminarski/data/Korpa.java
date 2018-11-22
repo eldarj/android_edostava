@@ -12,6 +12,7 @@ public class Korpa implements Serializable {
     private UUID uId;
     public double ukupnaCijena;
     public List<KorpaHranaStavka> hranaStavke;
+    private int hranaStavkeSize;
 
     public Korpa() {
         uId = UUID.randomUUID();
@@ -19,12 +20,27 @@ public class Korpa implements Serializable {
         hranaStavke = new ArrayList<KorpaHranaStavka>();
     }
 
-    public static void odbaciNarudzbu() {
-        MySession.setKorpa(new Korpa());
+    public static Korpa odbaciNarudzbu() {
+        Korpa korpa = new Korpa();
+        MySession.setKorpa(korpa);
+
+        return korpa;
     }
 
-    public static void izvrsiNarudzbu() {
-        MySession.setKorpa(new Korpa());
+    public static Korpa izvrsiNarudzbu() {
+        Korpa korpa = new Korpa();
+        MySession.setKorpa(korpa);
+
+        return korpa;
+    }
+
+    public int getHranaStavkeTotalCount() {
+        int total = 0;
+        for (KorpaHranaStavka s :
+                hranaStavke) {
+            total += s.getKolicina();
+        }
+        return total;
     }
 
     public UUID getuId() {
@@ -44,7 +60,7 @@ public class Korpa implements Serializable {
         for (KorpaHranaStavka s :
                 hranaStavke) {
             if (s.equals(stavka)) {
-                s.dodajNaKolicinu();
+                s.dodajKolicinu();
                 return;
             }
         }
@@ -52,6 +68,13 @@ public class Korpa implements Serializable {
     }
 
     public void dodajStavku(HranaItemVM stavka) {
+        for (KorpaHranaStavka s :
+                hranaStavke) {
+            if (s.equals(stavka)) {
+                s.dodajKolicinu();
+                return;
+            }
+        }
         hranaStavke.add(new KorpaHranaStavka(stavka, 1));
     }
 
