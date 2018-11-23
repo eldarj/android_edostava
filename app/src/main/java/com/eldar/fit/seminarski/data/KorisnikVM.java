@@ -11,23 +11,18 @@ public class KorisnikVM implements Serializable{
     private String Password;
     private String Ime;
     private String Prezime;
+    private String Adresa;
     private BlokVM BlokVM;
     private String ImageUrl;
 
-    public KorisnikVM(String username, String password, String ime, String prezime, String imageUrl, BlokVM blokVM) {
+    public KorisnikVM(String username, String password, String ime, String prezime, String imageUrl, BlokVM blokVM, String adresa) {
         Username = username;
         Password = password;
         Ime = ime;
         Prezime = prezime;
         BlokVM = blokVM;
         ImageUrl = imageUrl;
-    }
-    public KorisnikVM(String username, String password, String ime, String prezime,BlokVM blokVM) {
-        Username = username;
-        Password = password;
-        Ime = ime;
-        Prezime = prezime;
-        BlokVM = blokVM;
+        Adresa = adresa;
     }
     public BlokVM getBlokVM(){ return BlokVM; }
 
@@ -55,5 +50,25 @@ public class KorisnikVM implements Serializable{
 
     public void setImageUrl(String imageUrl) {
         ImageUrl = imageUrl;
+    }
+
+    public String getAdresa() {
+        return Adresa;
+    }
+
+    public void setAdresa(String adresa) {
+        Adresa = adresa;
+    }
+
+    public String getOmiljeniRestoran() {
+        return Storage.getRestorani().get(0).getNaziv();
+    }
+
+    public int getUkupnoNarudzbi() {
+        return 9;
+    }
+
+    public String getDatumRegistracije() {
+        return "26.9.2018";
     }
 }

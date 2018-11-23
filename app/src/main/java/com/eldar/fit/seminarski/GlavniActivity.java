@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -16,7 +17,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.eldar.fit.seminarski.data.KorisnikVM;
+import com.eldar.fit.seminarski.fragments.KorisnikPretragaDialogFragment;
 import com.eldar.fit.seminarski.fragments.KorpaFragment;
+import com.eldar.fit.seminarski.fragments.ProfilActivity;
 import com.eldar.fit.seminarski.fragments.RestoranListFragment;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
 import com.eldar.fit.seminarski.helper.MySession;
@@ -134,11 +137,9 @@ public class GlavniActivity extends AppCompatActivity
         } else if (id == R.id.nav_korpa) {
             MyFragmentHelper.fragmentCreate(this, R.id.fragmentContainer, KorpaFragment.newInstance());
         } else if (id == R.id.nav_profile) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
+            startActivity(new Intent(this, ProfilActivity.class));
+//            DialogFragment dlg = new KorisnikPretragaDialogFragment();
+//            MyFragmentHelper.dodajDialog(this, "testTag", dlg);
         } else if (id == R.id.nav_logout) {
             MySession.setKorisnik(null);
             startActivity(new Intent(this, LoginActivity.class));

@@ -21,20 +21,20 @@ public class Storage {
     public static List<KorisnikVM> getKorisnici(){
         if (korisnici == null) {
             korisnici = new ArrayList<KorisnikVM>();
-            korisnici.add(new KorisnikVM("emina", "emina","Emina", "Obradović", "http://ekstra.ba/assets/images/small/1.jpg", getBlokovi().get(0)));
-            korisnici.add(new KorisnikVM("almir", "almir","Almir", "Hodžić", null, getBlokovi().get(0)));
-            korisnici.add(new KorisnikVM("anela", "anela","Anela", "Tahirović", "http://ekstra.ba/assets/images/small/2.jpg", getBlokovi().get(0)));
-            korisnici.add(new KorisnikVM("almasa", "almasa","Almasa", "Halilović","http://ekstra.ba/assets/images/small/3.jpg", getBlokovi().get(2)));
-            korisnici.add(new KorisnikVM("armin", "armin","Armin", "Požegić","http://ekstra.ba/assets/images/small/4.jpg", getBlokovi().get(2)));
-            korisnici.add(new KorisnikVM("selma", "selma","Selma", "Jasminović","http://ekstra.ba/assets/images/small/5.jpg", getBlokovi().get(3)));
-            korisnici.add(new KorisnikVM("amar", "amar","Amar", "Jasminović","http://ekstra.ba/assets/images/small/6.jpg", getBlokovi().get(3)));
-            korisnici.add(new KorisnikVM("selma2", "selma2","Selma", "Obradović","http://ekstra.ba/assets/images/small/7.jpg", getBlokovi().get(3)));
-            korisnici.add(new KorisnikVM("eldar", "eldar","Eldar", "Jahijagić","http://ekstra.ba/assets/images/small/8.jpg", getBlokovi().get(1)));
-            korisnici.add(new KorisnikVM("indira", "indira","Indira", "Jahijagić","http://ekstra.ba/assets/images/small/9.jpg", getBlokovi().get(1)));
-            korisnici.add(new KorisnikVM("mirsad", "mirsad","Mirsad", "Zikić", null, getBlokovi().get(1)));
-            korisnici.add(new KorisnikVM("ensar", "ensar","Ensar", "Pohić", null, getBlokovi().get(1)));
-            korisnici.add(new KorisnikVM("alen", "alen","Alen", "Osmanović", null, getBlokovi().get(2)));
-            korisnici.add(new KorisnikVM("alija", "alija","Alija", "Gutić", null, getBlokovi().get(2)));
+            korisnici.add(new KorisnikVM("emina", "emina","Emina", "Obradović", "http://ekstra.ba/assets/images/small/1.jpg", getBlokovi().get(0), "Aleja Alije Izetbegovića 16."));
+            korisnici.add(new KorisnikVM("almir", "almir","Almir", "Hodžić", "", getBlokovi().get(0), "Trg Stara Tržnica 6."));
+            korisnici.add(new KorisnikVM("anela", "anela","Anela", "Tahirović", "http://ekstra.ba/assets/images/small/2.jpg", getBlokovi().get(0), "Asmira Mehanovića 23."));
+            korisnici.add(new KorisnikVM("almasa", "almasa","Almasa", "Halilović","http://ekstra.ba/assets/images/small/3.jpg", getBlokovi().get(2), "Stari centar 31."));
+            korisnici.add(new KorisnikVM("armin", "armin","Armin", "Požegić","http://ekstra.ba/assets/images/small/4.jpg", getBlokovi().get(2), "Ulica Armije BiH 11. B2"));
+            korisnici.add(new KorisnikVM("selma", "selma","Selma", "Jasminović","http://ekstra.ba/assets/images/small/5.jpg", getBlokovi().get(3), "Turalibegova 23."));
+            korisnici.add(new KorisnikVM("amar", "amar","Amar", "Jasminović","http://ekstra.ba/assets/images/small/6.jpg", getBlokovi().get(3), "Ul. Patriotske Lige 7."));
+            korisnici.add(new KorisnikVM("selma2", "selma2","Selma", "Obradović","http://ekstra.ba/assets/images/small/7.jpg", getBlokovi().get(3), "Ul. Musala 19."));
+            korisnici.add(new KorisnikVM("eldar", "eldar","Eldar", "Jahijagić","https://i.pinimg.com/originals/f6/77/b6/f677b6463a402c2d5e8ca609d1cc2b03.jpg", getBlokovi().get(1), "Matije Gupca 16. B1"));
+            korisnici.add(new KorisnikVM("indira", "indira","Indira", "Jahijagić","http://ekstra.ba/assets/images/small/9.jpg", getBlokovi().get(1), "Trg Stara Tržnica 6."));
+            korisnici.add(new KorisnikVM("mirsad", "mirsad","Mirsad", "Zikić", "http://ekstra.ba/assets/images/small/8.jpg", getBlokovi().get(1), "Trg Stara Tržnica 6."));
+            korisnici.add(new KorisnikVM("ensar", "ensar","Ensar", "Pohić", "http://ekstra.ba/assets/images/small/8.jpg", getBlokovi().get(1), "Trg Stara Tržnica 6."));
+            korisnici.add(new KorisnikVM("alen", "alen","Alen", "Osmanović", "", getBlokovi().get(2), "Trg Stara Tržnica 6."));
+            korisnici.add(new KorisnikVM("alija", "alija","Alija", "Gutić", "", getBlokovi().get(2), "Trg Stara Tržnica 6."));
         }
         return korisnici;
     }
@@ -78,7 +78,7 @@ public class Storage {
                             "http://www.kibemahala.ba/wp-content/uploads/2017/08/umj4-585x390.jpg"
                     )),
                     "Petica",
-                    "Tradicija 100 godina",
+                    "Restoran Petica koji se nalazi u samom srcu starog dijela grada, koji je ujedno i centar grada, Vam nudi originalnost i autentičnost bosanske tradicionalne kuhinje.",
                     getTipoviRestorana().get(0),
                     getKorisnici().get(0),
                     "Maršala Tita 16.",
@@ -137,7 +137,13 @@ public class Storage {
     public static List<HranaItemVM> getHrana() {
         if (hrana == null) {
             hrana = new ArrayList<>();
-            hrana.add(new HranaItemVM("Hamburger", "Sočan hambuerger, svježe sa roštilja", null, null, getRestorani().get(0), "https://www.volim-meso.hr/wordpress/wp-content/uploads/2014/06/10-hamburger-zapovjedi.jpg", 2.50));
+            List<String> sastojci = new ArrayList<String>();
+            sastojci.add("Pecivo");
+            sastojci.add("Šnicla");
+            sastojci.add("Blagi sos");
+            sastojci.add("Salata");
+
+            hrana.add(new HranaItemVM("Hamburger", "Sočan hambuerger, svježe sa roštilja", sastojci, null, getRestorani().get(0), "https://www.volim-meso.hr/wordpress/wp-content/uploads/2014/06/10-hamburger-zapovjedi.jpg", 2.50));
             hrana.add(new HranaItemVM("Tost sendvič", "Super odličan tost sendvič", null, null, getRestorani().get(0), "https://kuharica.kontin.info/wp-content/uploads/2013/11/Tost-sendvis-s-jajetom-i-senfom-10-702x467.jpg", 2.50));
             hrana.add(new HranaItemVM("Tabaskino", "Tabaskino punjen sirom, šunkom itd..", null, null, getRestorani().get(0), "https://www.theparisreview.org/blog/wp-content/uploads/2018/02/pexels-photo-660282-1024x683.jpg",3.00));
             hrana.add(new HranaItemVM("Pizza Margarita", "Najbolja i najjednostavnija", null, null, getRestorani().get(0), "http://www.tanjir.ba/thumb.php?src=image/13838454148.JPG&iar=1&fltr[]=wmi|images/art/logo.png|BL", 3));
