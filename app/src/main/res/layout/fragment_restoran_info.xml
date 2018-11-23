@@ -86,13 +86,14 @@
 
             <LinearLayout
                 android:orientation="vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/textDetaljnoRestoranNaziv"
                     style="@style/TextAppearance.MaterialComponents.Headline6"
-                    android:paddingLeft="16dp"
                     android:paddingTop="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -101,19 +102,70 @@
                 <TextView
                     android:id="@+id/textDetaljnoRestoranLikes"
                     style="@style/TextAppearance.MaterialComponents.Caption"
-                    android:paddingLeft="16dp"
                     android:paddingBottom="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="16 sviđanja" />
 
+
+                <android.support.design.chip.ChipGroup
+                    android:layout_marginBottom="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.chip.Chip
+                        android:text="Restoran"
+                        android:layout_marginRight="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <android.support.design.chip.Chip
+                        android:text="Slastičarna"
+                        android:layout_marginRight="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </android.support.design.chip.ChipGroup>
+
                 <TextView
                     android:id="@+id/textDetaljnoRestoranOpis"
-                    android:paddingLeft="16dp"
                     android:paddingBottom="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Restoran opis"/>
+
+
+                <View style="@style/Divider.Small"></View>
+                <TextView
+                    android:text="Kontakt"
+                    android:textColor="@color/colorSecondaryLight"
+                    android:textSize="17dp"
+                    android:textAllCaps="true"
+                    android:paddingBottom="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:paddingBottom="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Maršala Tita 16., Tuzla"/>
+                <TextView
+                    android:paddingBottom="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tel. +387 62 005 152"/>
+
+                <TextView
+                    android:paddingBottom="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Web www.petica.com"/>
+                <TextView
+                    android:paddingBottom="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email info@petica.com"/>
+
 
             </LinearLayout>
 

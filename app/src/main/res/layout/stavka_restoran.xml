@@ -8,7 +8,10 @@
     <android.support.design.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mtrl_card_spacing">
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="@dimen/mtrl_card_spacing"
+        android:layout_marginBottom="@dimen/mtrl_card_spacing">
 
         <LinearLayout
             android:orientation="vertical"
@@ -54,6 +57,7 @@
 
             <TextView
                 android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingBottom="16dp"
                 android:id="@+id/textStavkaRestoranOpis"
                 android:layout_width="wrap_content"
@@ -71,7 +75,7 @@
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pregledaj hranu"
+                    android:text="Jelovnik"
                     />
                 <ImageButton
                     android:id="@+id/btnStavkaRestoranLike"

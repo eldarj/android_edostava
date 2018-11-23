@@ -1,11 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ListView
-        android:id="@+id/listViewHrana"
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:gravity="bottom"
+        android:translationZ="2.5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="80dp"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-</RelativeLayout>
+        <android.support.v7.widget.Toolbar
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:contentInsetLeft="0dp"
+            android:contentInsetStart="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:id="@+id/btnKorpaClose"
+                    android:tint="@color/colorWhite"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_chevron_left"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/titleKorpaNaziv"
+                    android:textColor="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Petica - Jelovnik"
+                    style="@style/Base.TextAppearance.AppCompat.Title" />
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <SearchView
+            android:id="@+id/searchViewPretraga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:queryBackground="@color/Transparent"
+            android:inputType="textNoSuggestions|textVisiblePassword"
+            android:iconifiedByDefault="false"
+            android:hint="Hrana, tip, naziv, restoran..."/>
+        <View style="@style/Divider.Xsmall"></View>
+        <ListView
+            android:id="@+id/listViewHrana"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>
