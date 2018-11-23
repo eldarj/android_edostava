@@ -30,6 +30,7 @@ public class KorpaStavkaDialogFragment extends DialogFragment {
     private Button btnStavkaKorpaDialogUkloni;
     private ImageButton btnStavkaKorpaDialogNazad;
     private ImageView imageStavkaKorpaDialog;
+    private TextView textStavkaKorpaDialogSastojci;
 
     public static KorpaStavkaDialogFragment newInstance(KorpaHranaStavka obj) {
         Bundle args = new Bundle();
@@ -60,8 +61,26 @@ public class KorpaStavkaDialogFragment extends DialogFragment {
         textStavkaKorpaDialogNaziv = view.findViewById(R.id.textStavkaKorpaDialogNaziv);
         textStavkaKorpaDialogNaziv.setText(stavka.getHranaItemVM().getNaziv());
 
+        textStavkaKorpaDialogCijena = view.findViewById(R.id.textStavkaKorpaDialogCijena);
+        textStavkaKorpaDialogCijena.setText(String.format("%1$,.2f KM",stavka.getHranaItemVM().getCijena()));
+
         textStavkaKorpaDialogKolicina = view.findViewById(R.id.textStavkaKorpaDialogKolicina);
-        textStavkaKorpaDialogKolicina.setText(Integer.toString(stavka.getKolicina()));
+        textStavkaKorpaDialogKolicina.setText("Kolicina x" + Integer.toString(stavka.getKolicina()));
+
+        textStavkaKorpaDialogSastojci = view.findViewById(R.id.textStavkaKorpaDialogSastojci);
+
+        String sastojci = "Sastojci: ";
+        if (stavka.getHranaItemVM().getSastojci() != null) {
+            for (int i = 0; i < stavka.getHranaItemVM().getSastojci().size(); i++) {
+                sastojci += "\n - " + stavka.getHranaItemVM().getSastojci().get(i);
+                if (i != stavka.getHranaItemVM().getSastojci().size() - 1) {
+                    sastojci += ", ";
+                }
+            }
+        } else {
+            sastojci += "-";
+        }
+        textStavkaKorpaDialogSastojci.setText(sastojci);
 
         textStavkaKorpaDialogOpis = view.findViewById(R.id.textStavkaKorpaDialogOpis);
         textStavkaKorpaDialogOpis.setText(stavka.getHranaItemVM().getOpis());

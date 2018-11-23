@@ -32,6 +32,7 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
     private ListView listKorpaStavke;
     private Button btnKorpaNaruci;
     private MaterialButton btnKorpaOdbaci;
+    private BaseAdapter listStavkeAdapter;
 
     public static KorpaFragment newInstance() {
         Bundle args = new Bundle();
@@ -52,6 +53,10 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
     }
 
     private void getKorpaSession() {
+        if (listStavkeAdapter != null ) {
+            listStavkeAdapter.notifyDataSetChanged();
+        }
+
         if (MySession.getKorpa() == null) {
             korpa = new Korpa();
             MySession.setKorpa(korpa);
@@ -109,7 +114,7 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
 
     private void listKorpaStavkePopuni() {
         // podaci -> korpa.getHranaStavke()
-        BaseAdapter listStavkeAdapter = new BaseAdapter() {
+        listStavkeAdapter = new BaseAdapter() {
             @Override
             public int getCount() {
                 return korpa.getHranaStavke().size();

@@ -123,7 +123,18 @@ public class RestoranListFragment extends Fragment {
                 });
 
                 restoranNaziv.setText(storageRestorani.get(position).getNaziv());
-                restoranOpis.setText(storageRestorani.get(position).getOpis());
+
+                int limit = 90;
+                String opis;
+                if (storageRestorani.get(position).getOpis().length() > limit ) {
+                    Log.i("Test", "Truncated");
+                    opis = storageRestorani.get(position).getOpis().substring(0, limit - 3) + "...";
+                } else {
+                    opis = storageRestorani.get(position).getOpis();
+                }
+                restoranOpis.setText(opis);
+
+
                 restoranLikesCount.setText(storageRestorani.get(position).getLikesCount() + " sviđanja");
 
 

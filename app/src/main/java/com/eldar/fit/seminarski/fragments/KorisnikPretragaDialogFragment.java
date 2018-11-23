@@ -57,9 +57,9 @@ public class KorisnikPretragaDialogFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         // SECOND APPROACH: Ako koristimo bundle za callback, preuzimamo ga ovdje pa onda dodjelimo callback
-        if (getArguments().containsKey(BUNDLE_KORISNIK_PRETRAGA_CALLBACK)) {
-            callback = (MyFragmentHelper.RunnableCallback) getArguments().getSerializable(BUNDLE_KORISNIK_PRETRAGA_CALLBACK);
-        }
+//        if (getArguments().containsKey(BUNDLE_KORISNIK_PRETRAGA_CALLBACK)) {
+//            callback = (MyFragmentHelper.RunnableCallback) getArguments().getSerializable(BUNDLE_KORISNIK_PRETRAGA_CALLBACK);
+//        }
 
         setStyle(STYLE_NORMAL, R.style.DialogsTheme);
     }
@@ -159,11 +159,11 @@ public class KorisnikPretragaDialogFragment extends DialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof MyFragmentHelper.OnKorisnikPretragaClickListener) {
-            KorisnikPretragaEmitter = (MyFragmentHelper.OnKorisnikPretragaClickListener) context;
-        } else {
-            throw new ClassCastException(context.toString() + R.string.exception_cast_interface);
-        }
+//        if (context instanceof MyFragmentHelper.OnKorisnikPretragaClickListener) {
+//            KorisnikPretragaEmitter = (MyFragmentHelper.OnKorisnikPretragaClickListener) context;
+//        } else {
+//            throw new ClassCastException(context.toString() + R.string.exception_cast_interface);
+//        }
     }
 
     private void do_PretraziPrimaoce(String query) {
