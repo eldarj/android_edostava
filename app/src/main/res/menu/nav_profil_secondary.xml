@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/actionProfilPromijeniSliku"
+        android:orderInCategory="100"
+        android:title="Promijeni profilnu sliku"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/actionProfilPromijeniLozinku"
+        android:orderInCategory="100"
+        android:title="Promijeni lozinku"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/actionProfilPromijeniOsnovnePodatke"
+        android:orderInCategory="100"
+        android:title="Uredi osnovne podatke"
+        app:showAsAction="never" />
 </menu>
