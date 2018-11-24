@@ -4,7 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,12 +13,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.eldar.fit.seminarski.R;
 import com.eldar.fit.seminarski.data.KorisnikVM;
+import com.eldar.fit.seminarski.helper.MyFragmentHelper;
 import com.eldar.fit.seminarski.helper.MySession;
 
 public class ProfilInfoFragment extends Fragment {
@@ -32,6 +35,7 @@ public class ProfilInfoFragment extends Fragment {
     private TextView chipProfilUkupnoNarudzbi;
     private TextView chipProfilOmiljeniRestoran;
     private Button btnProfilMojeNarudzbe;
+    private Toolbar myToolbar;
 
     public static ProfilInfoFragment newInstance() {
         ProfilInfoFragment fragment = new ProfilInfoFragment();
@@ -59,27 +63,40 @@ public class ProfilInfoFragment extends Fragment {
         textProfilImePrezime.setText(korisnik.getIme() + " " + korisnik.getPrezime());
 
         textProfilAdresa = view.findViewById(R.id.textProfilAdresa);
-        textProfilAdresa.setText(korisnik.getAdresa() + ", " + korisnik.getBlokVM().getNaziv() + " " + korisnik.getBlokVM().getOpstina());
+        textProfilAdresa.setText((korisnik.getAdresa() == null ? "" : korisnik.getAdresa() + ", ") + korisnik.getBlokVM().getNaziv() + " " + korisnik.getBlokVM().getOpstina().getnaziv());
 
         textProfilUsername = view.findViewById(R.id.textProfilUsername);
-        textProfilUsername.setText(korisnik.getUsername());
+        textProfilUsername.setText("Username " + korisnik.getUsername());
 
         textProfilDatumRegistracije = view.findViewById(R.id.textProfilDatumRegistracije);
-        textProfilDatumRegistracije.setText(korisnik.getDatumRegistracije());
+        textProfilDatumRegistracije.setText("Datum registracije " + korisnik.getDatumRegistracije());
 
         chipProfilUkupnoNarudzbi = view.findViewById(R.id.chipProfilUkupnoNarudzbi);
-        chipProfilUkupnoNarudzbi.setText(korisnik.getUkupnoNarudzbi());
+        chipProfilUkupnoNarudzbi.setText("Ukupno narudžbi" + korisnik.getUkupnoNarudzbi());
 
         chipProfilOmiljeniRestoran = view.findViewById(R.id.chipProfilOmiljeniRestoran);
-        chipProfilOmiljeniRestoran.setText(korisnik.getOmiljeniRestoran());
+        chipProfilOmiljeniRestoran.setText("Omiljeni restoran " + korisnik.getOmiljeniRestoran());
 
         btnProfilMojeNarudzbe = view.findViewById(R.id.btnProfilMojeNarudzbe);
         btnProfilMojeNarudzbe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("Test", "moje narudzbe clicked!");
+                MyFragmentHelper.fragmentCreate((AppCompatActivity)getActivity(),
+                        R.id.fragmentContainer,
+                        ProfilNarudzbeFragment.newInstance());
             }
         });
+
+        ImageButton btnProfilClose = view.findViewById(R.id.btnProfilClose);
+        btnProfilClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+
+        myToolbar = (Toolbar) view.findViewById(R.id.toolbarProfil);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
 
         return view;
     }
@@ -98,13 +115,11 @@ public class ProfilInfoFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.i("Test", "Selected " + item.getItemId());
         switch(item.getItemId()){
-            case R.id.actionProfilPromijeniLozinku:
-                break;
-            case R.id.actionProfilPromijeniSliku:
-                break;
-            case R.id.actionProfilPromijeniOsnovnePodatke:
+            case R.id.actionUrediProfil:
+                MyFragmentHelper.fragmentCreate((AppCompatActivity)getActivity(),
+                        R.id.fragmentContainer,
+                        ProfilOpcijeFragment.newInstance());
                 break;
             default:
                 return false;

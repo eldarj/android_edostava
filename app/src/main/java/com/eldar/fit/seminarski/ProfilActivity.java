@@ -1,9 +1,10 @@
-package com.eldar.fit.seminarski.fragments;
+package com.eldar.fit.seminarski;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.eldar.fit.seminarski.R;
+import com.eldar.fit.seminarski.fragments.ProfilInfoFragment;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
 
 public class ProfilActivity extends AppCompatActivity {
@@ -16,7 +17,7 @@ public class ProfilActivity extends AppCompatActivity {
 
 
         MyFragmentHelper.fragmentCreate(this,
-                R.id.profilFragmentContainer,
+                R.id.fragmentContainer,
                 ProfilInfoFragment.newInstance());
 
     }

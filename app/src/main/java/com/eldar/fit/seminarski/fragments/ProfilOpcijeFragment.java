@@ -1,6 +1,7 @@
 package com.eldar.fit.seminarski.fragments;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,11 +13,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
+import com.eldar.fit.seminarski.LoginActivity;
 import com.eldar.fit.seminarski.R;
+import com.eldar.fit.seminarski.data.KorisnikVM;
+import com.eldar.fit.seminarski.data.Storage;
+import com.eldar.fit.seminarski.helper.MyApp;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
+import com.eldar.fit.seminarski.helper.MySession;
 
-public class ProfilSettingsFragment extends Fragment {
+public class ProfilOpcijeFragment extends Fragment {
 
     private Button btnProfilSettingsQuestion;
     private Button btnProfilSettingsImePrezime;
@@ -24,16 +31,27 @@ public class ProfilSettingsFragment extends Fragment {
     private Button btnProfilSettingsSlika;
     private Button btnProfilSettingsLozinka;
     private Button btnProfilSettingsDelete;
+    private KorisnikVM korisnik;
 
-    public static ProfilSettingsFragment newInstance() {
-        ProfilSettingsFragment fragment = new ProfilSettingsFragment();
+    public static ProfilOpcijeFragment newInstance() {
+        ProfilOpcijeFragment fragment = new ProfilOpcijeFragment();
         return fragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profil_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_profil_opcije, container, false);
+
+        korisnik = MySession.getKorisnik();
+
+        ImageButton btnProfilSettingsClose = view.findViewById(R.id.btnProfilSettingsClose);
+        btnProfilSettingsClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
 
         btnProfilSettingsQuestion = view.findViewById(R.id.btnProfilSettingsQuestion);
         btnProfilSettingsQuestion.setOnClickListener(new View.OnClickListener() {
@@ -57,12 +75,23 @@ public class ProfilSettingsFragment extends Fragment {
         btnProfilSettingsAdresa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyFragmentHelper.dodajDialog((AppCompatActivity)getActivity(), "dlgPromijeniAdresu", ProfilPromijeniAdresuDialogFragment.newInstance());
+                MyFragmentHelper.dodajDialog((AppCompatActivity)getActivity(),
+                        "dlgPromijeniAdresu",
+                        ProfilPromijeniAdresuDialogFragment.newInstance());
             }
         });
 
         btnProfilSettingsSlika = view.findViewById(R.id.btnProfilSettingsSlika);
+
         btnProfilSettingsLozinka = view.findViewById(R.id.btnProfilSettingsLozinka);
+        btnProfilSettingsLozinka.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyFragmentHelper.dodajDialog((AppCompatActivity)getActivity(),
+                        "dlgPromijeniLozinku",
+                        ProfilPromijeniLozinkuDialogFragment.newInstance());
+            }
+        });
 
         btnProfilSettingsDelete = view.findViewById(R.id.btnProfilSettingsDelete);
         btnProfilSettingsDelete.setOnClickListener(new View.OnClickListener() {
@@ -75,8 +104,17 @@ public class ProfilSettingsFragment extends Fragment {
                         .setPositiveButton("Da, izbriši račun", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                Snackbar.make(getView(), "Uspješno ste izbrisali korisnički račun!", Snackbar.LENGTH_LONG).show();
+                                Snackbar.make(getView(), "Uspješno ste izbrisali korisnički račun!", Snackbar.LENGTH_SHORT)
+                                        .addCallback(new Snackbar.Callback() {
+                                            @Override
+                                            public void onDismissed(Snackbar transientBottomBar, int event) {
+                                                super.onDismissed(transientBottomBar, event);
+                                                dialog.dismiss();
+
+                                                do_deleteKorisnik();
+                                            }
+                                        })
+                                        .show();
                             }
                         })
                         .show();
@@ -85,5 +123,14 @@ public class ProfilSettingsFragment extends Fragment {
 
 
         return view;
+    }
+
+    private void do_deleteKorisnik() {
+        Storage.removeKorisnik(korisnik);
+        MySession.setKorisnik(null);
+        Intent intent = new Intent(MyApp.getContext(), LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        startActivity(intent);
     }
 }
