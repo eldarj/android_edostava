@@ -26,7 +26,7 @@ public class KorisnikVM implements Serializable{
     }
     public BlokVM getBlokVM(){ return BlokVM; }
 
-    public void setOpstinaVM(BlokVM value){ BlokVM = value; }
+    public void setBlokVM(BlokVM value){ BlokVM = value; }
 
     public String getUsername() { return Username; }
 
@@ -70,5 +70,12 @@ public class KorisnikVM implements Serializable{
 
     public String getDatumRegistracije() {
         return "26.9.2018";
+    }
+
+    public boolean correctLozinka(String lozinka) {
+        if (this.getPassword().equals(lozinka)) {
+            return true;
+        }
+        return false;
     }
 }

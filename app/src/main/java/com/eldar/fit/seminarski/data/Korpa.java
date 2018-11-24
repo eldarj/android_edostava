@@ -27,11 +27,9 @@ public class Korpa implements Serializable {
         return korpa;
     }
 
-    public static Korpa izvrsiNarudzbu() {
-        Korpa korpa = new Korpa();
-        MySession.setKorpa(korpa);
-
-        return korpa;
+    public static void kreirajNarudzbu(Korpa korpa) {
+        NarudzbaVM nova = new NarudzbaVM(korpa.getuId(), korpa.getHranaStavke(), korpa.getUkupnaCijena(), MySession.getKorisnik());
+        Storage.getNarudzbe().add(nova);
     }
 
     public int getHranaStavkeTotalCount() {

@@ -1,9 +1,12 @@
 package com.eldar.fit.seminarski.data;
 
+import com.eldar.fit.seminarski.helper.MySession;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Storage {
     private static int brojacPosiljki;
@@ -16,6 +19,8 @@ public class Storage {
     private static List<HranaKategorijaVM> kategorijeHrane;
     private static List<HranaItemVM> hrana;
     private static List<BlokVM> blokovi;
+
+    private static List<NarudzbaVM> narudzbe;
 
 
     public static List<KorisnikVM> getKorisnici(){
@@ -203,6 +208,24 @@ public class Storage {
         return posiljke;
     }
 
+    public static List<NarudzbaVM> getNarudzbe() {
+        if (narudzbe == null) {
+            List<KorpaHranaStavka> stavke = new ArrayList<KorpaHranaStavka>();
+            stavke.add(new KorpaHranaStavka(getHrana().get(0), 2));
+            stavke.add(new KorpaHranaStavka(getHrana().get(1), 1));
+
+            narudzbe = new ArrayList<NarudzbaVM>();
+
+            int ukupnaCijena = 0;
+            for (KorpaHranaStavka s :
+                    stavke) {
+                ukupnaCijena += s.getUkupnaCijena();
+            }
+            narudzbe.add(new NarudzbaVM(UUID.randomUUID(), stavke, ukupnaCijena, MySession.getKorisnik()));
+        }
+        return narudzbe;
+    }
+
     public static List<KorisnikVM> getKorisniciByIme(String query){
         List<KorisnikVM> var = new ArrayList<KorisnikVM>();
 
@@ -266,5 +289,9 @@ public class Storage {
             result.add(blok.getNaziv() + ", " + blok.getOpstina().getnaziv());
         }
         return result;
+    }
+
+    public static void removeKorisnik(KorisnikVM korisnikVM) {
+        korisnici.remove(korisnikVM);
     }
 }
