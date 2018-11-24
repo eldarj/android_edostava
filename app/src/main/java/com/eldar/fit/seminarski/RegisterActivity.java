@@ -102,7 +102,9 @@ public class RegisterActivity extends AppCompatActivity {
                 inputPassword.getText().toString(),
                 inputIme.getText().toString(),
                 inputPrezime.getText().toString(),
-                Storage.getBlokovi().get(spinnerBlok.getSelectedItemPosition())
+                "",
+                Storage.getBlokovi().get(spinnerBlok.getSelectedItemPosition()),
+                ""
         );
 
         MySession.setKorisnik(noviKorisnik);

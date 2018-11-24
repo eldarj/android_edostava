@@ -71,7 +71,6 @@
         app:layout_anchorGravity="bottom|right|end" />
 
     <android.support.v4.widget.NestedScrollView
-
         android:fillViewport="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

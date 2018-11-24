@@ -19,7 +19,7 @@ import android.view.MenuItem;
 import com.eldar.fit.seminarski.data.KorisnikVM;
 import com.eldar.fit.seminarski.fragments.KorisnikPretragaDialogFragment;
 import com.eldar.fit.seminarski.fragments.KorpaFragment;
-import com.eldar.fit.seminarski.fragments.ProfilActivity;
+import com.eldar.fit.seminarski.ProfilActivity;
 import com.eldar.fit.seminarski.fragments.RestoranListFragment;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
 import com.eldar.fit.seminarski.helper.MySession;

@@ -9,11 +9,15 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,6 +37,7 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
     private Button btnKorpaNaruci;
     private MaterialButton btnKorpaOdbaci;
     private BaseAdapter listStavkeAdapter;
+    private ImageButton btnKorpaClose;
 
     public static KorpaFragment newInstance() {
         Bundle args = new Bundle();
@@ -44,24 +49,9 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-//        ((RestoranDetaljnoActivity) getActivity()).getSupportActionBar().hide();
-//        Log.i("test", "hide");
-
         getKorpaSession();
-
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
-    }
-
-    private void getKorpaSession() {
-        if (listStavkeAdapter != null ) {
-            listStavkeAdapter.notifyDataSetChanged();
-        }
-
-        if (MySession.getKorpa() == null) {
-            korpa = new Korpa();
-            MySession.setKorpa(korpa);
-        }
-        korpa = MySession.getKorpa();
     }
 
     @Nullable
@@ -93,11 +83,21 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
             }
         });
 
+        btnKorpaClose = view.findViewById(R.id.btnKorpaClose);
+        btnKorpaClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+
         btnKorpaOdbaci = view.findViewById(R.id.btnKorpaOdbaci);
         btnKorpaOdbaci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                korpa = Korpa.izvrsiNarudzbu();
+                Korpa.kreirajNarudzbu(korpa);
+                korpa = new Korpa();
+                MySession.setKorpa(korpa);
             }
         });
 
@@ -110,6 +110,18 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
         });
 
         return view;
+    }
+
+    private void getKorpaSession() {
+        if (listStavkeAdapter != null ) {
+            listStavkeAdapter.notifyDataSetChanged();
+        }
+
+        if (MySession.getKorpa() == null) {
+            korpa = new Korpa();
+            MySession.setKorpa(korpa);
+        }
+        korpa = MySession.getKorpa();
     }
 
     private void listKorpaStavkePopuni() {
@@ -162,6 +174,22 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
         };
 
         listKorpaStavke.setAdapter(listStavkeAdapter);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.nav_korpa_secondary, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.actionMojeNarudzbe) {
+            MyFragmentHelper.fragmentCreate((AppCompatActivity) getActivity(), R.id.fragmentContainer, ProfilNarudzbeFragment.newInstance());
+        }
+
+        return false;
     }
 
     @Override

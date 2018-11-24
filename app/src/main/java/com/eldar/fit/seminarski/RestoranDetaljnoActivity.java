@@ -32,7 +32,7 @@ public class RestoranDetaljnoActivity extends AppCompatActivity {
         restoran = (RestoranVM) args.getSerializable(DETAIL_VIEW_RESTORAN);
 
         MyFragmentHelper.fragmentCreate(this,
-                R.id.restoranDetaljnoFragmentContainer,
+                R.id.fragmentContainer,
                 RestoranInfoFragment.newInstance(restoran));
 
         bottomnavigationRestoranDetaljno = findViewById(R.id.bottomnavigationRestoranDetaljno);
@@ -45,17 +45,17 @@ public class RestoranDetaljnoActivity extends AppCompatActivity {
                 switch(kliknutiTabId) {
                     case R.id.nav_bottom_restoran_jelovnik:
                         MyFragmentHelper.fragmentCreate(RestoranDetaljnoActivity.this,
-                                R.id.restoranDetaljnoFragmentContainer,
+                                R.id.fragmentContainer,
                                 RestoranJelovnikFragment.newInstance());
                         break;
                     case R.id.nav_bottom_restoran_vise:
                         MyFragmentHelper.fragmentCreate(RestoranDetaljnoActivity.this,
-                                R.id.restoranDetaljnoFragmentContainer,
+                                R.id.fragmentContainer,
                                 RestoranInfoFragment.newInstance(restoran));
                         break;
                     case R.id.nav_bottom_restoran_korpa:
                         MyFragmentHelper.fragmentCreate(RestoranDetaljnoActivity.this,
-                                R.id.restoranDetaljnoFragmentContainer,
+                                R.id.fragmentContainer,
                                 KorpaFragment.newInstance());
                         break;
                     default:

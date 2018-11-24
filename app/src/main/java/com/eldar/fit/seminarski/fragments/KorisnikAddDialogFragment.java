@@ -91,7 +91,7 @@ public class KorisnikAddDialogFragment extends DialogFragment {
         izabranaOpstina = null;
         BlokVM izabraniBlok = Storage.getBlokovi().get(0);
 
-        KorisnikVM noviKorisnik = new KorisnikVM("", "", inputIme.getText().toString(), inputPrezime.getText().toString(), izabraniBlok);
+        KorisnikVM noviKorisnik = new KorisnikVM("", "", inputIme.getText().toString(), inputPrezime.getText().toString(), "", izabraniBlok, "");
         Storage.addKorisnik(noviKorisnik);
 
         callback.run(noviKorisnik);

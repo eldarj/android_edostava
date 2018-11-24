@@ -54,7 +54,7 @@ public class MyFragmentHelper {
     }
 
     public static void dodajDialog(AppCompatActivity activity, String tag, DialogFragment dialogFragment) {
-        FragmentManager fm = activity.getSupportFragmentManager();
+        fm = activity.getSupportFragmentManager();
         dialogFragment.show(fm, tag);
     }
 }
