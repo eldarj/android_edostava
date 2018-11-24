@@ -1,0 +1,110 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:translationZ="2.5dp"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="bottom"
+        android:theme="@style/AppTheme.AppBarOverlay.Settings">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnProfilSettingsClose"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_chevron_left"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize" />
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Račun - opcije"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+            <android.support.design.button.MaterialButton
+                android:id="@+id/btnProfilSettingsQuestion"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="match_parent"
+                app:iconGravity="textStart"
+                app:iconTint="@color/colorSecondaryDark"
+                android:stateListAnimator="@null"
+                app:icon="@drawable/ic_question_mark"
+                style="@style/Widget.MaterialComponents.Button.Icon"/>
+
+        </LinearLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="Osnovno"
+                style="@style/TextAppearance.MaterialComponents.Caption"
+                android:textColor="@color/colorTypographySemiDark"
+                android:paddingTop="12dp"
+                android:paddingBottom="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnProfilSettingsSlika"
+                android:text="Promijeni sliku profila"
+                style="@style/AppTheme.SettingsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnProfilSettingsAdresa"
+                android:text="Promijeni adresu"
+                style="@style/AppTheme.SettingsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View style="@style/Divider"></View>
+            <TextView
+                android:text="Račun"
+                style="@style/TextAppearance.MaterialComponents.Caption"
+                android:textColor="@color/colorTypographySemiDark"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnProfilSettingsLozinka"
+                android:text="Promijeni lozinku"
+                style="@style/AppTheme.SettingsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnProfilSettingsDelete"
+                android:text="Izbriši račun"
+                style="@style/AppTheme.SettingsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>
