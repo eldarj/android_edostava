@@ -1,6 +1,7 @@
 package com.eldar.fit.seminarski.data;
 
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -193,5 +194,10 @@ public class RestoranVM implements Serializable {
 
     public int getLikesCount() {
         return 16;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        return (obj instanceof RestoranVM && this.naziv == ((RestoranVM) obj).naziv);
     }
 }

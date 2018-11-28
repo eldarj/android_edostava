@@ -6,11 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.eldar.fit.seminarski.data.KorisnikVM;
-import com.eldar.fit.seminarski.fragments.PosiljkaListFragment;
 
 import java.io.Serializable;
 
@@ -42,13 +39,7 @@ public class MyFragmentHelper {
         fm = activity.getSupportFragmentManager();
         ft = fm.beginTransaction();
         ft.replace(targetLayoutId, fragment);
-
-        if (!(fragment instanceof PosiljkaListFragment)) {
-            ft.addToBackStack(null);
-        }
-
-        Log.i("Test:", "fragmentCreate()");
-
+        ft.addToBackStack(null);
         ft.commit();
         fragNo++;
     }

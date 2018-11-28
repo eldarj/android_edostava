@@ -38,7 +38,7 @@ public class ProfilPromijeniLozinkuDialogFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dialog_profil_promijeni_lozinku, container, false);
+        View view = inflater.inflate(R.layout.profil_promijeni_lozinku_dialog, container, false);
 
         korisnik = MySession.getKorisnik();
 

@@ -51,7 +51,7 @@ public class KorpaStavkaDialogFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dialog_korpa_stavka, container, false);
+        View view = inflater.inflate(R.layout.korpa_stavka_dialog, container, false);
 
         stavka = (KorpaHranaStavka) getArguments().getSerializable(BUNDLE_KORPA_STAVKA);
 

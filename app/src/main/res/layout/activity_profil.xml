@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/fragmentContainer"
+        android:id="@+id/fragmentProfilContainer"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"

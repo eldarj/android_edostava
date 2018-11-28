@@ -56,16 +56,16 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void do_btnOpenRegistrationClick() {
-        startActivity(new Intent(this, RegisterActivity.class));
-    }
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString(BUNDLE_KEY_USERNAME, inputUsername.getText().toString());
         outState.putString(BUNDLE_KEY_PASSWORD, inputPassword.getText().toString());
         Log.i("TEST", "onSaveInstanceState from Login");
         super.onSaveInstanceState(outState);
+    }
+
+    private void do_btnOpenRegistrationClick() {
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 
     private void do_btnLoginClick() {

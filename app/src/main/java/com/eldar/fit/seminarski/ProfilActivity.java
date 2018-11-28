@@ -9,7 +9,6 @@ import com.eldar.fit.seminarski.helper.MyFragmentHelper;
 
 public class ProfilActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,7 +16,7 @@ public class ProfilActivity extends AppCompatActivity {
 
 
         MyFragmentHelper.fragmentCreate(this,
-                R.id.fragmentContainer,
+                R.id.fragmentProfilContainer,
                 ProfilInfoFragment.newInstance());
 
     }

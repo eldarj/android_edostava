@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.design.button.MaterialButton;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +45,7 @@ public class RestoranListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_restoran_list, container, false);
+        final View view = inflater.inflate(R.layout.restoran_list_fragment, container, false);
 
         listRestorani = view.findViewById(R.id.listViewRestorani);
 
@@ -98,7 +97,7 @@ public class RestoranListFragment extends Fragment {
 
                 if (view == null) {
                     LayoutInflater inflater = getActivity().getLayoutInflater();
-                    view = inflater != null ? inflater.inflate(R.layout.stavka_restoran, parent, false) : null;
+                    view = inflater != null ? inflater.inflate(R.layout.restoran_stavka, parent, false) : null;
                 }
 
                 TextView restoranNaziv = view.findViewById(R.id.textStavkaRestoranNaziv);
@@ -117,8 +116,6 @@ public class RestoranListFragment extends Fragment {
                             }
                         };
 
-                        KorisnikPretragaDialogFragment dlg = KorisnikPretragaDialogFragment.newInstance(callback);
-                        MyFragmentHelper.dodajDialog((AppCompatActivity)getActivity(), "promijeniPrimaocaDialog", dlg);
                     }
                 });
 

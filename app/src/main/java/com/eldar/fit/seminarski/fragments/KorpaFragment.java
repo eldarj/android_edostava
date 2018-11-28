@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.button.MaterialButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,6 +39,7 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
     private MaterialButton btnKorpaOdbaci;
     private BaseAdapter listStavkeAdapter;
     private ImageButton btnKorpaClose;
+    private Toolbar myToolbar;
 
     public static KorpaFragment newInstance() {
         Bundle args = new Bundle();
@@ -60,7 +62,7 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
 
 
 
-        View view = inflater.inflate(R.layout.fragment_korpa, container, false);
+        View view = inflater.inflate(R.layout.korpa_fragment, container, false);
 
         Log.i("Test", "onCreateView::KorpaFragment");
 
@@ -109,6 +111,9 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
             }
         });
 
+        myToolbar = (Toolbar) view.findViewById(R.id.toolbarKorpa);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
+
         return view;
     }
 
@@ -146,7 +151,7 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
             public View getView(int position, View view, ViewGroup parent) {
                 if (view == null) {
                     LayoutInflater inflater = getActivity().getLayoutInflater();
-                    view = inflater != null ? inflater.inflate(R.layout.stavka_korpa, parent, false) : null;
+                    view = inflater != null ? inflater.inflate(R.layout.korpa_stavka, parent, false) : null;
                 }
 
                 KorpaHranaStavka stavka = korpa.getHranaStavke().get(position);

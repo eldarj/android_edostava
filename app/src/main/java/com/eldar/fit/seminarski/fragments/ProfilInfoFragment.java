@@ -46,7 +46,7 @@ public class ProfilInfoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profil_info, container, false);
+        View view = inflater.inflate(R.layout.profil_info_fragment, container, false);
 
         KorisnikVM korisnik = MySession.getKorisnik();
 
@@ -82,7 +82,7 @@ public class ProfilInfoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MyFragmentHelper.fragmentCreate((AppCompatActivity)getActivity(),
-                        R.id.fragmentContainer,
+                        R.id.fragmentProfilContainer,
                         ProfilNarudzbeFragment.newInstance());
             }
         });
@@ -118,7 +118,7 @@ public class ProfilInfoFragment extends Fragment {
         switch(item.getItemId()){
             case R.id.actionUrediProfil:
                 MyFragmentHelper.fragmentCreate((AppCompatActivity)getActivity(),
-                        R.id.fragmentContainer,
+                        R.id.fragmentProfilContainer,
                         ProfilOpcijeFragment.newInstance());
                 break;
             default:

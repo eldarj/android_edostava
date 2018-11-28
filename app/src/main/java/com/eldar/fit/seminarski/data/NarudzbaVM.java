@@ -1,5 +1,7 @@
 package com.eldar.fit.seminarski.data;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -42,7 +44,20 @@ public class NarudzbaVM {
         return datumNapravljena;
     }
 
+    public String getDatumNapravljenaString() {
+        return new SimpleDateFormat("dd.MM.yyyy").format(getDatumNapravljena());
+    }
+
     public KorisnikVM getKorisnik() {
         return korisnik;
+    }
+
+    public List<RestoranVM> getRestorani() {
+        List<RestoranVM> restorani = new ArrayList<RestoranVM>();
+        for (KorpaHranaStavka stavka:
+             hranaStavke) {
+            restorani.add(stavka.getHranaItemVM().getRestoran());
+        }
+        return restorani;
     }
 }

@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorPrimary</item>
 
         <!-- Enable Transitions -->
+        <!-- -->
 
         <!-- Element stilovi -->
         <item name="textInputStyle">@style/AppTheme.TextInputLayout</item>

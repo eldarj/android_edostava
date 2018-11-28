@@ -21,7 +21,7 @@
         <LinearLayout
             android:layout_weight="3"
             android:id="@+id/stavka_korpa_details_left"
-            android:layout_toRightOf="@id/stavka_icon"
+            android:layout_toRightOf="@id/imageStavkaKorpa"
             android:orientation="vertical"
             android:weightSum="1"
             android:layout_width="0dp"

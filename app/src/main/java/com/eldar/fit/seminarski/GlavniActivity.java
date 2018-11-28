@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -17,9 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.eldar.fit.seminarski.data.KorisnikVM;
-import com.eldar.fit.seminarski.fragments.KorisnikPretragaDialogFragment;
 import com.eldar.fit.seminarski.fragments.KorpaFragment;
-import com.eldar.fit.seminarski.ProfilActivity;
 import com.eldar.fit.seminarski.fragments.RestoranListFragment;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
 import com.eldar.fit.seminarski.helper.MySession;
@@ -126,7 +122,6 @@ public class GlavniActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
