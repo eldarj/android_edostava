@@ -65,26 +65,6 @@ public class ProfilNarudzbeFragment extends Fragment {
 
         // ASYNC
         podaci = Storage.getNarudzbe();
-        podaci2 = null;
-
-        MyUrlConnection.volleyGet("http://ekstra.ba/api/narudzbe.php");
-
-        new AsyncTask<Void, Void, NarudzbaPregledVM>() {
-            @Override
-            protected NarudzbaPregledVM doInBackground(Void... voids) {
-                String strJson = MyUrlConnection.Get("http://ekstra.ba/api" + "/narudzbe.php");
-                NarudzbaPregledVM result = MyGson.build().fromJson(strJson, NarudzbaPregledVM.class);
-
-                return result;
-            }
-
-            @Override
-            protected void onPostExecute(NarudzbaPregledVM narudzbaVMS) {
-                podaci2 = narudzbaVMS;
-                listViewNarudzbe.setAdapter(getListNarudzbeAdapter(podaci2));
-            }
-        }.execute();
-
 
         listViewNarudzbe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
