@@ -2,86 +2,70 @@ package com.eldar.fit.seminarski.helper;
 
 import android.util.Log;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONObject;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class MyUrlConnection {
 
-    private static final String TAG = "myUrlConnection";
-
-    private static String res;
-
-    public static void volleyGet(String urlString) {
-        RequestQueue queue = Volley.newRequestQueue(MyApp.getContext());
-
-        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, urlString, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.i("Test", response.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i("Test", "Error " + error);
-                    }
-                });
-
-        queue.add(getRequest);
+    public enum HttpMethod {
+        GET, POST, HEAD, OPTIONS, TRACE
     }
 
-    public static String Get(String urlString) {
+    public static String charset = "UTF-8";
+
+    public static MyApiResult request(String urlString, HttpMethod httpMethod, String postData, String contentType) {
 
         HttpURLConnection urlConnection = null;
         String result = null;
+
         try {
             URL url = new URL(urlString);
-
             urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setDoInput(true);
-            urlConnection.setDoOutput(true);
-            urlConnection.setRequestProperty("Content-Type", "application/json");
-            urlConnection.setRequestMethod("GET");
+
+            urlConnection.setRequestProperty("Content-type", contentType);
+            urlConnection.setRequestProperty("Accept", contentType);
+            urlConnection.setRequestProperty("Accept-Charset", charset);
+            urlConnection.setRequestProperty("User-Agent", "Mozilla/5.0");
+            urlConnection.setRequestMethod(httpMethod.toString());
+
+            if (postData != null) {
+                urlConnection.setDoOutput(true);
+                byte[] outputBytes = postData.getBytes(charset);
+                OutputStream ostream = urlConnection.getOutputStream();
+                ostream.write(outputBytes);
+                ostream.flush();
+                ostream.close();
+            }
 
             int statusCode = urlConnection.getResponseCode();
 
             if (statusCode == 200) {
-                InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+                InputStream is = new BufferedInputStream(urlConnection.getInputStream());
+                String response = convertToString(is);
 
-                String response = convertToString(inputStream);
-
-                return response;
+                return MyApiResult.OK(response);
             } else {
-                // handle != 200
+                InputStream is = new BufferedInputStream(urlConnection.getErrorStream());
+                String response = convertToString(is);
+
+                return MyApiResult.Error(statusCode, response);
             }
 
 
         } catch(Exception e) {
             e.printStackTrace();
-        }
-
-        finally {
+            return MyApiResult.Error(0, e.getMessage());
+        } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
             }
         }
-
-        return result;
     }
 
     private static String convertToString(InputStream in) {
