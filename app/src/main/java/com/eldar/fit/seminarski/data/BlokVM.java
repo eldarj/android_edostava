@@ -1,14 +1,19 @@
 package com.eldar.fit.seminarski.data;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class BlokVM implements Serializable {
     public static int blokIdCounter = 0;
 
+    @SerializedName(value = "id", alternate = { "Id", "ID", "BlokID", "BlokId", "blokID", "blokId", "blokid" })
     private int id;
 
+    @SerializedName(value = "naziv", alternate = { "Naziv" })
     private String naziv;
 
+    @SerializedName(value = "grad", alternate = { "Grad", "Opstina", "opstina" })
     private OpstinaVM opstina;
 
     public BlokVM(String naziv, OpstinaVM opstina) {

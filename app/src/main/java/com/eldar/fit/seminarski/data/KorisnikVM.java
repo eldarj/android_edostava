@@ -1,63 +1,78 @@
 package com.eldar.fit.seminarski.data;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
-/**
- * Created by asus on 11/12/2018.
- */
-
 public class KorisnikVM implements Serializable{
-    private String Username;
-    private String Password;
-    private String Ime;
-    private String Prezime;
-    private String Adresa;
-    private BlokVM BlokVM;
-    private String ImageUrl;
 
-    public KorisnikVM(String username, String password, String ime, String prezime, String imageUrl, BlokVM blokVM, String adresa) {
-        Username = username;
-        Password = password;
-        Ime = ime;
-        Prezime = prezime;
-        BlokVM = blokVM;
-        ImageUrl = imageUrl;
-        Adresa = adresa;
+    @SerializedName(value="username", alternate= { "Username" })
+    private String username;
+
+    @SerializedName(value="password", alternate= { "Password" })
+    private String password;
+
+    @SerializedName(value="ime", alternate= { "Ime" })
+    private String ime;
+
+    @SerializedName(value="prezime", alternate= { "Prezime" })
+    private String prezime;
+
+    @SerializedName(value="adresa", alternate= { "Adresa" })
+    private String adresa;
+
+    private int BlokID;
+
+    @SerializedName(value="blok", alternate= { "Blok", "BlokVm", "BlokVM", "blokVm", "blokvm" })
+    private BlokVM blok;
+
+    @SerializedName(value="imageUrl", alternate= { "ImageUrl", "imageurl", "ImageURL", "image", "Image" })
+    private String imageUrl;
+
+    public KorisnikVM(String username, String password, String ime, String prezime, String imageUrl, BlokVM blok, String adresa) {
+        this.username = username;
+        this.password = password;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.blok = blok;
+        this.BlokID = blok.getId();
+        this.imageUrl = imageUrl;
+        this.adresa = adresa;
     }
-    public BlokVM getBlokVM(){ return BlokVM; }
+    public BlokVM getBlok(){ return blok; }
 
-    public void setBlokVM(BlokVM value){ BlokVM = value; }
+    public void setBlok(BlokVM value){ BlokID = value.getId(); blok = value; }
 
-    public String getUsername() { return Username; }
+    public String getUsername() { return username; }
 
-    public void setUsername(String username) { Username = username; }
+    public void setUsername(String username) { this.username = username; }
 
-    public String getPassword() { return Password; }
+    public String getPassword() { return password; }
 
-    public void setPassword(String password) { Password = password; }
+    public void setPassword(String password) { this.password = password; }
 
-    public String getIme(){ return Ime; }
+    public String getIme(){ return ime; }
 
-    public void setIme(String value){ Ime = value; }
+    public void setIme(String value){ ime = value; }
 
-    public String getPrezime(){ return Prezime; }
+    public String getPrezime(){ return prezime; }
 
-    public void setPrezime(String value){ Prezime = value; }
+    public void setPrezime(String value){ prezime = value; }
 
     public String getImageUrl() {
-        return ImageUrl;
+        return imageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
-        ImageUrl = imageUrl;
+        this.imageUrl = imageUrl;
     }
 
     public String getAdresa() {
-        return Adresa;
+        return adresa;
     }
 
     public void setAdresa(String adresa) {
-        Adresa = adresa;
+        this.adresa = adresa;
     }
 
     public String getOmiljeniRestoran() {
