@@ -63,7 +63,7 @@ public class ProfilInfoFragment extends Fragment {
         textProfilImePrezime.setText(korisnik.getIme() + " " + korisnik.getPrezime());
 
         textProfilAdresa = view.findViewById(R.id.textProfilAdresa);
-        textProfilAdresa.setText((korisnik.getAdresa() == null ? "" : korisnik.getAdresa() + ", ") + korisnik.getBlokVM().getNaziv() + " " + korisnik.getBlokVM().getOpstina().getnaziv());
+        textProfilAdresa.setText((korisnik.getAdresa() == null ? "" : korisnik.getAdresa() + ", ") + korisnik.getBlok().getNaziv() + " " + korisnik.getBlok().getOpstina().getnaziv());
 
         textProfilUsername = view.findViewById(R.id.textProfilUsername);
         textProfilUsername.setText("Username " + korisnik.getUsername());

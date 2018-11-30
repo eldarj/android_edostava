@@ -50,7 +50,7 @@ public class ProfilPromijeniAdresuDialogFragment extends DialogFragment {
         korisnik = MySession.getKorisnik();
 
         tvProfilOpcijeTrenutnaAdresa = view.findViewById(R.id.tvProfilOpcijeTrenutnaAdresa);
-        tvProfilOpcijeTrenutnaAdresa.setText(korisnik.getAdresa() + "\n" + korisnik.getBlokVM().getNaziv() + ", " + korisnik.getBlokVM().getOpstina().getnaziv());
+        tvProfilOpcijeTrenutnaAdresa.setText(korisnik.getAdresa() + "\n" + korisnik.getBlok().getNaziv() + ", " + korisnik.getBlok().getOpstina().getnaziv());
 
         textProfilOpcijeAdresaNew = view.findViewById(R.id.textProfilOpcijeAdresaNew);
 
@@ -62,7 +62,7 @@ public class ProfilPromijeniAdresuDialogFragment extends DialogFragment {
                 android.R.layout.simple_spinner_dropdown_item,
                 spinnerProfilOpcijeAdresaBlok);
 
-        spinnerProfilOpcijeAdresaBlok.setSelection(korisnik.getBlokVM().getId());
+        spinnerProfilOpcijeAdresaBlok.setSelection(korisnik.getBlok().getId());
 
         btnProfilAdresaOdustani = view.findViewById(R.id.btnProfilAdresaOdustani);
         btnProfilAdresaOdustani.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +85,7 @@ public class ProfilPromijeniAdresuDialogFragment extends DialogFragment {
 
                 korisnik.setAdresa(textProfilOpcijeAdresaNew.getText().toString());
                 BlokVM blok = Storage.getBlokovi().get(spinnerProfilOpcijeAdresaBlok.getSelectedItemPosition());
-                korisnik.setBlokVM(blok);
+                korisnik.setBlok(blok);
                 MySession.setKorisnik(korisnik);
 
                 Snackbar.make(getView(), "Uspješno ste sačuvali adresu!" , Snackbar.LENGTH_SHORT).addCallback(new Snackbar.Callback() {
