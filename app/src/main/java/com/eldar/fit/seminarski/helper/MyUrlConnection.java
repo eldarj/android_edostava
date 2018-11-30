@@ -25,6 +25,7 @@ public class MyUrlConnection {
         String result = null;
 
         try {
+            Log.i("Test", "requestTry");
             URL url = new URL(urlString);
             urlConnection = (HttpURLConnection) url.openConnection();
 
@@ -35,6 +36,7 @@ public class MyUrlConnection {
             urlConnection.setRequestMethod(httpMethod.toString());
 
             if (postData != null) {
+                Log.i("Test", "postData" + postData);
                 urlConnection.setDoOutput(true);
                 byte[] outputBytes = postData.getBytes(charset);
                 OutputStream ostream = urlConnection.getOutputStream();
@@ -46,11 +48,13 @@ public class MyUrlConnection {
             int statusCode = urlConnection.getResponseCode();
 
             if (statusCode == 200) {
+                Log.i("Test", "status 200");
                 InputStream is = new BufferedInputStream(urlConnection.getInputStream());
                 String response = convertToString(is);
 
                 return MyApiResult.OK(response);
             } else {
+                Log.i("Test", "status 0");
                 InputStream is = new BufferedInputStream(urlConnection.getErrorStream());
                 String response = convertToString(is);
 

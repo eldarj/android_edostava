@@ -22,6 +22,7 @@ public class MyApiRequest {
             @Override
             protected MyApiResult doInBackground(Void... voids)
             {
+                Log.i("Test", "doInBackground");
                 try {Thread.sleep(1000);} catch (Exception e ) {}
                 String jsonPostObject = postObject == null ? null : MyGson.build().toJson(postObject);
                 MyApiResult result = MyUrlConnection.request(MyConfig.apiBase + "/" + endpoint, httpMethod, jsonPostObject, CONTENT_TYPE_JSON);
@@ -31,6 +32,7 @@ public class MyApiRequest {
             @Override
             protected void onPostExecute(MyApiResult result)
             {
+                Log.i("Test", "postExecute");
                 View parentLayout = activity.findViewById(R.id.content);
                 Snackbar snackbar = null;
                 if (result.isException) {
@@ -47,6 +49,7 @@ public class MyApiRequest {
                     Type genericType = callback.getGenericType();
 
                     try {
+                        Log.i("Test", "asyncResultsJSON: " + result.value);
                         T mappedObj = MyGson.build().fromJson(result.value, genericType);
                         callback.run(mappedObj);
                     } catch (Exception e) {
