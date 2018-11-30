@@ -39,7 +39,11 @@ public class MyFragmentHelper {
         fm = activity.getSupportFragmentManager();
         ft = fm.beginTransaction();
         ft.replace(targetLayoutId, fragment);
-        ft.addToBackStack(null);
+
+        if (!fragment.isAdded()) {
+            ft.addToBackStack(null);
+        }
+
         ft.commit();
         fragNo++;
     }
