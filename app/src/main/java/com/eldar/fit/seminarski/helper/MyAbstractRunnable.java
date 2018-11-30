@@ -3,7 +3,7 @@ package com.eldar.fit.seminarski.helper;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 
-public abstract class GenericRunnable<T> implements Serializable {
+public abstract class MyAbstractRunnable<T> implements Serializable {
 
     public abstract void run(T t);
 
