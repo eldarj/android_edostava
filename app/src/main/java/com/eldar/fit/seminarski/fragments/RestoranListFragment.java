@@ -21,17 +21,18 @@ import com.bumptech.glide.Glide;
 import com.eldar.fit.seminarski.R;
 import com.eldar.fit.seminarski.RestoranDetaljnoActivity;
 import com.eldar.fit.seminarski.data.KorisnikVM;
+import com.eldar.fit.seminarski.data.RestoranPrikazVM;
 import com.eldar.fit.seminarski.data.RestoranVM;
-import com.eldar.fit.seminarski.data.Storage;
+import com.eldar.fit.seminarski.helper.MyAbstractRunnable;
+import com.eldar.fit.seminarski.helper.MyApiRequest;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
 
-import java.util.List;
-
 import static com.eldar.fit.seminarski.RestoranDetaljnoActivity.DETAIL_VIEW_RESTORAN;
+import static com.eldar.fit.seminarski.helper.MyApiRequest.ENDPOINT_RESTORANI;
 
 public class RestoranListFragment extends Fragment {
 
-    private List<RestoranVM> storageRestorani;
+    private RestoranPrikazVM apiRestorani;
     private ListView listRestorani;
     public static RestoranListFragment newInstance() {
         Bundle args = new Bundle();
@@ -49,14 +50,19 @@ public class RestoranListFragment extends Fragment {
 
         listRestorani = view.findViewById(R.id.listViewRestorani);
 
-        popuniPodatke();
+        MyApiRequest.get(getActivity(), ENDPOINT_RESTORANI, new MyAbstractRunnable<RestoranPrikazVM>() {
+            @Override
+            public void run(RestoranPrikazVM restoranPrikazVM) {
+                popuniPodatke(restoranPrikazVM);
+            }
+        });
 
         listRestorani.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("Test", "CARD CLICKED");
-                RestoranVM restoran = storageRestorani.get(position);
-                do_transitionCardView(view, restoran);
+//    CHECK!            RestoranVM restoran = apiRestorani.restorani.get(position);
+//                do_transitionCardView(view, restoran);
             }
         });
 
@@ -75,21 +81,21 @@ public class RestoranListFragment extends Fragment {
         startActivity(intent, options.toBundle());
     }
 
-    private void popuniPodatke() {
-        storageRestorani = Storage.getRestorani();
+    private void popuniPodatke(RestoranPrikazVM model) {
+        apiRestorani = model;
 
         listRestoraniAdapter = new BaseAdapter() {
             @Override
             public int getCount() {
-                return storageRestorani.size();
+                return apiRestorani.restorani.size();
             }
 
             @Override
-            public Object getItem(int position) { return storageRestorani.get(position); }
+            public Object getItem(int position) { return apiRestorani.restorani.get(position); }
 
             @Override
             public long getItemId(int position) {
-                return storageRestorani.get(position).getId();
+                return apiRestorani.restorani.get(position).getId();
             }
 
             @Override
@@ -119,29 +125,27 @@ public class RestoranListFragment extends Fragment {
                     }
                 });
 
-                restoranNaziv.setText(storageRestorani.get(position).getNaziv());
+                restoranNaziv.setText(apiRestorani.restorani.get(position).getNaziv());
 
                 int limit = 90;
                 String opis;
-                if (storageRestorani.get(position).getOpis().length() > limit ) {
+                if (apiRestorani.restorani.get(position).getOpis().length() > limit ) {
                     Log.i("Test", "Truncated");
-                    opis = storageRestorani.get(position).getOpis().substring(0, limit - 3) + "...";
+                    opis = apiRestorani.restorani.get(position).getOpis().substring(0, limit - 3) + "...";
                 } else {
-                    opis = storageRestorani.get(position).getOpis();
+                    opis = apiRestorani.restorani.get(position).getOpis();
                 }
                 restoranOpis.setText(opis);
 
+                restoranLikesCount.setText(apiRestorani.restorani.get(position).getLikesCount() + " sviđanja");
 
-                restoranLikesCount.setText(storageRestorani.get(position).getLikesCount() + " sviđanja");
-
-
-
-                Glide.with(getActivity())
-                        .load(storageRestorani.get(position).getMainImageUrl())
-                        .centerCrop()
-                        .into(restoranSlikaView);
-
-
+                if (apiRestorani.restorani.get(position).getSlika() != null) {
+                    Log.i("Test", "SLIKA " + apiRestorani.restorani.get(position).getSlika());
+                    Glide.with(getActivity())
+                            .load(apiRestorani.restorani.get(position).getSlika())
+                            .centerCrop()
+                            .into(restoranSlikaView);
+                }
 
                 return view;
             }
