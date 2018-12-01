@@ -75,26 +75,33 @@
             android:layout_height="wrap_content"/>
 
     </android.support.design.widget.TextInputLayout>
-
     <LinearLayout
-        android:layout_gravity="right"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/btnProfilLozinkaOdustani"
-            android:layout_width="match_parent"
+        <ProgressBar
+            android:id="@+id/progressBar_snimiPromjene"
+            android:visibility="invisible"
+            style="@style/AppTheme.ProgressBar.Small" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/AlertDialogsTheme.Components.Button"
-            android:text="Odustani"/>
-        <Button
-            android:id="@+id/btnProfilLozinkaSnimi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/AlertDialogsTheme.Components.Button"
-            android:text="Snimi"/>
+            android:gravity="center_vertical|end">
 
+            <Button
+                android:id="@+id/btnProfilLozinkaOdustani"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AlertDialogsTheme.Components.Button"
+                android:text="Odustani"/>
+            <Button
+                android:id="@+id/btnProfilLozinkaSnimi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AlertDialogsTheme.Components.Button"
+                android:text="Snimi"/>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

@@ -6,13 +6,17 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.eldar.fit.seminarski.R;
+import com.eldar.fit.seminarski.data.AuthRegister;
 import com.eldar.fit.seminarski.data.KorisnikVM;
+import com.eldar.fit.seminarski.helper.MyAbstractRunnable;
+import com.eldar.fit.seminarski.helper.MyApiRequest;
 import com.eldar.fit.seminarski.helper.MySession;
 
 public class ProfilPromijeniLozinkuDialogFragment extends DialogFragment {
@@ -23,6 +27,7 @@ public class ProfilPromijeniLozinkuDialogFragment extends DialogFragment {
     private Button btnProfilLozinkaOdustani;
     private Button btnProfilLozinkaSnimi;
     private KorisnikVM korisnik;
+    private View view;
 
     public static ProfilPromijeniLozinkuDialogFragment newInstance() {
         ProfilPromijeniLozinkuDialogFragment fragment = new ProfilPromijeniLozinkuDialogFragment();
@@ -38,7 +43,7 @@ public class ProfilPromijeniLozinkuDialogFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.profil_promijeni_lozinku_dialog, container, false);
+        view = inflater.inflate(R.layout.profil_promijeni_lozinku_dialog, container, false);
 
         korisnik = MySession.getKorisnik();
 
@@ -58,6 +63,10 @@ public class ProfilPromijeniLozinkuDialogFragment extends DialogFragment {
         btnProfilLozinkaSnimi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (view.findViewById(R.id.progressBar_snimiPromjene) != null) {
+                    view.findViewById(R.id.progressBar_snimiPromjene).setVisibility(View.VISIBLE);
+                }
+
                 if (textProfilOpcijeLozinkaTrenutna == null ||
                         !korisnik.correctLozinka(textProfilOpcijeLozinkaTrenutna.getText().toString())) {
                     // iftrue:
@@ -83,21 +92,51 @@ public class ProfilPromijeniLozinkuDialogFragment extends DialogFragment {
                     textProfilOpcijeLozinkaNew.getError() != null ||
                     textProfilOpcijeLozinkaNewPonovo.getError() != null) {
                     Snackbar.make(getView(), "Molimo provjerite unesene podatke!", Snackbar.LENGTH_SHORT).show();
+
+                    if (view.findViewById(R.id.progressBar_snimiPromjene) != null) {
+                        view.findViewById(R.id.progressBar_snimiPromjene).setVisibility(View.INVISIBLE);
+                    }
+
                     return;
                 }
 
-                korisnik.setPassword(textProfilOpcijeLozinkaNew.getText().toString());
-                MySession.setKorisnik(korisnik);
-                Snackbar.make(getView(), "Uspješno ste promijenili lozinku!",  Snackbar.LENGTH_SHORT).addCallback(new Snackbar.Callback() {
+                AuthRegister userPostObj = new AuthRegister(korisnik);
+                userPostObj.setPassword(textProfilOpcijeLozinkaNew.getText().toString());
+
+                MyApiRequest.post(getActivity(), MyApiRequest.ENDPOINT_USER_UPDATE_AUTH, userPostObj, new MyAbstractRunnable<KorisnikVM>() {
                     @Override
-                    public void onDismissed(Snackbar transientBottomBar, int event) {
-                        getDialog().dismiss();
+                    public void run(KorisnikVM korisnikVM) {
+                        Log.i("Test", "run, result: " + korisnikVM.getAdresa());
+                        updatePassword(korisnikVM, null, null);
                     }
-                }).show();
+
+                    @Override
+                    public void error(@Nullable Integer statusCode, @Nullable String errorMessage) {
+                        Log.i("Test", "run, result: " + statusCode + errorMessage);
+                        updatePassword(null, statusCode, errorMessage);
+                    }
+                });
             }
         });
 
-
         return view;
+    }
+
+    private void updatePassword(@Nullable KorisnikVM korisnik, @Nullable Integer statusCode, @Nullable String errorMessage) {
+        if (view.findViewById(R.id.progressBar_snimiPromjene) != null) {
+            view.findViewById(R.id.progressBar_snimiPromjene).setVisibility(View.INVISIBLE);
+        }
+
+        if (korisnik == null) {
+            Snackbar.make(getView(), "Dogodila s greška, provjerite podatke i pokušajte ponovo." , Snackbar.LENGTH_SHORT).show();
+        } else {
+            MySession.setKorisnik(korisnik);
+            Snackbar.make(getView(), "Uspješno ste promijenili lozinku!" , Snackbar.LENGTH_SHORT).addCallback(new Snackbar.Callback() {
+                @Override
+                public void onDismissed(Snackbar transientBottomBar, int event) {
+                    getDialog().dismiss();
+                }
+            }).show();
+        }
     }
 }
