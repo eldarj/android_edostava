@@ -1,10 +1,19 @@
 package com.eldar.fit.seminarski.data;
 
+import android.util.Log;
+
+import com.eldar.fit.seminarski.helper.MyConfig;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class KorisnikVM implements Serializable{
+
+    @SerializedName(value = "id", alternate = { "Id", "ID" })
+    private Integer id;
 
     @SerializedName(value="username", alternate= { "Username" })
     private String username;
@@ -29,6 +38,19 @@ public class KorisnikVM implements Serializable{
     @SerializedName(value="imageUrl", alternate= { "ImageUrl", "imageurl", "ImageURL", "image", "Image" })
     private String imageUrl;
 
+    @SerializedName(value = "datumKreiranja", alternate = { "datumkreiranja", "DatumKreiranja" })
+    private String datumKreiranjaString; // 2018-11-30T22:47:28.5912989+01:00
+
+    private transient Date datumKreiranja;
+
+    @SerializedName(value = "zadnjiLogin", alternate = { "ZadnjiLogin", "zadnjilogin" })
+    private String zadnjiLoginString;
+
+    private transient Date zadnjiLogin;
+
+    @SerializedName(value = "narudzbeCount", alternate = { "NarudzbeCount", "narudzbecount" })
+    private int narudzbeCount;
+
     public KorisnikVM(String username, String password, String ime, String prezime, String imageUrl, BlokVM blok, String adresa) {
         this.username = username;
         this.password = password;
@@ -39,6 +61,15 @@ public class KorisnikVM implements Serializable{
         this.imageUrl = imageUrl;
         this.adresa = adresa;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public BlokVM getBlok(){ return blok; }
 
     public void setBlok(BlokVM value){ BlokID = value.getId(); blok = value; }
@@ -59,6 +90,10 @@ public class KorisnikVM implements Serializable{
 
     public void setPrezime(String value){ prezime = value; }
 
+    public String getImageUrlForDisplay() {
+        return MyConfig.APP_BASE + imageUrl;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -67,24 +102,50 @@ public class KorisnikVM implements Serializable{
         this.imageUrl = imageUrl;
     }
 
+    public String getLokacija() {
+        return getBlok().getNaziv() + ", " + getBlok().getOpstina().getnaziv();
+    }
+
     public String getAdresa() {
-        return adresa;
+        return adresa != null && adresa.length() > 0 ? adresa : "-";
     }
 
     public void setAdresa(String adresa) {
         this.adresa = adresa;
     }
 
-    public String getOmiljeniRestoran() {
-        return Storage.getRestorani().get(0).getNaziv();
+    public int getNarudzbeCount() {
+        return narudzbeCount;
     }
 
-    public int getUkupnoNarudzbi() {
-        return 9;
+    public String getZadnjiLogin() {
+        if (zadnjiLogin == null) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            SimpleDateFormat wantedFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+            try {
+                zadnjiLogin = format.parse(zadnjiLoginString);
+                zadnjiLoginString = wantedFormat.format(zadnjiLogin);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                Log.i("Test", "Error kod parsiranja datuma: " + e.getMessage());
+            }
+        }
+        return zadnjiLoginString;
     }
 
     public String getDatumRegistracije() {
-        return "26.9.2018";
+        if (datumKreiranja == null) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            SimpleDateFormat wantedFormat = new SimpleDateFormat("dd.MM.yyyy");
+            try {
+                datumKreiranja = format.parse(datumKreiranjaString);
+                datumKreiranjaString = wantedFormat.format(datumKreiranja);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                Log.i("Test", "Error kod parsiranja datuma: " + e.getMessage());
+            }
+        }
+        return datumKreiranjaString;
     }
 
     public boolean correctLozinka(String lozinka) {
@@ -93,4 +154,5 @@ public class KorisnikVM implements Serializable{
         }
         return false;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.eldar.fit.seminarski.data;
 
+import com.eldar.fit.seminarski.helper.MyApiRequest;
 import com.eldar.fit.seminarski.helper.MySession;
 
 import java.util.ArrayList;
@@ -162,7 +163,6 @@ public class Storage {
         }
         return hrana;
     }
-
 
     public static List<BlokVM> getBlokovi() {
         if (blokovi == null) {
