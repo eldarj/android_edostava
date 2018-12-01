@@ -4,6 +4,8 @@ import android.net.Uri;
 
 public class MyConfig {
 
-    public static final Uri apiBase = Uri.parse("http://192.168.1.3:51627/api");
+    public static final String APP_BASE = "http://192.168.1.3:51627/";
+
+    public static final Uri apiBase = Uri.parse(APP_BASE + "api");
 
 }

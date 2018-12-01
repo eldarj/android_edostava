@@ -14,7 +14,10 @@ public class MyApiRequest {
 
     public static String CONTENT_TYPE_JSON = "application/json";
     public static String ENDPOINT_RESTORANI = "restorani";
-    public static String ENDPOINT_AUTH = "auth";
+    public static String ENDPOINT_LOCATIONS = "locations";
+    public static String ENDPOINT_USER_LOGIN_CHECK_AUTH = "auth";
+    public static String ENDPOINT_USER_REGISTER_AUTH = "auth/register";
+    public static String ENDPOINT_USER_UPDATE_AUTH = "auth/update";
 
     public static <T> void request(final Activity activity, final String endpoint, final MyUrlConnection.HttpMethod httpMethod, final Object postObject, final MyAbstractRunnable<T> callback) {
         new AsyncTask<Void, Void, MyApiResult>() {
@@ -40,9 +43,11 @@ public class MyApiRequest {
                     if (result.resultCode == 0) {
                         Log.i("Test", "asyncApiRequest - error server communication.");
                         snackbar = Snackbar.make(parentLayout, "Greška u komunikaciji sa serverom. ", Snackbar.LENGTH_LONG);
+                        callback.error(result.resultCode, "Greška u komunikaciji sa serverom.");
                     } else {
                         Log.i("Test", "asyncApiRequest - error:" + result.errorMessage + " statuscode:" + result.resultCode);
                         snackbar = Snackbar.make(parentLayout, "Greška " + result.resultCode + ": " + result.errorMessage, Snackbar.LENGTH_LONG);
+                        callback.error(result.resultCode, "Greška na serveru, provjerite podatke.");
                     }
                 }
                 else {
@@ -55,6 +60,7 @@ public class MyApiRequest {
                     } catch (Exception e) {
                         Log.i("Test", "asyncApiRequest - get - Exception:" + e.getMessage());
                         snackbar = Snackbar.make(parentLayout, "Greška pri prikazivanju podataka. ", Snackbar.LENGTH_LONG);
+                        callback.error(0, "Greška pri prikazivanju podataka.");
                     }
                 }
                 if (snackbar != null) {

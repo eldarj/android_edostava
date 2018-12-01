@@ -10,6 +10,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 public class MyUrlConnection {
 
@@ -17,6 +21,9 @@ public class MyUrlConnection {
         GET, POST, HEAD, OPTIONS, TRACE
     }
 
+    // ... maybe create an api endpoint that returns a <-
+    // list of all the success status codes that it returns?
+    public static List<Integer> OkStatuses = Arrays.asList(200, 201, 202);
     public static String charset = "UTF-8";
 
     public static MyApiResult request(String urlString, HttpMethod httpMethod, String postData, String contentType) {
@@ -47,8 +54,8 @@ public class MyUrlConnection {
 
             int statusCode = urlConnection.getResponseCode();
 
-            if (statusCode == 200) {
-                Log.i("Test", "status 200");
+            if (OkStatuses.contains(statusCode)) {
+                Log.i("Test", "status Ok: " + statusCode);
                 InputStream is = new BufferedInputStream(urlConnection.getInputStream());
                 String response = convertToString(is);
 
