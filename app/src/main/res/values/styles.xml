@@ -86,7 +86,8 @@
     </style>
 
     <style name="AlertDialogsTheme.Components.Button" parent="@style/Widget.MaterialComponents.Button.TextButton">
-        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
     </style>
 
     <style name="AlertDialogsTheme.Components.TextInputLayout" parent="Widget.Design.TextInputLayout">
@@ -97,6 +98,34 @@
 
 
     <!-- Element stilovi -->
+
+    <style name="AppTheme.ProgressBar">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
+    <style name="AppTheme.ProgressBar.Medium" parent="AppTheme.ProgressBar">
+        <item name="android:maxHeight">50dp</item>
+        <item name="android:maxWidth">50dp</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:minWidth">50dp</item>
+    </style>
+
+    <style name="AppTheme.ProgressBar.Small" parent="AppTheme.ProgressBar">
+        <item name="android:maxHeight">25dp</item>
+        <item name="android:maxWidth">25dp</item>
+        <item name="android:minHeight">25dp</item>
+        <item name="android:minWidth">25dp</item>
+    </style>
+
+    <style name="AppTheme.ProgressBar.MatchParent" parent="AppTheme.ProgressBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
 
     <style name="Divider">
         <item name="android:layout_marginBottom">16dp</item>

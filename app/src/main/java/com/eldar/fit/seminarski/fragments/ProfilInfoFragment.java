@@ -33,7 +33,7 @@ public class ProfilInfoFragment extends Fragment {
     private TextView textProfilUsername;
     private TextView textProfilDatumRegistracije;
     private TextView chipProfilUkupnoNarudzbi;
-    private TextView chipProfilOmiljeniRestoran;
+    private TextView chipProfilZadnjiLogin;
     private Button btnProfilMojeNarudzbe;
     private Toolbar myToolbar;
 
@@ -55,7 +55,7 @@ public class ProfilInfoFragment extends Fragment {
 
         imageProfil = view.findViewById(R.id.imageProfilHeader);
         Glide.with(getActivity())
-                .load("https://i.pinimg.com/originals/f6/77/b6/f677b6463a402c2d5e8ca609d1cc2b03.jpg")
+                .load(korisnik.getImageUrlForDisplay())
                 .centerCrop()
                 .into(imageProfil);
 
@@ -63,7 +63,7 @@ public class ProfilInfoFragment extends Fragment {
         textProfilImePrezime.setText(korisnik.getIme() + " " + korisnik.getPrezime());
 
         textProfilAdresa = view.findViewById(R.id.textProfilAdresa);
-        textProfilAdresa.setText((korisnik.getAdresa() == null ? "" : korisnik.getAdresa() + ", ") + korisnik.getBlok().getNaziv() + " " + korisnik.getBlok().getOpstina().getnaziv());
+        textProfilAdresa.setText(korisnik.getAdresa() + ", " + korisnik.getLokacija());
 
         textProfilUsername = view.findViewById(R.id.textProfilUsername);
         textProfilUsername.setText("Username " + korisnik.getUsername());
@@ -72,10 +72,10 @@ public class ProfilInfoFragment extends Fragment {
         textProfilDatumRegistracije.setText("Datum registracije " + korisnik.getDatumRegistracije());
 
         chipProfilUkupnoNarudzbi = view.findViewById(R.id.chipProfilUkupnoNarudzbi);
-        chipProfilUkupnoNarudzbi.setText("Ukupno narudžbi" + korisnik.getUkupnoNarudzbi());
+        chipProfilUkupnoNarudzbi.setText("Ukupno narudžbi " + korisnik.getNarudzbeCount());
 
-        chipProfilOmiljeniRestoran = view.findViewById(R.id.chipProfilOmiljeniRestoran);
-        chipProfilOmiljeniRestoran.setText("Omiljeni restoran " + korisnik.getOmiljeniRestoran());
+        chipProfilZadnjiLogin = view.findViewById(R.id.chipProfilZadnjiLogin);
+        chipProfilZadnjiLogin.setText("Zadnji put logiran  " + korisnik.getZadnjiLogin());
 
         btnProfilMojeNarudzbe = view.findViewById(R.id.btnProfilMojeNarudzbe);
         btnProfilMojeNarudzbe.setOnClickListener(new View.OnClickListener() {

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.button.MaterialButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -54,6 +55,13 @@ public class RestoranListFragment extends Fragment {
             @Override
             public void run(RestoranPrikazVM restoranPrikazVM) {
                 popuniPodatke(restoranPrikazVM);
+            }
+
+            @Override
+            public void error(@Nullable Integer statusCode, @Nullable String errorMessage) {
+                Snackbar.make(getActivity().findViewById(R.id.fragmentContainer),
+                        errorMessage != null ? errorMessage : "Dogodila se greška.",
+                        Snackbar.LENGTH_LONG).show();
             }
         });
 
