@@ -32,7 +32,6 @@ import java.util.List;
 public class ProfilOpcijeFragment extends Fragment {
 
     private Button btnProfilSettingsQuestion;
-    private Button btnProfilSettingsImePrezime;
     private Button btnProfilSettingsAdresa;
     private Button btnProfilSettingsSlika;
     private Button btnProfilSettingsLozinka;
@@ -89,6 +88,14 @@ public class ProfilOpcijeFragment extends Fragment {
         });
 
         btnProfilSettingsSlika = view.findViewById(R.id.btnProfilSettingsSlika);
+        btnProfilSettingsSlika.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyFragmentHelper.dodajDialog((AppCompatActivity)getActivity(),
+                        "dlgPromijeniSliku",
+                        ProfilPromijeniSlikuDialogFragment.newInstance());
+            }
+        });
 
         btnProfilSettingsLozinka = view.findViewById(R.id.btnProfilSettingsLozinka);
         btnProfilSettingsLozinka.setOnClickListener(new View.OnClickListener() {
