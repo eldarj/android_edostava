@@ -158,7 +158,7 @@
                        android:layout_height="wrap_content" />
 
                    <android.support.design.chip.Chip
-                       android:id="@+id/chipProfilOmiljeniRestoran"
+                       android:id="@+id/chipProfilZadnjiLogin"
                        android:layout_marginRight="8dp"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content" />

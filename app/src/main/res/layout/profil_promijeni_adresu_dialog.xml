@@ -50,34 +50,53 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Blok i grad"/>
-        <Spinner
-            android:id="@+id/spinnerProfilOpcijeAdresaBlok"
+        <RelativeLayout
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
-        </Spinner>
+            android:layout_height="match_parent">
+            <ProgressBar
+                android:id="@+id/progressBar_blokSpinner"
+                style="@style/AppTheme.ProgressBar.MatchParent" />
+            <Spinner
+                android:id="@+id/spinnerProfilOpcijeAdresaBlok"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </Spinner>
+        </RelativeLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_gravity="right"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/btnProfilAdresaOdustani"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/AlertDialogsTheme.Components.Button"
-            android:text="Odustani"/>
-        <Button
-            android:id="@+id/btnProfilAdresaSnimi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/AlertDialogsTheme.Components.Button"
-            android:text="Snimi"/>
+        <ProgressBar
+            android:id="@+id/progressBar_snimiPromjene"
+            android:visibility="invisible"
+            style="@style/AppTheme.ProgressBar.Small" />
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|end">
+
+            <Button
+                android:id="@+id/btnProfilAdresaOdustani"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                style="@style/AlertDialogsTheme.Components.Button"
+                android:text="Odustani"/>
+            <Button
+                android:id="@+id/btnProfilAdresaSnimi"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                style="@style/AlertDialogsTheme.Components.Button"
+                android:text="Snimi"/>
+
+        </LinearLayout>
     </LinearLayout>
+
 
 </LinearLayout>
