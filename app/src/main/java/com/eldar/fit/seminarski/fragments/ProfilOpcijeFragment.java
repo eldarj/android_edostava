@@ -17,11 +17,17 @@ import android.widget.ImageButton;
 
 import com.eldar.fit.seminarski.LoginActivity;
 import com.eldar.fit.seminarski.R;
+import com.eldar.fit.seminarski.data.AuthRegister;
 import com.eldar.fit.seminarski.data.KorisnikVM;
 import com.eldar.fit.seminarski.data.Storage;
+import com.eldar.fit.seminarski.helper.MyAbstractRunnable;
+import com.eldar.fit.seminarski.helper.MyApiRequest;
 import com.eldar.fit.seminarski.helper.MyApp;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
 import com.eldar.fit.seminarski.helper.MySession;
+import com.eldar.fit.seminarski.helper.MyUtils;
+
+import java.util.List;
 
 public class ProfilOpcijeFragment extends Fragment {
 
@@ -32,6 +38,7 @@ public class ProfilOpcijeFragment extends Fragment {
     private Button btnProfilSettingsLozinka;
     private Button btnProfilSettingsDelete;
     private KorisnikVM korisnik;
+    private View view;
 
     public static ProfilOpcijeFragment newInstance() {
         ProfilOpcijeFragment fragment = new ProfilOpcijeFragment();
@@ -41,7 +48,7 @@ public class ProfilOpcijeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.profil_opcije_fragment, container, false);
+        view = inflater.inflate(R.layout.profil_opcije_fragment, container, false);
 
         korisnik = MySession.getKorisnik();
 
@@ -101,20 +108,29 @@ public class ProfilOpcijeFragment extends Fragment {
                 dlgBuilder.setTitle("Izbriši korisnički račun")
                         .setMessage("Da li ste sigurni da želite izbrisati korisnički račun?" +
                                 "\n\nTrenutne sačuvane preference i korisnički podaci će biti trajno uklonjeni sa sistema, te nećete moći više koristiti aplikaciju eDostava!")
-                        .setPositiveButton("Da, izbriši račun", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Da, Izbriši račun", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Snackbar.make(getView(), "Uspješno ste izbrisali korisnički račun!", Snackbar.LENGTH_SHORT)
-                                        .addCallback(new Snackbar.Callback() {
-                                            @Override
-                                            public void onDismissed(Snackbar transientBottomBar, int event) {
-                                                super.onDismissed(transientBottomBar, event);
-                                                dialog.dismiss();
+                                AuthRegister userPostObj = new AuthRegister();
+                                userPostObj.setId(korisnik.getId());
 
-                                                do_deleteKorisnik();
-                                            }
-                                        })
-                                        .show();
+                                MyApiRequest.post(getActivity(), MyApiRequest.ENDPOINT_USER_DELETE_AUTH, userPostObj, new MyAbstractRunnable<Object>() {
+                                    @Override
+                                    public void run(Object o) {
+                                        onAccountDeleted(dialog,204, null);
+                                    }
+
+                                    @Override
+                                    public void error(@Nullable Integer statusCode, @Nullable String errorMessage) {
+                                        onAccountDeleted(dialog, statusCode, errorMessage);
+                                    }
+                                });
+                            }
+                        })
+                        .setNegativeButton("NE", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
                             }
                         })
                         .show();
@@ -125,12 +141,27 @@ public class ProfilOpcijeFragment extends Fragment {
         return view;
     }
 
-    private void do_deleteKorisnik() {
-        Storage.removeKorisnik(korisnik);
-        MySession.setKorisnik(null);
-        Intent intent = new Intent(MyApp.getContext(), LoginActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    private void onAccountDeleted(@Nullable DialogInterface dialog, @Nullable Integer statusCode, @Nullable String errorMessage) {
+        if (view.findViewById(R.id.progressBar_snimiPromjene) != null) {
+            view.findViewById(R.id.progressBar_snimiPromjene).setVisibility(View.INVISIBLE);
+        }
 
-        startActivity(intent);
+        if (statusCode == 204) {
+            Snackbar.make(getView(), "Uspješno ste izbrisali korisnički račun!" , Snackbar.LENGTH_LONG).addCallback(new Snackbar.Callback() {
+                @Override
+                public void onDismissed(Snackbar transientBottomBar, int event) {
+                    dialog.dismiss();
+
+                    MySession.setKorisnik(null);
+                    Intent intent = new Intent(MyApp.getContext(), LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                    startActivity(intent);
+                }
+            }).show();
+
+        } else {
+            Snackbar.make(getView(), "Dogodila s greška, pokušajte ponovo." , Snackbar.LENGTH_LONG).show();
+        }
     }
 }

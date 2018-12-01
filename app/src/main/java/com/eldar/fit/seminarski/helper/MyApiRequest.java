@@ -18,6 +18,7 @@ public class MyApiRequest {
     public static String ENDPOINT_USER_LOGIN_CHECK_AUTH = "auth";
     public static String ENDPOINT_USER_REGISTER_AUTH = "auth/register";
     public static String ENDPOINT_USER_UPDATE_AUTH = "auth/update";
+    public static String ENDPOINT_USER_DELETE_AUTH = "auth/delete";
 
     public static <T> void request(final Activity activity, final String endpoint, final MyUrlConnection.HttpMethod httpMethod, final Object postObject, final MyAbstractRunnable<T> callback) {
         new AsyncTask<Void, Void, MyApiResult>() {

@@ -23,7 +23,7 @@ public class MyUrlConnection {
 
     // ... maybe create an api endpoint that returns a <-
     // list of all the success status codes that it returns?
-    public static List<Integer> OkStatuses = Arrays.asList(200, 201, 202);
+    public static List<Integer> OkStatuses = Arrays.asList(200, 201, 202, 204);
     public static String charset = "UTF-8";
 
     public static MyApiResult request(String urlString, HttpMethod httpMethod, String postData, String contentType) {

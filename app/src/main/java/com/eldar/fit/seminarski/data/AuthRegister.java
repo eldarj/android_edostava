@@ -10,6 +10,8 @@ public class AuthRegister {
     public String imageUrl;
     public int blokID;
 
+    public AuthRegister() {}
+
     public AuthRegister(KorisnikVM korisnik) {
         this.id = korisnik.getId();
         this.username = korisnik.getUsername();
