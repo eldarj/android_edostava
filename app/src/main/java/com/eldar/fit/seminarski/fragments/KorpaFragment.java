@@ -42,29 +42,21 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
     private Toolbar myToolbar;
 
     public static KorpaFragment newInstance() {
-        Bundle args = new Bundle();
         KorpaFragment fragment = new KorpaFragment();
-        fragment.setArguments(args);
-
         return fragment;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        getKorpaSession();
         setHasOptionsMenu(true);
+        korpa = prepKorpaSession();
         super.onCreate(savedInstanceState);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
-
         View view = inflater.inflate(R.layout.korpa_fragment, container, false);
-
-        Log.i("Test", "onCreateView::KorpaFragment");
 
         textKorpaIntro = view.findViewById(R.id.textKorpaIntro);
         textKorpaIntro.setText(korpa.getHranaStavke().size() == 0 ?
@@ -72,8 +64,7 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
                 "Ukupno stavki u korpi: " + korpa.getHranaStavkeTotalCount());
 
         textKorpaTotal = view.findViewById(R.id.textKorpaTotal);
-        final double ukupno = korpa.getUkupnaCijena();
-        textKorpaTotal.setText(ukupno == 0 ? "- KM" : ukupno + " KM");
+        textKorpaTotal.setText(korpa.getUkupnaCijena() == 0 ? "- KM" : korpa.getUkupnaCijena() + " KM");
 
         listKorpaStavke = view.findViewById(R.id.listKorpaStavke);
         listKorpaStavkePopuni();
@@ -117,16 +108,15 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
         return view;
     }
 
-    private void getKorpaSession() {
+    private Korpa prepKorpaSession() {
         if (listStavkeAdapter != null ) {
             listStavkeAdapter.notifyDataSetChanged();
         }
 
         if (MySession.getKorpa() == null) {
-            korpa = new Korpa();
-            MySession.setKorpa(korpa);
+            MySession.setKorpa(new Korpa());
         }
-        korpa = MySession.getKorpa();
+        return MySession.getKorpa();
     }
 
     private void listKorpaStavkePopuni() {
@@ -205,7 +195,7 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
     @Override
     public void onResume() {
         super.onResume();
-        getKorpaSession();
+        korpa = prepKorpaSession();
 
         SharedPreferences prefs = MySession.getPrefs();
         prefs.registerOnSharedPreferenceChangeListener(this);
