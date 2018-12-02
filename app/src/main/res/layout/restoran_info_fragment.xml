@@ -74,6 +74,7 @@
         android:fillViewport="true"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
+        android:layout_gravity="fill_vertical"
         android:layout_marginBottom="@dimen/bottomnav_height"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -82,7 +83,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/textDetaljnoRestoranNaziv"

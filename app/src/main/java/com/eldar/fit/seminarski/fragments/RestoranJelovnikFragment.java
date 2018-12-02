@@ -131,7 +131,7 @@ public class RestoranJelovnikFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         v.setBackground(getResources().getDrawable(R.drawable.ic_plus_round_added));
-                        do_dodajStavku(position);
+                        do_dodajStavku(podaci.get(position));
                     }
                 });
 
@@ -160,14 +160,13 @@ public class RestoranJelovnikFragment extends Fragment {
 
     private void getKorpaSession() {
         if (MySession.getKorpa() == null) {
-            korpa = new Korpa();
-            MySession.setKorpa(korpa);
+            MySession.setKorpa(new Korpa());
         }
         korpa = MySession.getKorpa();
     }
 
-    private void do_dodajStavku(int position) {
-        korpa.dodajStavku(podaci.get(position));
+    private void do_dodajStavku(HranaItemVM stavka) {
+        korpa.dodajStavku(stavka);
         MySession.setKorpa(korpa);
     }
 }

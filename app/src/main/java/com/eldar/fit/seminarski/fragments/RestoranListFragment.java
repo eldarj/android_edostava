@@ -142,7 +142,7 @@ public class RestoranListFragment extends Fragment {
 
                 restoranNaziv.setText(apiRestorani.restorani.get(position).getNaziv());
 
-                int limit = 90;
+                int limit = 120;
                 String opis;
                 if (apiRestorani.restorani.get(position).getOpis().length() > limit ) {
                     Log.i("Test", "Truncated");

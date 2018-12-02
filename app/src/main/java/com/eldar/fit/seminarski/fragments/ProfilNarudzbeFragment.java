@@ -26,6 +26,7 @@ import com.eldar.fit.seminarski.data.RestoranVM;
 import com.eldar.fit.seminarski.data.Storage;
 import com.eldar.fit.seminarski.helper.MyGson;
 import com.eldar.fit.seminarski.helper.MyUrlConnection;
+import com.eldar.fit.seminarski.helper.RestoranInfo;
 
 import java.util.HashSet;
 import java.util.List;
@@ -64,7 +65,8 @@ public class ProfilNarudzbeFragment extends Fragment {
         listViewNarudzbe = view.findViewById(R.id.listViewNarudzbe);
 
         // ASYNC
-        podaci = Storage.getNarudzbe();
+        //podaci = Storage.getNarudzbe();
+        podaci = null;
 
         listViewNarudzbe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -171,10 +173,10 @@ public class ProfilNarudzbeFragment extends Fragment {
                 TextView textStavkaNarudzbaCijena = view.findViewById(R.id.textStavkaNarudzbaCijena);
                 textStavkaNarudzbaCijena.setText(String.format("%1$,.2f KM", n.getUkupnaCijena()));
 
-                Set<RestoranVM> restorani = new HashSet<RestoranVM>(n.getRestorani());
+                Set<RestoranInfo> restorani = new HashSet<RestoranInfo>(n.getRestorani());
                 ChipGroup chipGroupRestorani = view.findViewById(R.id.chipgroupStavkaNarudzbaRestorani);
                 chipGroupRestorani.removeAllViews();
-                for (RestoranVM restoran :
+                for (RestoranInfo restoran :
                         restorani) {
                     Chip c = new Chip(getActivity());
                     c.setText(restoran.getNaziv());
