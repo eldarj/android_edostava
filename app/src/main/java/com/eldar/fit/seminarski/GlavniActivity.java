@@ -31,10 +31,7 @@ public class GlavniActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        KorisnikVM k = MySession.getKorisnik();
-
-        if (k == null) {
+        if (MySession.getKorisnik() == null) {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
@@ -48,9 +45,7 @@ public class GlavniActivity extends AppCompatActivity
         bottomnavigationMain.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int kliknutiTabId = menuItem.getItemId();
-
-                switch(kliknutiTabId) {
+                switch(menuItem.getItemId()) {
                     case R.id.bottommain_restorani:
                         MyFragmentHelper.fragmentCreate(GlavniActivity.this,
                                 R.id.fragmentContainer,
@@ -73,7 +68,6 @@ public class GlavniActivity extends AppCompatActivity
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         setupMainNavigation();
 
-
         MyFragmentHelper.fragmentCreate(this, R.id.fragmentContainer,  RestoranListFragment.newInstance());
     }
 
@@ -81,6 +75,7 @@ public class GlavniActivity extends AppCompatActivity
     private void setupMainNavigation() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
