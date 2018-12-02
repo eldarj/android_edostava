@@ -1,5 +1,7 @@
 package com.eldar.fit.seminarski.data;
 
+import com.eldar.fit.seminarski.helper.RestoranInfo;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,8 +54,8 @@ public class NarudzbaVM {
         return korisnik;
     }
 
-    public List<RestoranVM> getRestorani() {
-        List<RestoranVM> restorani = new ArrayList<RestoranVM>();
+    public List<RestoranInfo> getRestorani() {
+        List<RestoranInfo> restorani = new ArrayList<RestoranInfo>();
         for (KorpaHranaStavka stavka:
              hranaStavke) {
             restorani.add(stavka.getHranaItemVM().getRestoran());

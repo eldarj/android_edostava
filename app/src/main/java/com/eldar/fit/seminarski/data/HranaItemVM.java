@@ -1,5 +1,6 @@
 package com.eldar.fit.seminarski.data;
 
+import com.eldar.fit.seminarski.helper.RestoranInfo;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -25,7 +26,7 @@ public class HranaItemVM implements Serializable {
     @SerializedName(value = "tipKuhinje", alternate = { "TipKuhinje", "tipkuhinje" })
     private TipKuhinje TipKuhinje;
 
-    private RestoranVM restoran;
+    private RestoranInfo restoran;
 
     @SerializedName(value = "cijena", alternate = { "Cijena" })
     private double cijena;
@@ -33,7 +34,7 @@ public class HranaItemVM implements Serializable {
     @SerializedName(value = "imageUrl", alternate = { "ImageUrl" })
     private String imageUrl;
 
-    public HranaItemVM(String naziv, String opis, List<String> sastojci, List<HranaKategorijaVM> kategorije, RestoranVM restoran, double cijena) {
+    public HranaItemVM(String naziv, String opis, List<String> sastojci, List<HranaKategorijaVM> kategorije, RestoranInfo restoran, double cijena) {
         this.id = hranaItemIdCounter++;
         this.naziv = naziv;
         this.opis = opis;
@@ -44,7 +45,7 @@ public class HranaItemVM implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public HranaItemVM(String naziv, String opis, List<String> sastojci, List<HranaKategorijaVM> kategorije, RestoranVM restoran, String imageUrl, double cijena) {
+    public HranaItemVM(String naziv, String opis, List<String> sastojci, List<HranaKategorijaVM> kategorije, RestoranInfo restoran, String imageUrl, double cijena) {
         this.id = hranaItemIdCounter++;
         this.naziv = naziv;
         this.opis = opis;
@@ -91,11 +92,11 @@ public class HranaItemVM implements Serializable {
         this.kategorije = kategorije;
     }
 
-    public RestoranVM getRestoran() {
+    public RestoranInfo getRestoran() {
         return restoran;
     }
 
-    public void setRestoran(RestoranVM restoran) {
+    public void setRestoran(RestoranInfo restoran) {
         this.restoran = restoran;
     }
 

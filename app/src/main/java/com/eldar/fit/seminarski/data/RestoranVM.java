@@ -105,19 +105,6 @@ public class RestoranVM implements Serializable {
         this.opis = opis;
     }
 
-    public List<HranaItemVM> getHrana() {
-        if (hrana == null) {
-            hrana = new ArrayList<HranaItemVM>();
-            for (HranaItemVM k: Storage.getHrana()) {
-                if (k.getRestoran() == this) {
-                    hrana.add(k);
-                }
-            }
-        }
-
-        return hrana;
-    }
-
     public void setHrana(List<HranaItemVM> hrana) {
         this.hrana = hrana;
     }

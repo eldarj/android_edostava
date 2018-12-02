@@ -140,29 +140,29 @@ public class Storage {
         return restorani;
     }
 
-    public static List<HranaItemVM> getHrana() {
-        if (hrana == null) {
-            hrana = new ArrayList<>();
-            List<String> sastojci = new ArrayList<String>();
-            sastojci.add("Pecivo");
-            sastojci.add("Šnicla");
-            sastojci.add("Blagi sos");
-            sastojci.add("Salata");
-
-            hrana.add(new HranaItemVM("Hamburger", "Sočan hambuerger, svježe sa roštilja", sastojci, null, getRestorani().get(0), "https://www.volim-meso.hr/wordpress/wp-content/uploads/2014/06/10-hamburger-zapovjedi.jpg", 2.50));
-            hrana.add(new HranaItemVM("Tost sendvič", "Super odličan tost sendvič", null, null, getRestorani().get(0), "https://kuharica.kontin.info/wp-content/uploads/2013/11/Tost-sendvis-s-jajetom-i-senfom-10-702x467.jpg", 2.50));
-            hrana.add(new HranaItemVM("Tabaskino", "Tabaskino punjen sirom, šunkom itd..", null, null, getRestorani().get(0), "https://www.theparisreview.org/blog/wp-content/uploads/2018/02/pexels-photo-660282-1024x683.jpg",3.00));
-            hrana.add(new HranaItemVM("Pizza Margarita", "Najbolja i najjednostavnija", null, null, getRestorani().get(0), "http://www.tanjir.ba/thumb.php?src=image/13838454148.JPG&iar=1&fltr[]=wmi|images/art/logo.png|BL", 3));
-            hrana.add(new HranaItemVM("Tuna Sendvič", "Svježa tuna i zelena salata", null, null, getRestorani().get(1),"https://www.theparisreview.org/blog/wp-content/uploads/2018/02/pexels-photo-660282-1024x683.jpg", 3));
-            hrana.add(new HranaItemVM("Tabaskino", "Tabaskino je odlično jelo", null, null, getRestorani().get(1),"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf6DXTVVZ0pnxxV_XWIvU4jYcOVdhEn_cx-xFjzx9_A1eIp13I", 3.5));
-            hrana.add(new HranaItemVM("Pizza Capr.", "-", null, null, getRestorani().get(1), "https://upload.wikimedia.org/wikipedia/commons/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg", 3.5));
-            hrana.add(new HranaItemVM("Pizza 4 vrste sira", "4 različite vrste sira", null, null, getRestorani().get(2), "https://recipes.timesofindia.com/photo/53110049.cms",3.5));
-            hrana.add(new HranaItemVM("Pizza Ljutko", "Veoma ljuto", null, null, getRestorani().get(2), "https://thestingyvegan.com/wp-content/uploads/2017/10/vegan-nacho-pizza-photo.jpg", 4.5));
-            hrana.add(new HranaItemVM("Ćevapi", "Direktno s roštilja", null, null, getRestorani().get(3), "http://www.tanjir.ba/thumb.php?src=image/135334772805.jpg&iar=1&fltr[]=wmi|images/art/logo.png|BL",4.5));
-            hrana.add(new HranaItemVM("Pljeskavica", "Vrhunska pljeskavica pravljena sa vrhunskim mesom", null, null, getRestorani().get(3), "https://api-content.prod.pizzahutaustralia.com.au//umbraco/api/Image/Get2?path=assets/products/menu/Meat-Super-Supreme-Pizza-3250-menu.jpg",4.5));
-        }
-        return hrana;
-    }
+//    public static List<HranaItemVM> getHrana() {
+//        if (hrana == null) {
+//            hrana = new ArrayList<>();
+//            List<String> sastojci = new ArrayList<String>();
+//            sastojci.add("Pecivo");
+//            sastojci.add("Šnicla");
+//            sastojci.add("Blagi sos");
+//            sastojci.add("Salata");
+//
+//            hrana.add(new HranaItemVM("Hamburger", "Sočan hambuerger, svježe sa roštilja", sastojci, null, getRestorani().get(0), "https://www.volim-meso.hr/wordpress/wp-content/uploads/2014/06/10-hamburger-zapovjedi.jpg", 2.50));
+//            hrana.add(new HranaItemVM("Tost sendvič", "Super odličan tost sendvič", null, null, getRestorani().get(0), "https://kuharica.kontin.info/wp-content/uploads/2013/11/Tost-sendvis-s-jajetom-i-senfom-10-702x467.jpg", 2.50));
+//            hrana.add(new HranaItemVM("Tabaskino", "Tabaskino punjen sirom, šunkom itd..", null, null, getRestorani().get(0), "https://www.theparisreview.org/blog/wp-content/uploads/2018/02/pexels-photo-660282-1024x683.jpg",3.00));
+//            hrana.add(new HranaItemVM("Pizza Margarita", "Najbolja i najjednostavnija", null, null, getRestorani().get(0), "http://www.tanjir.ba/thumb.php?src=image/13838454148.JPG&iar=1&fltr[]=wmi|images/art/logo.png|BL", 3));
+//            hrana.add(new HranaItemVM("Tuna Sendvič", "Svježa tuna i zelena salata", null, null, getRestorani().get(1),"https://www.theparisreview.org/blog/wp-content/uploads/2018/02/pexels-photo-660282-1024x683.jpg", 3));
+//            hrana.add(new HranaItemVM("Tabaskino", "Tabaskino je odlično jelo", null, null, getRestorani().get(1),"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf6DXTVVZ0pnxxV_XWIvU4jYcOVdhEn_cx-xFjzx9_A1eIp13I", 3.5));
+//            hrana.add(new HranaItemVM("Pizza Capr.", "-", null, null, getRestorani().get(1), "https://upload.wikimedia.org/wikipedia/commons/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg", 3.5));
+//            hrana.add(new HranaItemVM("Pizza 4 vrste sira", "4 različite vrste sira", null, null, getRestorani().get(2), "https://recipes.timesofindia.com/photo/53110049.cms",3.5));
+//            hrana.add(new HranaItemVM("Pizza Ljutko", "Veoma ljuto", null, null, getRestorani().get(2), "https://thestingyvegan.com/wp-content/uploads/2017/10/vegan-nacho-pizza-photo.jpg", 4.5));
+//            hrana.add(new HranaItemVM("Ćevapi", "Direktno s roštilja", null, null, getRestorani().get(3), "http://www.tanjir.ba/thumb.php?src=image/135334772805.jpg&iar=1&fltr[]=wmi|images/art/logo.png|BL",4.5));
+//            hrana.add(new HranaItemVM("Pljeskavica", "Vrhunska pljeskavica pravljena sa vrhunskim mesom", null, null, getRestorani().get(3), "https://api-content.prod.pizzahutaustralia.com.au//umbraco/api/Image/Get2?path=assets/products/menu/Meat-Super-Supreme-Pizza-3250-menu.jpg",4.5));
+//        }
+//        return hrana;
+//    }
 
     public static List<BlokVM> getBlokovi() {
         if (blokovi == null) {
@@ -208,23 +208,23 @@ public class Storage {
         return posiljke;
     }
 
-    public static List<NarudzbaVM> getNarudzbe() {
-        if (narudzbe == null) {
-            List<KorpaHranaStavka> stavke = new ArrayList<KorpaHranaStavka>();
-            stavke.add(new KorpaHranaStavka(getHrana().get(0), 2));
-            stavke.add(new KorpaHranaStavka(getHrana().get(1), 1));
-
-            narudzbe = new ArrayList<NarudzbaVM>();
-
-            int ukupnaCijena = 0;
-            for (KorpaHranaStavka s :
-                    stavke) {
-                ukupnaCijena += s.getUkupnaCijena();
-            }
-            narudzbe.add(new NarudzbaVM(UUID.randomUUID(), stavke, ukupnaCijena, MySession.getKorisnik()));
-        }
-        return narudzbe;
-    }
+//    public static List<NarudzbaVM> getNarudzbe() {
+//        if (narudzbe == null) {
+//            List<KorpaHranaStavka> stavke = new ArrayList<KorpaHranaStavka>();
+//            stavke.add(new KorpaHranaStavka(getHrana().get(0), 2));
+//            stavke.add(new KorpaHranaStavka(getHrana().get(1), 1));
+//
+//            narudzbe = new ArrayList<NarudzbaVM>();
+//
+//            int ukupnaCijena = 0;
+//            for (KorpaHranaStavka s :
+//                    stavke) {
+//                ukupnaCijena += s.getUkupnaCijena();
+//            }
+//            narudzbe.add(new NarudzbaVM(UUID.randomUUID(), stavke, ukupnaCijena, MySession.getKorisnik()));
+//        }
+//        return narudzbe;
+//    }
 
     public static List<KorisnikVM> getKorisniciByIme(String query){
         List<KorisnikVM> var = new ArrayList<KorisnikVM>();
