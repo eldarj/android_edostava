@@ -12,9 +12,13 @@ import java.lang.reflect.Type;
 
 public class MyApiRequest {
 
+    // Content type
     public static String CONTENT_TYPE_JSON = "application/json";
+
+    // Endpoints
+    public static String ENDPOINT_LOCATIONS = "lokacije";
     public static String ENDPOINT_RESTORANI = "restorani";
-    public static String ENDPOINT_LOCATIONS = "locations";
+    public static String ENDPOINT_RESTORANI_HRANA = "restorani/%1$d/hrana";
     public static String ENDPOINT_USER_LOGIN_CHECK_AUTH = "auth";
     public static String ENDPOINT_USER_REGISTER_AUTH = "auth/register";
     public static String ENDPOINT_USER_UPDATE_AUTH = "auth/update";
