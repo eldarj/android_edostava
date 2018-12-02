@@ -52,12 +52,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Neki tekst..."/>
-            <TextView
-                android:id="@+id/textStavkaJelovnikSastojci"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:text="Datum"/>
         </LinearLayout>
         <TextView
             android:id="@+id/textStavkaJelovnikCijena"

@@ -73,105 +73,156 @@
     <android.support.v4.widget.NestedScrollView
         android:fillViewport="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_marginBottom="@dimen/bottomnav_height"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.design.card.MaterialCardView
+        <LinearLayout
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:id="@+id/cardDetaljnoContainer">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
+            <TextView
+                android:id="@+id/textDetaljnoRestoranNaziv"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:paddingTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Restoran naziv" />
+
+            <TextView
+                android:id="@+id/textDetaljnoRestoranLikes"
+                style="@style/TextAppearance.MaterialComponents.Caption"
+                android:paddingBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16 sviđanja" />
+
+
+            <android.support.design.chip.ChipGroup
+                android:layout_marginBottom="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/textDetaljnoRestoranNaziv"
-                    style="@style/TextAppearance.MaterialComponents.Headline6"
-                    android:paddingTop="16dp"
+                <android.support.design.chip.Chip
+                    android:text="Restoran"
+                    android:layout_marginRight="8dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Restoran naziv" />
+                    android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/textDetaljnoRestoranLikes"
-                    style="@style/TextAppearance.MaterialComponents.Caption"
-                    android:paddingBottom="16dp"
+                <android.support.design.chip.Chip
+                    android:text="Slastičarna"
+                    android:layout_marginRight="8dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="16 sviđanja" />
+                    android:layout_height="wrap_content" />
+
+            </android.support.design.chip.ChipGroup>
+
+            <TextView
+                android:id="@+id/textDetaljnoRestoranOpis"
+                android:paddingBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Restoran opis"/>
 
 
-                <android.support.design.chip.ChipGroup
-                    android:layout_marginBottom="16dp"
-                    android:layout_width="match_parent"
+            <View style="@style/Divider.Small"></View>
+
+            <TextView
+                android:text="Kontakt"
+                android:textColor="@color/colorSecondaryLight"
+                android:textSize="17dp"
+                android:textAllCaps="true"
+                android:paddingBottom="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content">
 
-                    <android.support.design.chip.Chip
-                        android:text="Restoran"
-                        android:layout_marginRight="8dp"
+                    <TextView
+                        android:id="@+id/textDetaljnoRestoranAdresa"
+                        android:paddingBottom="4dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <android.support.design.chip.Chip
-                        android:text="Slastičarna"
-                        android:layout_marginRight="8dp"
+                        android:layout_height="wrap_content"
+                        android:text="Maršala Tita 16"/>
+                    <TextView
+                        android:id="@+id/textDetaljnoRestoranLokacija"
+                        android:paddingBottom="4dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="Zalik, Mostar"/>
+                    <TextView
+                        android:id="@+id/textDetaljnoRestoranTelefon"
+                        android:paddingBottom="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tel. +387 62 005 152"/>
 
-                </android.support.design.chip.ChipGroup>
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textDetaljnoRestoranOpis"
-                    android:paddingBottom="16dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Restoran opis"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
 
+                    <TextView
+                        android:id="@+id/textDetaljnoRestoranWebUrl"
+                        android:paddingBottom="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Web www.petica.com"/>
+                    <TextView
+                        android:id="@+id/textDetaljnoRestoranEmail"
+                        android:paddingBottom="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email info@petica.com"/>
 
-                <View style="@style/Divider.Small"></View>
-                <TextView
-                    android:text="Kontakt"
-                    android:textColor="@color/colorSecondaryLight"
-                    android:textSize="17dp"
-                    android:textAllCaps="true"
-                    android:paddingBottom="8dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:paddingBottom="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Maršala Tita 16., Tuzla"/>
-                <TextView
-                    android:paddingBottom="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tel. +387 62 005 152"/>
-
-                <TextView
-                    android:paddingBottom="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Web www.petica.com"/>
-                <TextView
-                    android:paddingBottom="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Email info@petica.com"/>
-
+                </LinearLayout>
 
             </LinearLayout>
 
-        </android.support.design.card.MaterialCardView>
+            <View style="@style/Divider.Small"></View>
 
+            <TextView
+                android:text="Vlasnik"
+                android:textColor="@color/colorSecondaryLight"
+                android:textSize="17dp"
+                android:textAllCaps="true"
+                android:paddingBottom="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textDetaljnoRestoranVlasnikImePrezime"
+                        android:paddingBottom="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Maršala Tita 16"/>
+                    <TextView
+                        android:id="@+id/textDetaljnoRestoranVlasnikEmail"
+                        android:paddingBottom="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Zalik, Mostar"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-
-
-
 </android.support.design.widget.CoordinatorLayout>

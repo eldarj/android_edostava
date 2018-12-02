@@ -27,6 +27,7 @@ import com.eldar.fit.seminarski.data.RestoranVM;
 import com.eldar.fit.seminarski.helper.MyAbstractRunnable;
 import com.eldar.fit.seminarski.helper.MyApiRequest;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
+import com.eldar.fit.seminarski.helper.RestoranInfo;
 
 import static com.eldar.fit.seminarski.RestoranDetaljnoActivity.DETAIL_VIEW_RESTORAN;
 import static com.eldar.fit.seminarski.helper.MyApiRequest.ENDPOINT_RESTORANI;
@@ -69,15 +70,15 @@ public class RestoranListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("Test", "CARD CLICKED");
-//    CHECK!            RestoranVM restoran = apiRestorani.restorani.get(position);
-//                do_transitionCardView(view, restoran);
+                RestoranInfo restoran = apiRestorani.restorani.get(position);
+                do_transitionCardView(view, restoran);
             }
         });
 
         return view;
     }
 
-    private void do_transitionCardView(View view, RestoranVM restoran) {
+    private void do_transitionCardView(View view, RestoranInfo restoran) {
         Intent intent = new Intent(getActivity(), RestoranDetaljnoActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(DETAIL_VIEW_RESTORAN, restoran);
@@ -86,7 +87,12 @@ public class RestoranListFragment extends Fragment {
         ActivityOptionsCompat options = ActivityOptionsCompat
                 .makeSceneTransitionAnimation(getActivity(), view, getString(R.string.transition_restoran_card));
 
-        startActivity(intent, options.toBundle());
+        try {
+            startActivity(intent, options.toBundle());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.i("Test", "error " + e.getMessage());
+        }
     }
 
     private void popuniPodatke(RestoranPrikazVM model) {
@@ -117,6 +123,7 @@ public class RestoranListFragment extends Fragment {
                 TextView restoranNaziv = view.findViewById(R.id.textStavkaRestoranNaziv);
                 TextView restoranOpis = view.findViewById(R.id.textStavkaRestoranOpis);
                 TextView restoranLikesCount = view.findViewById(R.id.textStavkaRestoranLikes);
+                TextView textStavkaRestoranLokacija = view.findViewById(R.id.textStavkaRestoranLokacija);
                 ImageView restoranSlikaView = view.findViewById(R.id.imageStavkaRestoranSlika);
 
                 MaterialButton btnDetaljno = view.findViewById(R.id.btnStavkaRestoranDetaljno);
@@ -146,6 +153,8 @@ public class RestoranListFragment extends Fragment {
                 restoranOpis.setText(opis);
 
                 restoranLikesCount.setText(apiRestorani.restorani.get(position).getLikesCount() + " sviđanja");
+
+                textStavkaRestoranLokacija.setText(apiRestorani.restorani.get(position).getLokacija());
 
                 if (apiRestorani.restorani.get(position).getSlika() != null) {
                     Log.i("Test", "SLIKA " + apiRestorani.restorani.get(position).getSlika());

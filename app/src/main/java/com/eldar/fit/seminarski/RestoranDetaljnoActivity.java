@@ -13,6 +13,7 @@ import com.eldar.fit.seminarski.fragments.KorpaFragment;
 import com.eldar.fit.seminarski.fragments.RestoranJelovnikFragment;
 import com.eldar.fit.seminarski.fragments.RestoranInfoFragment;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
+import com.eldar.fit.seminarski.helper.RestoranInfo;
 
 public class RestoranDetaljnoActivity extends AppCompatActivity {
 
@@ -21,7 +22,7 @@ public class RestoranDetaljnoActivity extends AppCompatActivity {
 
     private Animation anim;
     private MaterialCardView card;
-    private RestoranVM restoran;
+    private RestoranInfo restoran;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class RestoranDetaljnoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_restoran_detaljno);
 
         Bundle args = getIntent().getExtras();
-        restoran = (RestoranVM) args.getSerializable(DETAIL_VIEW_RESTORAN);
+        restoran = (RestoranInfo) args.getSerializable(DETAIL_VIEW_RESTORAN);
 
         MyFragmentHelper.fragmentCreate(this,
                 R.id.fragmentContainer,
@@ -46,7 +47,7 @@ public class RestoranDetaljnoActivity extends AppCompatActivity {
                     case R.id.nav_bottom_restoran_jelovnik:
                         MyFragmentHelper.fragmentCreate(RestoranDetaljnoActivity.this,
                                 R.id.fragmentContainer,
-                                RestoranJelovnikFragment.newInstance());
+                                RestoranJelovnikFragment.newInstance(restoran));
                         break;
                     case R.id.nav_bottom_restoran_vise:
                         MyFragmentHelper.fragmentCreate(RestoranDetaljnoActivity.this,
