@@ -42,8 +42,6 @@ public class MyUrlConnection {
             urlConnection.setRequestProperty("User-Agent", "Mozilla/5.0");
             urlConnection.setRequestMethod(httpMethod.toString());
 
-            Log.i("Test", "TRY URL: " + urlString);
-            Log.i("Test", "TRY URL: STATUS CODE " + urlConnection.getResponseCode());
 
             if (postData != null) {
                 Log.i("Test", "postData" + postData);
