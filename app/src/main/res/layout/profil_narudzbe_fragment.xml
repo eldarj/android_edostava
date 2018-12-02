@@ -33,7 +33,7 @@
                         android:id="@+id/btnNarudzbeClose"
                         android:tint="@color/colorWhite"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:src="@drawable/ic_chevron_left"
+                        android:src="@drawable/ic_close"
                         android:layout_width="?attr/actionBarSize"
                         android:layout_height="match_parent" />
                     <TextView
@@ -57,25 +57,42 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <RelativeLayout
             android:orientation="vertical"
+            android:fillViewport="true"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <SearchView
-                android:id="@+id/searchViewNarudzbe"
-                android:layout_width="match_parent"
-                android:inputType="textNoSuggestions|textVisiblePassword"
-                android:layout_height="wrap_content">
-            </SearchView>
+        <ProgressBar
+            android:id="@+id/progressBar_narudzbaList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp"
+            android:minWidth="50dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
 
-            <ListView
-                android:id="@+id/listViewNarudzbe"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            </ListView>
 
-        </LinearLayout>
+                <SearchView
+                    android:id="@+id/searchViewNarudzbe"
+                    android:layout_width="match_parent"
+                    android:inputType="textNoSuggestions|textVisiblePassword"
+                    android:layout_height="wrap_content">
+                </SearchView>
+
+                <ListView
+                    android:id="@+id/listViewNarudzbe"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </ListView>
+
+            </LinearLayout>
+        </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>
 

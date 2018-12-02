@@ -1,65 +1,62 @@
 package com.eldar.fit.seminarski.data;
 
-import com.eldar.fit.seminarski.helper.RestoranInfo;
+import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class NarudzbaVM {
+public class NarudzbaVM implements Serializable {
 
+    @SerializedName(value = "uId", alternate = { "uid", "guidSifra", "GuidSifra", "guidsifra"})
     private UUID uId;
-    public List<KorpaHranaStavka> hranaStavke;
-    private int hranaStavkeSize;
-    public double ukupnaCijena;
-    public Date datumNapravljena;
-    public KorisnikVM korisnik;
 
-    public NarudzbaVM(UUID uId, List<KorpaHranaStavka> hranaStavke, double ukupnaCijena, KorisnikVM korisnik) {
-        this.uId = uId;
-        this.hranaStavke = hranaStavke;
-        this.ukupnaCijena = ukupnaCijena;
-        this.korisnik = korisnik;
-        this.hranaStavkeSize = hranaStavke.size();
-        this.datumNapravljena = new Date();
-    }
+    @SerializedName(value = "datumKreiranja", alternate = { "DatumKreiranja", "datumkreiranja" })
+    public Date datumKreiranja;
+
+    @SerializedName(value = "ukupnacijena", alternate = { "UkupnaCijena", "ukupnacijena" })
+    public double ukupnaCijena;
+
+    @SerializedName(value = "status", alternate = { "Status" })
+    public String status;
+
+    @SerializedName(value = "narudzbaStavke", alternate = { "HranaStavke", "hranastavke" })
+    public List<NarudzbaStavkaVM> narudzbaStavke;
+
+    @SerializedName(value = "narucenoIzRestorana", alternate = { "NarucenoIzRestorana", "narucenoizrestorana" })
+    public List<String> narucenoIzRestorana;
 
     public UUID getuId() {
         return uId;
     }
 
-    public List<KorpaHranaStavka> getHranaStavke() {
-        return hranaStavke;
+    public Date getDatumNapravljena() {
+        return datumKreiranja;
     }
 
-    public int getHranaStavkeSize() {
-        return hranaStavke.size();
+    public String getDatumNapravljenaString() {
+        return new SimpleDateFormat("dd.MM.yyyy").format(datumKreiranja);
     }
 
     public double getUkupnaCijena() {
         return ukupnaCijena;
     }
 
-    public Date getDatumNapravljena() {
-        return datumNapravljena;
+    public String getStatus() {
+        return status;
     }
 
-    public String getDatumNapravljenaString() {
-        return new SimpleDateFormat("dd.MM.yyyy").format(getDatumNapravljena());
+    public List<NarudzbaStavkaVM> getNarudzbaStavke() {
+        return narudzbaStavke;
     }
 
-    public KorisnikVM getKorisnik() {
-        return korisnik;
+    public int getNarudzbaStavkeSize() {
+        return narudzbaStavke.size();
     }
 
-    public List<RestoranInfo> getRestorani() {
-        List<RestoranInfo> restorani = new ArrayList<RestoranInfo>();
-        for (KorpaHranaStavka stavka:
-             hranaStavke) {
-            restorani.add(stavka.getHranaItemVM().getRestoran());
-        }
-        return restorani;
+    public List<String> getNarucenoIzRestorana() {
+        return narucenoIzRestorana;
     }
 }

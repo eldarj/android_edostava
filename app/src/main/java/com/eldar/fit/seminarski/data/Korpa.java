@@ -28,7 +28,7 @@ public class Korpa implements Serializable {
     }
 
     public static void kreirajNarudzbu(Korpa korpa) {
-//        NarudzbaVM nova = new NarudzbaVM(korpa.getuId(), korpa.getHranaStavke(), korpa.getUkupnaCijena(), MySession.getKorisnik());
+//        NarudzbaVM nova = new NarudzbaVM(korpa.getuId(), korpa.getNarudzbaStavke(), korpa.getUkupnaCijena(), MySession.getKorisnik());
 //        Storage.getNarudzbe().add(nova);
     }
 

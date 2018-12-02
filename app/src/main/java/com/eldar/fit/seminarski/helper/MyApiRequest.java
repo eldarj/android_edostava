@@ -18,6 +18,8 @@ public class MyApiRequest {
     // Endpoints
     public static String ENDPOINT_LOCATIONS = "lokacije";
     public static String ENDPOINT_RESTORANI = "restorani";
+    public static String ENDPOINT_NARUDZBE = "narudzbe";
+
     public static String ENDPOINT_RESTORANI_HRANA = "restorani/%1$d/hrana";
     public static String ENDPOINT_USER_LOGIN_CHECK_AUTH = "auth";
     public static String ENDPOINT_USER_REGISTER_AUTH = "auth/register";
@@ -34,6 +36,11 @@ public class MyApiRequest {
                 Log.i("Test", "doInBackground");
                 try {Thread.sleep(1000);} catch (Exception e ) {}
                 String jsonPostObject = postObject == null ? null : MyGson.build().toJson(postObject);
+
+                if (endpoint == "test") {
+                    return MyUrlConnection.request("https://jsonplaceholder.typicode.com/todos/1", httpMethod, jsonPostObject, CONTENT_TYPE_JSON);
+                }
+
                 MyApiResult result = MyUrlConnection.request(MyConfig.apiBase + "/" + endpoint, httpMethod, jsonPostObject, CONTENT_TYPE_JSON);
                 return result;
             }

@@ -17,6 +17,7 @@ import com.eldar.fit.seminarski.helper.MyApiRequest;
 import com.eldar.fit.seminarski.helper.MySession;
 import com.eldar.fit.seminarski.helper.MyUtils;
 
+import static com.eldar.fit.seminarski.helper.MyApiRequest.ENDPOINT_RESTORANI;
 import static com.eldar.fit.seminarski.helper.MyApiRequest.ENDPOINT_USER_LOGIN_CHECK_AUTH;
 
 public class LoginActivity extends AppCompatActivity {
@@ -59,6 +60,19 @@ public class LoginActivity extends AppCompatActivity {
             && savedInstanceState.containsKey(BUNDLE_KEY_USERNAME)) {
             inputPassword.setText(BUNDLE_KEY_PASSWORD);
         }
+
+        MyApiRequest.get(this, ENDPOINT_RESTORANI, new MyAbstractRunnable<String>() {
+            @Override
+            public void run(String o) {
+                Log.i("Test", "TRY THIS:" + o);
+            }
+
+            @Override
+            public void error(@Nullable Integer statusCode, @Nullable String errorMessage) {
+                Log.i("Test", "TRY THIS: " + statusCode + errorMessage);
+            }
+        });
+
     }
 
     @Override

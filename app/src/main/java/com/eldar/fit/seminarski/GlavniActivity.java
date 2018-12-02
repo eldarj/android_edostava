@@ -137,6 +137,7 @@ public class GlavniActivity extends AppCompatActivity
 //            MyFragmentHelper.dodajDialog(this, "testTag", dlg);
         } else if (id == R.id.nav_logout) {
             MySession.setKorisnik(null);
+            MySession.setKorpa(null);
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }

@@ -25,16 +25,16 @@ public class KorpaStavkaDialogFragment extends DialogFragment {
             textStavkaKorpaDialogNaziv,
             textStavkaKorpaDialogOpis,
             textStavkaKorpaDialogCijena,
-            textStavkaKorpaDialogKolicina;
-
+            textStavkaKorpaDialogKolicina,
+            textStavkaKorpaDialogRestoran;
     private Button btnStavkaKorpaDialogUkloni;
     private ImageButton btnStavkaKorpaDialogNazad;
     private ImageView imageStavkaKorpaDialog;
-    private TextView textStavkaKorpaDialogSastojci;
 
     public static KorpaStavkaDialogFragment newInstance(KorpaHranaStavka obj) {
         Bundle args = new Bundle();
         args.putSerializable(BUNDLE_KORPA_STAVKA, obj);
+
         KorpaStavkaDialogFragment fragment = new KorpaStavkaDialogFragment();
         fragment.setArguments(args);
 
@@ -67,20 +67,8 @@ public class KorpaStavkaDialogFragment extends DialogFragment {
         textStavkaKorpaDialogKolicina = view.findViewById(R.id.textStavkaKorpaDialogKolicina);
         textStavkaKorpaDialogKolicina.setText("Kolicina x" + Integer.toString(stavka.getKolicina()));
 
-        textStavkaKorpaDialogSastojci = view.findViewById(R.id.textStavkaKorpaDialogSastojci);
-
-        String sastojci = "Sastojci: ";
-        if (stavka.getHranaItemVM().getSastojci() != null) {
-            for (int i = 0; i < stavka.getHranaItemVM().getSastojci().size(); i++) {
-                sastojci += "\n - " + stavka.getHranaItemVM().getSastojci().get(i);
-                if (i != stavka.getHranaItemVM().getSastojci().size() - 1) {
-                    sastojci += ", ";
-                }
-            }
-        } else {
-            sastojci += "-";
-        }
-        textStavkaKorpaDialogSastojci.setText(sastojci);
+        textStavkaKorpaDialogRestoran = view.findViewById(R.id.textStavkaKorpaDialogRestoran);
+        textStavkaKorpaDialogRestoran.setText("Iz restorana " + stavka.getHranaItemVM().getRestoranNaziv());
 
         textStavkaKorpaDialogOpis = view.findViewById(R.id.textStavkaKorpaDialogOpis);
         textStavkaKorpaDialogOpis.setText(stavka.getHranaItemVM().getOpis());

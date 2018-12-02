@@ -26,7 +26,11 @@ public class HranaItemVM implements Serializable {
     @SerializedName(value = "tipKuhinje", alternate = { "TipKuhinje", "tipkuhinje" })
     private TipKuhinje TipKuhinje;
 
-    private RestoranInfo restoran;
+    @SerializedName(value = "restoranNaziv", alternate = { "RestoranNaziv", "restorannaziv" })
+    private String restoranNaziv;
+
+    @SerializedName(value = "restoranId", alternate = { "RestoranID", "RestoranId", "restoranID", "restoranid" })
+    private int restoranId;
 
     @SerializedName(value = "cijena", alternate = { "Cijena" })
     private double cijena;
@@ -34,24 +38,22 @@ public class HranaItemVM implements Serializable {
     @SerializedName(value = "imageUrl", alternate = { "ImageUrl" })
     private String imageUrl;
 
-    public HranaItemVM(String naziv, String opis, List<String> sastojci, List<HranaKategorijaVM> kategorije, RestoranInfo restoran, double cijena) {
+    public HranaItemVM(String naziv, String opis, List<String> sastojci, List<HranaKategorijaVM> kategorije, double cijena) {
         this.id = hranaItemIdCounter++;
         this.naziv = naziv;
         this.opis = opis;
         this.sastojci = sastojci == null ? new ArrayList<String>() : sastojci;
         this.kategorije = kategorije;
-        this.restoran = restoran;
         this.cijena = cijena;
         this.imageUrl = imageUrl;
     }
 
-    public HranaItemVM(String naziv, String opis, List<String> sastojci, List<HranaKategorijaVM> kategorije, RestoranInfo restoran, String imageUrl, double cijena) {
+    public HranaItemVM(String naziv, String opis, List<String> sastojci, List<HranaKategorijaVM> kategorije, String imageUrl, double cijena) {
         this.id = hranaItemIdCounter++;
         this.naziv = naziv;
         this.opis = opis;
         this.sastojci = sastojci;
         this.kategorije = kategorije;
-        this.restoran = restoran;
         this.cijena = cijena;
         this.imageUrl = imageUrl;
     }
@@ -92,12 +94,12 @@ public class HranaItemVM implements Serializable {
         this.kategorije = kategorije;
     }
 
-    public RestoranInfo getRestoran() {
-        return restoran;
+    public String getRestoranNaziv() {
+        return restoranNaziv;
     }
 
-    public void setRestoran(RestoranInfo restoran) {
-        this.restoran = restoran;
+    public int getRestoranId() {
+        return restoranId;
     }
 
     public String getImageUrl() {

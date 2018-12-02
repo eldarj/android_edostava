@@ -112,7 +112,6 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
         if (listStavkeAdapter != null ) {
             listStavkeAdapter.notifyDataSetChanged();
         }
-
         if (MySession.getKorpa() == null) {
             MySession.setKorpa(new Korpa());
         }
@@ -120,7 +119,6 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
     }
 
     private void listKorpaStavkePopuni() {
-        // podaci -> korpa.getHranaStavke()
         listStavkeAdapter = new BaseAdapter() {
             @Override
             public int getCount() {
@@ -147,7 +145,7 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
                 KorpaHranaStavka stavka = korpa.getHranaStavke().get(position);
 
                 TextView textStavkaKorpaSuper = view.findViewById(R.id.textStavkaKorpaSuper);
-                textStavkaKorpaSuper.setText("Restoran " + stavka.getHranaItemVM().getRestoran().getNaziv());
+                textStavkaKorpaSuper.setText("Restoran " + stavka.getHranaItemVM().getRestoranNaziv());
 
                 TextView textStavkaKorpaNaziv = view.findViewById(R.id.textStavkaKorpaNaziv);
                 textStavkaKorpaNaziv.setText("x" + stavka.getKolicina() + " " + stavka.getHranaItemVM().getNaziv());
