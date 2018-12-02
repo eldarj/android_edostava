@@ -42,6 +42,8 @@ public class RestoranVM implements Serializable {
 
     private @Nullable List<KorisnikVM> korisniciLikes;
 
+    public RestoranVM () {}
+
     public RestoranVM(@Nullable String mainImageUrl,
                       @Nullable List<String> imageUrls,
                       String naziv,

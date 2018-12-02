@@ -1,5 +1,7 @@
 package com.eldar.fit.seminarski.data;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,20 +9,28 @@ import java.util.List;
 public class HranaItemVM implements Serializable {
     private static int hranaItemIdCounter = 0;
 
+    @SerializedName(value = "id", alternate = { "Id", "ID" })
     private int id;
 
+    @SerializedName(value = "naziv", alternate = { "Naziv" })
     private String naziv;
 
+    @SerializedName(value = "opis", alternate = { "Opis" })
     private String opis;
 
     private List<String> sastojci;
 
     private List<HranaKategorijaVM> kategorije;
 
+    @SerializedName(value = "tipKuhinje", alternate = { "TipKuhinje", "tipkuhinje" })
+    private TipKuhinje TipKuhinje;
+
     private RestoranVM restoran;
 
+    @SerializedName(value = "cijena", alternate = { "Cijena" })
     private double cijena;
 
+    @SerializedName(value = "imageUrl", alternate = { "ImageUrl" })
     private String imageUrl;
 
     public HranaItemVM(String naziv, String opis, List<String> sastojci, List<HranaKategorijaVM> kategorije, RestoranVM restoran, double cijena) {
@@ -90,7 +100,7 @@ public class HranaItemVM implements Serializable {
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return "http://" + imageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
