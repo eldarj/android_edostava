@@ -9,17 +9,22 @@
             android:icon="@drawable/ic_restaurant"
             android:title="Restorani" />
         <item
+            android:id="@+id/nav_omiljeni"
+            android:icon="@drawable/ic_heart"
+            android:iconTint="@color/colorBackgroundDark"
+            android:title="Omiljeni restorani" />
+        <item
             android:id="@+id/nav_korpa"
             android:icon="@drawable/ic_korpa"
-            android:title="Moja korpa" />
-        <item
-            android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_user_filled"
-            android:title="Moj profil" />
+            android:title="Korpa" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Račun">
         <menu>
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/ic_user_filled"
+                android:title="Moj profil" />
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_chevron_left"

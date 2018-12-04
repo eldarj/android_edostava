@@ -87,7 +87,7 @@
 
     <style name="AlertDialogsTheme.Components.Button" parent="@style/Widget.MaterialComponents.Button.TextButton">
         <item name="android:layout_marginTop">12dp</item>
-        <item name="android:layout_marginBottom">12dp</item>
+        <item name="android:layout_marginBottom">6dp</item>
     </style>
 
     <style name="AlertDialogsTheme.Components.TextInputLayout" parent="Widget.Design.TextInputLayout">
@@ -169,7 +169,6 @@
 
     <style name="AppTheme.CardIconButton">
         <item name="android:backgroundTint">@android:color/transparent</item>
-        <item name="android:tint">@color/colorTypographySemiDark</item>
     </style>
 
     <style name="AppTheme.Fab" parent="Widget.Design.FloatingActionButton">
