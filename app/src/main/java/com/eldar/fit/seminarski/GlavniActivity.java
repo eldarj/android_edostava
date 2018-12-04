@@ -3,22 +3,30 @@ package com.eldar.fit.seminarski;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
-import com.eldar.fit.seminarski.data.KorisnikVM;
+import com.eldar.fit.seminarski.data.AuthLogin;
+import com.eldar.fit.seminarski.data.api.request.models.NewNarudzbaRequest;
 import com.eldar.fit.seminarski.fragments.KorpaFragment;
+import com.eldar.fit.seminarski.fragments.ProfilNarudzbeFragment;
 import com.eldar.fit.seminarski.fragments.RestoranListFragment;
+import com.eldar.fit.seminarski.helper.MyAbstractRunnable;
+import com.eldar.fit.seminarski.helper.MyApiRequest;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
 import com.eldar.fit.seminarski.helper.MySession;
+import com.eldar.fit.seminarski.helper.MyUrlConnection;
 
 public class GlavniActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -47,14 +55,25 @@ public class GlavniActivity extends AppCompatActivity
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch(menuItem.getItemId()) {
                     case R.id.bottommain_restorani:
-                        MyFragmentHelper.fragmentCreate(GlavniActivity.this,
+                        MyFragmentHelper.fragmentReplace(GlavniActivity.this,
                                 R.id.fragmentContainer,
-                                RestoranListFragment.newInstance());
+                                RestoranListFragment.newInstance(false),
+                                RestoranListFragment.Tag,
+                                false);
+                        break;
+                    case R.id.bottommain_omiljeni_restorani:
+                        MyFragmentHelper.fragmentReplace(GlavniActivity.this,
+                                R.id.fragmentContainer,
+                                RestoranListFragment.newInstance(true),
+                                RestoranListFragment.Tag,
+                                false);
                         break;
                     case R.id.bottommain_korpa:
-                        MyFragmentHelper.fragmentCreate(GlavniActivity.this,
+                        MyFragmentHelper.fragmentReplace(GlavniActivity.this,
                                 R.id.fragmentContainer,
-                                KorpaFragment.newInstance());
+                                KorpaFragment.newInstance(false),
+                                KorpaFragment.Tag,
+                                false);
                         break;
                     default:
                         return false;
@@ -68,7 +87,11 @@ public class GlavniActivity extends AppCompatActivity
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         setupMainNavigation();
 
-        MyFragmentHelper.fragmentCreate(this, R.id.fragmentContainer,  RestoranListFragment.newInstance());
+        MyFragmentHelper.fragmentReplace(this,
+                R.id.fragmentContainer,
+                RestoranListFragment.newInstance(false),
+                RestoranListFragment.Tag,
+                false);
     }
 
 
@@ -101,9 +124,23 @@ public class GlavniActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_restorani) {
-            MyFragmentHelper.fragmentCreate(this, R.id.fragmentContainer,  RestoranListFragment.newInstance());
+            MyFragmentHelper.fragmentReplace(this,
+                    R.id.fragmentContainer,
+                    RestoranListFragment.newInstance(false),
+                    RestoranListFragment.Tag,
+                    false);
+        } else if (id == R.id.nav_omiljeni) {
+            MyFragmentHelper.fragmentReplace(this,
+                    R.id.fragmentContainer,
+                    RestoranListFragment.newInstance(true),
+                    RestoranListFragment.Tag,
+                    false);
         } else if (id == R.id.nav_korpa) {
-            MyFragmentHelper.fragmentCreate(this, R.id.fragmentContainer, KorpaFragment.newInstance());
+            MyFragmentHelper.fragmentReplace(this,
+                    R.id.fragmentContainer,
+                    KorpaFragment.newInstance(false),
+                    KorpaFragment.Tag,
+                    false);
         } else if (id == R.id.nav_profile) {
             startActivity(new Intent(this, ProfilActivity.class));
         } else if (id == R.id.nav_logout) {

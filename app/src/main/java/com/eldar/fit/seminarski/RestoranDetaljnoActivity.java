@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.animation.Animation;
 
-import com.eldar.fit.seminarski.data.RestoranVM;
 import com.eldar.fit.seminarski.fragments.KorpaFragment;
 import com.eldar.fit.seminarski.fragments.RestoranJelovnikFragment;
 import com.eldar.fit.seminarski.fragments.RestoranInfoFragment;
@@ -18,6 +17,11 @@ import com.eldar.fit.seminarski.helper.RestoranInfo;
 public class RestoranDetaljnoActivity extends AppCompatActivity {
 
     public static String DETAIL_VIEW_RESTORAN = "detailViewRestoran";
+
+    public static String DETAIL_VIEW_GOTO_INFO = "gotoDetaljnoRestoranInfo";
+    public static String DETAIL_VIEW_GOTO_JELOVNIK = "gotoDetaljnoRestoranJelovnik";
+    public static String DETAIL_VIEW_RESTORAN_FRAGMENT_FLAG = "detailviewRestoranFragment";
+
     BottomNavigationView bottomnavigationRestoranDetaljno;
 
     private Animation anim;
@@ -32,9 +36,20 @@ public class RestoranDetaljnoActivity extends AppCompatActivity {
         Bundle args = getIntent().getExtras();
         restoran = (RestoranInfo) args.getSerializable(DETAIL_VIEW_RESTORAN);
 
-        MyFragmentHelper.fragmentCreate(this,
-                R.id.fragmentContainer,
-                RestoranInfoFragment.newInstance(restoran));
+        if (args.getString(DETAIL_VIEW_RESTORAN_FRAGMENT_FLAG).equals(DETAIL_VIEW_GOTO_JELOVNIK)) {
+            MyFragmentHelper.fragmentReplace(this,
+                    R.id.fragmentContainer,
+                    RestoranJelovnikFragment.newInstance(restoran),
+                    RestoranInfoFragment.Tag,
+                    false);
+        } else {
+            MyFragmentHelper.fragmentReplace(this,
+                    R.id.fragmentContainer,
+                    RestoranInfoFragment.newInstance(restoran),
+                    RestoranInfoFragment.Tag,
+                    false);
+        }
+
 
         bottomnavigationRestoranDetaljno = findViewById(R.id.bottomnavigationRestoranDetaljno);
         bottomnavigationRestoranDetaljno.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -45,19 +60,25 @@ public class RestoranDetaljnoActivity extends AppCompatActivity {
 
                 switch(kliknutiTabId) {
                     case R.id.nav_bottom_restoran_jelovnik:
-                        MyFragmentHelper.fragmentCreate(RestoranDetaljnoActivity.this,
+                        MyFragmentHelper.fragmentReplace(RestoranDetaljnoActivity.this,
                                 R.id.fragmentContainer,
-                                RestoranJelovnikFragment.newInstance(restoran));
+                                RestoranJelovnikFragment.newInstance(restoran),
+                                RestoranJelovnikFragment.Tag,
+                                true);
                         break;
                     case R.id.nav_bottom_restoran_vise:
-                        MyFragmentHelper.fragmentCreate(RestoranDetaljnoActivity.this,
+                        MyFragmentHelper.fragmentReplace(RestoranDetaljnoActivity.this,
                                 R.id.fragmentContainer,
-                                RestoranInfoFragment.newInstance(restoran));
+                                RestoranInfoFragment.newInstance(restoran),
+                                RestoranInfoFragment.Tag,
+                                true);
                         break;
                     case R.id.nav_bottom_restoran_korpa:
-                        MyFragmentHelper.fragmentCreate(RestoranDetaljnoActivity.this,
+                        MyFragmentHelper.fragmentReplace(RestoranDetaljnoActivity.this,
                                 R.id.fragmentContainer,
-                                KorpaFragment.newInstance());
+                                KorpaFragment.newInstance(true),
+                                KorpaFragment.Tag,
+                                true);
                         break;
                     default:
                         return false;
