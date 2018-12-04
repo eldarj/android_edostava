@@ -7,6 +7,7 @@
     android:transitionName="@string/transition_restoran_card">
 
     <android.support.design.card.MaterialCardView
+        android:id="@+id/cardStavkaRestoran"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -49,7 +50,7 @@
             <TextView
                 style="@style/TextAppearance.MaterialComponents.Caption"
                 android:paddingLeft="16dp"
-                android:id="@+id/textStavkaRestoranLikes"
+                android:id="@+id/textStavkaRestoranStats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="16 sviđanja"
@@ -81,20 +82,27 @@
                 android:paddingRight="16dp"
                 android:layout_height="wrap_content">
                 <android.support.design.button.MaterialButton
-                    android:id="@+id/btnStavkaRestoranDetaljno"
+                    android:id="@+id/btnStavkaRestoranJelovnik"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Jelovnik"
                     />
-                <ImageButton
-                    android:id="@+id/btnStavkaRestoranLike"
-                    style="@style/AppTheme.CardIconButton"
+                <RelativeLayout
                     android:layout_alignParentEnd="true"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_heart"
-                    />
+                    android:layout_height="wrap_content">
+                    <ProgressBar
+                        android:id="@+id/progressBar_restoranLike"
+                        style="@style/AppTheme.ProgressBar.Small"
+                        android:visibility="invisible" />
+                    <ImageButton
+                        android:id="@+id/btnStavkaRestoranLike"
+                        style="@style/AppTheme.CardIconButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_heart"/>
+                </RelativeLayout>
             </RelativeLayout>
 
 

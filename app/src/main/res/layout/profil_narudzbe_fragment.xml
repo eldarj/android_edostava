@@ -51,27 +51,27 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
-        android:fillViewport="true"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
         <RelativeLayout
-            android:orientation="vertical"
-            android:fillViewport="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <ProgressBar
-            android:id="@+id/progressBar_narudzbaList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="50dp"
-            android:minWidth="50dp"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            <ProgressBar
+                android:id="@+id/progressBar_narudzbaList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="50dp"
+                android:elevation="99dp"
+                android:minWidth="50dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+            <TextView
+                android:id="@+id/profilnarudzbeNoData"
+                android:text="Nemate narudžbi"
+                android:gravity="center"
+                android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <LinearLayout
                 android:orientation="vertical"
@@ -81,19 +81,24 @@
                 <SearchView
                     android:id="@+id/searchViewNarudzbe"
                     android:layout_width="match_parent"
+                    android:queryHint="Šifra, Status, Restoran, Datum kreiranja..."
+                    android:layout_height="wrap_content"
+                    android:queryBackground="@color/Transparent"
                     android:inputType="textNoSuggestions|textVisiblePassword"
-                    android:layout_height="wrap_content">
+                    android:iconifiedByDefault="false">
                 </SearchView>
+
+                <View style="@style/Divider.Xsmall"></View>
 
                 <ListView
                     android:id="@+id/listViewNarudzbe"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_weight="1"
+                    android:layout_height="0dp">
                 </ListView>
 
             </LinearLayout>
-        </RelativeLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+        </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

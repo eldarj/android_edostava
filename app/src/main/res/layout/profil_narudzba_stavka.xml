@@ -5,67 +5,80 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp">
 
+        <TextView
+            android:text="UUID Šifra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"/>
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="UUID Šifra"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"/>
-            <TextView
                 android:id="@+id/textStavkaNarudzbaSifra"
-                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="746e26b8-e464-46b8-881b-ff1d3ac242f4"
                 style="@style/TextAppearance.MaterialComponents.Subtitle1" />
             <TextView
-                android:id="@+id/textStavkaNarudzbaDatum"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/textStavkaNarudzbaRestorani"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:text="Naručeno iz restorana"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/AlertDialogsTheme.Components.Caption"
-                android:layout_marginBottom="8dp"/>
-            <android.support.design.chip.ChipGroup
-                android:id="@+id/chipgroupStavkaNarudzbaRestorani"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp">
-            </android.support.design.chip.ChipGroup>
-            <TextView
-                android:text="Sve stavke"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/AlertDialogsTheme.Components.Caption"
-                android:layout_marginBottom="8dp"/>
-            <android.support.design.chip.ChipGroup
-                android:id="@+id/chipgroupStavkaNarudzbaHrana"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </android.support.design.chip.ChipGroup>
+                android:id="@+id/textStavkaNarudzbaCijena"
+                android:layout_marginLeft="8dp"
+                android:gravity="top|right"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="24.50 KM"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1" />
 
         </LinearLayout>
         <TextView
-            android:id="@+id/textStavkaNarudzbaCijena"
-            android:layout_marginLeft="8dp"
-            android:gravity="top"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1" />
+            android:id="@+id/textStavkaNarudzbaDatum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="Status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            style="@style/AlertDialogsTheme.Components.Caption"/>
+        <TextView
+            android:id="@+id/textStavkaNarudzbaStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+        <TextView
+            android:text="Naručeno iz restorana"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            style="@style/AlertDialogsTheme.Components.Caption"
+            android:layout_marginBottom="8dp"/>
+        <android.support.design.chip.ChipGroup
+            android:id="@+id/chipgroupStavkaNarudzbaRestorani"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
+        </android.support.design.chip.ChipGroup>
+        <TextView
+            android:text="Naručeno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            style="@style/AlertDialogsTheme.Components.Caption"
+            android:layout_marginBottom="8dp"/>
+        <android.support.design.chip.ChipGroup
+            android:id="@+id/chipgroupStavkaNarudzbaHrana"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.design.chip.ChipGroup>
+
     </LinearLayout>
 
 </RelativeLayout>

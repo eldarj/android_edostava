@@ -20,17 +20,19 @@
                 android:orientation="vertical"
                 android:gravity="center_vertical"
                 android:layout_height="match_parent"
+                android:clickable="false"
+                android:focusable="false"
                 android:layout_width="match_parent"
                 android:background="@drawable/side_nav_bar">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    app:civ_border_overlay="false"
-                    app:civ_border_color="@color/colorWhite"
-                    app:civ_border_width="2dp"
-                    android:id="@+id/imageProfilHeader"
-                    android:layout_gravity="center"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp" />
+                app:civ_border_overlay="false"
+                app:civ_border_color="@color/colorWhite"
+                app:civ_border_width="2dp"
+                android:id="@+id/imageProfilHeader"
+                android:layout_gravity="center"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
 
                 <TextView
                     android:id="@+id/textProfilImePrezimeHeader"
@@ -57,11 +59,11 @@
                     android:layout_height="wrap_content">
                     <ImageButton
                         android:id="@+id/btnProfilClose"
+                        android:src="@drawable/ic_chevron_left"
                         android:tint="@color/colorWhite"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:src="@drawable/ic_chevron_left"
                         android:layout_width="?attr/actionBarSize"
-                        android:layout_height="match_parent" />
+                        android:layout_height="?attr/actionBarSize" />
                 </LinearLayout>
             </android.support.v7.widget.Toolbar>
 

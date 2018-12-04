@@ -2,6 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -26,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageButton
-                    android:id="@+id/btnKorpaClose"
+                    android:id="@+id/btnJelovnikClose"
                     android:tint="@color/colorWhite"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_chevron_left"
@@ -61,6 +62,13 @@
             android:minWidth="50dp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
+        <TextView
+            android:id="@+id/restoranJelovnikNoData"
+            android:text="Nema hrane"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -74,7 +82,7 @@
                 android:queryBackground="@color/Transparent"
                 android:inputType="textNoSuggestions|textVisiblePassword"
                 android:iconifiedByDefault="false"
-                android:hint="Hrana, tip, naziv, restoran..."/>
+                android:queryHint="Hrana, tip, naziv, restoran..."/>
 
             <View style="@style/Divider.Xsmall"></View>
 

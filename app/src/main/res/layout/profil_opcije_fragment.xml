@@ -22,7 +22,8 @@
             <ImageButton
                 android:id="@+id/btnProfilSettingsClose"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_chevron_left"
+                android:tint="@android:color/black"
+                android:src="@drawable/ic_close"
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="?attr/actionBarSize" />
 

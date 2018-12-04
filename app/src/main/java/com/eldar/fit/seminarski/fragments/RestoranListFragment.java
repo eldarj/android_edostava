@@ -23,7 +23,7 @@ import com.eldar.fit.seminarski.R;
 import com.eldar.fit.seminarski.RestoranDetaljnoActivity;
 import com.eldar.fit.seminarski.data.KorisnikVM;
 import com.eldar.fit.seminarski.data.RestoranPrikazVM;
-import com.eldar.fit.seminarski.data.RestoranVM;
+import com.eldar.fit.seminarski.helper.MyTaggedFragment;
 import com.eldar.fit.seminarski.helper.MyAbstractRunnable;
 import com.eldar.fit.seminarski.helper.MyApiRequest;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
@@ -32,14 +32,14 @@ import com.eldar.fit.seminarski.helper.RestoranInfo;
 import static com.eldar.fit.seminarski.RestoranDetaljnoActivity.DETAIL_VIEW_RESTORAN;
 import static com.eldar.fit.seminarski.helper.MyApiRequest.ENDPOINT_RESTORANI;
 
-public class RestoranListFragment extends Fragment {
+public class RestoranListMyTaggedFragment extends Fragment implements MyTaggedFragment {
 
     private RestoranPrikazVM apiRestorani;
     private ListView listRestorani;
-    public static RestoranListFragment newInstance() {
+    public static RestoranListMyTaggedFragment newInstance() {
         Bundle args = new Bundle();
 
-        RestoranListFragment fragment = new RestoranListFragment();
+        RestoranListMyTaggedFragment fragment = new RestoranListMyTaggedFragment();
         fragment.setArguments(args);
 
         return fragment;
@@ -172,4 +172,9 @@ public class RestoranListFragment extends Fragment {
     }
 
     private BaseAdapter listRestoraniAdapter;
+
+    @Override
+    public String myFragmentTag() {
+        return this.getClass().getName();
+    }
 }
