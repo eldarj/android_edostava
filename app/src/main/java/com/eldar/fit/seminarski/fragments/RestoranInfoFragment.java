@@ -3,26 +3,38 @@ package com.eldar.fit.seminarski.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.chip.Chip;
+import android.support.design.chip.ChipGroup;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.eldar.fit.seminarski.R;
-import com.eldar.fit.seminarski.data.RestoranVM;
+import com.eldar.fit.seminarski.data.TipKuhinje;
 import com.eldar.fit.seminarski.helper.RestoranInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.eldar.fit.seminarski.RestoranDetaljnoActivity.DETAIL_VIEW_RESTORAN;
 
 public class RestoranInfoFragment extends Fragment {
-
-    TextView restoranNaziv, restoranOpis, restoranLikesCount, titleDetaljnoRestoranNaziv;
-    ImageView restoranSlika;
+    public static String Tag = "restoranInfoFragment";
 
     private RestoranInfo restoran;
+
+    private ImageButton btnRestoranClose;
+    private ImageView restoranSlika;
+
+    private TextView restoranNaziv;
+    private TextView restoranOpis;
+    private TextView restoranStatsCount;
+    private TextView titleDetaljnoRestoranNaziv;
     private TextView restoranAdresa;
     private TextView restoranLokacija;
     private TextView restoranTelefon;
@@ -30,6 +42,7 @@ public class RestoranInfoFragment extends Fragment {
     private TextView restoranEmail;
     private TextView vlasnikImePrezime;
     private TextView vlasnikEmail;
+    private ChipGroup chipGroupRestoranTipovihrane;
 
     public static RestoranInfoFragment newInstance(RestoranInfo restoran) {
         Bundle args = new Bundle();
@@ -47,6 +60,14 @@ public class RestoranInfoFragment extends Fragment {
         View view = inflater.inflate(R.layout.restoran_info_fragment, container, false);
         restoran = (RestoranInfo) getArguments().getSerializable(DETAIL_VIEW_RESTORAN);
 
+        btnRestoranClose = view.findViewById(R.id.btnRestoranClose);
+        btnRestoranClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
+
         // Restoran top-section
         restoranNaziv = view.findViewById(R.id.textDetaljnoRestoranNaziv);
         restoranNaziv.setText(restoran.getNaziv());
@@ -57,9 +78,25 @@ public class RestoranInfoFragment extends Fragment {
         restoranOpis = view.findViewById(R.id.textDetaljnoRestoranOpis);
         restoranOpis.setText(restoran.getOpis());
 
-        restoranLikesCount = view.findViewById(R.id.textDetaljnoRestoranLikes);
-        restoranLikesCount.setText(restoran.getLikesCount() + " sviđanja");
+        restoranStatsCount = view.findViewById(R.id.textDetaljnoRestoranStats);
+        restoranStatsCount.setText(restoran.getLikesCount() + " sviđanja - " + restoran.getRecenzije().size() + " recenzija");
 
+        try {
+            chipGroupRestoranTipovihrane = view.findViewById(R.id.chipGroupRestoranTipovihrane);
+            chipGroupRestoranTipovihrane.removeAllViews();
+            chipGroupRestoranTipovihrane.setFocusable(false);
+            for (TipKuhinje t:
+                 restoran.getTipoviKuhinje()) {
+                Chip c = new Chip(getActivity());
+                c.setText(t.naziv);
+                c.setFocusable(false);
+                c.setClickable(false);
+                chipGroupRestoranTipovihrane.addView(c);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         restoranSlika = view.findViewById(R.id.imageDetaljnoRestoranSlika);
         Glide.with(this)
                 .load(restoran.getSlika())

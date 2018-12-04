@@ -9,27 +9,19 @@ import java.util.UUID;
 
 public class Korpa implements Serializable {
 
-    private UUID uId;
     public double ukupnaCijena;
     public List<KorpaHranaStavka> hranaStavke;
-    private int hranaStavkeSize;
 
     public Korpa() {
-        uId = UUID.randomUUID();
         ukupnaCijena = 0;
         hranaStavke = new ArrayList<KorpaHranaStavka>();
     }
 
-    public static Korpa odbaciNarudzbu() {
+    public static Korpa emptyKorpa() {
         Korpa korpa = new Korpa();
         MySession.setKorpa(korpa);
 
         return korpa;
-    }
-
-    public static void kreirajNarudzbu(Korpa korpa) {
-//        NarudzbaVM nova = new NarudzbaVM(korpa.getuId(), korpa.getNarudzbaStavke(), korpa.getUkupnaCijena(), MySession.getKorisnik());
-//        Storage.getNarudzbe().add(nova);
     }
 
     public int getHranaStavkeTotalCount() {
@@ -39,10 +31,6 @@ public class Korpa implements Serializable {
             total += s.getKolicina();
         }
         return total;
-    }
-
-    public UUID getuId() {
-        return uId;
     }
 
     public double getUkupnaCijena() {

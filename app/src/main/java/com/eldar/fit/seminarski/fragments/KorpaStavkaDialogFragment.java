@@ -18,6 +18,8 @@ import com.eldar.fit.seminarski.data.KorpaHranaStavka;
 
 public class KorpaStavkaDialogFragment extends DialogFragment {
 
+    public static String Tag = "korpaStavkaDialogFragment";
+
     private static String BUNDLE_KORPA_STAVKA = "bundleKorpaStavkaKey";
     private KorpaHranaStavka stavka;
 

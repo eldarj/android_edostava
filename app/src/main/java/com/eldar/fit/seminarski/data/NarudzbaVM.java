@@ -10,19 +10,22 @@ import java.util.UUID;
 
 public class NarudzbaVM implements Serializable {
 
+    @SerializedName(value = "id", alternate = { "Id", "ID" })
+    private int id;
+
     @SerializedName(value = "uId", alternate = { "uid", "guidSifra", "GuidSifra", "guidsifra"})
     private UUID uId;
 
     @SerializedName(value = "datumKreiranja", alternate = { "DatumKreiranja", "datumkreiranja" })
     public Date datumKreiranja;
 
-    @SerializedName(value = "ukupnacijena", alternate = { "UkupnaCijena", "ukupnacijena" })
-    public double ukupnaCijena;
-
     @SerializedName(value = "status", alternate = { "Status" })
     public String status;
 
-    @SerializedName(value = "narudzbaStavke", alternate = { "HranaStavke", "hranastavke" })
+    @SerializedName(value = "ukupnaCijena", alternate = { "UkupnaCijena", "ukupnacijena" })
+    public double ukupnaCijena;
+
+    @SerializedName(value = "narudzbaStavke", alternate = { "hranaStavke", "HranaStavke", "hranastavke" })
     public List<NarudzbaStavkaVM> narudzbaStavke;
 
     @SerializedName(value = "narucenoIzRestorana", alternate = { "NarucenoIzRestorana", "narucenoizrestorana" })
@@ -40,8 +43,8 @@ public class NarudzbaVM implements Serializable {
         return new SimpleDateFormat("dd.MM.yyyy").format(datumKreiranja);
     }
 
-    public double getUkupnaCijena() {
-        return ukupnaCijena;
+    public int getId() {
+        return id;
     }
 
     public String getStatus() {
@@ -52,11 +55,29 @@ public class NarudzbaVM implements Serializable {
         return narudzbaStavke;
     }
 
+    public double getUkupnaCijena() {
+        return ukupnaCijena;
+    }
+
     public int getNarudzbaStavkeSize() {
         return narudzbaStavke.size();
     }
 
     public List<String> getNarucenoIzRestorana() {
         return narucenoIzRestorana;
+    }
+
+    public String getSearchIndex() {
+        String searchData = status + uId + this.getDatumNapravljenaString();
+        for (NarudzbaStavkaVM stavka :
+                narudzbaStavke) {
+            searchData += stavka.getNaziv();
+        }
+        for (String restoran :
+                narucenoIzRestorana) {
+            searchData += restoran;
+        }
+
+        return searchData.toLowerCase();
     }
 }

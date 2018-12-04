@@ -117,4 +117,9 @@ public class HranaItemVM implements Serializable {
     public void setCijena(double cijena) {
         this.cijena = cijena;
     }
+
+    public String getSearchIndex() {
+        String searchData = naziv + opis + cijena;
+        return searchData.toLowerCase();
+    }
 }

@@ -11,16 +11,23 @@ import com.eldar.fit.seminarski.R;
 import java.lang.reflect.Type;
 
 public class MyApiRequest {
-
     // Content type
     public static String CONTENT_TYPE_JSON = "application/json";
 
     // Endpoints
     public static String ENDPOINT_LOCATIONS = "lokacije";
     public static String ENDPOINT_RESTORANI = "restorani";
-    public static String ENDPOINT_NARUDZBE = "narudzbe";
-
+    public static String ENDPOINT_RESTORANI_OMILJENI = "restorani/omiljeni";
+    public static String ENDPOINT_RESTORANI_LIKE = "restorani/%1$d/like";
+    public static String ENDPOINT_RESTORANI_UNLIKE = "restorani/%1$d/unlike";
     public static String ENDPOINT_RESTORANI_HRANA = "restorani/%1$d/hrana";
+
+    public static String ENDPOINT_NARUDZBE = "narudzbe";
+    public static String ENDPOINT_NARUDZBE_CREATE = "narudzbe/create";
+    public static String ENDPOINT_NARUDZBE_STATUS = "narudzbe/%1$d/status";
+    public static String ENDPOINT_NARUDZBE_DELETE = "narudzbe/%1$d/delete";
+
+
     public static String ENDPOINT_USER_LOGIN_CHECK_AUTH = "auth";
     public static String ENDPOINT_USER_REGISTER_AUTH = "auth/register";
     public static String ENDPOINT_USER_UPDATE_AUTH = "auth/update";
@@ -49,7 +56,7 @@ public class MyApiRequest {
             protected void onPostExecute(MyApiResult result)
             {
                 Log.i("Test", "postExecute");
-                View parentLayout = activity.findViewById(R.id.content);
+                View parentLayout = activity.findViewById(R.id.content) != null ? activity.findViewById(R.id.content) : activity.findViewById(R.id.fragmentContainer);
                 Snackbar snackbar = null;
                 if (result.isException) {
 

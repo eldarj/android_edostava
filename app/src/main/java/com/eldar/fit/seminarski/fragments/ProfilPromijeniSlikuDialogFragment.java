@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.eldar.fit.seminarski.R;
 import com.eldar.fit.seminarski.data.ApiUserImage;
+import com.eldar.fit.seminarski.data.AuthLogin;
 import com.eldar.fit.seminarski.data.KorisnikVM;
 import com.eldar.fit.seminarski.helper.MyAbstractRunnable;
 import com.eldar.fit.seminarski.helper.MyApiRequest;
@@ -38,6 +39,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
+
+    public static String Tag = "profilPromijeniSlikuDialogFragment";
 
     private static final int REQUEST_IMAGE_CAMERA_CAPTURE = 1;
     private static final int REQUEST_IMAGE_FROM_GALLERY = 2;
@@ -85,7 +88,7 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
                 Log.i("Test", "encoded bytes" + encodeImageBytes);
 
                 MyApiRequest.post(getActivity(), MyApiRequest.ENDPOINT_USER_UPLOAD_IMAGE,
-                        new ApiUserImage(encodeImageBytes, korisnik.getUsername(), korisnik.getId()),
+                        new ApiUserImage(encodeImageBytes, korisnik.getUsername(), new AuthLogin(korisnik.getUsername(), korisnik.getPassword())),
                         new MyAbstractRunnable<String>() {
                     @Override
                     public void run(String path) {

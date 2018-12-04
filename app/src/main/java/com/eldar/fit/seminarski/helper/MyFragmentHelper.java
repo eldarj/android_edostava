@@ -6,14 +6,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.eldar.fit.seminarski.R;
 import com.eldar.fit.seminarski.data.KorisnikVM;
 
 import java.io.Serializable;
 
 public class MyFragmentHelper {
 
-    private static int fragNo = 0;
     private static FragmentManager fm;
     private static FragmentTransaction ft;
 
@@ -31,21 +33,17 @@ public class MyFragmentHelper {
         void run(T t);
     }
 
-    public static void fragmentEmptyAndCreate(AppCompatActivity activity, int targetLayoutId, Fragment fragment) {
-
-    }
-
-    public static void fragmentCreate(AppCompatActivity activity, int targetLayoutId, Fragment fragment) {
+    public static void fragmentReplace(AppCompatActivity activity, int targetLayoutId, Fragment fragment, String fragmentTag, boolean addToBackStack) {
         fm = activity.getSupportFragmentManager();
         ft = fm.beginTransaction();
-        ft.replace(targetLayoutId, fragment);
 
-        if (!fragment.isAdded()) {
+        ft.replace(targetLayoutId, fragment, fragmentTag);
+
+        if (addToBackStack) {
             ft.addToBackStack(null);
         }
 
         ft.commit();
-        fragNo++;
     }
 
     public static void dodajDialog(AppCompatActivity activity, String tag, DialogFragment dialogFragment) {

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.button.MaterialButton;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,34 +23,59 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.eldar.fit.seminarski.R;
+import com.eldar.fit.seminarski.data.AuthLogin;
 import com.eldar.fit.seminarski.data.Korpa;
 import com.eldar.fit.seminarski.data.KorpaHranaStavka;
+import com.eldar.fit.seminarski.data.api.request.models.NewNarudzbaRequest;
+import com.eldar.fit.seminarski.helper.MyAbstractRunnable;
+import com.eldar.fit.seminarski.helper.MyApiRequest;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
 import com.eldar.fit.seminarski.helper.MySession;
+import com.eldar.fit.seminarski.helper.MyUrlConnection;
 
 public class KorpaFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
+    public static String Tag = "korpaFragment";
+    public static String RENDER_KORPA_APPBAR = "showKorpaAppBar";
+
     private Korpa korpa;
-    private TextView textKorpaIntro, textKorpaTotal;
+
+    private BaseAdapter listStavkeAdapter;
     private ListView listKorpaStavke;
+
+    private Toolbar myToolbar;
     private Button btnKorpaNaruci;
     private MaterialButton btnKorpaOdbaci;
-    private BaseAdapter listStavkeAdapter;
     private ImageButton btnKorpaClose;
-    private Toolbar myToolbar;
+    private TextView textKorpaIntro, textKorpaTotal;
+    private View view;
+    private AppBarLayout appbarKorpa;
+    private boolean renderKorpaAppBar;
+    private ProgressBar progressBar_korpa;
 
-    public static KorpaFragment newInstance() {
+    public static KorpaFragment newInstance(boolean renderKorpaAppBar) {
         KorpaFragment fragment = new KorpaFragment();
+
+        Bundle args = new Bundle();
+        args.putBoolean(RENDER_KORPA_APPBAR, renderKorpaAppBar);
+        fragment.setArguments(args);
+
         return fragment;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
+
+        if (getArguments().containsKey(RENDER_KORPA_APPBAR)) {
+            renderKorpaAppBar = getArguments().getBoolean(RENDER_KORPA_APPBAR);
+        }
+
         korpa = prepKorpaSession();
         super.onCreate(savedInstanceState);
     }
@@ -56,7 +83,17 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.korpa_fragment, container, false);
+        view = inflater.inflate(R.layout.korpa_fragment, container, false);
+
+        appbarKorpa = view.findViewById(R.id.appbarKorpa);
+        if (!renderKorpaAppBar) {
+            appbarKorpa.getLayoutParams().height = 0;
+        }
+
+        myToolbar = view.findViewById(R.id.toolbarKorpa);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
+
+        progressBar_korpa = view.findViewById(R.id.progressBar_korpa);
 
         textKorpaIntro = view.findViewById(R.id.textKorpaIntro);
         textKorpaIntro.setText(korpa.getHranaStavke().size() == 0 ?
@@ -72,7 +109,9 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 KorpaHranaStavka stavka = korpa.getHranaStavke().get(position);
-                MyFragmentHelper.dodajDialog((AppCompatActivity) getActivity(), "korpaStavkaDlg", KorpaStavkaDialogFragment.newInstance(stavka));
+                MyFragmentHelper.dodajDialog((AppCompatActivity) getActivity(),
+                        KorpaStavkaDialogFragment.Tag,
+                        KorpaStavkaDialogFragment.newInstance(stavka));
             }
         });
 
@@ -88,24 +127,62 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
         btnKorpaOdbaci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Korpa.kreirajNarudzbu(korpa);
-                korpa = new Korpa();
-                MySession.setKorpa(korpa);
+                korpa = Korpa.emptyKorpa();
+                view.invalidate();
             }
         });
+        btnKorpaOdbaci.setClickable(korpa.getHranaStavke().size() != 0);
 
         btnKorpaNaruci = view.findViewById(R.id.btnKorpaNaruci);
         btnKorpaNaruci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                korpa = Korpa.odbaciNarudzbu();
+                do_btnNaruciClick();
             }
         });
-
-        myToolbar = (Toolbar) view.findViewById(R.id.toolbarKorpa);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
+        btnKorpaNaruci.setEnabled(korpa.getHranaStavke().size() != 0);
 
         return view;
+    }
+
+    private void do_btnNaruciClick() {
+        progressBar_korpa.setVisibility(View.VISIBLE);
+
+        MyApiRequest.request(getActivity(),
+                MyApiRequest.ENDPOINT_NARUDZBE_CREATE,
+                MyUrlConnection.HttpMethod.POST,
+                new NewNarudzbaRequest(
+                        new AuthLogin(MySession.getKorisnik().getUsername(), MySession.getKorisnik().getPassword()),
+                        MySession.getKorpa()),
+                new MyAbstractRunnable<String>() {
+                    @Override
+                    public void run(String s) {
+                        onNarudzbaCreated(s, null, null);
+                    }
+
+                    @Override
+                    public void error(@Nullable Integer statusCode, @Nullable String errorMessage) {
+                        onNarudzbaCreated(null, statusCode, errorMessage);
+                    }
+                });
+
+        korpa = Korpa.emptyKorpa();
+    }
+
+    private void onNarudzbaCreated(@Nullable String response, @Nullable Integer statusCode, @Nullable String errorMessage) {
+        progressBar_korpa.setVisibility(View.INVISIBLE);
+
+
+        if (response != null) {
+            Log.i("Test", "KORPA TEST USPIO " + response);
+            // clear out the korpa - narudzba successfully created
+        } else {
+            Snackbar.make(getActivity().findViewById(R.id.content),
+                    errorMessage != null ? errorMessage : "Dogodila se greška.",
+                    Snackbar.LENGTH_LONG).show();
+
+            // narudzba was not created!
+        }
     }
 
     private Korpa prepKorpaSession() {
@@ -179,7 +256,11 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.actionMojeNarudzbe) {
-            MyFragmentHelper.fragmentCreate((AppCompatActivity) getActivity(), R.id.fragmentContainer, ProfilNarudzbeFragment.newInstance());
+            MyFragmentHelper.fragmentReplace((AppCompatActivity) getActivity(),
+                    R.id.fragmentContainer,
+                    ProfilNarudzbeFragment.newInstance(),
+                    ProfilNarudzbeFragment.Tag,
+                    true);
         }
 
         return false;
@@ -188,15 +269,6 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Log.i("Test", "onSharedPreferenceChanged with key: " + key);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        korpa = prepKorpaSession();
-
-        SharedPreferences prefs = MySession.getPrefs();
-        prefs.registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override

@@ -6,13 +6,13 @@ public class ApiUserImage {
 
     public String fileName;
 
-    public int userId;
+    public AuthLogin credentials;
 
 
-    public ApiUserImage(String encodedImageBase64, String fileName, int userId) {
+    public ApiUserImage(String encodedImageBase64, String fileName, AuthLogin credentials) {
         this.encodedImageBase64 = encodedImageBase64;
         this.fileName = fileName;
-        this.userId = userId;
+        this.credentials = credentials;
     }
 
     public String getEncodedImageBase64() {
@@ -31,12 +31,6 @@ public class ApiUserImage {
         this.fileName = fileName;
     }
 
-    public int getUserId() {
-        return userId;
-    }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 
 }

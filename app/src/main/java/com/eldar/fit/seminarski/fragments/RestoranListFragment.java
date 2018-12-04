@@ -8,54 +8,83 @@ import android.support.design.button.MaterialButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.eldar.fit.seminarski.R;
 import com.eldar.fit.seminarski.RestoranDetaljnoActivity;
+import com.eldar.fit.seminarski.data.AuthLogin;
 import com.eldar.fit.seminarski.data.KorisnikVM;
 import com.eldar.fit.seminarski.data.RestoranPrikazVM;
-import com.eldar.fit.seminarski.helper.MyTaggedFragment;
+import com.eldar.fit.seminarski.helper.MySession;
 import com.eldar.fit.seminarski.helper.MyAbstractRunnable;
 import com.eldar.fit.seminarski.helper.MyApiRequest;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
 import com.eldar.fit.seminarski.helper.RestoranInfo;
 
+import java.util.List;
+
 import static com.eldar.fit.seminarski.RestoranDetaljnoActivity.DETAIL_VIEW_RESTORAN;
+import static com.eldar.fit.seminarski.RestoranDetaljnoActivity.DETAIL_VIEW_RESTORAN_FRAGMENT_FLAG;
 import static com.eldar.fit.seminarski.helper.MyApiRequest.ENDPOINT_RESTORANI;
 
-public class RestoranListMyTaggedFragment extends Fragment implements MyTaggedFragment {
+public class RestoranListFragment extends Fragment {
+    public static String Tag = "restoranListMyTaggedFragment";
+    private static final String FILTER_BY_OMILJENI = "filterRestoraniByOmiljeni";
 
-    private RestoranPrikazVM apiRestorani;
+
     private ListView listRestorani;
-    public static RestoranListMyTaggedFragment newInstance() {
-        Bundle args = new Bundle();
+    private List<RestoranInfo> podaci;
+    private BaseAdapter listRestoraniAdapter;
 
-        RestoranListMyTaggedFragment fragment = new RestoranListMyTaggedFragment();
+    private ProgressBar progressBar_restorani;
+    private TextView textNemateOmiljenih;
+
+    private boolean showOmiljeneOnly;
+    private View listView;
+
+    public static RestoranListFragment newInstance(boolean fitlerByOmiljene) {
+        RestoranListFragment fragment = new RestoranListFragment();
+
+        Bundle args = new Bundle();
+        args.putBoolean(FILTER_BY_OMILJENI, fitlerByOmiljene);
         fragment.setArguments(args);
 
         return fragment;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments().containsKey(FILTER_BY_OMILJENI)) {
+            showOmiljeneOnly = getArguments().getBoolean(FILTER_BY_OMILJENI);
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.restoran_list_fragment, container, false);
+        listView = inflater.inflate(R.layout.restoran_list_fragment, container, false);
 
-        listRestorani = view.findViewById(R.id.listViewRestorani);
+        progressBar_restorani = listView.findViewById(R.id.progressBar_restoraniList);
+        textNemateOmiljenih = listView.findViewById(R.id.textNemateOmiljenih);
+
+        listRestorani = listView.findViewById(R.id.listViewRestorani);
 
         MyApiRequest.get(getActivity(), ENDPOINT_RESTORANI, new MyAbstractRunnable<RestoranPrikazVM>() {
             @Override
             public void run(RestoranPrikazVM restoranPrikazVM) {
                 popuniPodatke(restoranPrikazVM);
+                progressBar_restorani.setVisibility(View.INVISIBLE);
             }
 
             @Override
@@ -63,118 +92,192 @@ public class RestoranListMyTaggedFragment extends Fragment implements MyTaggedFr
                 Snackbar.make(getActivity().findViewById(R.id.fragmentContainer),
                         errorMessage != null ? errorMessage : "Dogodila se greška.",
                         Snackbar.LENGTH_LONG).show();
+                progressBar_restorani.setVisibility(View.INVISIBLE);
             }
         });
 
         listRestorani.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("Test", "CARD CLICKED");
-                RestoranInfo restoran = apiRestorani.restorani.get(position);
-                do_transitionCardView(view, restoran);
+                do_transitionCardView(view, podaci.get(position),  RestoranDetaljnoActivity.DETAIL_VIEW_GOTO_INFO);
             }
         });
 
-        return view;
+        return listView;
     }
 
-    private void do_transitionCardView(View view, RestoranInfo restoran) {
-        Intent intent = new Intent(getActivity(), RestoranDetaljnoActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(DETAIL_VIEW_RESTORAN, restoran);
-        intent.putExtras(bundle);
-
-        ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(getActivity(), view, getString(R.string.transition_restoran_card));
-
+    private void do_transitionCardView(View view, RestoranInfo restoran, String fragmentFlag) {
         try {
+            Intent intent = new Intent(getActivity(), RestoranDetaljnoActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(DETAIL_VIEW_RESTORAN, restoran);
+            bundle.putSerializable(DETAIL_VIEW_RESTORAN_FRAGMENT_FLAG, fragmentFlag);
+            intent.putExtras(bundle);
+
+            ActivityOptionsCompat options = ActivityOptionsCompat
+                    .makeSceneTransitionAnimation(getActivity(), view, getString(R.string.transition_restoran_card));
+
             startActivity(intent, options.toBundle());
         } catch (Exception e) {
             e.printStackTrace();
-            Log.i("Test", "error " + e.getMessage());
         }
     }
 
     private void popuniPodatke(RestoranPrikazVM model) {
-        apiRestorani = model;
+        if (showOmiljeneOnly) {
+            podaci = model.getOmiljeniRestorani();
+        } else {
+            podaci = model.getRestorani();
+        }
+
+        if (podaci == null || podaci.size() == 0) {
+            textNemateOmiljenih.setVisibility(View.VISIBLE);
+        }
 
         listRestoraniAdapter = new BaseAdapter() {
+
             @Override
             public int getCount() {
-                return apiRestorani.restorani.size();
+                return podaci.size();
             }
 
             @Override
-            public Object getItem(int position) { return apiRestorani.restorani.get(position); }
+            public Object getItem(int position) { return podaci.get(position); }
 
             @Override
             public long getItemId(int position) {
-                return apiRestorani.restorani.get(position).getId();
+                return podaci.get(position).getId();
             }
 
             @Override
             public View getView(int position, View view, ViewGroup parent) {
-
                 if (view == null) {
                     LayoutInflater inflater = getActivity().getLayoutInflater();
-                    view = inflater != null ? inflater.inflate(R.layout.restoran_stavka, parent, false) : null;
+                    view = inflater.inflate(R.layout.restoran_stavka, parent, false);
                 }
 
-                TextView restoranNaziv = view.findViewById(R.id.textStavkaRestoranNaziv);
-                TextView restoranOpis = view.findViewById(R.id.textStavkaRestoranOpis);
-                TextView restoranLikesCount = view.findViewById(R.id.textStavkaRestoranLikes);
-                TextView textStavkaRestoranLokacija = view.findViewById(R.id.textStavkaRestoranLokacija);
-                ImageView restoranSlikaView = view.findViewById(R.id.imageStavkaRestoranSlika);
+                RestoranInfo restoran = podaci.get(position);
 
-                MaterialButton btnDetaljno = view.findViewById(R.id.btnStavkaRestoranDetaljno);
-                btnDetaljno.setOnClickListener(new View.OnClickListener() {
+                ProgressBar progressBar_restoranLike = view.findViewById(R.id.progressBar_restoranLike);
+
+                ImageButton btnStavkaRestoranLike = view.findViewById(R.id.btnStavkaRestoranLike);
+                btnStavkaRestoranLike.setImageResource(restoran.userHasLiked() ?
+                                R.drawable.ic_heart_red : R.drawable.ic_heart);
+
+                btnStavkaRestoranLike.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MyFragmentHelper.RunnableCallback<KorisnikVM> callback = new MyFragmentHelper.RunnableCallback<KorisnikVM>() {
-                            @Override
-                            public void run(KorisnikVM korisnikVM) {
+                        progressBar_restoranLike.setVisibility(View.VISIBLE);
+                        btnStavkaRestoranLike.setVisibility(View.INVISIBLE);
+                        if (restoran.userHasLiked()) {
+                            MyApiRequest.post(getActivity(),
+                                String.format(MyApiRequest.ENDPOINT_RESTORANI_UNLIKE, restoran.getId()),
+                                new AuthLogin(MySession.getKorisnik().getUsername(), MySession.getKorisnik().getPassword()),
+                                new MyAbstractRunnable<String>() {
+                                    @Override
+                                    public void run(String response) {
+                                        onRestoranLikeDislike(response,
+                                                null,
+                                                null,
+                                                progressBar_restoranLike,
+                                                btnStavkaRestoranLike,
+                                                restoran);
+                                    }
 
-                            }
-                        };
+                                    @Override
+                                    public void error(@Nullable Integer statusCode, @Nullable String errorMessage) {
+                                        onRestoranLikeDislike(null,
+                                                statusCode, errorMessage,
+                                                progressBar_restoranLike,
+                                                null,
+                                                null);
+                                    }
+                                });
+                        } else {
+                            MyApiRequest.post(getActivity(),
+                                String.format(MyApiRequest.ENDPOINT_RESTORANI_LIKE, restoran.getId()),
+                                new AuthLogin(MySession.getKorisnik().getUsername(), MySession.getKorisnik().getPassword()),
+                                new MyAbstractRunnable<String>() {
+                                    @Override
+                                    public void run(String response) {
+                                        onRestoranLikeDislike(response, null, null, progressBar_restoranLike, btnStavkaRestoranLike, restoran);
+                                    }
+
+                                    @Override
+                                    public void error(@Nullable Integer statusCode, @Nullable String errorMessage) {
+                                        onRestoranLikeDislike(null, statusCode, errorMessage, progressBar_restoranLike, null, null);
+                                    }
+                            });
+                        }
 
                     }
                 });
 
-                restoranNaziv.setText(apiRestorani.restorani.get(position).getNaziv());
+                TextView restoranNaziv = view.findViewById(R.id.textStavkaRestoranNaziv);
+                TextView restoranOpis = view.findViewById(R.id.textStavkaRestoranOpis);
+                TextView restoranStatsCount = view.findViewById(R.id.textStavkaRestoranStats);
+                TextView textStavkaRestoranLokacija = view.findViewById(R.id.textStavkaRestoranLokacija);
+                ImageView restoranSlikaView = view.findViewById(R.id.imageStavkaRestoranSlika);
+
+                MaterialButton btnStavkaRestoranJelovnik = view.findViewById(R.id.btnStavkaRestoranJelovnik);
+                btnStavkaRestoranJelovnik.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        do_transitionCardView(listView, restoran, RestoranDetaljnoActivity.DETAIL_VIEW_GOTO_JELOVNIK);
+                    }
+                });
+
+                restoranNaziv.setText(restoran.getNaziv());
 
                 int limit = 120;
                 String opis;
-                if (apiRestorani.restorani.get(position).getOpis().length() > limit ) {
-                    Log.i("Test", "Truncated");
-                    opis = apiRestorani.restorani.get(position).getOpis().substring(0, limit - 3) + "...";
+                if (restoran.getOpis().length() > limit ) {
+                    opis = restoran.getOpis().substring(0, limit - 3) + "...";
                 } else {
-                    opis = apiRestorani.restorani.get(position).getOpis();
+                    opis = restoran.getOpis();
                 }
                 restoranOpis.setText(opis);
 
-                restoranLikesCount.setText(apiRestorani.restorani.get(position).getLikesCount() + " sviđanja");
+                restoranStatsCount.setText(restoran.getLikesCount() + " sviđanja  - " + restoran.getRecenzije().size() + " recenzija");
 
-                textStavkaRestoranLokacija.setText(apiRestorani.restorani.get(position).getLokacija());
+                textStavkaRestoranLokacija.setText(restoran.getLokacija());
 
-                if (apiRestorani.restorani.get(position).getSlika() != null) {
-                    Log.i("Test", "SLIKA " + apiRestorani.restorani.get(position).getSlika());
+                if (restoran.getSlika() != null) {
                     Glide.with(getActivity())
-                            .load(apiRestorani.restorani.get(position).getSlika())
+                            .load(restoran.getSlika())
                             .centerCrop()
                             .into(restoranSlikaView);
                 }
 
                 return view;
             }
+
         };
 
         listRestorani.setAdapter(listRestoraniAdapter);
     }
 
-    private BaseAdapter listRestoraniAdapter;
 
-    @Override
-    public String myFragmentTag() {
-        return this.getClass().getName();
+    private void onRestoranLikeDislike(@Nullable String response,
+       @Nullable Integer statusCode,
+       @Nullable String errorMessage,
+       @Nullable ProgressBar progressBar,
+       ImageButton btnStavkaRestoranLike,
+       RestoranInfo restoran
+    ) {
+        progressBar.setVisibility(View.INVISIBLE);
+        btnStavkaRestoranLike.setVisibility(View.VISIBLE);
+        if (response != null) {
+            btnStavkaRestoranLike.setImageResource(restoran.toggleLike() ?
+                    R.drawable.ic_heart_red : R.drawable.ic_heart);
+
+            Snackbar.make(getActivity().findViewById(R.id.fragmentContainer),
+                    response,
+                    Snackbar.LENGTH_LONG).show();
+        } else {
+            Snackbar.make(getActivity().findViewById(R.id.fragmentContainer),
+                    errorMessage != null ? errorMessage : "Dogodila se greška.",
+                    Snackbar.LENGTH_LONG).show();
+        }
     }
 }

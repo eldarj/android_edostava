@@ -21,6 +21,8 @@ import com.eldar.fit.seminarski.helper.MySession;
 
 public class ProfilPromijeniLozinkuDialogFragment extends DialogFragment {
 
+    public static String Tag = "profilPromijeniLozinkuDialogFragment";
+
     private TextInputEditText textProfilOpcijeLozinkaTrenutna;
     private TextInputEditText textProfilOpcijeLozinkaNewPonovo;
     private TextInputEditText textProfilOpcijeLozinkaNew;

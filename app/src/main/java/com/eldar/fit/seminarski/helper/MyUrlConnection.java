@@ -45,6 +45,7 @@ public class MyUrlConnection {
 
             if (postData != null) {
                 Log.i("Test", "postData" + postData);
+                Log.i("Test", "postToEndpoint" + urlString);
                 urlConnection.setDoOutput(true);
                 byte[] outputBytes = postData.getBytes(charset);
                 OutputStream ostream = urlConnection.getOutputStream();
@@ -72,6 +73,7 @@ public class MyUrlConnection {
 
         } catch(Exception e) {
             e.printStackTrace();
+            Log.i("Test", "exception" + e.getMessage());
             return MyApiResult.Error(0, e.getMessage());
         } finally {
             if (urlConnection != null) {

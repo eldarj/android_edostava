@@ -1,5 +1,7 @@
 package com.eldar.fit.seminarski.helper;
 
+import android.util.Log;
+
 import com.eldar.fit.seminarski.data.TipKuhinje;
 import com.eldar.fit.seminarski.data.Vlasnik;
 import com.google.gson.annotations.SerializedName;
@@ -15,7 +17,9 @@ public class RestoranInfo implements Serializable {
     public String telefon;
     public String adresa;
     public String lokacija;
+    public List<RestoranRecenzija> recenzije;
     public List<RestoranLike> lajkovi;
+    public int likeCount;
     public String slika;
     public String slogan;
     public String email;
@@ -82,17 +86,12 @@ public class RestoranInfo implements Serializable {
         this.lokacija = lokacija;
     }
 
-    public int getLikesCount() {
-        return lajkovi.size();
+    public List<RestoranRecenzija> getRecenzije() {
+        return recenzije;
     }
 
-
-    public List<RestoranLike> getLajkovi() {
-        return lajkovi;
-    }
-
-    public void setLajkovi(List<RestoranLike> lajkovi) {
-        this.lajkovi = lajkovi;
+    public void setRecenzije(List<RestoranRecenzija> recenzije) {
+        this.recenzije = recenzije;
     }
 
     public String getSlika() {
@@ -123,6 +122,18 @@ public class RestoranInfo implements Serializable {
         return webUrl;
     }
 
+    public List<RestoranLike> getLajkovi() {
+        return lajkovi;
+    }
+
+    public int getLikesCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
     public void setWebUrl(String webUrl) {
         this.webUrl = webUrl;
     }
@@ -133,5 +144,29 @@ public class RestoranInfo implements Serializable {
 
     public void setTipoviKuhinje(List<TipKuhinje> tipoviKuhinje) {
         this.tipoviKuhinje = tipoviKuhinje;
+    }
+
+    public boolean userHasLiked() {
+        String username = MySession.getKorisnik().getUsername();
+        for (RestoranLike like :
+                getLajkovi()) {
+            if (like.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean toggleLike() {
+        String username = MySession.getKorisnik().getUsername();
+        for (RestoranLike like :
+                getLajkovi()) {
+            if (like.getUsername().equals(username)) {
+                getLajkovi().remove(like);
+                return false;
+            }
+        }
+        getLajkovi().add(new RestoranLike(MySession.getKorisnik()));
+        return true;
     }
 }

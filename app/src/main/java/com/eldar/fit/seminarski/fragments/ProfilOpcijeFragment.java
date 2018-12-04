@@ -31,6 +31,8 @@ import java.util.List;
 
 public class ProfilOpcijeFragment extends Fragment {
 
+    public static String Tag = "profilOpcijeFragment";
+
     private Button btnProfilSettingsQuestion;
     private Button btnProfilSettingsAdresa;
     private Button btnProfilSettingsSlika;
@@ -82,7 +84,7 @@ public class ProfilOpcijeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MyFragmentHelper.dodajDialog((AppCompatActivity)getActivity(),
-                        "dlgPromijeniAdresu",
+                        ProfilPromijeniAdresuDialogFragment.Tag,
                         ProfilPromijeniAdresuDialogFragment.newInstance());
             }
         });
@@ -92,7 +94,7 @@ public class ProfilOpcijeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MyFragmentHelper.dodajDialog((AppCompatActivity)getActivity(),
-                        "dlgPromijeniSliku",
+                        ProfilPromijeniAdresuDialogFragment.Tag,
                         ProfilPromijeniSlikuDialogFragment.newInstance());
             }
         });
@@ -102,7 +104,7 @@ public class ProfilOpcijeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MyFragmentHelper.dodajDialog((AppCompatActivity)getActivity(),
-                        "dlgPromijeniLozinku",
+                        ProfilPromijeniAdresuDialogFragment.Tag,
                         ProfilPromijeniLozinkuDialogFragment.newInstance());
             }
         });

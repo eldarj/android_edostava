@@ -28,6 +28,8 @@ import java.util.List;
 
 public class ProfilPromijeniAdresuDialogFragment extends DialogFragment {
 
+    public static String Tag = "profilPromijeniAdresuDialogFragment";
+
     private TextInputEditText textProfilOpcijeAdresaNew;
     private Spinner spinnerProfilOpcijeAdresaBlok;
     private Button btnProfilAdresaOdustani;
@@ -151,7 +153,7 @@ public class ProfilPromijeniAdresuDialogFragment extends DialogFragment {
 
             spinnerProfilOpcijeAdresaBlok.setSelection(blokPodaci.indexOf(korisnik.getLokacija()));
         } else {
-            Snackbar.make(getActivity().findViewById(android.R.id.content),
+            Snackbar.make(getActivity().findViewById(R.id.fragmentContainer),
                     errorMessage != null ? errorMessage : "Dogodila se greška.",
                     Snackbar.LENGTH_LONG).show();
         }
