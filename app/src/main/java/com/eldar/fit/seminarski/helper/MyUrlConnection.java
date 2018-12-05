@@ -2,6 +2,9 @@ package com.eldar.fit.seminarski.helper;
 
 import android.util.Log;
 
+import com.eldar.fit.seminarski.data.AuthLogin;
+import com.eldar.fit.seminarski.data.KorisnikVM;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,9 +13,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 public class MyUrlConnection {
@@ -40,6 +41,10 @@ public class MyUrlConnection {
             urlConnection.setRequestProperty("Accept", contentType);
             urlConnection.setRequestProperty("Accept-Charset", charset);
             urlConnection.setRequestProperty("User-Agent", "Mozilla/5.0");
+
+            KorisnikVM korisnik = MySession.getKorisnik();
+            urlConnection.setRequestProperty("MyAuthToken", korisnik != null ? korisnik.getToken() : "");
+
             urlConnection.setRequestMethod(httpMethod.toString());
 
 
