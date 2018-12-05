@@ -31,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Spinner spinnerBlok;
     private Button btnRegister, btnOpenLogin;
     private ProgressBar progressBar_blokSpinner;
-    private ProgressBar progressBar_login;
+    private ProgressBar progressBar_register;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         progressBar_blokSpinner = findViewById(R.id.progressBar_blokSpinner);
-        progressBar_login = findViewById(R.id.progressBar_login);
+        progressBar_register = findViewById(R.id.progressBar_register);
 
         inputUsername = findViewById(R.id.inputRegisterUsername);
         inputPassword = findViewById(R.id.inputRegisterPassword);
@@ -166,7 +166,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
     private void loginUser(@Nullable KorisnikVM korisnik, @Nullable Integer statusCode, @Nullable String errorMessage) {
-        progressBar_login.setVisibility(View.INVISIBLE);
+        progressBar_register.setVisibility(View.INVISIBLE);
 
         if (korisnik == null) {
             Snackbar.make(findViewById(android.R.id.content),

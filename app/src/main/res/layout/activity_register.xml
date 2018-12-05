@@ -134,6 +134,10 @@
             android:layout_height="wrap_content"
             android:text="@string/login"/>
 
+        <ProgressBar
+            android:id="@+id/progressBar_register"
+            style="@style/AppTheme.ProgressBar.Medium"
+            android:visibility="invisible" />
 
     </LinearLayout>
 </ScrollView>

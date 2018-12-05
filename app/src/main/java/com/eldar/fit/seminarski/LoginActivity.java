@@ -121,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
         progressBar_login.setVisibility(View.INVISIBLE);
         if (korisnik == null) {
             Snackbar.make(findViewById(android.R.id.content),
-                    errorMessage != null ? errorMessage : getString(R.string.wrong_credentials) ,
+                    getString(R.string.wrong_credentials) ,
                     Snackbar.LENGTH_LONG).show();
         } else {
             MySession.setKorisnik(korisnik);

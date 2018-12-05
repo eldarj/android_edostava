@@ -44,4 +44,5 @@
     <string name="login_error_username">Polje Username ne smije biti prazno ili manje od 4 karaktera.</string>
     <string name="input_podaci_invalid">Molimo provjerite podatke</string>
     <string name="input_komentar_error">Komentar ne smije sadržati manje od 5 karaktera.</string>
+    <string name="login">Login</string>
 </resources>

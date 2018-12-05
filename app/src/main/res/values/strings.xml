@@ -55,9 +55,8 @@
     <string name="input_komentar_error">Komentar ne smije sadržati manje od 5 karaktera.</string>
     <string name="wrong_credentials">Pogrešan username ili password.</string>
     <string name="input_podaci_invalid">Molimo provjerite podatke</string>
-    <string name="api_load_ponovo">Ponovo</string>
+    <string name="api_load_ponovo">Refresh</string>
     <string name="uspjesna_registracija">Uspješno ste se registrovali</string>
-    <string name="login">Login</string>
     <string name="nemate_racun">Nemate račun?</string>
     <string name="registrujte_se">Registrujte se</string>
     <string name="dogodila_se_greska">Dogodila se greška.</string>

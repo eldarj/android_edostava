@@ -5,9 +5,9 @@
     android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="@dimen/login_page_margin"
-    android:layout_marginTop="@dimen/login_page_margin"
-    android:layout_marginRight="@dimen/login_page_margin"
+    android:layout_marginLeft="@dimen/page_margin_large"
+    android:layout_marginTop="@dimen/page_margin_large"
+    android:layout_marginRight="@dimen/page_margin_large"
     android:orientation="vertical"
     tools:context="com.eldar.fit.seminarski.LoginActivity">
 
