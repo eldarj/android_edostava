@@ -12,7 +12,7 @@ public class MySession {
     private static String SHARED_PREFS_STORAGE_NAME = "DatotekaZaSharedPreferences";
     private static String PREF_LOGGED_USER = "LoginraniUser";
     private static String PREF_KORPA = "MojaKorpa";
-    private static AuthLogin authObj;
+    private static AuthLogin authLogin;
 
     public static Korpa getKorpa() {
         Korpa korpa;
@@ -41,9 +41,9 @@ public class MySession {
         editor.apply();
     }
 
-    public static AuthLogin getApiAuthObj() {
-        if (authObj != null) {
-            return authObj;
+    public static AuthLogin getAuthLogin() {
+        if (authLogin != null) {
+            return authLogin;
         }
 
         KorisnikVM korisnik = getKorisnik();
@@ -51,8 +51,8 @@ public class MySession {
             return null;
         }
 
-        authObj = new AuthLogin(korisnik);
-        return authObj;
+        authLogin = new AuthLogin(korisnik);
+        return authLogin;
     }
 
     public static KorisnikVM getKorisnik() {
