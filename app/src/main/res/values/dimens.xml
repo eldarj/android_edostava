@@ -24,4 +24,5 @@
 
     <dimen name="page_margin_large">64dp</dimen>
     <dimen name="page_margin_semilarge">32dp</dimen>
+    <item name="appbar_translation_z" type="dimen" format="float">2.5dp</item>
 </resources>

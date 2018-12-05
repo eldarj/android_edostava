@@ -13,20 +13,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.eldar.fit.seminarski.data.AuthLogin;
-import com.eldar.fit.seminarski.data.api.request.models.NewNarudzbaRequest;
 import com.eldar.fit.seminarski.fragments.KorpaFragment;
-import com.eldar.fit.seminarski.fragments.ProfilNarudzbeFragment;
 import com.eldar.fit.seminarski.fragments.RestoranListFragment;
 import com.eldar.fit.seminarski.helper.MyAbstractRunnable;
 import com.eldar.fit.seminarski.helper.MyApiRequest;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
 import com.eldar.fit.seminarski.helper.MySession;
-import com.eldar.fit.seminarski.helper.MyUrlConnection;
 
 public class GlavniActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -144,10 +138,19 @@ public class GlavniActivity extends AppCompatActivity
         } else if (id == R.id.nav_profile) {
             startActivity(new Intent(this, ProfilActivity.class));
         } else if (id == R.id.nav_logout) {
-            MySession.setKorisnik(null);
-            MySession.setKorpa(null);
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
+
+            MyApiRequest.get(MyApiRequest.ENDPOINT_USER_LOGOUT, new MyAbstractRunnable<Object>() {
+                @Override
+                public void run(Object o) {
+                    onLogout(null, null);
+                }
+
+                @Override
+                public void error(@Nullable Integer statusCode, @Nullable String errorMessage) {
+                    onLogout(statusCode, errorMessage);
+                }
+            });
+
         }
 
         navigationView.setCheckedItem(item);
@@ -155,5 +158,15 @@ public class GlavniActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void onLogout(Integer statusCode, String errorMessage) {
+        // Ako se desi greška na logout, izbaci sve podatke iz sharedprefs.
+            // nećemo hendlati grešku, jer u slučaju greške na serveru će samo ostati neiskoristiv token u bazi
+        Snackbar.make(findViewById(R.id.content), "Uspješan logout", Snackbar.LENGTH_SHORT).show();
+        MySession.setKorisnik(null);
+        MySession.setKorpa(null);
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 }
