@@ -67,8 +67,12 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(BUNDLE_KEY_USERNAME, inputUsername.getText().toString());
-        outState.putString(BUNDLE_KEY_PASSWORD, inputPassword.getText().toString());
+        try {
+            outState.putString(BUNDLE_KEY_USERNAME, inputUsername.getText().toString());
+            outState.putString(BUNDLE_KEY_PASSWORD, inputPassword.getText().toString());
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
     }
 
     private void do_btnOpenRegistrationClick() {
@@ -79,19 +83,19 @@ public class LoginActivity extends AppCompatActivity {
         MyUtils.dismissKeyboard(this);
         progressBar_login.setVisibility(View.VISIBLE);
 
-        if (inputPassword == null || inputPassword.length() < 3) {
+        if (inputPassword.length() < 3) {
             inputPassword.setError(getString(R.string.login_error_password));
         } else {
             inputPassword.setError(null); // Clear the error
         }
-        if (inputUsername == null || inputUsername.length() < 3) {
+        if (inputUsername.length() < 3) {
             inputUsername.setError(getString(R.string.login_error_username));
         } else {
             inputUsername.setError(null); // Clear the error
         }
 
         if (inputUsername.getError() != null || inputPassword.getError() != null) {
-            Snackbar.make(findViewById(android.R.id.content), "Molimo provjerite podatke!", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(findViewById(android.R.id.content), R.string.input_podaci_invalid, Snackbar.LENGTH_LONG).show();
             findViewById(R.id.progressBar_login).setVisibility(View.INVISIBLE);
             return;
         }
