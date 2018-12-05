@@ -63,7 +63,7 @@ public class ProfilPromijeniAdresuDialogFragment extends DialogFragment {
 
         spinnerProfilOpcijeAdresaBlok = view.findViewById(R.id.spinnerProfilOpcijeAdresaBlok);
 
-        MyApiRequest.get(getActivity(), MyApiRequest.ENDPOINT_LOCATIONS, new MyAbstractRunnable<ApiBlokList>() {
+        MyApiRequest.get(MyApiRequest.ENDPOINT_LOCATIONS, new MyAbstractRunnable<ApiBlokList>() {
             @Override
             public void run(ApiBlokList apiBlokList) {
                 List<String> blokPodaci = ApiResponseHandler.getStringListBlokovi(apiBlokList);
@@ -94,7 +94,7 @@ public class ProfilPromijeniAdresuDialogFragment extends DialogFragment {
 
                 if (textProfilOpcijeAdresaNew == null || textProfilOpcijeAdresaNew.length() <= 4) {
                     textProfilOpcijeAdresaNew.setError(getString(R.string.profil_error_adresa));
-                    Snackbar.make(getView(), "Molimo provjerite unesene podatke!" , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(), getString(R.string.input_podaci_invalid) , Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -102,16 +102,14 @@ public class ProfilPromijeniAdresuDialogFragment extends DialogFragment {
                 userPostObj.setAdresa(textProfilOpcijeAdresaNew.getText().toString());
                 userPostObj.setBlokID(ApiResponseHandler.getBlokovi().get(spinnerProfilOpcijeAdresaBlok.getSelectedItemPosition()).getId());
 
-                MyApiRequest.post(getActivity(), MyApiRequest.ENDPOINT_USER_UPDATE_AUTH, userPostObj, new MyAbstractRunnable<KorisnikVM>() {
+                MyApiRequest.post(MyApiRequest.ENDPOINT_USER_UPDATE_AUTH, userPostObj, new MyAbstractRunnable<KorisnikVM>() {
                     @Override
                     public void run(KorisnikVM korisnikVM) {
-                        Log.i("Test", "run, result: " + korisnikVM.getAdresa());
                         updateLokacija(korisnikVM, null, null);
                     }
 
                     @Override
                     public void error(@Nullable Integer statusCode, @Nullable String errorMessage) {
-                        Log.i("Test", "run, result: " + statusCode + errorMessage);
                         updateLokacija(null, statusCode, errorMessage);
                     }
                 });
@@ -127,10 +125,10 @@ public class ProfilPromijeniAdresuDialogFragment extends DialogFragment {
         }
 
         if (korisnik == null) {
-            Snackbar.make(getView(), "Dogodila s greška, provjerite podatke i pokušajte ponovo." , Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.dogodila_se_greska_provjerite_i_ponovite) , Snackbar.LENGTH_SHORT).show();
         } else {
             MySession.setKorisnik(korisnik);
-            Snackbar.make(getView(), "Uspješno ste sačuvali adresu!" , Snackbar.LENGTH_SHORT).addCallback(new Snackbar.Callback() {
+            Snackbar.make(getView(), R.string.profil_adresa_success , Snackbar.LENGTH_SHORT).addCallback(new Snackbar.Callback() {
                 @Override
                 public void onDismissed(Snackbar transientBottomBar, int event) {
                     getDialog().dismiss();
@@ -155,7 +153,7 @@ public class ProfilPromijeniAdresuDialogFragment extends DialogFragment {
         } else {
             try {
                 Snackbar.make(getActivity().findViewById(R.id.fragmentContainer),
-                        errorMessage != null ? errorMessage : "Dogodila se greška.",
+                        getString(R.string.dogodila_se_greska_provjerite_i_ponovite),
                         Snackbar.LENGTH_LONG).show();
             } catch (Exception e) {
                 e.printStackTrace();

@@ -4,11 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -40,15 +36,11 @@ public class ProfilInfoFragment extends Fragment {
     private TextView chipProfilUkupnoNarudzbi;
     private TextView chipProfilZadnjiLogin;
     private Button btnProfilMojeNarudzbe;
-    private Button btnProfilClose;
     private Toolbar myToolbar;
-    private ImageView imageProfilFullScreen;
-    private LinearLayout imageProfilFullscreenHolder;
 
 
     public static ProfilInfoFragment newInstance() {
         ProfilInfoFragment fragment = new ProfilInfoFragment();
-
         return fragment;
     }
 
@@ -60,7 +52,7 @@ public class ProfilInfoFragment extends Fragment {
         KorisnikVM korisnik = MySession.getKorisnik();
 
         textProfilImePrezimeHeader = view.findViewById(R.id.textProfilImePrezimeHeader);
-        textProfilImePrezimeHeader.setText(korisnik.getIme() + " " + korisnik.getPrezime());
+        textProfilImePrezimeHeader.setText(korisnik.getImePrezime());
 
         imageProfil = view.findViewById(R.id.imageProfilHeader);
         Glide.with(getActivity())
@@ -69,22 +61,22 @@ public class ProfilInfoFragment extends Fragment {
                 .into(imageProfil);
 
         textProfilImePrezime = view.findViewById(R.id.textProfilImePrezime);
-        textProfilImePrezime.setText(korisnik.getIme() + " " + korisnik.getPrezime());
+        textProfilImePrezime.setText(korisnik.getImePrezime());
 
         textProfilAdresa = view.findViewById(R.id.textProfilAdresa);
-        textProfilAdresa.setText(korisnik.getAdresa() + ", " + korisnik.getLokacija());
+        textProfilAdresa.setText(korisnik.getAdresaLokacija());
 
         textProfilUsername = view.findViewById(R.id.textProfilUsername);
-        textProfilUsername.setText("Username " + korisnik.getUsername());
+        textProfilUsername.setText(getString(R.string.profil_username, korisnik.getUsername()));
 
         textProfilDatumRegistracije = view.findViewById(R.id.textProfilDatumRegistracije);
-        textProfilDatumRegistracije.setText("Datum registracije " + korisnik.getDatumRegistracije());
+        textProfilDatumRegistracije.setText(getString(R.string.profil_datum_registracije, korisnik.getDatumRegistracije()));
 
         chipProfilUkupnoNarudzbi = view.findViewById(R.id.chipProfilUkupnoNarudzbi);
-        chipProfilUkupnoNarudzbi.setText("Ukupno narudžbi " + korisnik.getNarudzbeCount());
+        chipProfilUkupnoNarudzbi.setText(getString(R.string.profil_ukupno_narudzbi, korisnik.getNarudzbeCount()));
 
         chipProfilZadnjiLogin = view.findViewById(R.id.chipProfilZadnjiLogin);
-        chipProfilZadnjiLogin.setText("Zadnji put logiran  " + korisnik.getZadnjiLogin());
+        chipProfilZadnjiLogin.setText(getString(R.string.profil_zadnji_login, korisnik.getZadnjiLogin()));
 
         btnProfilMojeNarudzbe = view.findViewById(R.id.btnProfilMojeNarudzbe);
         btnProfilMojeNarudzbe.setOnClickListener(new View.OnClickListener() {

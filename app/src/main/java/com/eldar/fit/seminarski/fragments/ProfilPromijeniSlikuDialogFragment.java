@@ -3,7 +3,6 @@ package com.eldar.fit.seminarski.fragments;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -23,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.eldar.fit.seminarski.R;
@@ -33,7 +31,6 @@ import com.eldar.fit.seminarski.data.KorisnikVM;
 import com.eldar.fit.seminarski.helper.MyAbstractRunnable;
 import com.eldar.fit.seminarski.helper.MyApiRequest;
 import com.eldar.fit.seminarski.helper.MySession;
-import com.eldar.fit.seminarski.helper.MyUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -85,9 +82,7 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
                 byte[] imageBytes = byteStream.toByteArray();
                 String encodeImageBytes = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
-                Log.i("Test", "encoded bytes" + encodeImageBytes);
-
-                MyApiRequest.post(getActivity(), MyApiRequest.ENDPOINT_USER_UPLOAD_IMAGE,
+                MyApiRequest.post(MyApiRequest.ENDPOINT_USER_UPLOAD_IMAGE,
                         new ApiUserImage(encodeImageBytes, korisnik.getUsername(), new AuthLogin(korisnik.getUsername(), korisnik.getPassword())),
                         new MyAbstractRunnable<String>() {
                     @Override
@@ -115,15 +110,15 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 final android.support.v7.app.AlertDialog.Builder dlgBuilder = new AlertDialog.Builder((AppCompatActivity)getActivity(), R.style.Theme_MaterialComponents_Light_Dialog_Alert);
-                dlgBuilder.setMessage("Izaberite postojeću sliku iz galerije ili napravite novu?")
-                        .setPositiveButton("Galerija", new DialogInterface.OnClickListener() {
+                dlgBuilder.setMessage(R.string.profil_slika_izbor)
+                        .setPositiveButton(R.string.profil_slika_galerija, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 imageProfilFromGallery();
                                 izborDialog = dialog;
                             }
                         })
-                        .setNegativeButton("Kamera", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.profil_slika_kamera, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 imageProfilCameraCapture();
@@ -151,7 +146,7 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
             korisnik.setImageUrl(imagePath);
             MySession.setKorisnik(korisnik);
 
-            Snackbar.make(view, "Uspješno ste promijenili sliku!" , Snackbar.LENGTH_SHORT).addCallback(new Snackbar.Callback() {
+            Snackbar.make(view, R.string.profil_slika_changed , Snackbar.LENGTH_SHORT).addCallback(new Snackbar.Callback() {
                 @Override
                 public void onDismissed(Snackbar transientBottomBar, int event) {
                     getDialog().dismiss();
@@ -160,7 +155,7 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
 
         } else {
             Snackbar.make(getActivity().findViewById(android.R.id.content),
-                    errorMessage != null ? errorMessage : "Dogodila se greška, pokušajte ponovo.",
+                    errorMessage != null ? errorMessage : getString(R.string.dogodila_se_greska_slika),
                     Snackbar.LENGTH_LONG).show();
         }
     }
@@ -196,7 +191,7 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
 
                 is.close();
             } catch (Exception e) {
-                Snackbar.make(view, "Dogodila se greška, pokušajte ponovo.", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(view, getString(R.string.dogodila_se_greska_slika), Snackbar.LENGTH_LONG).show();
                 e.printStackTrace();
             }
         }

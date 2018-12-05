@@ -66,9 +66,8 @@ public class ProfilOpcijeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder dlgBuilder = new AlertDialog.Builder((AppCompatActivity)getActivity(), R.style.Theme_MaterialComponents_Light_Dialog_Alert);
-                dlgBuilder.setTitle("Licencni ugovor")
-                        .setMessage("Korisnik alikacije eDostava! je dužan isporučiti ispravne korisničke podatke i adresu. " +
-                                "\n\nKorisnik pri kreiranju narudžbe garantuje dostavljaču da će preuzeti narudžbu u naznačenom vremenu i platiti naznačeni iznos.")
+                dlgBuilder.setTitle(R.string.fake_licence_terms)
+                        .setMessage(R.string.fake_licence_terms_text)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -114,16 +113,16 @@ public class ProfilOpcijeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder dlgBuilder = new AlertDialog.Builder((AppCompatActivity)getActivity(), R.style.Theme_MaterialComponents_Light_Dialog_Alert);
-                dlgBuilder.setTitle("Izbriši korisnički račun")
-                        .setMessage("Da li ste sigurni da želite izbrisati korisnički račun?" +
-                                "\n\nTrenutne sačuvane preference i korisnički podaci će biti trajno uklonjeni sa sistema, te nećete moći više koristiti aplikaciju eDostava!")
-                        .setPositiveButton("Da, Izbriši račun", new DialogInterface.OnClickListener() {
+                dlgBuilder.setTitle(R.string.profil_delete_account)
+                        .setMessage(getString(R.string.profil_delete_account_confirm) +
+                                getString(R.string.profil_delete_account_desc))
+                        .setPositiveButton(R.string.profil_delete_account_confirm_btn, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 AuthRegister userPostObj = new AuthRegister();
                                 userPostObj.setId(korisnik.getId());
 
-                                MyApiRequest.post(getActivity(), MyApiRequest.ENDPOINT_USER_DELETE_AUTH, userPostObj, new MyAbstractRunnable<Object>() {
+                                MyApiRequest.post(MyApiRequest.ENDPOINT_USER_DELETE_AUTH, userPostObj, new MyAbstractRunnable<Object>() {
                                     @Override
                                     public void run(Object o) {
                                         onAccountDeleted(dialog,204, null);
@@ -136,7 +135,7 @@ public class ProfilOpcijeFragment extends Fragment {
                                 });
                             }
                         })
-                        .setNegativeButton("NE", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.profil_delete_account_cancel_btn, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -156,7 +155,7 @@ public class ProfilOpcijeFragment extends Fragment {
         }
 
         if (statusCode == 204) {
-            Snackbar.make(getView(), "Uspješno ste izbrisali korisnički račun!" , Snackbar.LENGTH_LONG).addCallback(new Snackbar.Callback() {
+            Snackbar.make(getView(), R.string.profil_delete_account_success , Snackbar.LENGTH_LONG).addCallback(new Snackbar.Callback() {
                 @Override
                 public void onDismissed(Snackbar transientBottomBar, int event) {
                     dialog.dismiss();
@@ -170,7 +169,7 @@ public class ProfilOpcijeFragment extends Fragment {
             }).show();
 
         } else {
-            Snackbar.make(getView(), "Dogodila s greška, pokušajte ponovo." , Snackbar.LENGTH_LONG).show();
+            Snackbar.make(getView(), getString(R.string.dogodila_se_greska_provjerite_i_ponovite) , Snackbar.LENGTH_LONG).show();
         }
     }
 }

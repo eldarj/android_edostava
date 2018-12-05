@@ -1,8 +1,6 @@
 package com.eldar.fit.seminarski.fragments;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -94,7 +92,7 @@ public class ProfilNarudzbeFragment extends Fragment {
 
         listViewNarudzbe = view.findViewById(R.id.listViewNarudzbe);
         AuthLogin credentialsObj = new AuthLogin(MySession.getKorisnik().getUsername(), MySession.getKorisnik().getPassword());
-        MyApiRequest.post(getActivity(), MyApiRequest.ENDPOINT_NARUDZBE, credentialsObj, new MyAbstractRunnable<NarudzbaPrikazVM>() {
+        MyApiRequest.post(MyApiRequest.ENDPOINT_NARUDZBE, credentialsObj, new MyAbstractRunnable<NarudzbaPrikazVM>() {
             @Override
             public void run(NarudzbaPrikazVM narudzbaPrikazVM) {
                 onNarudzbaListReceived(narudzbaPrikazVM, null, null);
@@ -109,13 +107,11 @@ public class ProfilNarudzbeFragment extends Fragment {
         listViewNarudzbe.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("Test", "asdasdasd");
                 progressBar_narudzbaList.setVisibility(View.VISIBLE);
 
                 narudzbaIzbrisi = podaci.get(position);
                 try {
-                    MyApiRequest.post(getActivity(),
-                            String.format(MyApiRequest.ENDPOINT_NARUDZBE_STATUS, narudzbaIzbrisi.getId()),
+                    MyApiRequest.post(String.format(MyApiRequest.ENDPOINT_NARUDZBE_STATUS, narudzbaIzbrisi.getId()),
                             new AuthLogin(MySession.getKorisnik().getUsername(), MySession.getKorisnik().getPassword()),
                             new MyAbstractRunnable<String>() {
                                 @Override
@@ -154,7 +150,7 @@ public class ProfilNarudzbeFragment extends Fragment {
                     IzbrisiNarudzbuDialogFragment.newInstance(narudzbaIzbrisi, callback));
         } else {
             Snackbar.make(getActivity().findViewById(R.id.fragmentContainer),
-                    errorMessage != null ? errorMessage : "Dogodila se greška, ili je narudžba već prihvaćena.",
+                    errorMessage != null ? errorMessage : getString(R.string.dogodila_se_greska_narudzba_prihvacena),
                     Snackbar.LENGTH_LONG).show();
         }
     }
@@ -171,7 +167,7 @@ public class ProfilNarudzbeFragment extends Fragment {
             popuniPodatke();
         } else {
             Snackbar.make(getActivity().findViewById(R.id.content),
-                    errorMessage != null ? errorMessage : "Dogodila se greška.",
+                    getString(R.string.dogodila_se_greska),
                     Snackbar.LENGTH_LONG).show();
         }
     }
@@ -225,7 +221,7 @@ public class ProfilNarudzbeFragment extends Fragment {
                 textStavkaNarudzbaDatum.setText("Datum kreiranja " + n.getDatumNapravljenaString());
 
                 TextView textStavkaNarudzbaCijena = view.findViewById(R.id.textStavkaNarudzbaCijena);
-                textStavkaNarudzbaCijena.setText(String.format("%1$,.2f KM", n.getUkupnaCijena()));
+                textStavkaNarudzbaCijena.setText(getString(R.string.cijena_double, n.getUkupnaCijena()));
 
                 TextView textStavkaNarudzbaStatus = view.findViewById(R.id.textStavkaNarudzbaStatus);
                 textStavkaNarudzbaStatus.setText(n.getStatus());

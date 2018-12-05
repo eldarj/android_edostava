@@ -72,7 +72,7 @@ public class ProfilPromijeniLozinkuDialogFragment extends DialogFragment {
                 if (textProfilOpcijeLozinkaTrenutna == null ||
                         !korisnik.correctLozinka(textProfilOpcijeLozinkaTrenutna.getText().toString())) {
                     // iftrue:
-                    textProfilOpcijeLozinkaTrenutna.setError("Netačna lozinka!");
+                    textProfilOpcijeLozinkaTrenutna.setError(getString(R.string.profil_netacna_lozinka));
                 } else {
                     textProfilOpcijeLozinkaTrenutna.setError(null);
                 }
@@ -83,8 +83,8 @@ public class ProfilPromijeniLozinkuDialogFragment extends DialogFragment {
                         textProfilOpcijeLozinkaNewPonovo.length() < 6  ||
                         !textProfilOpcijeLozinkaNew.getText().toString().equals(textProfilOpcijeLozinkaNewPonovo.getText().toString())) {
                     // iftrue:
-                    textProfilOpcijeLozinkaNew.setError("Polje ne smije biti prazno, manje od 6 karaktera ili se lozinke ne podudaraju!");
-                    textProfilOpcijeLozinkaNewPonovo.setError("Polje ne smije biti prazno, manje od 6 karaktera ili se lozinke ne podudaraju!");
+                    textProfilOpcijeLozinkaNew.setError(getString(R.string.profil_nova_lozinka_error));
+                    textProfilOpcijeLozinkaNewPonovo.setError(getString(R.string.profil_nova_lozinka_ponovo_error));
                 } else {
                     textProfilOpcijeLozinkaNew.setError(null);
                     textProfilOpcijeLozinkaNewPonovo.setError(null);
@@ -93,7 +93,7 @@ public class ProfilPromijeniLozinkuDialogFragment extends DialogFragment {
                 if (textProfilOpcijeLozinkaTrenutna.getError() != null ||
                     textProfilOpcijeLozinkaNew.getError() != null ||
                     textProfilOpcijeLozinkaNewPonovo.getError() != null) {
-                    Snackbar.make(getView(), "Molimo provjerite unesene podatke!", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(), getString(R.string.input_podaci_invalid), Snackbar.LENGTH_SHORT).show();
 
                     if (view.findViewById(R.id.progressBar_snimiPromjene) != null) {
                         view.findViewById(R.id.progressBar_snimiPromjene).setVisibility(View.INVISIBLE);
@@ -105,16 +105,14 @@ public class ProfilPromijeniLozinkuDialogFragment extends DialogFragment {
                 AuthRegister userPostObj = new AuthRegister(korisnik);
                 userPostObj.setPassword(textProfilOpcijeLozinkaNew.getText().toString());
 
-                MyApiRequest.post(getActivity(), MyApiRequest.ENDPOINT_USER_UPDATE_AUTH, userPostObj, new MyAbstractRunnable<KorisnikVM>() {
+                MyApiRequest.post(MyApiRequest.ENDPOINT_USER_UPDATE_AUTH, userPostObj, new MyAbstractRunnable<KorisnikVM>() {
                     @Override
                     public void run(KorisnikVM korisnikVM) {
-                        Log.i("Test", "run, result: " + korisnikVM.getAdresa());
                         updatePassword(korisnikVM, null, null);
                     }
 
                     @Override
                     public void error(@Nullable Integer statusCode, @Nullable String errorMessage) {
-                        Log.i("Test", "run, result: " + statusCode + errorMessage);
                         updatePassword(null, statusCode, errorMessage);
                     }
                 });
@@ -130,10 +128,10 @@ public class ProfilPromijeniLozinkuDialogFragment extends DialogFragment {
         }
 
         if (korisnik == null) {
-            Snackbar.make(getView(), "Dogodila s greška, provjerite podatke i pokušajte ponovo." , Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(), R.string.dogodila_se_greska_provjerite_i_ponovite , Snackbar.LENGTH_SHORT).show();
         } else {
             MySession.setKorisnik(korisnik);
-            Snackbar.make(getView(), "Uspješno ste promijenili lozinku!" , Snackbar.LENGTH_SHORT).addCallback(new Snackbar.Callback() {
+            Snackbar.make(getView(), R.string.profil_lozinka_success , Snackbar.LENGTH_SHORT).addCallback(new Snackbar.Callback() {
                 @Override
                 public void onDismissed(Snackbar transientBottomBar, int event) {
                     getDialog().dismiss();
