@@ -37,4 +37,8 @@
     <dimen name="stavka_img_height">50dp</dimen>
     <dimen name="stavka_firstline_textsize">16sp</dimen>
     <dimen name="stavka_endpart_width">24dp</dimen>
+    <dimen name="restoran_info_section_title_textsize">15sp</dimen>
+    <dimen name="section_restoran_info_padding_bottom">8dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="stavka_super_textsize">12sp</dimen>
 </resources>

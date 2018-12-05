@@ -71,4 +71,9 @@
     <string name="prazna_lista_omiljeni_restorani">Niste niti jedan restoran dodali u omiljene.</string>
     <string name="cijena_double">%1$,.2f KM</string>
     <string name="empty_list_hrana">Nema hrane</string>
+    <string name="section_restoran_info_kontakt">Kontakt</string>
+    <string name="section_restoran_info_opis">Restoran opis</string>
+    <string name="dogodila_se_greska_posalji_komentar_ponovo">Pokusajte poslati komentar ponovo</string>
+    <string name="btn_komentar_posalji">Napiši</string>
+    <string name="empty_list_komentari">Budite prvi ko će napisati komentar.</string>
 </resources>

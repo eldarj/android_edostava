@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:paddingTop="16dp"
+    android:paddingTop="@dimen/padding_regular"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -13,11 +14,12 @@
         <android.support.design.widget.TextInputLayout
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/inputRestoranKomentarText"
-                android:hint="Napiši komentar..."
+                android:hint="Napiši komentar podijelite iskustvo o restoranu"
                 android:textSize="14dp"
                 android:paddingTop="14dp"
                 style="@style/Widget.MaterialComponents.TextInputEditText.FilledBox"
@@ -25,21 +27,51 @@
                 android:layout_height="wrap_content" />
 
         </android.support.design.widget.TextInputLayout>
-        <Button
-            android:id="@+id/btnRestoranKomentarNapisi"
-            android:text="Napiši"
-            style="@style/AppTheme.TextButton.Small"
+
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnRestoranKomentarNapisi"
+                android:text="@string/btn_komentar_posalji"
+                style="@style/AppTheme.TextButton.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ProgressBar
+                android:id="@+id/progressBar_komentariList"
+                style="@style/AppTheme.ProgressBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 
     <View style="@style/Divider.Small.NoBottom"/>
 
-    <ListView
-        android:id="@+id/listViewRestoraniRecenzije"
-        android:layout_height="match_parent"
-        android:nestedScrollingEnabled="true"
-        android:layout_width="wrap_content"></ListView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/komentariNoData"
+            android:text="@string/empty_list_komentari"
+            android:gravity="center"
+            android:paddingTop="50dp"
+            android:paddingBottom="50dp"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ListView
+            android:id="@+id/listViewRestoraniRecenzije"
+            android:layout_height="match_parent"
+            android:nestedScrollingEnabled="true"
+            android:layout_width="wrap_content"></ListView>
+    </RelativeLayout>
+
 
 </LinearLayout>

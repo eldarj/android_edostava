@@ -1,12 +1,10 @@
 package com.eldar.fit.seminarski;
 
 import android.support.annotation.NonNull;
-import android.support.design.card.MaterialCardView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.animation.Animation;
 
 import com.eldar.fit.seminarski.fragments.KorpaFragment;
 import com.eldar.fit.seminarski.fragments.RestoranJelovnikFragment;
@@ -52,9 +50,7 @@ public class RestoranDetaljnoActivity extends AppCompatActivity {
         bottomnavigationRestoranDetaljno.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int kliknutiTabId = menuItem.getItemId();
-
-                switch(kliknutiTabId) {
+                switch(menuItem.getItemId()) {
                     case R.id.nav_bottom_restoran_jelovnik:
                         MyFragmentHelper.fragmentReplace(RestoranDetaljnoActivity.this,
                                 R.id.fragmentContainer,
