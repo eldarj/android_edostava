@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.eldar.fit.seminarski.data.AuthLogin;
 import com.eldar.fit.seminarski.data.KorisnikVM;
@@ -27,11 +28,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextInputEditText inputUsername, inputPassword;
     private Button btnLogin, btnOpenRegistration;
+    private ProgressBar progressBar_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        progressBar_login = findViewById(R.id.progressBar_login);
 
         inputUsername = findViewById(R.id.inputLoginUsername);
         inputPassword = findViewById(R.id.inputLoginPassword);
@@ -52,35 +56,19 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        if (savedInstanceState != null
-            && savedInstanceState.containsKey(BUNDLE_KEY_USERNAME)) {
+        if (savedInstanceState.containsKey(BUNDLE_KEY_USERNAME)) {
             inputUsername.setText(BUNDLE_KEY_USERNAME);
         }
-        if (savedInstanceState != null
-            && savedInstanceState.containsKey(BUNDLE_KEY_USERNAME)) {
+        if (savedInstanceState.containsKey(BUNDLE_KEY_USERNAME)) {
             inputPassword.setText(BUNDLE_KEY_PASSWORD);
         }
-
-        MyApiRequest.get(this, ENDPOINT_RESTORANI, new MyAbstractRunnable<String>() {
-            @Override
-            public void run(String o) {
-                Log.i("Test", "TRY THIS:" + o);
-            }
-
-            @Override
-            public void error(@Nullable Integer statusCode, @Nullable String errorMessage) {
-                Log.i("Test", "TRY THIS: " + statusCode + errorMessage);
-            }
-        });
-
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
         outState.putString(BUNDLE_KEY_USERNAME, inputUsername.getText().toString());
         outState.putString(BUNDLE_KEY_PASSWORD, inputPassword.getText().toString());
-        Log.i("TEST", "onSaveInstanceState from Login");
-        super.onSaveInstanceState(outState);
     }
 
     private void do_btnOpenRegistrationClick() {
@@ -89,14 +77,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void do_btnLoginClick() {
         MyUtils.dismissKeyboard(this);
-        findViewById(R.id.progressBar_login).setVisibility(View.VISIBLE);
+        progressBar_login.setVisibility(View.VISIBLE);
 
-        if (inputPassword == null || inputPassword.length() <= 4) {
+        if (inputPassword == null || inputPassword.length() < 3) {
             inputPassword.setError(getString(R.string.login_error_password));
         } else {
             inputPassword.setError(null); // Clear the error
         }
-        if (inputUsername == null || inputUsername.length() <= 4) {
+        if (inputUsername == null || inputUsername.length() < 3) {
             inputUsername.setError(getString(R.string.login_error_username));
         } else {
             inputUsername.setError(null); // Clear the error
@@ -121,16 +109,14 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
-        //KorisnikVM korisnik = Storage.LoginCheck(inputUsername.getText().toString(), inputPassword.getText().toString());
-        //loginUser(korisnik);
     }
 
     private void loginUser(@Nullable KorisnikVM korisnik, @Nullable Integer statusCode, @Nullable String errorMessage) {
-        if (findViewById(R.id.progressBar_login) != null) {
-            findViewById(R.id.progressBar_login).setVisibility(View.INVISIBLE);
-        }
+        progressBar_login.setVisibility(View.INVISIBLE);
         if (korisnik == null) {
-            Snackbar.make(findViewById(android.R.id.content), errorMessage != null ? errorMessage : "Pogrešan username ili password." , Snackbar.LENGTH_LONG).show();
+            Snackbar.make(findViewById(android.R.id.content),
+                    errorMessage != null ? errorMessage : getString(R.string.wrong_credentials) ,
+                    Snackbar.LENGTH_LONG).show();
         } else {
             MySession.setKorisnik(korisnik);
             startActivity(new Intent(this, GlavniActivity.class));
