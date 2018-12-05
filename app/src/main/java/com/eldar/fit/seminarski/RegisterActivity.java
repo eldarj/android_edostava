@@ -92,6 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
                     android.R.layout.simple_spinner_dropdown_item,
                     spinnerBlok);
         } else {
+            btnRegister.setEnabled(false);
             Snackbar.make(findViewById(android.R.id.content),
                     errorMessage != null ? errorMessage : getString(R.string.dogodila_se_greska),
                     Snackbar.LENGTH_INDEFINITE)
