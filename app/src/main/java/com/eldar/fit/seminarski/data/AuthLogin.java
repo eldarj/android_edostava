@@ -13,4 +13,6 @@ public class AuthLogin {
         this.username = korisnik.getUsername();
         this.password = korisnik.getPassword();
     }
+
+
 }

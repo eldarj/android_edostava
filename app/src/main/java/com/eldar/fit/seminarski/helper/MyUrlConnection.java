@@ -49,8 +49,6 @@ public class MyUrlConnection {
 
 
             if (postData != null) {
-                Log.i("Test", "postData" + postData);
-                Log.i("Test", "postToEndpoint" + urlString);
                 urlConnection.setDoOutput(true);
                 byte[] outputBytes = postData.getBytes(charset);
                 OutputStream ostream = urlConnection.getOutputStream();
@@ -60,15 +58,12 @@ public class MyUrlConnection {
             }
 
             int statusCode = urlConnection.getResponseCode();
-            Log.i("Test", "TRY URL: STATUS CODE " + statusCode);
             if (OkStatuses.contains(statusCode)) {
-                Log.i("Test", "status Ok: " + statusCode);
                 InputStream is = new BufferedInputStream(urlConnection.getInputStream());
                 String response = convertToString(is);
 
                 return MyApiResult.OK(response);
             } else {
-                Log.i("Test", "status 0");
                 InputStream is = new BufferedInputStream(urlConnection.getErrorStream());
                 String response = convertToString(is);
 
@@ -78,7 +73,6 @@ public class MyUrlConnection {
 
         } catch(Exception e) {
             e.printStackTrace();
-            Log.i("Test", "exception" + e.getMessage());
             return MyApiResult.Error(0, e.getMessage());
         } finally {
             if (urlConnection != null) {

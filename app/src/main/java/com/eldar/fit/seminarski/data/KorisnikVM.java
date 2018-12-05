@@ -2,7 +2,7 @@ package com.eldar.fit.seminarski.data;
 
 import android.util.Log;
 
-import com.eldar.fit.seminarski.helper.MyConfig;
+import com.eldar.fit.seminarski.helper.MyApiConfig;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -20,6 +20,9 @@ public class KorisnikVM implements Serializable{
 
     @SerializedName(value="password", alternate= { "Password" })
     private String password;
+
+    @SerializedName(value="token")
+    private String token;
 
     @SerializedName(value="ime", alternate= { "Ime" })
     private String ime;
@@ -82,6 +85,10 @@ public class KorisnikVM implements Serializable{
 
     public void setPassword(String password) { this.password = password; }
 
+    public String getToken() {
+        return token;
+    }
+
     public String getIme(){ return ime; }
 
     public void setIme(String value){ ime = value; }
@@ -91,7 +98,7 @@ public class KorisnikVM implements Serializable{
     public void setPrezime(String value){ prezime = value; }
 
     public String getImageUrlForDisplay() {
-        return MyConfig.APP_BASE + imageUrl;
+        return MyApiConfig.APP_BASE + imageUrl;
     }
 
     public String getImageUrl() {
@@ -155,4 +162,11 @@ public class KorisnikVM implements Serializable{
         return false;
     }
 
+    public String getImePrezime() {
+        return ime + " " + prezime;
+    }
+
+    public String getAdresaLokacija() {
+        return getAdresa() + ", " + getLokacija();
+    }
 }

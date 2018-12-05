@@ -44,7 +44,7 @@ public class MyApiRequest {
                     try {Thread.sleep(1000);} catch (Exception e) {e.printStackTrace();} // zakomentariši ovo za produkciju
 
                     String jsonPostObject = postObject == null ? null : MyGson.build().toJson(postObject);
-                    MyApiResult result = MyUrlConnection.request(MyConfig.apiBase + "/" + endpoint, httpMethod, jsonPostObject, CONTENT_TYPE_JSON);
+                    MyApiResult result = MyUrlConnection.request(MyApiConfig.apiBase + "/" + endpoint, httpMethod, jsonPostObject, CONTENT_TYPE_JSON);
 
                     return result;
                 }

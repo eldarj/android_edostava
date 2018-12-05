@@ -24,7 +24,7 @@ public class RestoranRecenzija implements Serializable {
     }
 
     public String getImageUrlForDisplay() {
-        return MyConfig.APP_BASE + imageUrl;
+        return MyApiConfig.APP_BASE + imageUrl;
     }
 
     public String getRecenzija() {

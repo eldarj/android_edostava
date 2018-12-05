@@ -19,16 +19,6 @@ public class MyFragmentHelper {
     private static FragmentManager fm;
     private static FragmentTransaction ft;
 
-    /*
-     * FIND: "FIRST APPROACH: USING INTERFACE LISTENERS"
-     */
-    public interface OnKorisnikPretragaClickListener {
-        void EmitKorisnikPretragaClicked(KorisnikVM korisnik);
-    }
-
-    /*
-     * FIND: "SECOND APPROACH: USING INTERFACE LISTENERS"
-     */
     public interface RunnableCallback<T> extends Serializable{
         void run(T t);
     }

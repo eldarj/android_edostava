@@ -29,17 +29,14 @@ public class MyAsyncImageInflater extends AsyncTask<String, Void, Bitmap> {
             Bitmap decodedBitmap = BitmapFactory.decodeStream(in, null, options);
 
             bitmap = Bitmap.createScaledBitmap(decodedBitmap, 300, 300, true);
-            Log.i("TEST BITMAP", "TEST BITMAP SUCCESS!");
 
         } catch (Exception e) {
-            Log.e("Error", e.getMessage());
             e.printStackTrace();
         }
         return bitmap;
     }
 
     protected void onPostExecute(Bitmap result) {
-        Log.i("ONPOST EXECUTE BITMAP", "ONPOST BITMAP SUCCESS!");
         image.setImageBitmap(result);
     }
 }
