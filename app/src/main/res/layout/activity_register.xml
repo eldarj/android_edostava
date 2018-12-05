@@ -125,7 +125,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="@string/ve_posjedujete_ra_un"/>
+            android:text="@string/vec_posjedujete_racun"/>
 
         <Button
             android:id="@+id/btnOpenLogin"
