@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusableInTouchMode="true"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    android:focusableInTouchMode="true">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:gravity="bottom"
-        android:translationZ="2.5dp"
+        android:translationZ="@dimen/appbar_translation_z"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="@dimen/appbar_plus_statusbar_height"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
@@ -40,7 +40,7 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="Petica - Jelovnik"
+                    android:text="Petica - Placeholder"
                     style="@style/Base.TextAppearance.AppCompat.Title" />
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
@@ -58,13 +58,13 @@
             android:id="@+id/progressBar_hranaList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="50dp"
-            android:minWidth="50dp"
+            android:minHeight="@dimen/progressbar_minheight"
+            android:minWidth="@dimen/progressbar_minwidth"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
         <TextView
             android:id="@+id/restoranJelovnikNoData"
-            android:text="Nema hrane"
+            android:text="@string/empty_list_hrana"
             android:gravity="center"
             android:visibility="invisible"
             android:layout_width="match_parent"
@@ -96,7 +96,5 @@
         </LinearLayout>
 
     </RelativeLayout>
-
-
 
 </android.support.design.widget.CoordinatorLayout>

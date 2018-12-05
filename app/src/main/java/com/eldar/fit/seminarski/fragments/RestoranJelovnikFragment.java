@@ -65,6 +65,19 @@ public class RestoranJelovnikFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        getKorpaSession();
+        super.onResume();
+    }
+
+    private void getKorpaSession() {
+        if (MySession.getKorpa() == null) {
+            MySession.setKorpa(new Korpa());
+        }
+        korpa = MySession.getKorpa();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -77,7 +90,11 @@ public class RestoranJelovnikFragment extends Fragment {
         btnJelovnikClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().popBackStack();
+                try {
+                    getActivity().onBackPressed();
+                } catch (NullPointerException e) {
+                    //e.printStackTrace();
+                }
             }
         });
 
@@ -100,8 +117,7 @@ public class RestoranJelovnikFragment extends Fragment {
 
         listViewHrana = view.findViewById(R.id.listViewHrana);
 
-        MyApiRequest.get(getActivity(),
-                String.format(MyApiRequest.ENDPOINT_RESTORANI_HRANA, restoran.getId()),
+        MyApiRequest.get(String.format(MyApiRequest.ENDPOINT_RESTORANI_HRANA, restoran.getId()),
                 new MyAbstractRunnable<HranaPrikazVM>() {
             @Override
             public void run(HranaPrikazVM hranaPrikazVM) {
@@ -124,12 +140,11 @@ public class RestoranJelovnikFragment extends Fragment {
         restoranJelovnikNoData.setVisibility(noDataTextVisibility);
 
         if (hranaPodaci != null) {
-
             podaci = initialPodaci = hranaPodaci.hrana;
             popuniPodatke();
         } else {
             Snackbar.make(getActivity().findViewById(R.id.fragmentContainer),
-                    errorMessage != null ? errorMessage : "Dogodila se greška.",
+                    errorMessage != null ? errorMessage : getString(R.string.dogodila_se_greska),
                     Snackbar.LENGTH_LONG).show();
         }
     }
@@ -181,7 +196,7 @@ public class RestoranJelovnikFragment extends Fragment {
                 textStavkaJelovnikOpis.setText(podaci.get(position).getOpis());
 
                 TextView textStavkaJelovnikCijena = view.findViewById(R.id.textStavkaJelovnikCijena);
-                textStavkaJelovnikCijena.setText(String.format("%1$,.2f KM",podaci.get(position).getCijena()));
+                textStavkaJelovnikCijena.setText(getString(R.string.cijena_double, podaci.get(position).getCijena()));
 
                 ImageButton btnDodajStavkuKorpu = view.findViewById(R.id.btnDodajStavkuKorpu);
                 btnDodajStavkuKorpu.setOnClickListener(new View.OnClickListener() {
@@ -203,19 +218,6 @@ public class RestoranJelovnikFragment extends Fragment {
         };
 
         listViewHrana.setAdapter(listHranaAdapter);
-    }
-
-    @Override
-    public void onResume() {
-        getKorpaSession();
-        super.onResume();
-    }
-
-    private void getKorpaSession() {
-        if (MySession.getKorpa() == null) {
-            MySession.setKorpa(new Korpa());
-        }
-        korpa = MySession.getKorpa();
     }
 
     private void do_dodajStavku(HranaItemVM stavka) {

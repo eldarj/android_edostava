@@ -46,4 +46,5 @@
     <string name="input_komentar_error">Komentar ne smije sadržati manje od 5 karaktera.</string>
     <string name="login">Login</string>
     <string name="restoran_stats">%1$d sviđanja - %2$d komentara</string>
+    <string name="cijena_double">%1$,.2f KM</string>
 </resources>
