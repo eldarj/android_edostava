@@ -18,9 +18,6 @@ import com.eldar.fit.seminarski.helper.MyApiRequest;
 import com.eldar.fit.seminarski.helper.MySession;
 import com.eldar.fit.seminarski.helper.MyUtils;
 
-import static com.eldar.fit.seminarski.helper.MyApiRequest.ENDPOINT_RESTORANI;
-import static com.eldar.fit.seminarski.helper.MyApiRequest.ENDPOINT_USER_LOGIN_CHECK_AUTH;
-
 public class LoginActivity extends AppCompatActivity {
 
     private static String BUNDLE_KEY_USERNAME = "MyBundleKeyUsername";
@@ -106,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         AuthLogin credentialsObj = new AuthLogin(inputUsername.getText().toString(), inputPassword.getText().toString());
-        MyApiRequest.post(this, ENDPOINT_USER_LOGIN_CHECK_AUTH, credentialsObj, new MyAbstractRunnable<KorisnikVM>() {
+        MyApiRequest.post(MyApiRequest.ENDPOINT_USER_LOGIN_CHECK_AUTH, credentialsObj, new MyAbstractRunnable<KorisnikVM>() {
             @Override
             public void run(KorisnikVM korisnikVM) {
                 loginUser(korisnikVM, null, null);
