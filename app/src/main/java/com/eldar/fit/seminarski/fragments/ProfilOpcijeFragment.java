@@ -135,7 +135,7 @@ public class ProfilOpcijeFragment extends Fragment {
                                 });
                             }
                         })
-                        .setNegativeButton(R.string.profil_delete_account_cancel_btn, new DialogInterface.OnClickListener() {
+                        .setNegativeButton(getString(R.string.profil_confirm_delete_cancel), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();

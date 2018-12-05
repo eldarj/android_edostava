@@ -16,7 +16,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -155,7 +154,7 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
 
         } else {
             Snackbar.make(getActivity().findViewById(android.R.id.content),
-                    errorMessage != null ? errorMessage : getString(R.string.dogodila_se_greska_slika),
+                    errorMessage != null ? errorMessage : getString(R.string.dogodila_se_greska_profil_slika),
                     Snackbar.LENGTH_LONG).show();
         }
     }
@@ -191,7 +190,7 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
 
                 is.close();
             } catch (Exception e) {
-                Snackbar.make(view, getString(R.string.dogodila_se_greska_slika), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(view, getString(R.string.dogodila_se_greska_profil_slika), Snackbar.LENGTH_LONG).show();
                 e.printStackTrace();
             }
         }

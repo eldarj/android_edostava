@@ -94,7 +94,7 @@ public class RestoranKomentariPagerFragment extends Fragment {
     private void do_napisiKomentar() {
         String komentarText = inputRestoranKomentarText.getText().toString().trim();
         if (komentarText.length() < 5) {
-            inputRestoranKomentarText.setError(getString(R.string.input_komentar_error));
+            inputRestoranKomentarText.setError(getString(R.string.restoran_input_komentar_error));
             return;
         }
 
