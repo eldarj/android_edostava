@@ -34,7 +34,7 @@
 
             <Button
                 android:id="@+id/btnRestoranKomentarNapisi"
-                android:text="@string/btn_komentar_posalji"
+                android:text="@string/restoran_btn_komentar_posalji"
                 style="@style/AppTheme.TextButton.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

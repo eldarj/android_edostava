@@ -18,13 +18,13 @@
         android:paddingBottom="@dimen/padding_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/section_restoran_info_opis"/>
+        android:text="@string/restoran_info_opis"/>
 
 
     <View style="@style/Divider.Small"></View>
 
     <TextView
-        android:text="@string/section_restoran_info_kontakt"
+        android:text="@string/restoran_info_kontakt"
         android:textColor="@color/colorSecondaryLight"
         android:textSize="@dimen/restoran_info_section_title_textsize"
         android:textAllCaps="true"

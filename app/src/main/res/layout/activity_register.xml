@@ -119,7 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/registruj_se"/>
+            android:text="@string/registrujte_se"/>
 
         <TextView
             android:layout_width="match_parent"
