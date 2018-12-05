@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,8 +84,8 @@ public class IzbrisiNarudzbuDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (textNarudzbaDeletePotvrda == null || !textNarudzbaDeletePotvrda.getText().toString().equals(narudzba.getuId().toString().substring(0, 4))) {
-                    textNarudzbaDeletePotvrda.setError("Neispravna šifra narudžbe.");
-                    Snackbar.make(getView(), "Potvrdite šifru, da biste izbrisali narudžbu!" , Snackbar.LENGTH_SHORT).show();
+                    textNarudzbaDeletePotvrda.setError(getString(R.string.narudzba_neispravna_sifra));
+                    Snackbar.make(getView(), R.string.narudzba_potvrdi_sifru , Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -94,20 +93,19 @@ public class IzbrisiNarudzbuDialogFragment extends DialogFragment {
                     progressBar_izbrisiNarudzbu.setVisibility(View.VISIBLE);
                 }
 
-                MyApiRequest.post(getActivity(),
-                        String.format(MyApiRequest.ENDPOINT_NARUDZBE_DELETE, narudzba.getId()),
-                        new AuthLogin(MySession.getKorisnik().getUsername(), MySession.getKorisnik().getPassword()),
-                        new MyAbstractRunnable<String>() {
-                            @Override
-                            public void run(String response) {
-                                onNarudzbaDeleted(response, null, null);
-                            }
+                MyApiRequest.post(String.format(MyApiRequest.ENDPOINT_NARUDZBE_DELETE, narudzba.getId()),
+                    new AuthLogin(MySession.getKorisnik().getUsername(), MySession.getKorisnik().getPassword()),
+                    new MyAbstractRunnable<String>() {
+                        @Override
+                        public void run(String response) {
+                            onNarudzbaDeleted(response, null, null);
+                        }
 
-                            @Override
-                            public void error(@Nullable Integer statusCode, @Nullable String errorMessage) {
-                                onNarudzbaDeleted(null, statusCode, errorMessage);
-                            }
-                        });
+                        @Override
+                        public void error(@Nullable Integer statusCode, @Nullable String errorMessage) {
+                            onNarudzbaDeleted(null, statusCode, errorMessage);
+                        }
+                    });
             }
         });
         return view;
@@ -119,10 +117,10 @@ public class IzbrisiNarudzbuDialogFragment extends DialogFragment {
         }
 
         if (response == null) {
-            Snackbar.make(getView(), "Dogodila s greška, provjerite podatke i pokušajte ponovo." , Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(), R.string.dogodila_se_greska_narudzba , Snackbar.LENGTH_SHORT).show();
         } else {
             callback.run(narudzba);
-            Snackbar.make(getView(), "Izbrisali ste narudžbu", Snackbar.LENGTH_SHORT).addCallback(new Snackbar.Callback() {
+            Snackbar.make(getView(), R.string.narudzba_deleted, Snackbar.LENGTH_SHORT).addCallback(new Snackbar.Callback() {
                 @Override
                 public void onDismissed(Snackbar transientBottomBar, int event) {
                     getDialog().dismiss();
