@@ -140,6 +140,10 @@
         <item name="android:layout_marginTop">8dp</item>
     </style>
 
+    <style name="Divider.Small.NoBottom" parent="Divider.Small">
+        <item name="android:layout_marginBottom">0dp</item>
+    </style>
+
     <style name="Divider.Xsmall" parent="Divider">
         <item name="android:layout_marginBottom">1dp</item>
         <item name="android:layout_marginTop">1dp</item>
@@ -159,6 +163,10 @@
     <style name="AppTheme.ListViewStyle" parent="Widget.AppCompat.ListView">
     </style>
 
+    <style name="AppTheme.TextButton.Small" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="AppTheme.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="hintTextAppearance">@style/AppTheme.TextInputLayout.HintText</item>
     </style>
@@ -172,9 +180,6 @@
     </style>
 
     <style name="AppTheme.Fab" parent="Widget.Design.FloatingActionButton">
-        <item name="android:backgroundTint">@color/colorPrimary</item>
-        <item name="backgroundTint">@color/colorPrimary</item>
-        <item name="android:tint">@color/colorWhite</item>
     </style>
 
     <style name="AppTheme.SettingsButton" parent="Widget.MaterialComponents.Button.TextButton">

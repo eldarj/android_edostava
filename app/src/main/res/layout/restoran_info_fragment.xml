@@ -59,14 +59,25 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBar_restoranDetaljnoLike"
+        android:visibility="invisible"
+        style="@style/AppTheme.ProgressBar.Small"
+        android:elevation="99dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@android:color/white"
+        app:layout_anchorGravity="center"
+        app:layout_anchor="@id/fabDetaljnoRestoranLike" />
+
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        style="@style/AppTheme.Fab"
+        android:id="@+id/fabDetaljnoRestoranLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:src="@drawable/ic_heart"
+        style="@style/AppTheme.Fab"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|right|end" />
 
@@ -74,8 +85,6 @@
         android:fillViewport="true"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_gravity="fill_vertical"
-        android:layout_marginBottom="@dimen/bottomnav_height"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -96,122 +105,26 @@
             <TextView
                 android:id="@+id/textDetaljnoRestoranStats"
                 style="@style/TextAppearance.MaterialComponents.Caption"
-                android:paddingBottom="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="16 sviđanja" />
 
-
-            <android.support.design.chip.ChipGroup
-                android:id="@+id/chipGroupRestoranTipovihrane"
-                android:layout_marginBottom="16dp"
+            <android.support.v4.view.ViewPager
+                android:id="@+id/restoranDetaljnoViewPager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_weight="1"
+                android:layout_height="0dp">
 
-            </android.support.design.chip.ChipGroup>
+                <android.support.v4.view.PagerTabStrip
+                    android:id="@+id/restoranDetaljnoPagerHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:paddingLeft="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingTop="4dp" />
 
-            <TextView
-                android:id="@+id/textDetaljnoRestoranOpis"
-                android:paddingBottom="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Restoran opis"/>
-
-
-            <View style="@style/Divider.Small"></View>
-
-            <TextView
-                android:text="Kontakt"
-                android:textColor="@color/colorSecondaryLight"
-                android:textSize="17dp"
-                android:textAllCaps="true"
-                android:paddingBottom="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/textDetaljnoRestoranAdresa"
-                        android:paddingBottom="4dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Maršala Tita 16"/>
-                    <TextView
-                        android:id="@+id/textDetaljnoRestoranLokacija"
-                        android:paddingBottom="4dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Zalik, Mostar"/>
-                    <TextView
-                        android:id="@+id/textDetaljnoRestoranTelefon"
-                        android:paddingBottom="4dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tel. +387 62 005 152"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/textDetaljnoRestoranWebUrl"
-                        android:paddingBottom="4dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Web www.petica.com"/>
-                    <TextView
-                        android:id="@+id/textDetaljnoRestoranEmail"
-                        android:paddingBottom="4dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Email info@petica.com"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <View style="@style/Divider.Small"></View>
-
-            <TextView
-                android:text="Vlasnik"
-                android:textColor="@color/colorSecondaryLight"
-                android:textSize="17dp"
-                android:textAllCaps="true"
-                android:paddingBottom="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/textDetaljnoRestoranVlasnikImePrezime"
-                        android:paddingBottom="4dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Maršala Tita 16"/>
-                    <TextView
-                        android:id="@+id/textDetaljnoRestoranVlasnikEmail"
-                        android:paddingBottom="4dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Zalik, Mostar"/>
-
-            </LinearLayout>
+            </android.support.v4.view.ViewPager>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

@@ -3,6 +3,7 @@ package com.eldar.fit.seminarski.helper;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.eldar.fit.seminarski.data.AuthLogin;
 import com.eldar.fit.seminarski.data.KorisnikVM;
 import com.eldar.fit.seminarski.data.Korpa;
 
@@ -11,6 +12,7 @@ public class MySession {
     private static String SHARED_PREFS_STORAGE_NAME = "DatotekaZaSharedPreferences";
     private static String PREF_LOGGED_USER = "LoginraniUser";
     private static String PREF_KORPA = "MojaKorpa";
+    private static AuthLogin authObj;
 
     public static Korpa getKorpa() {
         Korpa korpa;
@@ -37,6 +39,20 @@ public class MySession {
 
         editor.putString(PREF_KORPA, jsonKorpa);
         editor.apply();
+    }
+
+    public static AuthLogin getApiAuthObj() {
+        if (authObj != null) {
+            return authObj;
+        }
+
+        KorisnikVM korisnik = getKorisnik();
+        if (korisnik == null) {
+            return null;
+        }
+
+        authObj = new AuthLogin(korisnik);
+        return authObj;
     }
 
     public static KorisnikVM getKorisnik() {

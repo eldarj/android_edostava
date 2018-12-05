@@ -24,8 +24,6 @@ public class RestoranDetaljnoActivity extends AppCompatActivity {
 
     BottomNavigationView bottomnavigationRestoranDetaljno;
 
-    private Animation anim;
-    private MaterialCardView card;
     private RestoranInfo restoran;
 
     @Override
@@ -50,12 +48,10 @@ public class RestoranDetaljnoActivity extends AppCompatActivity {
                     false);
         }
 
-
         bottomnavigationRestoranDetaljno = findViewById(R.id.bottomnavigationRestoranDetaljno);
         bottomnavigationRestoranDetaljno.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int trenutniTabId = bottomnavigationRestoranDetaljno.getSelectedItemId();
                 int kliknutiTabId = menuItem.getItemId();
 
                 switch(kliknutiTabId) {
@@ -64,21 +60,21 @@ public class RestoranDetaljnoActivity extends AppCompatActivity {
                                 R.id.fragmentContainer,
                                 RestoranJelovnikFragment.newInstance(restoran),
                                 RestoranJelovnikFragment.Tag,
-                                true);
+                                false);
                         break;
                     case R.id.nav_bottom_restoran_vise:
                         MyFragmentHelper.fragmentReplace(RestoranDetaljnoActivity.this,
                                 R.id.fragmentContainer,
                                 RestoranInfoFragment.newInstance(restoran),
                                 RestoranInfoFragment.Tag,
-                                true);
+                                false);
                         break;
                     case R.id.nav_bottom_restoran_korpa:
                         MyFragmentHelper.fragmentReplace(RestoranDetaljnoActivity.this,
                                 R.id.fragmentContainer,
                                 KorpaFragment.newInstance(true),
                                 KorpaFragment.Tag,
-                                true);
+                                false);
                         break;
                     default:
                         return false;
@@ -89,27 +85,4 @@ public class RestoranDetaljnoActivity extends AppCompatActivity {
             }
         });
     }
-
-    @Override
-    public void onAttachedToWindow() {
-        //animateCard();
-    }
-
-    /*private void animateCard() {
-        card = findViewById(R.id.cardDetaljnoContainer);
-        anim = new Animation() {
-            @Override
-            protected void applyTransformation(float interpolatedTime, Transformation t) {
-                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) card.getLayoutParams();
-                int m = params.getMarginStart();
-                Log.i("test", "happening + " + m);
-                int interpolatedMargin = (int) (16 * interpolatedTime);
-                params.setMargins(interpolatedMargin, interpolatedMargin, interpolatedMargin, interpolatedMargin);
-                super.applyTransformation(interpolatedTime, t);
-            }
-        };
-        anim.setDuration(250);
-        card.setAnimation(anim);
-        card.invalidate();
-    }*/
 }

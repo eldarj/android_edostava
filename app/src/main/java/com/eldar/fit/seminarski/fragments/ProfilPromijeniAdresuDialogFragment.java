@@ -153,9 +153,13 @@ public class ProfilPromijeniAdresuDialogFragment extends DialogFragment {
 
             spinnerProfilOpcijeAdresaBlok.setSelection(blokPodaci.indexOf(korisnik.getLokacija()));
         } else {
-            Snackbar.make(getActivity().findViewById(R.id.fragmentContainer),
-                    errorMessage != null ? errorMessage : "Dogodila se greška.",
-                    Snackbar.LENGTH_LONG).show();
+            try {
+                Snackbar.make(getActivity().findViewById(R.id.fragmentContainer),
+                        errorMessage != null ? errorMessage : "Dogodila se greška.",
+                        Snackbar.LENGTH_LONG).show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

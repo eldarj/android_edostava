@@ -8,4 +8,9 @@ public class AuthLogin {
         this.username = username;
         this.password = password;
     }
+
+    public AuthLogin(KorisnikVM korisnik) {
+        this.username = korisnik.getUsername();
+        this.password = korisnik.getPassword();
+    }
 }
