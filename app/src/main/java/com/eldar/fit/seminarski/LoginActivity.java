@@ -56,11 +56,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        if (savedInstanceState.containsKey(BUNDLE_KEY_USERNAME)) {
-            inputUsername.setText(BUNDLE_KEY_USERNAME);
-        }
-        if (savedInstanceState.containsKey(BUNDLE_KEY_USERNAME)) {
-            inputPassword.setText(BUNDLE_KEY_PASSWORD);
+        try {
+            if (savedInstanceState.containsKey(BUNDLE_KEY_USERNAME)) {
+                inputUsername.setText(BUNDLE_KEY_USERNAME);
+            }
+            if (savedInstanceState.containsKey(BUNDLE_KEY_USERNAME)) {
+                inputPassword.setText(BUNDLE_KEY_PASSWORD);
+            }
+        } catch (NullPointerException e) {
+            Log.i("Error", "login nullpointer on savedinstance");
+            // e.printStackTrace();
         }
     }
 
