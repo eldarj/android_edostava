@@ -1,16 +1,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
-    android:paddingHorizontal="16dp">
+    android:paddingTop="@dimen/padding_small"
+    android:paddingBottom="@dimen/padding_small"
+    android:paddingHorizontal="@dimen/padding_regular">
 
     <ImageView
         android:id="@+id/imageStavkaKorpa"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="@dimen/margin_regular"
         android:layout_marginTop="3dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:layout_width="@dimen/stavka_img_height"
+        android:layout_height="@dimen/stavka_img_height" />
 
     <LinearLayout
         android:id="@+id/stavka_korpa_details"
@@ -31,14 +31,14 @@
                 android:id="@+id/textStavkaKorpaSuper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="@dimen/stavka_super_textsize"
                 android:text="Datum"/>
             <TextView
                 android:id="@+id/textStavkaKorpaNaziv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="First Line"
-                android:textSize="16dp"
+                android:textSize="@dimen/stavka_firstline_textsize"
                 android:textStyle="bold" />
 
             <TextView

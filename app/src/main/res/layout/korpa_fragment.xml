@@ -7,9 +7,9 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbarKorpa"
         android:gravity="bottom"
-        android:translationZ="2.5dp"
+        android:translationZ="@dimen/appbar_translation_z"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="@dimen/appbar_plus_statusbar_height"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
@@ -55,8 +55,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="invisible"
-            android:minHeight="50dp"
-            android:minWidth="50dp"
+            android:minHeight="@dimen/progressbar_minheight"
+            android:minWidth="@dimen/progressbar_minheight"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
@@ -95,13 +95,13 @@
                     <TextView
                         android:text="Total"
                         android:textAllCaps="true"
-                        android:textSize="16dp"
+                        android:textSize="@dimen/korpa_subsection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:id="@+id/textKorpaTotal"
                         android:textAllCaps="true"
-                        android:textSize="16dp"
+                        android:textSize="@dimen/korpa_subsection"
                         android:text="41.25 KM"
                         android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
@@ -114,7 +114,7 @@
                     android:layout_height="wrap_content">
                     <Button
                         android:id="@+id/btnKorpaNaruci"
-                        android:text="NARUČI"
+                        android:text="@string/korpa_submit"
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
@@ -125,12 +125,12 @@
                         android:backgroundTint="@color/colorSecondary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Odbaci"
+                        android:text="@string/korpa_clearout"
                         android:textAlignment="viewEnd"
                         app:iconGravity="textStart"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginLeft="@dimen/margin_small"
                         app:icon="@drawable/ic_trash"
-                        app:iconSize="16dp"/>
+                        app:iconSize="@dimen/btn_icon_size"/>
                 </LinearLayout>
 
             </LinearLayout>

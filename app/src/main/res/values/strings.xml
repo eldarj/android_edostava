@@ -76,4 +76,10 @@
     <string name="dogodila_se_greska_posalji_komentar_ponovo">Pokusajte poslati komentar ponovo</string>
     <string name="btn_komentar_posalji">Napiši</string>
     <string name="empty_list_komentari">Budite prvi ko će napisati komentar.</string>
+    <string name="empty_list_korpa">Korpa je prazna. Pregledajte restorane i jelovnike, izaberite i dodajte nešto u korpu!</string>
+    <string name="korpa_ukupno_stavki">Ukupno stavki u korpi:</string>
+    <string name="korpa_stavka_kolicina">Kolicina x%1d$</string>
+    <string name="korpa_stavka_restoran">Iz restorana %1s$</string>
+    <string name="korpa_submit">NARUČI</string>
+    <string name="korpa_clearout">Odbaci</string>
 </resources>

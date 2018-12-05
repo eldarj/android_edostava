@@ -1,5 +1,6 @@
 package com.eldar.fit.seminarski.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -43,7 +44,6 @@ public class KorpaStavkaDialogFragment extends DialogFragment {
         return fragment;
     }
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,13 +64,13 @@ public class KorpaStavkaDialogFragment extends DialogFragment {
         textStavkaKorpaDialogNaziv.setText(stavka.getHranaItemVM().getNaziv());
 
         textStavkaKorpaDialogCijena = view.findViewById(R.id.textStavkaKorpaDialogCijena);
-        textStavkaKorpaDialogCijena.setText(String.format("%1$,.2f KM",stavka.getHranaItemVM().getCijena()));
+        textStavkaKorpaDialogCijena.setText(getString(R.string.cijena_double, stavka.getHranaItemVM().getCijena()));
 
         textStavkaKorpaDialogKolicina = view.findViewById(R.id.textStavkaKorpaDialogKolicina);
-        textStavkaKorpaDialogKolicina.setText("Kolicina x" + Integer.toString(stavka.getKolicina()));
+        textStavkaKorpaDialogKolicina.setText(getString(R.string.korpa_stavka_kolicina, stavka.getKolicina()));
 
         textStavkaKorpaDialogRestoran = view.findViewById(R.id.textStavkaKorpaDialogRestoran);
-        textStavkaKorpaDialogRestoran.setText("Iz restorana " + stavka.getHranaItemVM().getRestoranNaziv());
+        textStavkaKorpaDialogRestoran.setText(getString(R.string.korpa_stavka_restoran, stavka.getHranaItemVM().getRestoranNaziv()));
 
         textStavkaKorpaDialogOpis = view.findViewById(R.id.textStavkaKorpaDialogOpis);
         textStavkaKorpaDialogOpis.setText(stavka.getHranaItemVM().getOpis());
