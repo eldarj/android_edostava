@@ -19,12 +19,4 @@ public class RestoranLike implements Serializable {
         this.imePrezime = k.getImageUrl();
         this.imageUrl = k.getImageUrl();
     }
-
-    public String getImePrezime() {
-        return imePrezime;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
 }

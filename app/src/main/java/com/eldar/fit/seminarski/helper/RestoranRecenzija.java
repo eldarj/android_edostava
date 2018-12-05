@@ -19,10 +19,6 @@ public class RestoranRecenzija implements Serializable {
         return imePrezime;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -33,14 +29,6 @@ public class RestoranRecenzija implements Serializable {
 
     public String getRecenzija() {
         return recenzija;
-    }
-
-    public boolean isLiked() {
-        return liked;
-    }
-
-    public Date getDatum() {
-        return datum;
     }
 
     public String getDatumString() {
