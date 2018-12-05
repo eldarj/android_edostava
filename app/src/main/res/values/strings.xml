@@ -60,4 +60,12 @@
     <string name="login">Login</string>
     <string name="nemate_racun">Nemate račun?</string>
     <string name="registrujte_se">Registrujte se</string>
+    <string name="dogodila_se_greska">Dogodila se greška.</string>
+    <string name="password">Password</string>
+    <string name="ime">Ime</string>
+    <string name="prezime">Prezime</string>
+    <string name="izaberite_blok">Izaberite blok</string>
+    <string name="registruj_se">Registruj se</string>
+    <string name="vec_posjedujete_racun">Več posjedujete račun?</string>
+    <string name="login">Login</string>
 </resources>
