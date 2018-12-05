@@ -45,4 +45,5 @@
     <string name="input_podaci_invalid">Molimo provjerite podatke</string>
     <string name="input_komentar_error">Komentar ne smije sadržati manje od 5 karaktera.</string>
     <string name="login">Login</string>
+    <string name="restoran_stats">%1$d sviđanja - %2$d komentara</string>
 </resources>

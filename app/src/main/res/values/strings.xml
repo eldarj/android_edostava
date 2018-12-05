@@ -67,4 +67,6 @@
     <string name="registruj_se">Registruj se</string>
     <string name="vec_posjedujete_racun">Več posjedujete račun?</string>
     <string name="login">Login</string>
+    <string name="restoran_stats">%1$d sviđanja - %2$d komentara</string>
+    <string name="prazna_lista_omiljeni_restorani">Niste niti jedan restoran dodali u omiljene.</string>
 </resources>

@@ -23,24 +23,20 @@ import com.bumptech.glide.Glide;
 import com.eldar.fit.seminarski.R;
 import com.eldar.fit.seminarski.RestoranDetaljnoActivity;
 import com.eldar.fit.seminarski.data.AuthLogin;
-import com.eldar.fit.seminarski.data.KorisnikVM;
 import com.eldar.fit.seminarski.data.RestoranPrikazVM;
 import com.eldar.fit.seminarski.helper.MySession;
 import com.eldar.fit.seminarski.helper.MyAbstractRunnable;
 import com.eldar.fit.seminarski.helper.MyApiRequest;
-import com.eldar.fit.seminarski.helper.MyFragmentHelper;
 import com.eldar.fit.seminarski.helper.RestoranInfo;
 
 import java.util.List;
 
 import static com.eldar.fit.seminarski.RestoranDetaljnoActivity.DETAIL_VIEW_RESTORAN;
 import static com.eldar.fit.seminarski.RestoranDetaljnoActivity.DETAIL_VIEW_RESTORAN_FRAGMENT_FLAG;
-import static com.eldar.fit.seminarski.helper.MyApiRequest.ENDPOINT_RESTORANI;
 
 public class RestoranListFragment extends Fragment {
     public static String Tag = "restoranListMyTaggedFragment";
     private static final String FILTER_BY_OMILJENI = "filterRestoraniByOmiljeni";
-
 
     private ListView listRestorani;
     private List<RestoranInfo> podaci;
@@ -52,11 +48,11 @@ public class RestoranListFragment extends Fragment {
     private boolean showOmiljeneOnly;
     private View listView;
 
-    public static RestoranListFragment newInstance(boolean fitlerByOmiljene) {
+    public static RestoranListFragment newInstance(boolean filterByOmiljeni) {
         RestoranListFragment fragment = new RestoranListFragment();
 
         Bundle args = new Bundle();
-        args.putBoolean(FILTER_BY_OMILJENI, fitlerByOmiljene);
+        args.putBoolean(FILTER_BY_OMILJENI, filterByOmiljeni);
         fragment.setArguments(args);
 
         return fragment;
@@ -80,21 +76,7 @@ public class RestoranListFragment extends Fragment {
 
         listRestorani = listView.findViewById(R.id.listViewRestorani);
 
-        MyApiRequest.get(getActivity(), ENDPOINT_RESTORANI, new MyAbstractRunnable<RestoranPrikazVM>() {
-            @Override
-            public void run(RestoranPrikazVM restoranPrikazVM) {
-                popuniPodatke(restoranPrikazVM);
-                progressBar_restorani.setVisibility(View.INVISIBLE);
-            }
-
-            @Override
-            public void error(@Nullable Integer statusCode, @Nullable String errorMessage) {
-                Snackbar.make(getActivity().findViewById(R.id.fragmentContainer),
-                        errorMessage != null ? errorMessage : "Dogodila se greška.",
-                        Snackbar.LENGTH_LONG).show();
-                progressBar_restorani.setVisibility(View.INVISIBLE);
-            }
-        });
+        restoraniListRequest();
 
         listRestorani.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -106,20 +88,44 @@ public class RestoranListFragment extends Fragment {
         return listView;
     }
 
+    private void restoraniListRequest() {
+        MyApiRequest.get(MyApiRequest.ENDPOINT_RESTORANI, new MyAbstractRunnable<RestoranPrikazVM>() {
+            @Override
+            public void run(RestoranPrikazVM restoranPrikazVM) {
+                popuniPodatke(restoranPrikazVM);
+                progressBar_restorani.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void error(@Nullable Integer statusCode, @Nullable String errorMessage) {
+                Snackbar.make(getActivity().findViewById(R.id.fragmentRestoranListContainer),
+                        "Dogodila se greška, molimo pokušajte ponovo.",
+                        Snackbar.LENGTH_INDEFINITE)
+                        .setAction(getString(R.string.api_load_ponovo), new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                restoraniListRequest();
+                            }
+                        })
+                        .show();
+            }
+        });
+    }
+
     private void do_transitionCardView(View view, RestoranInfo restoran, String fragmentFlag) {
-        try {
-            Intent intent = new Intent(getActivity(), RestoranDetaljnoActivity.class);
+         Intent intent = new Intent(getActivity(), RestoranDetaljnoActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable(DETAIL_VIEW_RESTORAN, restoran);
             bundle.putSerializable(DETAIL_VIEW_RESTORAN_FRAGMENT_FLAG, fragmentFlag);
             intent.putExtras(bundle);
-
+        try {
             ActivityOptionsCompat options = ActivityOptionsCompat
                     .makeSceneTransitionAnimation(getActivity(), view, getString(R.string.transition_restoran_card));
 
             startActivity(intent, options.toBundle());
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception e) { // ako dođe do transition greške, učitaj activity normalno...
+            startActivity(intent);
+            //e.printStackTrace();
         }
     }
 
@@ -135,7 +141,6 @@ public class RestoranListFragment extends Fragment {
         }
 
         listRestoraniAdapter = new BaseAdapter() {
-
             @Override
             public int getCount() {
                 return podaci.size();
@@ -170,8 +175,7 @@ public class RestoranListFragment extends Fragment {
                         progressBar_restoranLike.setVisibility(View.VISIBLE);
                         btnStavkaRestoranLike.setVisibility(View.INVISIBLE);
                         if (restoran.userHasLiked()) {
-                            MyApiRequest.post(getActivity(),
-                                String.format(MyApiRequest.ENDPOINT_RESTORANI_UNLIKE, restoran.getId()),
+                            MyApiRequest.post(String.format(MyApiRequest.ENDPOINT_RESTORANI_UNLIKE, restoran.getId()),
                                 new AuthLogin(MySession.getKorisnik().getUsername(), MySession.getKorisnik().getPassword()),
                                 new MyAbstractRunnable<String>() {
                                     @Override
@@ -194,8 +198,7 @@ public class RestoranListFragment extends Fragment {
                                     }
                                 });
                         } else {
-                            MyApiRequest.post(getActivity(),
-                                String.format(MyApiRequest.ENDPOINT_RESTORANI_LIKE, restoran.getId()),
+                            MyApiRequest.post(String.format(MyApiRequest.ENDPOINT_RESTORANI_LIKE, restoran.getId()),
                                 new AuthLogin(MySession.getKorisnik().getUsername(), MySession.getKorisnik().getPassword()),
                                 new MyAbstractRunnable<String>() {
                                     @Override
@@ -238,7 +241,7 @@ public class RestoranListFragment extends Fragment {
                 }
                 restoranOpis.setText(opis);
 
-                restoranStatsCount.setText(restoran.getLikesCount() + " sviđanja  - " + restoran.getRecenzije().size() + " recenzija");
+                restoranStatsCount.setText(getString(R.string.restoran_stats, restoran.getLikesCount(), restoran.getRecenzije().size()));
 
                 textStavkaRestoranLokacija.setText(restoran.getLokacija());
 
@@ -257,7 +260,6 @@ public class RestoranListFragment extends Fragment {
         listRestorani.setAdapter(listRestoraniAdapter);
     }
 
-
     private void onRestoranLikeDislike(@Nullable String response,
        @Nullable Integer statusCode,
        @Nullable String errorMessage,
@@ -265,19 +267,23 @@ public class RestoranListFragment extends Fragment {
        ImageButton btnStavkaRestoranLike,
        RestoranInfo restoran
     ) {
-        progressBar.setVisibility(View.INVISIBLE);
-        btnStavkaRestoranLike.setVisibility(View.VISIBLE);
-        if (response != null) {
-            btnStavkaRestoranLike.setImageResource(restoran.toggleLike() ?
-                    R.drawable.ic_heart_red : R.drawable.ic_heart);
+        try {
+            progressBar.setVisibility(View.INVISIBLE);
+            btnStavkaRestoranLike.setVisibility(View.VISIBLE);
+            if (response != null) {
+                btnStavkaRestoranLike.setImageResource(restoran.toggleLike() ?
+                        R.drawable.ic_heart_red : R.drawable.ic_heart);
 
-            Snackbar.make(getActivity().findViewById(R.id.fragmentContainer),
-                    response,
-                    Snackbar.LENGTH_LONG).show();
-        } else {
-            Snackbar.make(getActivity().findViewById(R.id.fragmentContainer),
-                    errorMessage != null ? errorMessage : "Dogodila se greška.",
-                    Snackbar.LENGTH_LONG).show();
+                Snackbar.make(getActivity().findViewById(R.id.fragmentRestoranListContainer),
+                        response,
+                        Snackbar.LENGTH_LONG).show();
+            } else {
+                Snackbar.make(getActivity().findViewById(R.id.fragmentRestoranListContainer),
+                        errorMessage != null ? errorMessage : getString(R.string.dogodila_se_greska),
+                        Snackbar.LENGTH_LONG).show();
+            }
+        } catch (NullPointerException e) {
+            //e.printStackTrace();
         }
     }
 }

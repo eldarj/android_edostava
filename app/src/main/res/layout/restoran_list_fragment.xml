@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/textNemateOmiljenih"
-        android:text="Niste niti jedan restoran dodali u omiljene."
+        android:text="@string/prazna_lista_omiljeni_restorani"
         android:gravity="center"
         android:visibility="invisible"
         android:layout_width="match_parent"
