@@ -97,8 +97,8 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
 
         textKorpaIntro = view.findViewById(R.id.textKorpaIntro);
         textKorpaIntro.setText(korpa.getHranaStavke().size() == 0 ?
-                "Korpa je prazna. Pregledajte restorane i jelovnike, izaberite i dodajte nešto u korpu!" :
-                "Ukupno stavki u korpi: " + korpa.getHranaStavkeTotalCount());
+                getString(R.string.empty_list_korpa) :
+                getString(R.string.korpa_ukupno_stavki) + korpa.getHranaStavkeTotalCount());
 
         textKorpaTotal = view.findViewById(R.id.textKorpaTotal);
         textKorpaTotal.setText(korpa.getUkupnaCijena() == 0 ? "- KM" : korpa.getUkupnaCijena() + " KM");
@@ -119,7 +119,7 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
         btnKorpaClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().popBackStack();
+                getActivity().onBackPressed();
             }
         });
 
@@ -148,8 +148,7 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
     private void do_btnNaruciClick() {
         progressBar_korpa.setVisibility(View.VISIBLE);
 
-        MyApiRequest.request(getActivity(),
-                MyApiRequest.ENDPOINT_NARUDZBE_CREATE,
+        MyApiRequest.request(MyApiRequest.ENDPOINT_NARUDZBE_CREATE,
                 MyUrlConnection.HttpMethod.POST,
                 new NewNarudzbaRequest(
                         new AuthLogin(MySession.getKorisnik().getUsername(), MySession.getKorisnik().getPassword()),
@@ -171,7 +170,6 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
 
     private void onNarudzbaCreated(@Nullable String response, @Nullable Integer statusCode, @Nullable String errorMessage) {
         progressBar_korpa.setVisibility(View.INVISIBLE);
-
 
         if (response != null) {
             Log.i("Test", "KORPA TEST USPIO " + response);
