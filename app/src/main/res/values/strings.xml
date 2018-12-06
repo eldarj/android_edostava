@@ -17,6 +17,7 @@
     <string name="ime">Ime</string>
     <string name="password">Password</string>
     <string name="prezime">Prezime</string>
+    <string name="login">Login</string>
     <string name="izaberite_blok">Izaberite blok</string>
     <string name="registrujte_se">Registrujte se</string>
     <string name="uspjesna_registracija">Uspješno ste se registrovali</string>

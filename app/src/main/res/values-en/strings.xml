@@ -14,6 +14,7 @@
     <string name="transition_restoran_card">restoranCardTransition</string>
 
     <!-- Login, Registracija -->
+    <string name="login">Login</string>
     <string name="ime">Ime</string>
     <string name="password">Password</string>
     <string name="prezime">Prezime</string>
