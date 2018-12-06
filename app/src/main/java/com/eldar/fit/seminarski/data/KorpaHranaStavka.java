@@ -18,7 +18,6 @@ public class KorpaHranaStavka implements Serializable {
 
     @Override
     public boolean equals(@Nullable Object obj) {
-        Log.i("Test", obj instanceof HranaItemVM && this.hranaItemVM.getId() == ((HranaItemVM) obj).getId() ? "yes!" : "no...");
         return ( obj instanceof HranaItemVM && this.hranaItemVM.getId() == ((HranaItemVM) obj).getId() ) ||
                 ( obj instanceof KorpaHranaStavka && this == obj );
     }

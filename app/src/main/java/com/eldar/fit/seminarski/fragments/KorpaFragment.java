@@ -38,7 +38,7 @@ import com.eldar.fit.seminarski.helper.MyFragmentHelper;
 import com.eldar.fit.seminarski.helper.MySession;
 import com.eldar.fit.seminarski.helper.MyUrlConnection;
 
-public class KorpaFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class KorpaFragment extends Fragment {
 
     public static String Tag = "korpaFragment";
     public static String RENDER_KORPA_APPBAR = "showKorpaAppBar";
@@ -252,7 +252,6 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         if (item.getItemId() == R.id.actionMojeNarudzbe) {
             MyFragmentHelper.fragmentReplace((AppCompatActivity) getActivity(),
                     R.id.fragmentContainer,
@@ -262,18 +261,5 @@ public class KorpaFragment extends Fragment implements SharedPreferences.OnShare
         }
 
         return false;
-    }
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        Log.i("Test", "onSharedPreferenceChanged with key: " + key);
-    }
-
-    @Override
-    public void onPause() {
-        SharedPreferences prefs = MySession.getPrefs();
-        prefs.registerOnSharedPreferenceChangeListener(this);
-
-        super.onPause();
     }
 }
