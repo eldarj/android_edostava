@@ -1,6 +1,7 @@
 package com.eldar.fit.seminarski.fragments;
 
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -131,7 +132,6 @@ public class KorpaFragment extends Fragment {
                 view.invalidate();
             }
         });
-        btnKorpaOdbaci.setClickable(korpa.getHranaStavke().size() != 0);
 
         btnKorpaNaruci = view.findViewById(R.id.btnKorpaNaruci);
         btnKorpaNaruci.setOnClickListener(new View.OnClickListener() {
@@ -140,8 +140,13 @@ public class KorpaFragment extends Fragment {
                 do_btnNaruciClick();
             }
         });
-        btnKorpaNaruci.setEnabled(korpa.getHranaStavke().size() != 0);
 
+        if (korpa.getHranaStavke().size() == 0) {
+            btnKorpaNaruci.setEnabled(false);
+            btnKorpaOdbaci.setEnabled(false);
+            btnKorpaOdbaci.setTextColor(getResources().getColor(R.color.colorTypographySemiDark));
+            btnKorpaOdbaci.setIconTint(ColorStateList.valueOf(getResources().getColor(R.color.colorTypographySemiDark)));
+        }
         return view;
     }
 
