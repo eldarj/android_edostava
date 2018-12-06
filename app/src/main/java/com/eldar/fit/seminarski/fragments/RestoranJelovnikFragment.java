@@ -1,19 +1,23 @@
 package com.eldar.fit.seminarski.fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.eldar.fit.seminarski.R;
@@ -198,11 +202,15 @@ public class RestoranJelovnikFragment extends Fragment {
                 TextView textStavkaJelovnikCijena = view.findViewById(R.id.textStavkaJelovnikCijena);
                 textStavkaJelovnikCijena.setText(getString(R.string.cijena_double, podaci.get(position).getCijena()));
 
+                final RelativeLayout stavkaJelovnikRoot = view.findViewById(R.id.stavkaJelovnikRoot);
+
                 ImageButton btnDodajStavkuKorpu = view.findViewById(R.id.btnDodajStavkuKorpu);
                 btnDodajStavkuKorpu.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        v.setBackground(getResources().getDrawable(R.drawable.ic_plus_round_added));
+                        stavkaJelovnikRoot.setPressed(true);
+                        stavkaJelovnikRoot.setPressed(false);
+
                         do_dodajStavku(podaci.get(position));
                     }
                 });

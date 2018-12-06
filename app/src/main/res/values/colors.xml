@@ -5,6 +5,8 @@
     <color name="colorPrimaryDark">#930002</color>
     <color name="colorPrimaryLight">#ff5c55</color>
 
+    <color name="colorPrimaryAlt">#88FF3300</color>
+
     <color name="colorSecondary">#2f2f2f</color>
     <color name="colorSecondaryDark">#050505</color>
     <color name="colorSecondaryLight">#383838</color>

@@ -87,6 +87,7 @@
             <View style="@style/Divider.Xsmall"></View>
 
             <ListView
+                android:drawSelectorOnTop="true"
                 android:id="@+id/listViewHrana"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
