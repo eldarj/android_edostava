@@ -88,14 +88,16 @@
     <style name="AlertDialogsTheme.Components.Button" parent="@style/Widget.MaterialComponents.Button.TextButton">
         <item name="android:layout_marginTop">12dp</item>
         <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
     <style name="AlertDialogsTheme.Components.TextInputLayout" parent="Widget.Design.TextInputLayout">
-        <item name="android:paddingLeft">-5dp</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:layout_marginBottom">8dp</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
     </style>
-
 
     <!-- Element stilovi -->
 
