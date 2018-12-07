@@ -8,41 +8,44 @@
         android:id="@+id/appbar"
         android:translationZ="2.5dp"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/profilTopHolder"
                 android:orientation="vertical"
                 android:gravity="center_vertical"
-                android:layout_height="match_parent"
                 android:clickable="false"
                 android:focusable="false"
+                android:paddingBottom="@dimen/padding_regular"
+                android:paddingTop="@dimen/padding_xlarge"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@drawable/side_nav_bar">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                app:civ_border_overlay="false"
-                app:civ_border_color="@color/colorWhite"
-                app:civ_border_width="2dp"
-                android:id="@+id/imageProfilHeader"
-                android:layout_gravity="center"
-                android:layout_width="100dp"
-                android:layout_height="100dp" />
+                    app:civ_border_overlay="false"
+                    app:civ_border_color="@color/colorWhite"
+                    app:civ_border_width="2dp"
+                    android:id="@+id/imageProfilHeader"
+                    android:layout_gravity="center"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp" />
 
                 <TextView
                     android:id="@+id/textProfilImePrezimeHeader"
-                    android:layout_marginTop="16dp"
-                    android:textAllCaps="true"
-                    android:textSize="19dp"
+                    style="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:layout_marginTop="@dimen/margin_regular"
+                    android:paddingBottom="@dimen/padding_xs"
                     android:textColor="@color/colorWhite"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
             </LinearLayout>
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbarProfil"
@@ -80,106 +83,102 @@
        <LinearLayout
            android:orientation="vertical"
            android:layout_width="match_parent"
-           android:layout_height="match_parent">
+           android:layout_height="match_parent"
+           android:paddingTop="16dp"
+           android:paddingLeft="16dp"
+           android:paddingRight="16dp">
 
-           <LinearLayout
-               android:orientation="vertical"
-               android:layout_weight="2"
+           <TextView
+               android:text="Osnovno"
+               android:textColor="@color/colorSecondaryLight"
+               android:textSize="17dp"
+               android:textAllCaps="true"
+               android:paddingBottom="8dp"
                android:layout_width="match_parent"
-               android:layout_height="0dp"
-               android:paddingTop="16dp"
-               android:paddingLeft="16dp"
-               android:paddingRight="16dp">
+               android:layout_height="wrap_content" />
+           <LinearLayout
+               android:orientation="horizontal"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
 
                <TextView
-                   android:text="Osnovno"
-                   android:textColor="@color/colorSecondaryLight"
-                   android:textSize="17dp"
-                   android:textAllCaps="true"
-                   android:paddingBottom="8dp"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content" />
-               <LinearLayout
-                   android:orientation="horizontal"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-                   <LinearLayout
-                       android:orientation="vertical"
-                       android:layout_weight="1"
-                       android:layout_width="0dp"
-                       android:layout_height="wrap_content">
-
-                       <TextView
-                           android:id="@+id/textProfilImePrezime"
-                           android:paddingBottom="4dp"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"/>
-
-                   </LinearLayout>
-                   <TextView
-                       android:id="@+id/textProfilAdresa"
-                       android:layout_weight="1"
-                       android:layout_width="0dp"
-                       android:layout_height="wrap_content"
-                       android:paddingBottom="10dp"/>
-
-               </LinearLayout>
-
-               <View style="@style/Divider"></View>
-
-               <TextView
-                   android:text="Više"
-                   android:textColor="@color/colorSecondaryLight"
-                   android:textSize="17dp"
-                   android:textAllCaps="true"
-                   android:paddingBottom="8dp"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content" />
-               <TextView
-                   android:id="@+id/textProfilUsername"
+                   android:id="@+id/textProfilImePrezime"
                    android:paddingBottom="4dp"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"/>
-               <TextView
-                   android:id="@+id/textProfilDatumRegistracije"
-                   android:paddingBottom="4dp"
-                   android:layout_width="wrap_content"
+                   android:layout_weight="1"
+                   android:layout_width="0dp"
                    android:layout_height="wrap_content"/>
 
-               <View style="@style/Divider"></View>
-
-               <android.support.design.chip.ChipGroup
-                   android:layout_marginBottom="16dp"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-
-                   <android.support.design.chip.Chip
-                       android:id="@+id/chipProfilUkupnoNarudzbi"
-                       android:layout_marginRight="8dp"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content" />
-
-                   <android.support.design.chip.Chip
-                       android:id="@+id/chipProfilZadnjiLogin"
-                       android:layout_marginRight="8dp"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content" />
-
-               </android.support.design.chip.ChipGroup>
+               <TextView
+                   android:id="@+id/textProfilAdresa"
+                   android:layout_weight="1"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:paddingBottom="10dp"/>
 
            </LinearLayout>
 
-           <Button
-               android:id="@+id/btnProfilMojeNarudzbe"
-               android:text="Moje narudžbe"
-               android:layout_marginLeft="16dp"
-               android:layout_marginRight="16dp"
-               android:layout_marginBottom="8dp"
-               android:layout_width="wrap_content"
+           <View style="@style/Divider"></View>
+
+           <TextView
+               android:text="Više"
+               android:textColor="@color/colorSecondaryLight"
+               android:textSize="17dp"
+               android:textAllCaps="true"
+               android:paddingBottom="8dp"
+               android:layout_width="match_parent"
                android:layout_height="wrap_content" />
+           <TextView
+               android:id="@+id/textProfilUsername"
+               android:paddingBottom="4dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"/>
+           <TextView
+               android:id="@+id/textProfilDatumRegistracije"
+               android:paddingBottom="4dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"/>
+
+           <View style="@style/Divider"></View>
+
+           <android.support.design.chip.ChipGroup
+               android:layout_marginBottom="80dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+
+               <android.support.design.chip.Chip
+                   android:id="@+id/chipProfilUkupnoNarudzbi"
+                   android:layout_marginRight="8dp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+               <android.support.design.chip.Chip
+                   android:id="@+id/chipProfilZadnjiLogin"
+                   android:layout_marginRight="8dp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+           </android.support.design.chip.ChipGroup>
 
        </LinearLayout>
 
    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnProfilMojeNarudzbe"
+            android:text="Moje narudžbe"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
