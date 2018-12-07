@@ -11,8 +11,6 @@
     <color name="colorSecondaryDark">#050505</color>
     <color name="colorSecondaryLight">#383838</color>
 
-    <color name="colorDisabled">#CCC</color>
-
     <!-- General colors -->
 
     <color name="colorTypographyDark">#1F1F1F</color>
@@ -28,4 +26,5 @@
 
     <!-- Dodatno -->
     <color name="Transparent">#00ffffff</color>
+    <color name="colorDisabled">#CCC</color>
 </resources>

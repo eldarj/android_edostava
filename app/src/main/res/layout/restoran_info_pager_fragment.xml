@@ -28,7 +28,7 @@
         android:textColor="@color/colorSecondaryLight"
         android:textSize="@dimen/restoran_info_section_title_textsize"
         android:textAllCaps="true"
-        android:paddingBottom="@dimen/section_restoran_info_padding_bottom"
+        android:paddingBottom="@dimen/restoran_info_section_padding_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <LinearLayout
@@ -93,7 +93,7 @@
         android:textColor="@color/colorSecondaryLight"
         android:textSize="@dimen/restoran_info_section_title_textsize"
         android:textAllCaps="true"
-        android:paddingBottom="@dimen/section_restoran_info_padding_bottom"
+        android:paddingBottom="@dimen/restoran_info_section_padding_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <LinearLayout

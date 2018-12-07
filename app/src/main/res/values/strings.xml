@@ -98,6 +98,4 @@
     <!-- Licence strings -->
     <string name="fake_licence_terms">Licencni ugovor</string>
     <string name="fake_licence_terms_text">Korisnik alikacije eDostava! je dužan isporučiti ispravne korisničke podatke i adresu.   Korisnik pri kreiranju narudžbe garantuje dostavljaču da će preuzeti narudžbu u naznačenom vremenu i platiti naznačeni iznos.</string>
-
-
 </resources>

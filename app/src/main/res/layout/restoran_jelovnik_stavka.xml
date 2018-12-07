@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/stavka_padding_jelovnik_top"
-    android:paddingBottom="@dimen/stavka_padding_jelovnik_bottom"
+    android:paddingTop="10dp"
+    android:paddingBottom="@dimen/padding_regular"
     android:orientation="vertical"
     android:id="@+id/stavkaJelovnikRoot"
     android:background="@drawable/ripple_effect">
@@ -18,7 +18,7 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/stavka_padding_jelovnik_img_right"
+            android:layout_marginEnd="@dimen/padding_regular"
             android:layout_marginTop="3dp">
 
             <ImageButton
@@ -81,7 +81,7 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/stavka_padding_jelovnik_img_right">
+            android:layout_marginEnd="@dimen/padding_regular">
 
             <ImageButton
                 android:paddingTop="0dp"

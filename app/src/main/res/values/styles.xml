@@ -100,7 +100,6 @@
     </style>
 
     <!-- Element stilovi -->
-
     <style name="AppTheme.ProgressBar">
         <item name="android:tint">@color/colorPrimary</item>
         <item name="android:gravity">center</item>
