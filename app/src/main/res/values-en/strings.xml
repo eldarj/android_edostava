@@ -14,10 +14,10 @@
     <string name="transition_restoran_card">restoranCardTransition</string>
 
     <!-- Login, Registracija -->
-    <string name="login">Login</string>
     <string name="ime">Ime</string>
     <string name="password">Password</string>
     <string name="prezime">Prezime</string>
+    <string name="login">Login</string>
     <string name="izaberite_blok">Izaberite blok</string>
     <string name="registrujte_se">Registrujte se</string>
     <string name="uspjesna_registracija">Uspješno ste se registrovali</string>
@@ -42,6 +42,7 @@
     <!-- Errors (snackbars) -->
     <string name="dogodila_se_greska">Dogodila se greška.</string>
     <string name="dogodila_se_greska_posalji_komentar_ponovo">Pokusajte poslati komentar ponovo</string>
+    <string name="dogodila_se_greska_posalji_narudzbu_ponovo">Dogodila s greška, pokušajte ponovo</string>
     <string name="dogodila_se_greska_narudzba">Dogodila s greška, provjerite podatke i pokušajte ponovo.</string>
     <string name="dogodila_se_greska_provjerite_i_ponovite">Dogodila s greška, provjerite podatke i pokušajte ponovo.</string>
     <string name="dogodila_se_greska_profil_slika">Dogodila se greška, pokušajte ponovo.</string>
@@ -53,13 +54,18 @@
     <string name="restoran_info_opis">Restoran opis</string>
     <string name="restoran_btn_komentar_posalji">Napiši</string>
     <string name="restoran_input_komentar_error">Komentar ne smije sadržati manje od 5 karaktera.</string>
+    <string name="restoran_jelovnik_toolbar_title">%1$s - jelovnik</string>
 
     <!-- Korpa strings -->
     <string name="korpa_ukupno_stavki">Ukupno stavki u korpi:</string>
-    <string name="korpa_stavka_kolicina">Kolicina x%1d$</string>
-    <string name="korpa_stavka_restoran">Iz restorana %1s$</string>
+    <string name="korpa_stavka_kolicina">Kolicina x%1$d</string>
+    <string name="korpa_stavka_restoran">Iz restorana %1$s</string>
     <string name="korpa_submit">NARUČI</string>
     <string name="korpa_clearout">Odbaci</string>
+    <string name="korpa_stavka_stats_stanje">Stanje: x%1$d - %2$,.2f KM</string>
+    <string name="korpa_dialog_narudzba_created_title">Narudžba kreirana</string>
+    <string name="korpa_dialog_narudzba_created_msg">Uspješno ste kreirali narudžbu! Status i detalje možete provjeriti u listi svih narudžbi.</string>
+    <string name="korpa_dialog_narudzba_created_btn">Narudžbe</string>
 
     <!-- Narudzba strings -->
     <string name="narudzba_neispravna_sifra">Neispravna šifra narudžbe.</string>
@@ -67,10 +73,10 @@
     <string name="narudzba_deleted">Izbrisali ste narudžbu</string>
 
     <!-- Profil strings -->
-    <string name="profil_username">Username %1s$ </string>
-    <string name="profil_datum_registracije">Datum registracije %1s$ </string>
-    <string name="profil_ukupno_narudzbi">Ukupno narudžbi %1d$ </string>
-    <string name="profil_zadnji_login">Zadnji put logiran %1s$ </string>
+    <string name="profil_username">Username %1$s</string>
+    <string name="profil_datum_registracije">Datum registracije %1$s </string>
+    <string name="profil_ukupno_narudzbi">Ukupno narudžbi %1$d</string>
+    <string name="profil_zadnji_login">"Zadnji put logiran %1$s "</string>
     <string name="profil_delete_account">Izbriši korisnički račun</string>
     <string name="profil_delete_account_confirm">Da li ste sigurni da želite izbrisati korisnički račun?</string>
     <string name="profil_delete_account_desc">Trenutne sačuvane preference i korisnički podaci će biti trajno uklonjeni sa sistema, te nećete moći više koristiti aplikaciju eDostava!</string>
@@ -91,6 +97,5 @@
     <!-- Licence strings -->
     <string name="fake_licence_terms">Licencni ugovor</string>
     <string name="fake_licence_terms_text">Korisnik alikacije eDostava! je dužan isporučiti ispravne korisničke podatke i adresu.   Korisnik pri kreiranju narudžbe garantuje dostavljaču da će preuzeti narudžbu u naznačenom vremenu i platiti naznačeni iznos.</string>
-
 
 </resources>

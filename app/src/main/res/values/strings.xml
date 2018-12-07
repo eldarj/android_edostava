@@ -58,8 +58,8 @@
 
     <!-- Korpa strings -->
     <string name="korpa_ukupno_stavki">Ukupno stavki u korpi:</string>
-    <string name="korpa_stavka_kolicina">Kolicina x%1d$</string>
-    <string name="korpa_stavka_restoran">Iz restorana %1s$</string>
+    <string name="korpa_stavka_kolicina">Kolicina x%1$d</string>
+    <string name="korpa_stavka_restoran">Iz restorana %1$s</string>
     <string name="korpa_submit">NARUČI</string>
     <string name="korpa_clearout">Odbaci</string>
     <string name="korpa_stavka_stats_stanje">Stanje: x%1$d - %2$,.2f KM</string>
@@ -73,10 +73,10 @@
     <string name="narudzba_deleted">Izbrisali ste narudžbu</string>
 
     <!-- Profil strings -->
-    <string name="profil_username">Username %1s$ </string>
-    <string name="profil_datum_registracije">Datum registracije %1s$ </string>
-    <string name="profil_ukupno_narudzbi">Ukupno narudžbi %1d$ </string>
-    <string name="profil_zadnji_login">Zadnji put logiran %1s$ </string>
+    <string name="profil_username">Username %1$s</string>
+    <string name="profil_datum_registracije">Datum registracije %1$s </string>
+    <string name="profil_ukupno_narudzbi">Ukupno narudžbi %1$d</string>
+    <string name="profil_zadnji_login">"Zadnji put logiran %1$s "</string>
     <string name="profil_delete_account">Izbriši korisnički račun</string>
     <string name="profil_delete_account_confirm">Da li ste sigurni da želite izbrisati korisnički račun?</string>
     <string name="profil_delete_account_desc">Trenutne sačuvane preference i korisnički podaci će biti trajno uklonjeni sa sistema, te nećete moći više koristiti aplikaciju eDostava!</string>
