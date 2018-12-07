@@ -46,6 +46,7 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
     private Button btnProfilSlikaSnimi;
     private Button btnProfilSlikaOdustani;
     private KorisnikVM korisnik;
+    private boolean changedImageFlag = false;
 
     public static ProfilPromijeniSlikuDialogFragment newInstance() {
         ProfilPromijeniSlikuDialogFragment fragment = new ProfilPromijeniSlikuDialogFragment();
@@ -70,6 +71,20 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
         btnProfilSlikaSnimi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!changedImageFlag) {
+                    Snackbar.make(getView(),
+                            "Odaberite novu sliku",
+                            Snackbar.LENGTH_INDEFINITE)
+                            .setAction("Promijeni sliku", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    izbornikPromjeneSlike();
+                                }
+                            })
+                            .show();
+                    return;
+                }
+
                 if (view.findViewById(R.id.progressBar_snimiPromjene) != null) {
                     view.findViewById(R.id.progressBar_snimiPromjene).setVisibility(View.VISIBLE);
                 }
@@ -108,23 +123,7 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
         imageProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final android.support.v7.app.AlertDialog.Builder dlgBuilder = new AlertDialog.Builder((AppCompatActivity)getActivity(), R.style.Theme_MaterialComponents_Light_Dialog_Alert);
-                dlgBuilder.setMessage(R.string.profil_slika_izbor)
-                        .setPositiveButton(R.string.profil_slika_galerija, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                imageProfilFromGallery();
-                                izborDialog = dialog;
-                            }
-                        })
-                        .setNegativeButton(R.string.profil_slika_kamera, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                imageProfilCameraCapture();
-                                izborDialog = dialog;
-                            }
-                        })
-                        .show();
+                izbornikPromjeneSlike();
             }
         });
 
@@ -136,6 +135,26 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
         return view;
     }
 
+    private void izbornikPromjeneSlike() {
+        final AlertDialog.Builder dlgBuilder = new AlertDialog.Builder((AppCompatActivity)getActivity(), R.style.Theme_MaterialComponents_Light_Dialog_Alert);
+        dlgBuilder.setMessage(R.string.profil_slika_izbor)
+                .setPositiveButton(R.string.profil_slika_galerija, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        imageProfilFromGallery();
+                        izborDialog = dialog;
+                    }
+                })
+                .setNegativeButton(R.string.profil_slika_kamera, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        imageProfilCameraCapture();
+                        izborDialog = dialog;
+                    }
+                })
+                .show();
+    }
+
     private void onImageUploaded(@Nullable String imagePath, @Nullable Integer statusCode, @Nullable String errorMessage) {
         if (view.findViewById(R.id.progressBar_snimiPromjene) != null) {
             view.findViewById(R.id.progressBar_snimiPromjene).setVisibility(View.INVISIBLE);
@@ -145,7 +164,7 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
             korisnik.setImageUrl(imagePath);
             MySession.setKorisnik(korisnik);
 
-            Snackbar.make(view, R.string.profil_slika_changed , Snackbar.LENGTH_SHORT).addCallback(new Snackbar.Callback() {
+            Snackbar.make(getView(), R.string.profil_slika_changed , Snackbar.LENGTH_SHORT).addCallback(new Snackbar.Callback() {
                 @Override
                 public void onDismissed(Snackbar transientBottomBar, int event) {
                     getDialog().dismiss();
@@ -153,7 +172,7 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
             }).show();
 
         } else {
-            Snackbar.make(getActivity().findViewById(android.R.id.content),
+            Snackbar.make(getView(),
                     errorMessage != null ? errorMessage : getString(R.string.dogodila_se_greska_profil_slika),
                     Snackbar.LENGTH_LONG).show();
         }
@@ -178,6 +197,7 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
 
             // Set the bitmap to imageProfil
             imageProfil.setImageBitmap(imageBitmap);
+            changedImageFlag = true;
         }
         if (requestCode == REQUEST_IMAGE_FROM_GALLERY && resultCode == Activity.RESULT_OK && data != null) {
             Uri pickedImage = data.getData();
@@ -187,10 +207,10 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
 
                 //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), pickedImage);
                 imageProfil.setImageBitmap(bitmap);
-
+                changedImageFlag = true;
                 is.close();
             } catch (Exception e) {
-                Snackbar.make(view, getString(R.string.dogodila_se_greska_profil_slika), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(getView(), getString(R.string.dogodila_se_greska_profil_slika), Snackbar.LENGTH_LONG).show();
                 e.printStackTrace();
             }
         }
