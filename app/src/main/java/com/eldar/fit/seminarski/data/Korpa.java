@@ -17,13 +17,6 @@ public class Korpa implements Serializable {
         hranaStavke = new ArrayList<KorpaHranaStavka>();
     }
 
-    public static Korpa emptyKorpa() {
-        Korpa korpa = new Korpa();
-        MySession.setKorpa(korpa);
-
-        return korpa;
-    }
-
     public int getHranaStavkeTotalCount() {
         int total = 0;
         for (KorpaHranaStavka s :

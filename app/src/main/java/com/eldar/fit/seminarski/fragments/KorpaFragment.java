@@ -128,8 +128,7 @@ public class KorpaFragment extends Fragment {
         btnKorpaOdbaci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                korpa = Korpa.emptyKorpa();
-                view.invalidate();
+                korpa = emptyKorpa();
             }
         });
 
@@ -170,7 +169,7 @@ public class KorpaFragment extends Fragment {
                     }
                 });
 
-        korpa = Korpa.emptyKorpa();
+        korpa = emptyKorpa();
     }
 
     private void onNarudzbaCreated(@Nullable String response, @Nullable Integer statusCode, @Nullable String errorMessage) {
@@ -186,6 +185,11 @@ public class KorpaFragment extends Fragment {
 
             // narudzba was not created!
         }
+    }
+
+    private Korpa emptyKorpa() {
+        MySession.setKorpa(null);
+        return prepKorpaSession();
     }
 
     private Korpa prepKorpaSession() {
