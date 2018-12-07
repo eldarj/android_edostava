@@ -2,6 +2,7 @@
     <!-- General -->
     <string name="app_name">eDostava!</string>
     <string name="app_email">eldar.jahijagic@fit.edu.ba</string>
+
     <string name="wrong_credentials">Pogrešan username ili password.</string>
     <string name="input_podaci_invalid">Molimo provjerite podatke</string>
     <string name="api_load_ponovo">Refresh</string>
