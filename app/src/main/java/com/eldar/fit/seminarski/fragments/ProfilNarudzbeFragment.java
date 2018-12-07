@@ -9,7 +9,6 @@ import android.support.design.chip.ChipGroup;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +38,7 @@ import java.util.Set;
 
 public class ProfilNarudzbeFragment extends Fragment {
 
+    private static final String LIST_NARUDZBE_QUERY = "profilListNarudzbeQuery";
     public static String Tag = "profilNarudzbeFragment";
 
     private NarudzbaVM narudzbaIzbrisi;
@@ -53,10 +53,24 @@ public class ProfilNarudzbeFragment extends Fragment {
     private BaseAdapter listNarudzbeAdapter;
     private TextView profilnarudzbeNoData;
     private ProgressBar progressBar_narudzbaList;
+    private String predefinedQuery = "";
 
-    public static ProfilNarudzbeFragment newInstance() {
+    public static ProfilNarudzbeFragment newInstance(String query) {
         ProfilNarudzbeFragment fragment = new ProfilNarudzbeFragment();
+
+        Bundle args = new Bundle();
+        args.putString(LIST_NARUDZBE_QUERY, query);
+        fragment.setArguments(args);
+
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments().containsKey(LIST_NARUDZBE_QUERY)) {
+            predefinedQuery = getArguments().getString(LIST_NARUDZBE_QUERY);
+        }
     }
 
     @Nullable
@@ -76,16 +90,17 @@ public class ProfilNarudzbeFragment extends Fragment {
         });
 
         searchViewNarudzbe = view.findViewById(R.id.searchViewNarudzbe);
+        searchViewNarudzbe.setQuery(predefinedQuery, false);
         searchViewNarudzbe.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                filterNarudzbeList(query);
+                updateNarudzbaList(query);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterNarudzbeList(newText);
+                updateNarudzbaList(newText);
                 return true;
             }
         });
@@ -141,7 +156,7 @@ public class ProfilNarudzbeFragment extends Fragment {
                 @Override
                 public void run(NarudzbaVM izbrisanaNarudzba) {
                     initialPodaci.remove(izbrisanaNarudzba);
-                    filterNarudzbeList(searchViewNarudzbe.getQuery().toString());
+                    updateNarudzbaList(searchViewNarudzbe.getQuery().toString());
                 }
             };
 
@@ -158,12 +173,19 @@ public class ProfilNarudzbeFragment extends Fragment {
     private void onNarudzbaListReceived(@Nullable NarudzbaPrikazVM narudzbePodaci, @Nullable Integer statusCode, @Nullable String errorMessage) {
         progressBar_narudzbaList.setVisibility(View.INVISIBLE);
 
-        int noDataTextVisibility = narudzbePodaci.narudzbe != null && narudzbePodaci.narudzbe.size() > 0 ? View.INVISIBLE: View.VISIBLE;
+        int noDataTextVisibility = narudzbePodaci != null &&
+                    narudzbePodaci.narudzbe != null &&
+                    narudzbePodaci.narudzbe.size() > 0
+                ? View.INVISIBLE: View.VISIBLE;
         profilnarudzbeNoData.setVisibility(noDataTextVisibility);
 
         if (narudzbePodaci != null) {
-
-            podaci = initialPodaci = narudzbePodaci.narudzbe;
+            initialPodaci = narudzbePodaci.narudzbe;
+            if (predefinedQuery != null && predefinedQuery.length() > 0 ) {
+                podaci= getFiltered(predefinedQuery);
+            } else {
+                podaci = initialPodaci;
+            }
             popuniPodatke();
         } else {
             Snackbar.make(getActivity().findViewById(R.id.content),
@@ -172,21 +194,20 @@ public class ProfilNarudzbeFragment extends Fragment {
         }
     }
 
-    private void filterNarudzbeList(String query) {
-        try {
-            List<NarudzbaVM> filtered = new ArrayList<NarudzbaVM>();
+    private void updateNarudzbaList(String query) {
+        podaci = getFiltered(query);
+        listNarudzbeAdapter.notifyDataSetChanged();
+    }
 
-            for (NarudzbaVM n: initialPodaci) {
-                if (n.getSearchIndex().contains(query.toLowerCase())) {
-                    filtered.add(n);
-                }
+    private List<NarudzbaVM> getFiltered(String query) {
+        List<NarudzbaVM> filtered = new ArrayList<NarudzbaVM>();
+
+        for (NarudzbaVM n: initialPodaci) {
+            if (n.getSearchIndex().contains(query.toLowerCase())) {
+                filtered.add(n);
             }
-
-            podaci = filtered;
-            listNarudzbeAdapter.notifyDataSetChanged();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+        return filtered;
     }
 
     private void popuniPodatke() {

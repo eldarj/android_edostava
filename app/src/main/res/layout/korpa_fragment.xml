@@ -50,15 +50,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <ProgressBar
-            android:id="@+id/progressBar_korpa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+        <RelativeLayout
+            android:id="@+id/progressBarKorpaHolder"
+            android:elevation="9dp"
             android:visibility="invisible"
-            android:minHeight="@dimen/progressbar_minheight"
-            android:minWidth="@dimen/progressbar_minheight"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:background="@color/colorWhite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/progressbar_minheight"
+                android:minWidth="@dimen/progressbar_minheight"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
 
         <LinearLayout
             android:orientation="vertical"

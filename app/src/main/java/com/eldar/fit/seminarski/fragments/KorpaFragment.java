@@ -1,14 +1,16 @@
 package com.eldar.fit.seminarski.fragments;
 
-import android.content.SharedPreferences;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.button.MaterialButton;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,7 +26,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -57,7 +59,7 @@ public class KorpaFragment extends Fragment {
     private View view;
     private AppBarLayout appbarKorpa;
     private boolean renderKorpaAppBar;
-    private ProgressBar progressBar_korpa;
+    private RelativeLayout progressBarKorpaHolder;
 
     public static KorpaFragment newInstance(boolean renderKorpaAppBar) {
         KorpaFragment fragment = new KorpaFragment();
@@ -94,15 +96,9 @@ public class KorpaFragment extends Fragment {
         myToolbar = view.findViewById(R.id.toolbarKorpa);
         ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
 
-        progressBar_korpa = view.findViewById(R.id.progressBar_korpa);
-
+        progressBarKorpaHolder = view.findViewById(R.id.progressBarKorpaHolder);
         textKorpaIntro = view.findViewById(R.id.textKorpaIntro);
-        textKorpaIntro.setText(korpa.getHranaStavke().size() == 0 ?
-                getString(R.string.empty_list_korpa) :
-                getString(R.string.korpa_ukupno_stavki) + korpa.getHranaStavkeTotalCount());
-
         textKorpaTotal = view.findViewById(R.id.textKorpaTotal);
-        textKorpaTotal.setText(korpa.getUkupnaCijena() == 0 ? "- KM" : korpa.getUkupnaCijena() + " KM");
 
         listKorpaStavke = view.findViewById(R.id.listKorpaStavke);
         listKorpaStavkePopuni();
@@ -128,7 +124,7 @@ public class KorpaFragment extends Fragment {
         btnKorpaOdbaci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                korpa = emptyKorpa();
+                do_odbaciKorpuClick();
             }
         });
 
@@ -140,17 +136,42 @@ public class KorpaFragment extends Fragment {
             }
         });
 
+        setupUI();
+        return view;
+    }
+
+    private void setupUI() {
+        textKorpaIntro.setText(korpa.getHranaStavke().size() == 0 ?
+                getString(R.string.empty_list_korpa) :
+                getString(R.string.korpa_ukupno_stavki) + korpa.getHranaStavkeTotalCount());
+
+        textKorpaTotal.setText(korpa.getUkupnaCijena() == 0 ? "- KM" : korpa.getUkupnaCijena() + " KM");
+
         if (korpa.getHranaStavke().size() == 0) {
             btnKorpaNaruci.setEnabled(false);
             btnKorpaOdbaci.setEnabled(false);
             btnKorpaOdbaci.setTextColor(getResources().getColor(R.color.colorTypographySemiDark));
             btnKorpaOdbaci.setIconTint(ColorStateList.valueOf(getResources().getColor(R.color.colorTypographySemiDark)));
         }
-        return view;
+    }
+
+    private void do_odbaciKorpuClick() {
+        progressBarKorpaHolder.setVisibility(View.VISIBLE);
+        new CountDownTimer(1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) { }
+            @Override
+            public void onFinish() {
+                MySession.setKorpa(null);
+                korpa = prepKorpaSession();
+                setupUI();
+                progressBarKorpaHolder.setVisibility(View.INVISIBLE);
+            }
+        }.start();
     }
 
     private void do_btnNaruciClick() {
-        progressBar_korpa.setVisibility(View.VISIBLE);
+        progressBarKorpaHolder.setVisibility(View.VISIBLE);
 
         MyApiRequest.request(MyApiRequest.ENDPOINT_NARUDZBE_CREATE,
                 MyUrlConnection.HttpMethod.POST,
@@ -169,27 +190,38 @@ public class KorpaFragment extends Fragment {
                     }
                 });
 
-        korpa = emptyKorpa();
+        MySession.setKorpa(null);
+        korpa = prepKorpaSession();
     }
 
     private void onNarudzbaCreated(@Nullable String response, @Nullable Integer statusCode, @Nullable String errorMessage) {
-        progressBar_korpa.setVisibility(View.INVISIBLE);
+        progressBarKorpaHolder.setVisibility(View.INVISIBLE);
 
         if (response != null) {
-            Log.i("Test", "KORPA TEST USPIO " + response);
-            // clear out the korpa - narudzba successfully created
+            MySession.setKorpa(null);
+            korpa = prepKorpaSession();
+            setupUI();
+            final AlertDialog.Builder dlgBuilder = new AlertDialog.Builder((AppCompatActivity)getActivity(), R.style.Theme_MaterialComponents_Light_Dialog_Alert);
+            dlgBuilder.setTitle(R.string.korpa_dialog_narudzba_created_title)
+                    .setMessage(R.string.korpa_dialog_narudzba_created_msg)
+                    .setPositiveButton(R.string.korpa_dialog_narudzba_created_btn, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            MyFragmentHelper.fragmentReplace((AppCompatActivity) getActivity(),
+                                    R.id.fragmentContainer,
+                                    ProfilNarudzbeFragment.newInstance(response),
+                                    ProfilNarudzbeFragment.Tag,
+                                    true);
+
+                        }
+                    })
+                    .show();
         } else {
             Snackbar.make(getActivity().findViewById(R.id.content),
-                    errorMessage != null ? errorMessage : "Dogodila se greška.",
+                    getString(R.string.dogodila_se_greska_posalji_narudzbu_ponovo),
                     Snackbar.LENGTH_LONG).show();
-
-            // narudzba was not created!
         }
-    }
-
-    private Korpa emptyKorpa() {
-        MySession.setKorpa(null);
-        return prepKorpaSession();
     }
 
     private Korpa prepKorpaSession() {
@@ -264,7 +296,7 @@ public class KorpaFragment extends Fragment {
         if (item.getItemId() == R.id.actionMojeNarudzbe) {
             MyFragmentHelper.fragmentReplace((AppCompatActivity) getActivity(),
                     R.id.fragmentContainer,
-                    ProfilNarudzbeFragment.newInstance(),
+                    ProfilNarudzbeFragment.newInstance(""),
                     ProfilNarudzbeFragment.Tag,
                     true);
         }

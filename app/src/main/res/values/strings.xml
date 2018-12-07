@@ -42,6 +42,7 @@
     <!-- Errors (snackbars) -->
     <string name="dogodila_se_greska">Dogodila se greška.</string>
     <string name="dogodila_se_greska_posalji_komentar_ponovo">Pokusajte poslati komentar ponovo</string>
+    <string name="dogodila_se_greska_posalji_narudzbu_ponovo">Dogodila s greška, pokušajte ponovo</string>
     <string name="dogodila_se_greska_narudzba">Dogodila s greška, provjerite podatke i pokušajte ponovo.</string>
     <string name="dogodila_se_greska_provjerite_i_ponovite">Dogodila s greška, provjerite podatke i pokušajte ponovo.</string>
     <string name="dogodila_se_greska_profil_slika">Dogodila se greška, pokušajte ponovo.</string>
@@ -62,6 +63,9 @@
     <string name="korpa_submit">NARUČI</string>
     <string name="korpa_clearout">Odbaci</string>
     <string name="korpa_stavka_stats_stanje">Stanje: x%1$d - %2$,.2f KM</string>
+    <string name="korpa_dialog_narudzba_created_title">Narudžba kreirana</string>
+    <string name="korpa_dialog_narudzba_created_msg">Uspješno ste kreirali narudžbu! Status i detalje možete provjeriti u listi svih narudžbi.</string>
+    <string name="korpa_dialog_narudzba_created_btn">Narudžbe</string>
 
     <!-- Narudzba strings -->
     <string name="narudzba_neispravna_sifra">Neispravna šifra narudžbe.</string>
@@ -93,6 +97,5 @@
     <!-- Licence strings -->
     <string name="fake_licence_terms">Licencni ugovor</string>
     <string name="fake_licence_terms_text">Korisnik alikacije eDostava! je dužan isporučiti ispravne korisničke podatke i adresu.   Korisnik pri kreiranju narudžbe garantuje dostavljaču da će preuzeti narudžbu u naznačenom vremenu i platiti naznačeni iznos.</string>
-
 
 </resources>

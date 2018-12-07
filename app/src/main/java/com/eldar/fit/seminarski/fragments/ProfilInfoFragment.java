@@ -84,7 +84,7 @@ public class ProfilInfoFragment extends Fragment {
             public void onClick(View v) {
                 MyFragmentHelper.fragmentReplace((AppCompatActivity)getActivity(),
                         R.id.fragmentProfilContainer,
-                        ProfilNarudzbeFragment.newInstance(),
+                        ProfilNarudzbeFragment.newInstance(""),
                         ProfilNarudzbeFragment.Tag,
                         true);
             }
