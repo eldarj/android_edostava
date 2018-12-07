@@ -240,7 +240,8 @@ public class RestoranJelovnikFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         KorpaHranaStavka s = do_dodajStavku(hranaStavka);
-                        updateStatsUI(s,  stavkaJelovnikRoot, jelovnikStavkaAddedStatsHolder, textStavkaJelovnikStats, btnDodajKorpaStavku);
+                        ripple(stavkaJelovnikRoot);
+                        updateStatsUI(s,  jelovnikStavkaAddedStatsHolder, textStavkaJelovnikStats, btnDodajKorpaStavku);
                     }
                 });
 
@@ -249,14 +250,15 @@ public class RestoranJelovnikFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         KorpaHranaStavka s = do_ukloniStavku(hranaStavka);
-                        updateStatsUI(s,  stavkaJelovnikRoot, jelovnikStavkaAddedStatsHolder, textStavkaJelovnikStats, btnDodajKorpaStavku);
+                        ripple(stavkaJelovnikRoot);
+                        updateStatsUI(s,  jelovnikStavkaAddedStatsHolder, textStavkaJelovnikStats, btnDodajKorpaStavku);
                     }
                 });
 
                 // Provjeri da li je stavka već u korpi
                 KorpaHranaStavka korpaStavka = korpa.getStavka(hranaStavka);
                 if (korpaStavka != null) {
-                    updateStatsUI(korpaStavka, stavkaJelovnikRoot, jelovnikStavkaAddedStatsHolder, textStavkaJelovnikStats, btnDodajKorpaStavku);
+                    updateStatsUI(korpaStavka, jelovnikStavkaAddedStatsHolder, textStavkaJelovnikStats, btnDodajKorpaStavku);
                 }
 
                 return view;
@@ -278,9 +280,12 @@ public class RestoranJelovnikFragment extends Fragment {
         return s;
     }
 
-    private void updateStatsUI(KorpaHranaStavka korpaStavka, LinearLayout container, LinearLayout statsContainer, TextView stanje, ImageButton btn) {
+    private void ripple(LinearLayout container) {
         container.setPressed(true);
         container.setPressed(false);
+    }
+
+    private void updateStatsUI(KorpaHranaStavka korpaStavka, LinearLayout statsContainer, TextView stanje, ImageButton btn) {
         if (korpa.getHranaStavke().contains(korpaStavka)) {
             stanje.setText(getString(R.string.korpa_stavka_stats_stanje, korpaStavka.getKolicina(), korpaStavka.getUkupnaCijena()));
             btn.setImageDrawable(getResources().getDrawable(R.drawable.ic_plus_round_added));
