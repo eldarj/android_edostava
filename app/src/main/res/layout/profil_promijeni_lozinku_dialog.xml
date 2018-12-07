@@ -13,10 +13,9 @@
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:textAppearance="@style/AlertDialogsTheme.Components.Caption"
-        android:text="Trenutna lozinka"
+        android:text="Unesite trenutnu lozinku"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -26,7 +25,7 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/textProfilOpcijeLozinkaTrenutna"
-            android:hint="Trenutna lozinka"
+            android:hint="@string/profil_unos_lozinka"
             android:singleLine="true"
             android:inputType="textPassword"
             android:layout_width="match_parent"
@@ -35,9 +34,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <TextView
-        android:layout_marginTop="16dp"
-        android:textAppearance="@style/AlertDialogsTheme.Components.Caption"
-        android:text="Nova lozinka"
+        android:text="@string/profil_unos_nova_lozinka"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

@@ -65,7 +65,7 @@ public class ProfilOpcijeFragment extends Fragment {
         btnProfilSettingsQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final AlertDialog.Builder dlgBuilder = new AlertDialog.Builder((AppCompatActivity)getActivity(), R.style.Theme_MaterialComponents_Light_Dialog_Alert);
+                final AlertDialog.Builder dlgBuilder = new AlertDialog.Builder((AppCompatActivity)getActivity());
                 dlgBuilder.setTitle(R.string.fake_licence_terms)
                         .setMessage(R.string.fake_licence_terms_text)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -112,7 +112,7 @@ public class ProfilOpcijeFragment extends Fragment {
         btnProfilSettingsDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final AlertDialog.Builder dlgBuilder = new AlertDialog.Builder((AppCompatActivity)getActivity(), R.style.Theme_MaterialComponents_Light_Dialog_Alert);
+                final AlertDialog.Builder dlgBuilder = new AlertDialog.Builder((AppCompatActivity)getActivity());
                 dlgBuilder.setTitle(R.string.profil_delete_account)
                         .setMessage(getString(R.string.profil_delete_account_confirm) +
                                 getString(R.string.profil_delete_account_desc))

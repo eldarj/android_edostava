@@ -52,6 +52,7 @@
                 style="@style/AlertDialogsTheme.Components.Button"
                 android:text="Odustani"/>
             <Button
+                android:textColor="@color/colorDisabled"
                 android:id="@+id/btnProfilSlikaSnimi"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

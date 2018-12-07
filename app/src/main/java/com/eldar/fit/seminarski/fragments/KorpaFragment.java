@@ -201,7 +201,7 @@ public class KorpaFragment extends Fragment {
             MySession.setKorpa(null);
             korpa = prepKorpaSession();
             setupUI();
-            final AlertDialog.Builder dlgBuilder = new AlertDialog.Builder((AppCompatActivity)getActivity(), R.style.Theme_MaterialComponents_Light_Dialog_Alert);
+            final AlertDialog.Builder dlgBuilder = new AlertDialog.Builder((AppCompatActivity)getActivity());
             dlgBuilder.setTitle(R.string.korpa_dialog_narudzba_created_title)
                     .setMessage(R.string.korpa_dialog_narudzba_created_msg)
                     .setPositiveButton(R.string.korpa_dialog_narudzba_created_btn, new DialogInterface.OnClickListener() {

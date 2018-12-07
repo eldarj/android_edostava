@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -37,6 +38,7 @@ public class ProfilPromijeniAdresuDialogFragment extends DialogFragment {
     private KorisnikVM korisnik;
     private TextView tvProfilOpcijeTrenutnaAdresa;
     private View view;
+    private ProgressBar progressBar_snimiPromjene;
 
     public static ProfilPromijeniAdresuDialogFragment newInstance(){
         ProfilPromijeniAdresuDialogFragment fragment = new ProfilPromijeniAdresuDialogFragment();
@@ -58,6 +60,8 @@ public class ProfilPromijeniAdresuDialogFragment extends DialogFragment {
 
         tvProfilOpcijeTrenutnaAdresa = view.findViewById(R.id.tvProfilOpcijeTrenutnaAdresa);
         tvProfilOpcijeTrenutnaAdresa.setText(korisnik.getAdresa() + ", " + korisnik.getLokacija());
+
+        progressBar_snimiPromjene = view.findViewById(R.id.progressBar_snimiPromjene);
 
         textProfilOpcijeAdresaNew = view.findViewById(R.id.textProfilOpcijeAdresaNew);
 
@@ -88,9 +92,7 @@ public class ProfilPromijeniAdresuDialogFragment extends DialogFragment {
         btnProfilAdresaSnimi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (view.findViewById(R.id.progressBar_snimiPromjene) != null) {
-                    view.findViewById(R.id.progressBar_snimiPromjene).setVisibility(View.VISIBLE);
-                }
+                progressBar_snimiPromjene.setVisibility(View.VISIBLE);
 
                 if (textProfilOpcijeAdresaNew == null || textProfilOpcijeAdresaNew.length() <= 4) {
                     textProfilOpcijeAdresaNew.setError(getString(R.string.profil_error_adresa));
@@ -120,9 +122,7 @@ public class ProfilPromijeniAdresuDialogFragment extends DialogFragment {
     }
 
     private void updateLokacija(@Nullable KorisnikVM korisnik, @Nullable Integer statusCode, @Nullable String errorMessage) {
-        if (view.findViewById(R.id.progressBar_snimiPromjene) != null) {
-            view.findViewById(R.id.progressBar_snimiPromjene).setVisibility(View.INVISIBLE);
-        }
+        progressBar_snimiPromjene.setVisibility(View.INVISIBLE);
 
         if (korisnik == null) {
             Snackbar.make(getView(), getString(R.string.dogodila_se_greska_provjerite_i_ponovite) , Snackbar.LENGTH_SHORT).show();

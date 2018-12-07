@@ -93,9 +93,11 @@
     <string name="profil_nova_lozinka_ponovo_error">Polje ne smije biti prazno, manje od 6 karaktera ili se lozinke ne podudaraju!</string>
     <string name="profil_lozinka_success">Uspješno ste promijenili lozinku!</string>
     <string name="profil_error_adresa">Adresa ne smije biti prazna ili manja od 4 karaktera!</string>
-
+    <string name="profil_unos_nova_lozinka">Unesite i potvrdite novu lozinku</string>
+    <string name="profil_unos_lozinka">Trenutna lozinka</string>
     <!-- Licence strings -->
     <string name="fake_licence_terms">Licencni ugovor</string>
     <string name="fake_licence_terms_text">Korisnik alikacije eDostava! je dužan isporučiti ispravne korisničke podatke i adresu.   Korisnik pri kreiranju narudžbe garantuje dostavljaču da će preuzeti narudžbu u naznačenom vremenu i platiti naznačeni iznos.</string>
+
 
 </resources>

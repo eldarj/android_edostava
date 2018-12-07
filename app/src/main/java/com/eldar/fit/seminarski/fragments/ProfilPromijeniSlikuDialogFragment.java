@@ -74,7 +74,7 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
                 if (!changedImageFlag) {
                     Snackbar.make(getView(),
                             "Odaberite novu sliku",
-                            Snackbar.LENGTH_INDEFINITE)
+                            Snackbar.LENGTH_LONG)
                             .setAction("Promijeni sliku", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -136,7 +136,7 @@ public class ProfilPromijeniSlikuDialogFragment extends DialogFragment {
     }
 
     private void izbornikPromjeneSlike() {
-        final AlertDialog.Builder dlgBuilder = new AlertDialog.Builder((AppCompatActivity)getActivity(), R.style.Theme_MaterialComponents_Light_Dialog_Alert);
+        final AlertDialog.Builder dlgBuilder = new AlertDialog.Builder((AppCompatActivity)getActivity());
         dlgBuilder.setMessage(R.string.profil_slika_izbor)
                 .setPositiveButton(R.string.profil_slika_galerija, new DialogInterface.OnClickListener() {
                     @Override
