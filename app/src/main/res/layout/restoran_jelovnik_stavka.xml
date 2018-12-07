@@ -55,6 +55,7 @@
                     android:id="@+id/textStavkaJelovnikOpis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/padding_xs"
                     android:text="Preukusna pizza"/>
             </LinearLayout>
             <TextView
@@ -102,6 +103,8 @@
             <View style="@style/Divider.Xsmall"></View>
             <TextView
                 android:id="@+id/textStavkaJelovnikStats"
+                android:textAllCaps="true"
+                style="@style/TextAppearance.MaterialComponents.Caption"
                 android:gravity="center|end"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
