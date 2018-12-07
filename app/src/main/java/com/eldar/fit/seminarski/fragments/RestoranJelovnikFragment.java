@@ -51,6 +51,7 @@ public class RestoranJelovnikFragment extends Fragment {
     private ProgressBar progressBar_hranaList;
     private TextView restoranJelovnikNoData;
     private ImageButton btnJelovnikClose;
+    private TextView titleKorpaNaziv;
 
     public static RestoranJelovnikFragment newInstance(RestoranInfo restoran) {
         RestoranJelovnikFragment fragment = new RestoranJelovnikFragment();
@@ -88,6 +89,9 @@ public class RestoranJelovnikFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getKorpaSession();
         View view = inflater.inflate(R.layout.restoran_jelovnik_fragment, container, false);
+
+        titleKorpaNaziv = view.findViewById(R.id.titleKorpaNaziv);
+        titleKorpaNaziv.setText(getString(R.string.restoran_jelovnik_toolbar_title, restoran.getNaziv()));
 
         progressBar_hranaList = view.findViewById(R.id.progressBar_hranaList);
 

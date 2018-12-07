@@ -53,6 +53,7 @@
     <string name="restoran_info_opis">Restoran opis</string>
     <string name="restoran_btn_komentar_posalji">Napiši</string>
     <string name="restoran_input_komentar_error">Komentar ne smije sadržati manje od 5 karaktera.</string>
+    <string name="restoran_jelovnik_toolbar_title">%1$s - jelovnik</string>
 
     <!-- Korpa strings -->
     <string name="korpa_ukupno_stavki">Ukupno stavki u korpi:</string>
