@@ -60,6 +60,7 @@
     <string name="korpa_stavka_restoran">Iz restorana %1s$</string>
     <string name="korpa_submit">NARUČI</string>
     <string name="korpa_clearout">Odbaci</string>
+    <string name="korpa_stavka_stats_stanje">Stanje: x%1$d - %2$,.2f KM</string>
 
     <!-- Narudzba strings -->
     <string name="narudzba_neispravna_sifra">Neispravna šifra narudžbe.</string>

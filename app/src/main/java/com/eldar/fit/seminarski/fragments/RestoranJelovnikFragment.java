@@ -1,33 +1,34 @@
 package com.eldar.fit.seminarski.fragments;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.eldar.fit.seminarski.R;
 import com.eldar.fit.seminarski.data.HranaItemVM;
 import com.eldar.fit.seminarski.data.HranaPrikazVM;
 import com.eldar.fit.seminarski.data.Korpa;
+import com.eldar.fit.seminarski.data.KorpaHranaStavka;
 import com.eldar.fit.seminarski.helper.MyAbstractRunnable;
 import com.eldar.fit.seminarski.helper.MyApiRequest;
 import com.eldar.fit.seminarski.helper.MySession;
 import com.eldar.fit.seminarski.helper.RestoranInfo;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -172,6 +173,7 @@ public class RestoranJelovnikFragment extends Fragment {
 
     private void popuniPodatke() {
         listHranaAdapter = new BaseAdapter() {
+
             @Override
             public int getCount() {
                 return podaci.size();
@@ -188,38 +190,70 @@ public class RestoranJelovnikFragment extends Fragment {
             }
 
             @Override
+            public int getViewTypeCount() {
+                return getCount();
+            }
+
+            @Override
+            public int getItemViewType(int position) {
+                return position;
+            }
+
+            @Override
             public View getView(int position, View view, ViewGroup parent) {
                 if (view == null) {
                     LayoutInflater inflater = getLayoutInflater();
                     view = inflater != null ? inflater.inflate(R.layout.restoran_jelovnik_stavka, parent, false) : null;
                 }
+
+                HranaItemVM hranaStavka = podaci.get(position);
+
+                // Main row
+                LinearLayout stavkaJelovnikRoot = view.findViewById(R.id.stavkaJelovnikRoot);
+
                 TextView textStavkaJelovnikNaziv = view.findViewById(R.id.textStavkaJelovnikNaziv);
-                textStavkaJelovnikNaziv.setText(podaci.get(position).getNaziv());
+                textStavkaJelovnikNaziv.setText(hranaStavka.getNaziv());
 
                 TextView textStavkaJelovnikOpis = view.findViewById(R.id.textStavkaJelovnikOpis);
-                textStavkaJelovnikOpis.setText(podaci.get(position).getOpis());
+                textStavkaJelovnikOpis.setText(hranaStavka.getOpis());
 
                 TextView textStavkaJelovnikCijena = view.findViewById(R.id.textStavkaJelovnikCijena);
-                textStavkaJelovnikCijena.setText(getString(R.string.cijena_double, podaci.get(position).getCijena()));
-
-                final RelativeLayout stavkaJelovnikRoot = view.findViewById(R.id.stavkaJelovnikRoot);
-
-                ImageButton btnDodajStavkuKorpu = view.findViewById(R.id.btnDodajStavkuKorpu);
-                btnDodajStavkuKorpu.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        stavkaJelovnikRoot.setPressed(true);
-                        stavkaJelovnikRoot.setPressed(false);
-
-                        do_dodajStavku(podaci.get(position));
-                    }
-                });
+                textStavkaJelovnikCijena.setText(getString(R.string.cijena_double, hranaStavka.getCijena()));
 
                 CircleImageView imageStavkaJelovnikSlika = view.findViewById(R.id.imageStavkaJelovnikSlika);
                 Glide.with(getActivity())
-                        .load(podaci.get(position).getImageUrl())
+                        .load(hranaStavka.getImageUrl())
                         .centerCrop()
                         .into(imageStavkaJelovnikSlika);
+
+                // Hidden status row (prikazi samo ako je stavka u korpi)
+                LinearLayout jelovnikStavkaAddedStatsHolder = view.findViewById(R.id.jelovnikStavkaAddedStatsHolder);
+                TextView textStavkaJelovnikStats = view.findViewById(R.id.textStavkaJelovnikStats);
+
+                // Dodaj-ukloni stavku Btns
+                ImageButton btnDodajKorpaStavku = view.findViewById(R.id.btnDodajKorpaStavku);
+                btnDodajKorpaStavku.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        KorpaHranaStavka s = do_dodajStavku(hranaStavka);
+                        updateStatsUI(s,  stavkaJelovnikRoot, jelovnikStavkaAddedStatsHolder, textStavkaJelovnikStats, btnDodajKorpaStavku);
+                    }
+                });
+
+                ImageButton btnUkloniKorpaStavku = view.findViewById(R.id.btnUkloniKorpaStavku);
+                btnUkloniKorpaStavku.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        KorpaHranaStavka s = do_ukloniStavku(hranaStavka);
+                        updateStatsUI(s,  stavkaJelovnikRoot, jelovnikStavkaAddedStatsHolder, textStavkaJelovnikStats, btnDodajKorpaStavku);
+                    }
+                });
+
+                // Provjeri da li je stavka već u korpi
+                KorpaHranaStavka korpaStavka = korpa.getStavka(hranaStavka);
+                if (korpaStavka != null) {
+                    updateStatsUI(korpaStavka, stavkaJelovnikRoot, jelovnikStavkaAddedStatsHolder, textStavkaJelovnikStats, btnDodajKorpaStavku);
+                }
 
                 return view;
             }
@@ -228,8 +262,29 @@ public class RestoranJelovnikFragment extends Fragment {
         listViewHrana.setAdapter(listHranaAdapter);
     }
 
-    private void do_dodajStavku(HranaItemVM stavka) {
-        korpa.dodajStavku(stavka);
+    private KorpaHranaStavka do_dodajStavku(HranaItemVM stavka) {
+        KorpaHranaStavka s = korpa.dodajStavku(stavka);
         MySession.setKorpa(korpa);
+        return s;
+    }
+
+    private KorpaHranaStavka do_ukloniStavku(HranaItemVM stavka) {
+        KorpaHranaStavka s = korpa.ukloniStavku(stavka);
+        MySession.setKorpa(korpa);
+        return s;
+    }
+
+    private void updateStatsUI(KorpaHranaStavka korpaStavka, LinearLayout container, LinearLayout statsContainer, TextView stanje, ImageButton btn) {
+        container.setPressed(true);
+        container.setPressed(false);
+        if (korpa.getHranaStavke().contains(korpaStavka)) {
+            stanje.setText(getString(R.string.korpa_stavka_stats_stanje, korpaStavka.getKolicina(), korpaStavka.getUkupnaCijena()));
+            btn.setImageDrawable(getResources().getDrawable(R.drawable.ic_plus_round_added));
+
+            statsContainer.setVisibility(View.VISIBLE);
+        } else {
+            btn.setImageDrawable(getResources().getDrawable(R.drawable.ic_plus_round));
+            statsContainer.setVisibility(View.GONE);
+        }
     }
 }

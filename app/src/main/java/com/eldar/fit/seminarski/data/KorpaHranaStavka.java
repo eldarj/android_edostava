@@ -35,6 +35,11 @@ public class KorpaHranaStavka implements Serializable {
         ukupnaCijena += hranaItemVM.getCijena();
     }
 
+    public void smanjiKolicinu() {
+        --this.kolicina;
+        ukupnaCijena -= hranaItemVM.getCijena();
+    }
+
     public void umanjiKolicinu() {
 //        if (kolicina == 1) {
 //

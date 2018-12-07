@@ -1,11 +1,10 @@
 package com.eldar.fit.seminarski.data;
 
-import com.eldar.fit.seminarski.helper.MySession;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class Korpa implements Serializable {
 
@@ -35,37 +34,46 @@ public class Korpa implements Serializable {
         return ukupnaCijena;
     }
 
-    public void dodajStavku(KorpaHranaStavka stavka) {
+    public KorpaHranaStavka dodajStavku(HranaItemVM stavka) {
         for (KorpaHranaStavka s :
                 hranaStavke) {
             if (s.equals(stavka)) {
                 s.dodajKolicinu();
-                return;
+                return s;
             }
         }
-        hranaStavke.add(stavka);
+        KorpaHranaStavka novaStavka = new KorpaHranaStavka(stavka, 1);
+        hranaStavke.add(novaStavka);
+        return novaStavka;
     }
 
-    public void dodajStavku(HranaItemVM stavka) {
+    public KorpaHranaStavka ukloniStavku(HranaItemVM stavka) {
         for (KorpaHranaStavka s :
                 hranaStavke) {
             if (s.equals(stavka)) {
-                s.dodajKolicinu();
-                return;
+                if (s.getKolicina() > 1) {
+                    s.smanjiKolicinu();
+                    return s;
+                } else {
+                    hranaStavke.remove(s);
+                    return null;
+                }
             }
         }
-        hranaStavke.add(new KorpaHranaStavka(stavka, 1));
-    }
-
-    public void setUkupnaCijena(double ukupnaCijena) {
-        this.ukupnaCijena = ukupnaCijena;
+        return null;
     }
 
     public List<KorpaHranaStavka> getHranaStavke() {
         return hranaStavke;
     }
 
-    public void setHranaStavke(List<KorpaHranaStavka> hranaStavke) {
-        this.hranaStavke = hranaStavke;
+    public KorpaHranaStavka getStavka(HranaItemVM stavka) {
+        for (KorpaHranaStavka s :
+                hranaStavke) {
+            if (s.equals(stavka)) {
+                return s;
+            }
+        }
+        return null;
     }
 }

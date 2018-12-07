@@ -1,69 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/stavka_padding_jelovnik_top"
     android:paddingBottom="@dimen/stavka_padding_jelovnik_bottom"
+    android:orientation="vertical"
     android:id="@+id/stavkaJelovnikRoot"
     android:background="@drawable/ripple_effect">
 
     <LinearLayout
-        android:id="@+id/vgStavkaJelovnikIconHolders"
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/stavka_padding_jelovnik_img_right"
-        android:layout_marginTop="3dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/btnDodajStavkuKorpu"
-            android:src="@drawable/ic_plus_round"
-            android:tint="@color/colorSecondary"
-            android:backgroundTint="@color/Transparent"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageStavkaJelovnikSlika"
-            android:layout_width="@dimen/stavka_img_width"
-            android:layout_height="@dimen/stavka_img_height"
-            />
-    </LinearLayout>
+            android:layout_marginEnd="@dimen/stavka_padding_jelovnik_img_right"
+            android:layout_marginTop="3dp">
 
-    <LinearLayout
-        android:layout_toRightOf="@id/vgStavkaJelovnikIconHolders"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_weight="3"
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:minHeight="72dp">
-            <TextView
-                android:id="@+id/textStavkaJelovnikNaziv"
-                android:layout_width="match_parent"
+            <ImageButton
+                android:id="@+id/btnDodajKorpaStavku"
+                android:src="@drawable/ic_plus_round"
+                android:backgroundTint="@color/Transparent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="First Line"
-                android:textSize="@dimen/stavka_firstline_textsize"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/textStavkaJelovnikOpis"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Neki tekst..."/>
+                android:layout_gravity="center"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageStavkaJelovnikSlika"
+                android:layout_width="@dimen/stavka_img_width"
+                android:layout_height="@dimen/stavka_img_height"
+                />
         </LinearLayout>
-        <TextView
-            android:id="@+id/textStavkaJelovnikCijena"
-            android:layout_weight="1"
-            android:width="0dp"
-            android:gravity="top|right"
-            android:layout_width="@dimen/stavka_endpart_width"
-            android:layout_height="match_parent"
-            android:layout_marginRight="@dimen/margin_regular"
-            android:text="Broj 15"/>
-    </LinearLayout>
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_weight="3"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/textStavkaJelovnikNaziv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pizza Margarita"
+                    android:textSize="@dimen/stavka_firstline_textsize"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/textStavkaJelovnikOpis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Preukusna pizza"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/textStavkaJelovnikCijena"
+                android:layout_weight="1"
+                android:width="0dp"
+                android:gravity="top|right"
+                android:layout_width="@dimen/stavka_endpart_width"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/margin_regular"
+                android:text="4.00 KM"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/jelovnikStavkaAddedStatsHolder"
+        android:visibility="gone"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/stavka_padding_jelovnik_img_right">
+
+            <ImageButton
+                android:paddingTop="0dp"
+                android:id="@+id/btnUkloniKorpaStavku"
+                android:src="@drawable/ic_minus_round"
+                android:tint="@color/colorPrimary"
+                android:backgroundTint="@color/Transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/stavka_img_width"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <View style="@style/Divider.Xsmall"></View>
+            <TextView
+                android:id="@+id/textStavkaJelovnikStats"
+                android:gravity="center|end"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/margin_regular"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
