@@ -145,7 +145,7 @@ public class RestoranJelovnikFragment extends Fragment {
     private void onHranaListReceived(@Nullable HranaPrikazVM hranaPodaci, @Nullable Integer statusCode, @Nullable String errorMessage) {
         progressBar_hranaList.setVisibility(View.INVISIBLE);
 
-        int noDataTextVisibility = hranaPodaci.hrana != null && hranaPodaci.hrana.size() > 0 ? View.INVISIBLE: View.VISIBLE;
+        int noDataTextVisibility = hranaPodaci != null && hranaPodaci.hrana != null && hranaPodaci.hrana.size() > 0 ? View.INVISIBLE: View.VISIBLE;
         restoranJelovnikNoData.setVisibility(noDataTextVisibility);
 
         if (hranaPodaci != null) {
@@ -153,7 +153,7 @@ public class RestoranJelovnikFragment extends Fragment {
             popuniPodatke();
         } else {
             Snackbar.make(getActivity().findViewById(R.id.fragmentContainer),
-                    errorMessage != null ? errorMessage : getString(R.string.dogodila_se_greska),
+                    getString(R.string.dogodila_se_greska),
                     Snackbar.LENGTH_LONG).show();
         }
     }
