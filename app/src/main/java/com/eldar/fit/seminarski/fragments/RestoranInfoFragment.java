@@ -22,7 +22,7 @@ import com.eldar.fit.seminarski.data.AuthLogin;
 import com.eldar.fit.seminarski.helper.MyAbstractRunnable;
 import com.eldar.fit.seminarski.helper.MyApiRequest;
 import com.eldar.fit.seminarski.helper.MySession;
-import com.eldar.fit.seminarski.helper.RestoranInfo;
+import com.eldar.fit.seminarski.data.RestoranInfo;
 import com.eldar.fit.seminarski.helper.RestoranViewPagerAdapter;
 
 import static com.eldar.fit.seminarski.RestoranDetaljnoActivity.DETAIL_VIEW_RESTORAN;

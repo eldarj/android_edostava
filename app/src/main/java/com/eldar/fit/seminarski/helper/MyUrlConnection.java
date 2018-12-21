@@ -19,11 +19,9 @@ import java.util.List;
 public class MyUrlConnection {
 
     public enum HttpMethod {
-        GET, POST, HEAD, OPTIONS, TRACE
+        GET, POST /*, HEAD, OPTIONS, TRACE */
     }
 
-    // ... maybe create an api endpoint that returns a <-
-    // list of all the success status codes that it returns?
     public static List<Integer> OkStatuses = Arrays.asList(200, 201, 202, 204);
     public static String charset = "UTF-8";
 

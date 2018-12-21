@@ -1,5 +1,6 @@
-package com.eldar.fit.seminarski.helper;
+package com.eldar.fit.seminarski.data;
 
+import com.eldar.fit.seminarski.helper.MyApiConfig;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;

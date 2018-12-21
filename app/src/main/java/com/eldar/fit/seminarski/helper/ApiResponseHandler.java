@@ -1,6 +1,6 @@
 package com.eldar.fit.seminarski.helper;
 
-import com.eldar.fit.seminarski.data.ApiBlokList;
+import com.eldar.fit.seminarski.data.BlokPrikazVM;
 import com.eldar.fit.seminarski.data.BlokVM;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ public class ApiResponseHandler {
 
     public static List<BlokVM> blokovi = null;
 
-    public static List<String> getStringListBlokovi(ApiBlokList blokoviResponse) {
+    public static List<String> getStringListBlokovi(BlokPrikazVM blokoviResponse) {
         List<String> result = new ArrayList<>();
         blokovi = blokoviResponse.blokovi;
         for (BlokVM blok: blokoviResponse.blokovi) {

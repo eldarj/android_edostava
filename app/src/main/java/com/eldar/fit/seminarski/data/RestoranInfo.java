@@ -1,9 +1,6 @@
-package com.eldar.fit.seminarski.helper;
+package com.eldar.fit.seminarski.data;
 
-import android.util.Log;
-
-import com.eldar.fit.seminarski.data.TipKuhinje;
-import com.eldar.fit.seminarski.data.Vlasnik;
+import com.eldar.fit.seminarski.helper.MySession;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;

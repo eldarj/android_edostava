@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.eldar.fit.seminarski.R;
 import com.eldar.fit.seminarski.data.TipKuhinje;
-import com.eldar.fit.seminarski.helper.RestoranInfo;
+import com.eldar.fit.seminarski.data.RestoranInfo;
 
 public class RestoranInfoPagerFragment extends Fragment {
     private static final String DETALJNO_PAGER_RESTORAN_OBJ = "detaljnoPagerRestoranObj";

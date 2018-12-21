@@ -1,4 +1,4 @@
-package com.eldar.fit.seminarski.helper;
+package com.eldar.fit.seminarski.data;
 
 import com.eldar.fit.seminarski.data.KorisnikVM;
 

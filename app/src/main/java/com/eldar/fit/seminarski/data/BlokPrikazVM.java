@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ApiBlokList {
+public class BlokPrikazVM {
     @SerializedName(value = "blokovi", alternate = { "Blokovi" })
     public List<BlokVM> blokovi;
 }

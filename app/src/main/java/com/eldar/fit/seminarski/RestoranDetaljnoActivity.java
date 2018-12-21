@@ -10,7 +10,7 @@ import com.eldar.fit.seminarski.fragments.KorpaFragment;
 import com.eldar.fit.seminarski.fragments.RestoranJelovnikFragment;
 import com.eldar.fit.seminarski.fragments.RestoranInfoFragment;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
-import com.eldar.fit.seminarski.helper.RestoranInfo;
+import com.eldar.fit.seminarski.data.RestoranInfo;
 
 public class RestoranDetaljnoActivity extends AppCompatActivity {
 

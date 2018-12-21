@@ -1,10 +1,6 @@
 package com.eldar.fit.seminarski.data;
 
-import android.util.Log;
-
 import com.eldar.fit.seminarski.helper.MySession;
-import com.eldar.fit.seminarski.helper.RestoranInfo;
-import com.eldar.fit.seminarski.helper.RestoranLike;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;

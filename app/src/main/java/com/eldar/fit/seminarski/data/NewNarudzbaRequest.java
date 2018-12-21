@@ -1,4 +1,4 @@
-package com.eldar.fit.seminarski.data.api.request.models;
+package com.eldar.fit.seminarski.data;
 
 import com.eldar.fit.seminarski.data.AuthLogin;
 import com.eldar.fit.seminarski.data.Korpa;

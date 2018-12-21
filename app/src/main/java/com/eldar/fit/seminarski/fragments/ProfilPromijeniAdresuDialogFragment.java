@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.eldar.fit.seminarski.R;
-import com.eldar.fit.seminarski.data.ApiBlokList;
+import com.eldar.fit.seminarski.data.BlokPrikazVM;
 import com.eldar.fit.seminarski.data.AuthRegister;
 import com.eldar.fit.seminarski.data.KorisnikVM;
 import com.eldar.fit.seminarski.helper.ApiResponseHandler;
@@ -67,10 +66,10 @@ public class ProfilPromijeniAdresuDialogFragment extends DialogFragment {
 
         spinnerProfilOpcijeAdresaBlok = view.findViewById(R.id.spinnerProfilOpcijeAdresaBlok);
 
-        MyApiRequest.get(MyApiRequest.ENDPOINT_LOCATIONS, new MyAbstractRunnable<ApiBlokList>() {
+        MyApiRequest.get(MyApiRequest.ENDPOINT_LOCATIONS, new MyAbstractRunnable<BlokPrikazVM>() {
             @Override
-            public void run(ApiBlokList apiBlokList) {
-                List<String> blokPodaci = ApiResponseHandler.getStringListBlokovi(apiBlokList);
+            public void run(BlokPrikazVM blokPrikazVM) {
+                List<String> blokPodaci = ApiResponseHandler.getStringListBlokovi(blokPrikazVM);
                 onBlokPodaciReceived(blokPodaci, null, null);
             }
 

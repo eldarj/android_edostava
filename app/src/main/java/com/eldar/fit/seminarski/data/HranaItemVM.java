@@ -1,6 +1,5 @@
 package com.eldar.fit.seminarski.data;
 
-import com.eldar.fit.seminarski.helper.RestoranInfo;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;

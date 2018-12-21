@@ -11,10 +11,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
-import com.eldar.fit.seminarski.data.ApiBlokList;
+import com.eldar.fit.seminarski.data.BlokPrikazVM;
 import com.eldar.fit.seminarski.data.AuthRegister;
 import com.eldar.fit.seminarski.data.KorisnikVM;
-import com.eldar.fit.seminarski.data.Storage;
 import com.eldar.fit.seminarski.helper.ApiResponseHandler;
 import com.eldar.fit.seminarski.helper.MyAbstractRunnable;
 import com.eldar.fit.seminarski.helper.MyApiRequest;
@@ -67,10 +66,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void blokPodaciRequest() {
-        MyApiRequest.get(ENDPOINT_LOCATIONS, new MyAbstractRunnable<ApiBlokList>() {
+        MyApiRequest.get(ENDPOINT_LOCATIONS, new MyAbstractRunnable<BlokPrikazVM>() {
             @Override
-            public void run(ApiBlokList apiBlokList) {
-                List<String> blokPodaci = ApiResponseHandler.getStringListBlokovi(apiBlokList);
+            public void run(BlokPrikazVM blokPrikazVM) {
+                List<String> blokPodaci = ApiResponseHandler.getStringListBlokovi(blokPrikazVM);
                 onBlokPodaciReceived(blokPodaci, null, null);
 
             }
@@ -118,8 +117,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
         if (inputUsername.length() <= 4) {
             inputUsername.setError(getString(R.string.register_error_username));
-        } else if(Storage.UsernameExists(inputUsername.getText().toString())) {
-            inputUsername.setError(getString(R.string.register_error_username_taken));
         } else {
             inputUsername.setError(null); // Clear the error
         }
@@ -137,7 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (inputUsername.getError() != null
                 || inputPassword.getError() != null
                 || inputIme.getError() != null
-                || inputPassword.getError() != null) {
+                || inputPrezime.getError() != null) {
             Snackbar.make(findViewById(android.R.id.content), getString(R.string.input_podaci_invalid), Snackbar.LENGTH_SHORT).show();
             return;
         }

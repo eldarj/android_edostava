@@ -19,15 +19,11 @@ import com.eldar.fit.seminarski.LoginActivity;
 import com.eldar.fit.seminarski.R;
 import com.eldar.fit.seminarski.data.AuthRegister;
 import com.eldar.fit.seminarski.data.KorisnikVM;
-import com.eldar.fit.seminarski.data.Storage;
 import com.eldar.fit.seminarski.helper.MyAbstractRunnable;
 import com.eldar.fit.seminarski.helper.MyApiRequest;
 import com.eldar.fit.seminarski.helper.MyApp;
 import com.eldar.fit.seminarski.helper.MyFragmentHelper;
 import com.eldar.fit.seminarski.helper.MySession;
-import com.eldar.fit.seminarski.helper.MyUtils;
-
-import java.util.List;
 
 public class ProfilOpcijeFragment extends Fragment {
 
