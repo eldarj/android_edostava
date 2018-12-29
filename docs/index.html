@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" 
+integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" 
+crossorigin="anonymous">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: 'Open Sans', sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+
+.main-logo {
+    margin: 5px 5px 5px 16px;
+    background: #CB202D;
+    border-radius: 5px;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    margin-right: auto;
+}
+a.main-logo-name {
+    margin: auto;
+    text-decoration: none;
+    font-size: 14px;
+    color: #fff;
+    
+}
+.mytop1 {
+  background: #fff;
+  box-shadow: 1px 1px 1px 1px rgba(0,0,0,.05);
+}
+
+.mytop-center-vh {
+  top: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.text-left {
+  text-align: left;
+  line-height: 25px;
+}
+
+.padding-16 {
+  padding: 16px;
+}
+
+.footer-icon-block {
+    display: flex;
+    padding: 15px 0;
+}
+
+.footer-icon-block p {
+    margin-top: 0;
+}
+
+.footer-icon-block i {
+    margin-top: 5px;
+    margin-right: 15px;
+    font-size: 22px;
+    color: #444;
+}
+
+.myhr {
+  width: 100%;
+  height: 5px;
+  display: block;
+  background: #CB202D;
+}
+.mytit {
+  margin-top: 45px;
+  margin-bottom: 32px;
+}
+.screens img {
+    max-width: 250px;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.05);
+}
+.myheader {
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    width: 100%;
+    background-image: url(images/main_background.jpg);
+    margin-top: 80px;
+}
+.myheader .h-cont {
+  align-self: center;
+  flex: 1;
+    background: rgba(255,255,255,.9);
+}
+.invisible {
+  visibility: hidden;
+}
+</style>
+<body>
+<!-- Top menu -->
+<div class="w3-top mytop1">
+  <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
+    <div class="w3-left">
+      <div class="main-logo">
+        <a class="main-logo-name" href="/Home">eDostava!</a>
+    </div>
+    </div>
+    <div class="w3-center w3-padding-16 mytop-center-vh">eDostava!</div>
+  </div>
+</div>
+  
+<div class="myheader">
+    <div class="h-cont w3-padding" style="max-width: 1200px;">
+        <h1><b>eDostava - android app</b></h1>
+        <p>Aplikacija za online naručivanje i dostavu hrane - korisnici se mogu registrovati,
+          pregledati restorane i njihove jelovnike, te kreirati narudžbe.
+        </p>
+    </div>
+</div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;">
+  <!-- About Section -->
+  <div class="w3-container w3-padding-32 w3-center">  
+      <p class="text-left">Server-side API je rađen u .NET Core-u, baza je MS-MSQL. API i Db su hostirani na Azure-u i 
+        sve funkcionalnosti android apliakcije rade direktno s API-em. 
+        Sve urađeno je na Github-u i svi linkovi i pristupni podaci su u footer-u.
+      </p>
+      <br>
+      <hr>
+      <h3 class="w3-center mytit"><b>Features</b></h3>
+
+      <div class="w3-quarter text-left padding-16">
+          <p>Aplikacija omogućava svim korisnicima odnosno naručiocima <b>login</b> i <b>registraciju</b> na sistem, 
+              pregled svih registrovanih <b>Restorana</b>, kontakt podataka o restorani te njihovih <b>jelovnika</b>.
+            </p>
+      </div>
+      <div class="w3-quarter text-left padding-16">
+          <p>Korisnik iz <b>jelovnika</b>, može odabrati i dodati <b>hranu</b> u svoju <b>korpu</b>, 
+            gdje će također moći pregledati
+            iste podatke, umanjiti i povećati količinu, te odbaciti ili kreirati <b>narudžbu</b> iz korpe.
+            </p>
+            <p>Također, korisnik može pregledati detalje i brisati svoje <b>narudžbe</b> (ukoliko je status i dalje ne prihvaćen).</p>
+      </div>
+      <div class="w3-quarter text-left padding-16">
+          <p>Korisnik može pogledati svoj <b>profil</b>, gdje može vidjeti osnovne podatke o računu.
+            Korisnik može urediti podatke kao što su adresa, lozinka, profilna slika, i također izbrisati svoj korisnički račun.
+            </p>
+      </div>
+      <div class="w3-quarter text-left padding-16">
+          <p>
+            Korisnici također mogu lajkati/sačuvati restoran u <b>omiljene restorane</b> i pisati <b>komentare</b> na 
+            'profilu' restorana.
+            </p>
+      </div>
+  </div>
+  <hr>
+  <h3 class="w3-center mytit"><b>Screens</b></h3>
+
+  <!-- First Photo Grid-->
+  <div class="w3-row-padding w3-padding-16 w3-center screens" id="food">
+    <div class="w3-quarter">
+      <img src="images/restorani.jpg" alt="Sandwich" style="width:100%">
+      <h3>Pregled restorana</h3>
+      <p>Lista svih restorana. <u>Korisnik može</u>: pogledati jelovnik, dodati/ukolniti restorane u omiljene
+        pogledati omiljene, pogledatu korpu.
+      </p>
+    </div>
+    <div class="w3-quarter">
+      <img src="images/petica.jpg" alt="Steak" style="width:100%">
+      <h3>Restoran Detaljno</h3>
+      <p>Prikaz restorana detaljno. <u>Korisnik može</u>: dodati/ukloniti restoran u omiljene, navigirati na sub-page za komentare.</p>
+    </div>
+    <div class="w3-quarter">
+      <img src="images/petica-komentari.jpg" alt="Cherries" style="width:100%">
+      <h3>Kometari restorana</h3>
+      <p>Prikaz svih komentara drugih korisnika. <u>Korisnik može</u>: pisati novi komentar.</p>
+    </div>
+    <div class="w3-quarter">
+      <img src="images/jelovnik.jpg" alt="Pasta and Wine" style="width:100%">
+      <h3>Jelovnik restorana</h3>
+      <p>Prikaz svih stavki hrane restorana. <u>Korisnik može</u>: filtrirati hranu po nazivu i cijeni, dodati hranu
+      u korpu i uvećati/smanjiti količinu.</p>
+    </div>
+  </div>
+  
+  <!-- Second Photo Grid-->
+  <div class="w3-row-padding w3-padding-16 w3-center screens">
+    <div class="w3-quarter">
+      <img src="images/korpa.jpg" alt="Popsicle" style="width:100%">
+      <h3>Korpa</h3>
+      <p>Pregled korpe i stavki koje je korisnik dodao. <u>Korisnik može</u>: Ukloniti hranu (longclick), odbaciti cijelu narudžbu, kreirati narudžbu.</p>
+    </div>
+    <div class="w3-quarter">
+      <img src="images/narudzbe.jpg" alt="Salmon" style="width:100%">
+      <h3>Narudžbe</h3>
+      <p>Pregled svih narudžbi koje je korisnik napravio. <u>Korisnik može</u>: Ukloniti 
+        narudžbu (longclick **ukoliko je status 'Na čekanju'), 
+        filtrirati narudžbe po šifri, cijeni, restoranima...</p>
+    </div>
+    <div class="w3-quarter">
+      <img src="images/profil.jpg" alt="Sandwich" style="width:100%">
+      <h3>Profil</h3>
+      <p>Korisnikov profil, sa osnovnim podacima i profilnom slikom. <u>Korisnik može</u> navigirati na pregled <u>Opcije</u> (settings button u app-baru)</p>
+    </div>
+    <div class="w3-quarter">
+      <img src="images/profil-edit.jpg" alt="Croissant" style="width:100%">
+      <h3>Opcije</h3>
+      <p>Opcije korisničkog računa. <u>Korisnik može</u>: promijeniti sliku (dodati novu iz galerije ili 
+        pravljenje nove kamerom), urediti adresu i lozinku, izbrisati korisnički račun.
+      </p>
+    </div>
+  </div>
+  
+  <hr style="margin-bottom: 0px;">  
+  <div class="myhr"></div>
+  <!-- Footer -->
+  <footer class="w3-row-padding w3-padding-32" style=>
+    <div class="w3-third">
+      <h3>Info</h3>
+      <p></p>
+      <p>Eldar Jahijagić <BR> IB150189, FIT - DL
+      <br>Github <a href="https://github.com/eldarj" target="_blank">/eldarj</a>
+      </p>
+      <p>Razvoj korisničkih sučelja, 2017/18</p>
+      <h3>Credentials</h3>
+      <p>Login podaci za android aplikaciju<br>
+      Username: <b>narucilac</b><br>
+      Password: <b>narucilacc</b>
+      </p>
+    </div>
+    <div class="w3-third">
+      <h3>Links</h3>
+      
+      <div class="footer-icon-block">
+          <i class="fas fa-cloud"></i>
+          <p>Web aplikacija i API: <br><a href="http://edostava.azurewebsites.net/" target="_blank">edostava.azurewebsites.net</a></p>
+      </div>
+
+      <div class="footer-icon-block">
+          <i class="fab fa-android"></i>
+          <div>
+          <p>Appetize-io - online aplikacija <br><a href="https://appetize.io/app/yfa4ueqg0y2w7g86da1dw1zvgc" target="_blank">appetize.io/app</a></p>
+          <p>ili</p>
+          <p>Download APK<br>
+          <a href="apk/app.apk">app.apk</a>
+          </p>
+          </div>
+      </div>
+
+    </div>
+    <div class="w3-third">
+      <h3 class="invisible">Links</h3>
+
+      <div class="footer-icon-block">
+          <i class="fab fa-github"></i>
+          <p>Github web i API (dotnet)<br>
+          <a href="https://github.com/eldarj/dotnet_edostava_api" target="_blank">/eldarj/dotnet_edostava_api</a>
+          <br><br>Github aplikacija (android)<br>
+          <a href="https://github.com/eldarj/android_edostava" target="_blank">/eldarj/android_edostava</a>
+          </p>
+          </div>
+          
+          <div class="footer-icon-block">
+              <i class="fas fa-database"></i>
+              <p>Web api db dump<br>
+              <a href="https://github.com/eldarj/dotnet_edostava_api/blob/master/webapp/dbdump/edostavadb_.bak">
+              /eldarj/dotnet_edostava_api/blob/master/webapp/dbdump
+              </a></p>
+          </div>
+    </div>
+  </footer>
+
+<!-- End page content -->
+</div>
+</body>
+</html>
